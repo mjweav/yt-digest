@@ -422,56 +422,65 @@ function ChannelPicker() {
                 </div>
 
                 <button
-                  onClick={() => {
-                    console.log('🔍 DEBUG: All channels thumbnail analysis:');
-                    const brokenChannels = channels.filter(channel => {
-                      const hasThumbnails = channel.thumbnails && (
-                        channel.thumbnails.medium?.url ||
-                        channel.thumbnails.high?.url ||
-                        channel.thumbnails.default?.url ||
-                        channel.thumbnails.standard?.url ||
-                        channel.thumbnails.maxres?.url
-                      );
-                      const hasLegacyThumbnail = channel.thumbnail;
+                  onClick={async () => {
+                    try {
+                      // First refresh the channel data from YouTube API
+                      await fetchSubscriptions();
 
-                      if (!hasThumbnails && !hasLegacyThumbnail) {
-                        console.log(`❌ BROKEN: "${channel.title}" - No thumbnails available`);
-                        console.log('Channel data:', channel);
-                        return true;
+                      // Then do thumbnail analysis on the refreshed data
+                      console.log('🔍 DEBUG: All channels thumbnail analysis after refresh:');
+                      const brokenChannels = channels.filter(channel => {
+                        const hasThumbnails = channel.thumbnails && (
+                          channel.thumbnails.medium?.url ||
+                          channel.thumbnails.high?.url ||
+                          channel.thumbnails.default?.url ||
+                          channel.thumbnails.standard?.url ||
+                          channel.thumbnails.maxres?.url
+                        );
+                        const hasLegacyThumbnail = channel.thumbnail;
+
+                        if (!hasThumbnails && !hasLegacyThumbnail) {
+                          console.log(`❌ BROKEN: "${channel.title}" - No thumbnails available`);
+                          console.log('Channel data:', channel);
+                          return true;
+                        }
+                        return false;
+                      });
+
+                      const workingChannels = channels.filter(channel => {
+                        const hasThumbnails = channel.thumbnails && (
+                          channel.thumbnails.medium?.url ||
+                          channel.thumbnails.high?.url ||
+                          channel.thumbnails.default?.url ||
+                          channel.thumbnails.standard?.url ||
+                          channel.thumbnails.maxres?.url
+                        );
+                        return hasThumbnails;
+                      });
+
+                      console.log(`✅ WORKING: ${workingChannels.length} channels with enhanced thumbnails`);
+                      console.log(`❌ BROKEN: ${brokenChannels.length} channels without thumbnails`);
+                      console.log('🔍 Full channel list with thumbnail status:');
+                      channels.forEach(channel => {
+                        const hasEnhanced = channel.thumbnails && (
+                          channel.thumbnails.medium?.url ||
+                          channel.thumbnails.high?.url ||
+                          channel.thumbnails.default?.url ||
+                          channel.thumbnails.standard?.url ||
+                          channel.thumbnails.maxres?.url
+                        );
+                        const hasLegacy = !!channel.thumbnail;
+                        console.log(`"${channel.title}": enhanced=${!!hasEnhanced}, legacy=${!!hasLegacy}`);
+                      });
+
+                      if (brokenChannels.length > 0) {
+                        alert(`✅ Channel data refreshed! Found ${brokenChannels.length} channels with missing thumbnails. Check console for details.`);
+                      } else {
+                        alert(`✅ Channel data refreshed successfully! All ${channels.length} channels have thumbnails and proper URLs.`);
                       }
-                      return false;
-                    });
-
-                    const workingChannels = channels.filter(channel => {
-                      const hasThumbnails = channel.thumbnails && (
-                        channel.thumbnails.medium?.url ||
-                        channel.thumbnails.high?.url ||
-                        channel.thumbnails.default?.url ||
-                        channel.thumbnails.standard?.url ||
-                        channel.thumbnails.maxres?.url
-                      );
-                      return hasThumbnails;
-                    });
-
-                    console.log(`✅ WORKING: ${workingChannels.length} channels with enhanced thumbnails`);
-                    console.log(`❌ BROKEN: ${brokenChannels.length} channels without thumbnails`);
-                    console.log('🔍 Full channel list with thumbnail status:');
-                    channels.forEach(channel => {
-                      const hasEnhanced = channel.thumbnails && (
-                        channel.thumbnails.medium?.url ||
-                        channel.thumbnails.high?.url ||
-                        channel.thumbnails.default?.url ||
-                        channel.thumbnails.standard?.url ||
-                        channel.thumbnails.maxres?.url
-                      );
-                      const hasLegacy = !!channel.thumbnail;
-                      console.log(`"${channel.title}": enhanced=${!!hasEnhanced}, legacy=${!!hasLegacy}`);
-                    });
-
-                    if (brokenChannels.length > 0) {
-                      alert(`❌ Found ${brokenChannels.length} channels with missing thumbnails. Check console for details.`);
-                    } else {
-                      alert(`✅ All ${channels.length} channels have thumbnails!`);
+                    } catch (error) {
+                      console.error('Error refreshing channel data:', error);
+                      alert('❌ Failed to refresh channel data. Please try again.');
                     }
                   }}
                   className="bg-gradient-to-r from-orange-600 to-red-700 hover:from-orange-700 hover:to-red-800 text-white px-4 py-2 rounded-lg font-medium text-sm transition-all duration-200 flex items-center gap-2 shadow-md hover:shadow-lg transform hover:-translate-y-1"
