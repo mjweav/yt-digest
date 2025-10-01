@@ -349,7 +349,7 @@ function ChannelPicker() {
             <div className="flex items-center">
               <Link
                 to="/"
-                className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+                className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-emerald-700 transition-all duration-300"
               >
                 🎬 YT-Digest
               </Link>
@@ -358,19 +358,19 @@ function ChannelPicker() {
             <div className="flex items-center space-x-2">
               <Link
                 to="/settings"
-                className="px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 bg-white text-gray-700 hover:bg-purple-50 hover:text-purple-600 border border-gray-200 hover:border-purple-300"
+                className="px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border border-gray-200 hover:border-emerald-300"
               >
                 ⚙️ Settings
               </Link>
               <Link
                 to="/channels"
-                className="px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg"
+                className="px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg"
               >
                 📺 Channel Picker
               </Link>
               <Link
                 to="/digest"
-                className="px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 bg-white text-gray-700 hover:bg-purple-50 hover:text-purple-600 border-2 border-gray-200 hover:border-purple-300"
+                className="px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border-2 border-gray-200 hover:border-emerald-300"
               >
                 🎯 Digest
               </Link>
@@ -386,8 +386,8 @@ function ChannelPicker() {
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <div className="flex items-center gap-4">
-                  <div className="bg-purple-100 p-3 rounded-full">
-                    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="bg-emerald-100 p-3 rounded-full">
+                    <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
                   </div>
@@ -473,7 +473,7 @@ function ChannelPicker() {
               <button
                 onClick={saveChannelSelections}
                 disabled={saving || selections.length === 0}
-                className="bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 disabled:from-gray-400 disabled:to-gray-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 disabled:from-gray-400 disabled:to-gray-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
                 {saving ? (
                   <>
@@ -554,9 +554,9 @@ function ChannelPicker() {
                         }`}
                       >
                         {/* Channel Header */}
-                        <div className={`flex items-center space-x-4 p-4 ${selected ? 'bg-gradient-to-r from-blue-50 to-purple-50' : 'cursor-pointer hover:bg-gray-50'}`} onClick={() => toggleChannelSelection(channel.id)}>
+                        <div className={`flex items-center space-x-4 p-4 ${selected ? 'bg-gradient-to-r from-blue-50 to-emerald-50' : 'cursor-pointer hover:bg-gray-50'}`} onClick={() => toggleChannelSelection(channel.id)}>
                           {selected ? (
-                            <div className="bg-gradient-to-r from-purple-500 to-blue-500 text-white p-2 rounded-full shadow-md">
+                            <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white p-2 rounded-full shadow-md">
                               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                               </svg>
@@ -570,12 +570,12 @@ function ChannelPicker() {
                             className="w-16 h-16 rounded-full object-cover"
                           />
                           <div className="flex-1 min-w-0">
-                            <p className={`font-semibold truncate ${selected ? 'text-purple-900' : 'text-gray-900'}`}>
+                            <p className={`font-semibold truncate ${selected ? 'text-emerald-900' : 'text-gray-900'}`}>
                               {channel.title}
                             </p>
                             <p className="text-sm text-gray-500 line-clamp-2">{channel.description}</p>
                             {selected && (
-                              <p className="text-xs text-purple-600 mt-1 font-medium">
+                              <p className="text-xs text-emerald-600 mt-1 font-medium">
                                 ✓ Selected for digest
                               </p>
                             )}
@@ -677,7 +677,7 @@ function ChannelPicker() {
                 {/* A-Z Button - Always Visible */}
                 <button
                   onClick={() => setShowMobileModal(true)}
-                  className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 flex items-center justify-center z-40 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+                  className="fixed bottom-6 right-6 w-14 h-14 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-200 flex items-center justify-center z-40 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50"
                   aria-label="Open alphabet navigation"
                 >
                   <span className="text-sm font-bold">A-Z</span>
@@ -714,9 +714,9 @@ function ChannelPicker() {
                           scrollToLetter(letter)
                           setShowMobileModal(false)
                         }}
-                        className={`w-12 h-12 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 ${
+                        className={`w-12 h-12 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 ${
                           activeLetter === letter
-                            ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg'
+                            ? 'bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-lg'
                             : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                         }`}
                         title={`Jump to channels starting with ${letter}`}
@@ -732,9 +732,9 @@ function ChannelPicker() {
                         scrollToLetter('#')
                         setShowMobileModal(false)
                       }}
-                      className={`w-12 h-12 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50 ${
+                      className={`w-12 h-12 rounded-full text-sm font-semibold transition-all duration-200 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50 ${
                         activeLetter === '#'
-                          ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white shadow-lg'
+                          ? 'bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-lg'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                       title="Jump to channels starting with numbers or symbols"

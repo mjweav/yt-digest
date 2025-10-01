@@ -2,8 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import { JsonStore } from './utils/jsonStore.js';
 import { GoogleAuth } from './utils/googleAuth.js';
-import youtubeRoutes from './routes/youtube.js';
+// Import routes
 import authRoutes from './routes/auth.js';
+import youtubeRoutes from './routes/youtube.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -136,6 +137,48 @@ app.post('/api/watched', (req, res) => {
     JsonStore.appendData('watched', watchedItem);
     res.json({ success: true });
   } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Digests API (Cached digest data)
+app.get('/api/digests/latest', (req, res) => {
+  try {
+    const data = JsonStore.getData('digests');
+
+    if (!data.digests || data.digests.length === 0) {
+      return res.status(404).json({
+        error: 'No cached digests found',
+        digest: [],
+        count: 0
+      });
+    }
+
+    // Return the most recent digest
+    const latestDigest = data.digests[data.digests.length - 1];
+
+    // Handle both old and new digest structures
+    const count = latestDigest.digest.reduce((total, group) => {
+      if (group.channels) {
+        // New structure: group.channels[].videos[]
+        return total + group.channels.reduce((chTotal, ch) => chTotal + ch.videos.length, 0);
+      } else if (group.videos) {
+        // Old structure: group.videos[]
+        return total + group.videos.length;
+      }
+      return total;
+    }, 0);
+
+    res.json({
+      success: true,
+      digest: latestDigest.digest,
+      count: count,
+      cachedAt: latestDigest.fetchedAt,
+      date: latestDigest.date,
+      isCached: true
+    });
+  } catch (error) {
+    console.error('Error loading cached digest:', error);
     res.status(500).json({ error: error.message });
   }
 });

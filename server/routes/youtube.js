@@ -413,20 +413,39 @@ router.get('/videos', async (req, res) => {
       }
     }
 
-    // Group videos by tagId, handling missing tagId by assigning to 'untagged'
+    // Group videos by tagId, then by channelId within each tag
     const videosByTag = {};
     for (const video of allVideos) {
       const selection = selectedChannels.find(s => s.channelId === video.channelId);
       const tagId = selection && selection.tagId ? selection.tagId : 'untagged';
 
       if (!videosByTag[tagId]) {
-        videosByTag[tagId] = [];
+        videosByTag[tagId] = {};
       }
-      videosByTag[tagId].push(video);
+
+      if (!videosByTag[tagId][video.channelId]) {
+        videosByTag[tagId][video.channelId] = {
+          channelId: video.channelId,
+          channelTitle: video.channelTitle,
+          channelThumbnail: '', // Will be filled from channels data
+          videos: []
+        };
+      }
+
+      videosByTag[tagId][video.channelId].videos.push(video);
     }
 
-    // Convert to digest format with proper tag names
-    const digest = Object.entries(videosByTag).map(([tagId, videos]) => {
+    // Get channel thumbnails for the channel headers
+    const channelsInfo = JsonStore.getData('channels');
+    const channelsMap = {};
+    if (channelsInfo.channels) {
+      channelsInfo.channels.forEach(channel => {
+        channelsMap[channel.id] = channel;
+      });
+    }
+
+    // Convert to new format with channel grouping
+    const digest = Object.entries(videosByTag).map(([tagId, channels]) => {
       let tagName = 'Uncategorized'; // Default for untagged
 
       if (tagId !== 'untagged' && tagsData.tags) {
@@ -436,10 +455,24 @@ router.get('/videos', async (req, res) => {
         tagName = 'Uncategorized';
       }
 
+      // Convert channels object to array and add thumbnails
+      const channelsArray = Object.values(channels).map(channelGroup => {
+        const channelInfo = channelsMap[channelGroup.channelId];
+        return {
+          channelId: channelGroup.channelId,
+          channelTitle: channelGroup.channelTitle,
+          channelThumbnail: channelInfo?.thumbnails?.medium?.url || channelInfo?.thumbnails?.default?.url || '',
+          videos: channelGroup.videos.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
+        };
+      });
+
+      // Sort channels by title within each category
+      channelsArray.sort((a, b) => a.channelTitle.localeCompare(b.channelTitle));
+
       return {
         tagId: tagId,
         tagName: tagName,
-        videos: videos.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
+        channels: channelsArray
       };
     });
 

@@ -46,7 +46,7 @@ function App() {
   }, [location.pathname, navigate])
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-emerald-50">
       {/* Navigation Header */}
       <nav className="bg-white shadow-lg border-b border-gray-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,7 +54,7 @@ function App() {
             <div className="flex items-center">
               <Link
                 to="/"
-                className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+                className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent hover:from-blue-700 hover:to-emerald-700 transition-all duration-300"
               >
                 🎬 YT-Digest
               </Link>
@@ -65,8 +65,8 @@ function App() {
                 to="/settings"
                 className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
                   location.pathname === '/settings'
-                    ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 hover:bg-purple-50 hover:text-purple-600 border border-gray-200 hover:border-purple-300'
+                    ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg'
+                    : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border border-gray-200 hover:border-emerald-300'
                 }`}
               >
                 ⚙️ Settings
@@ -75,8 +75,8 @@ function App() {
                 to="/channels"
                 className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 ${
                   location.pathname === '/channels'
-                    ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 hover:bg-purple-50 hover:text-purple-600 border-2 border-gray-200 hover:border-purple-300'
+                    ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg'
+                    : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border-2 border-gray-200 hover:border-emerald-300'
                 }`}
               >
                 📺 Channel Picker
@@ -85,8 +85,8 @@ function App() {
                 to="/digest"
                 className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 ${
                   location.pathname === '/digest'
-                    ? 'bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg'
-                    : 'bg-white text-gray-700 hover:bg-purple-50 hover:text-purple-600 border-2 border-gray-200 hover:border-purple-300'
+                    ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg'
+                    : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border-2 border-gray-200 hover:border-emerald-300'
                 }`}
               >
                 🎯 Digest
@@ -103,7 +103,7 @@ function App() {
             <div className="min-h-screen flex items-center justify-center px-4">
               <div className="max-w-4xl mx-auto text-center">
                 <div className="mb-8">
-                  <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-6">
+                  <h1 className="text-6xl font-bold bg-gradient-to-r from-blue-600 via-emerald-600 to-blue-800 bg-clip-text text-transparent mb-6">
                     YT-Digest
                   </h1>
                   <p className="text-2xl text-gray-600 mb-4">
@@ -135,7 +135,7 @@ function App() {
                       <span>YouTube API</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                      <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
                       <span>Live Data</span>
                     </div>
                   </div>
