@@ -1,0 +1,19 @@
+{
+  "name": "subscription-curator-spike",
+  "version": "1.0.0",
+  "description": "YouTube Subscription Curator test harness with local JSON storage",
+  "private": true,
+  "workspaces": [
+    "server",
+    "src"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=server\" \"npm run dev --workspace=src\"",
+    "dev:server": "npm run dev --workspace=server",
+    "dev:frontend": "npm run dev --workspace=src",
+    "install:all": "npm install && npm install --workspaces"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

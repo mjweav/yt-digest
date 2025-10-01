@@ -1,0 +1,16 @@
+{
+  "name": "subscription-curator-server",
+  "version": "1.0.0",
+  "description": "Backend API server for Subscription Curator",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "googleapis": "^160.0.0"
+  }
+}
