@@ -15,6 +15,9 @@ function ChannelPicker() {
   const [debugMode, setDebugMode] = useState(false)
   const [expandedDescriptions, setExpandedDescriptions] = useState({})
   const [isDarkMode, setIsDarkMode] = useState(false)
+  const [activeTag, setActiveTag] = useState(null)
+  const [showUnassigned, setShowUnassigned] = useState(false)
+  const [showTagDropdown, setShowTagDropdown] = useState(false)
   const channelListRef = useRef(null)
 
   // Dark mode toggle function
@@ -303,6 +306,47 @@ function ChannelPicker() {
     )
   }
 
+  // Filter channels based on active filters
+  const getFilteredChannels = () => {
+    let filteredChannels = channels
+
+    // Filter by tag if activeTag is set
+    if (activeTag) {
+      filteredChannels = filteredChannels.filter(channel =>
+        selections.some(selection =>
+          selection.channelId === channel.id && selection.tagId === activeTag
+        )
+      )
+    }
+
+    // Filter by unassigned if showUnassigned is true
+    if (showUnassigned) {
+      filteredChannels = filteredChannels.filter(channel =>
+        !selections.some(selection => selection.channelId === channel.id && selection.tagId)
+      )
+    }
+
+    return filteredChannels
+  }
+
+  // Handle tag filter click
+  const handleTagFilter = (tagId) => {
+    if (activeTag === tagId) {
+      setActiveTag(null) // Clear filter if clicking active tag
+    } else {
+      setActiveTag(tagId) // Set new active tag
+      setShowUnassigned(false) // Clear unassigned filter when selecting tag
+    }
+  }
+
+  // Handle unassigned filter toggle
+  const handleUnassignedToggle = () => {
+    setShowUnassigned(!showUnassigned)
+    if (!showUnassigned) {
+      setActiveTag(null) // Clear tag filter when enabling unassigned
+    }
+  }
+
   // Alphabet navigation functions
   const getSortedChannels = () => {
     return [...channels].sort((a, b) => {
@@ -567,227 +611,346 @@ function ChannelPicker() {
               </div>
             ) : (
               <>
-                {/* Channel List */}
-                <div ref={channelListRef} className="space-y-6">
-                  {getSortedChannels().map((channel) => {
-                    const selected = isChannelSelected(channel.id)
-                    const assignedTag = selections.find(s => s.channelId === channel.id)?.tagId
-                    const assignedTagName = assignedTag ? tags.find(t => t.id === assignedTag)?.name : null
+                {/* Filter Bar */}
+                {tags.length > 0 && (
+                  <div className="mb-6 p-4 bg-[var(--accent-bg)] rounded-lg border border-[var(--border-color)]">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                      {/* Tag Filters */}
+                      <div className="flex-1">
+                        <p className="text-sm font-medium text-[var(--text-primary)] mb-3">Filter by Category:</p>
+                        <div className="flex flex-wrap gap-2">
+                          {/* "All" Filter */}
+                          <button
+                            onClick={() => handleTagFilter(null)}
+                            className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-200 ${
+                              activeTag === null && !showUnassigned
+                                ? 'bg-blue-500 text-white shadow-md'
+                                : 'bg-[var(--card-bg)] text-[var(--text-secondary)] hover:bg-[var(--border-color)] border border-[var(--border-color)]'
+                            }`}
+                          >
+                            All Channels
+                          </button>
 
-                    return (
-                      <div
-                        key={channel.id}
-                        id={`channel-${channel.id}`}
-                        className={`border-2 rounded-lg transition-all duration-200 ${
-                          selected
-                            ? 'border-green-400 bg-[var(--success-bg)] hover:bg-green-100'
-                            : 'border-[var(--border-color)] hover:border-[var(--border-hover)] hover:bg-[var(--accent-bg)]'
-                        }`}
-                      >
-                        {/* Channel Header */}
-                        <div className={`p-4 ${selected ? 'bg-gradient-to-r from-blue-50 to-emerald-50' : 'cursor-pointer hover:bg-[var(--accent-bg)]'}`} onClick={() => toggleChannelSelection(channel.id)}>
-                          <div className="flex items-start space-x-4">
-                            {/* Selection Checkbox/Indicator - Left aligned */}
-                            <div className="flex-shrink-0 pt-1">
-                              {selected ? (
-                                <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white p-2 rounded-full shadow-md">
-                                  <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                  </svg>
+                          {/* Tag Pills - Show first 5, then "+ More" */}
+                          {tags.slice(0, 5).map((tag) => (
+                            <button
+                              key={tag.id}
+                              onClick={() => handleTagFilter(tag.id)}
+                              className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-200 ${
+                                activeTag === tag.id
+                                  ? 'bg-blue-500 text-white shadow-md'
+                                  : 'bg-[var(--card-bg)] text-[var(--text-secondary)] hover:bg-[var(--border-color)] border border-[var(--border-color)]'
+                              }`}
+                            >
+                              {tag.name}
+                            </button>
+                          ))}
+
+                          {/* "+ More" Dropdown for remaining tags */}
+                          {tags.length > 5 && (
+                            <div className="relative">
+                              <button
+                                onClick={() => setShowTagDropdown(!showTagDropdown)}
+                                className={`px-3 py-1 rounded-full text-sm font-medium transition-all duration-200 ${
+                                  showTagDropdown
+                                    ? 'bg-blue-500 text-white shadow-md'
+                                    : 'bg-[var(--card-bg)] text-[var(--text-secondary)] hover:bg-[var(--border-color)] border border-[var(--border-color)]'
+                                }`}
+                              >
+                                + More ({tags.length - 5})
+                              </button>
+
+                              {/* Dropdown Menu */}
+                              {showTagDropdown && (
+                                <div className="absolute top-full left-0 mt-1 w-48 bg-[var(--card-bg)] border border-[var(--border-color)] rounded-lg shadow-lg z-10">
+                                  <div className="p-2 max-h-48 overflow-y-auto">
+                                    {tags.slice(5).map((tag) => (
+                                      <button
+                                        key={tag.id}
+                                        onClick={() => {
+                                          handleTagFilter(tag.id)
+                                          setShowTagDropdown(false)
+                                        }}
+                                        className={`w-full text-left px-3 py-2 rounded text-sm font-medium transition-all duration-200 ${
+                                          activeTag === tag.id
+                                            ? 'bg-blue-500 text-white'
+                                            : 'text-[var(--text-secondary)] hover:bg-[var(--accent-bg)]'
+                                        }`}
+                                      >
+                                        {tag.name}
+                                      </button>
+                                    ))}
+                                  </div>
                                 </div>
-                              ) : (
-                                <div className="w-7 h-7"></div>
                               )}
                             </div>
+                          )}
+                        </div>
+                      </div>
 
-                            {/* Clickable Identity Section */}
-                            <div className="flex items-start space-x-4 flex-1">
-                              {/* Clickable Avatar */}
-                              {channel.channelUrl ? (
-                                <a
-                                  href={channel.channelUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="flex-shrink-0"
-                                  onClick={(e) => e.stopPropagation()}
-                                >
+                      {/* Unassigned Filter */}
+                      <div className="flex items-center gap-3">
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={showUnassigned}
+                            onChange={handleUnassignedToggle}
+                            className="w-4 h-4 text-blue-600 bg-[var(--card-bg)] border-[var(--border-color)] rounded focus:ring-blue-500 focus:ring-2"
+                          />
+                          <span className="text-sm font-medium text-[var(--text-primary)]">Show Unassigned</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Active Filter Summary */}
+                    {(activeTag || showUnassigned) && (
+                      <div className="mt-3 pt-3 border-t border-[var(--border-color)]">
+                        <div className="flex items-center justify-between">
+                          <p className="text-sm text-[var(--text-secondary)]">
+                            {showUnassigned ? (
+                              <>Showing unassigned channels only</>
+                            ) : activeTag ? (
+                              <>Filtering by: <span className="font-medium text-[var(--text-primary)]">{tags.find(t => t.id === activeTag)?.name}</span></>
+                            ) : null}
+                          </p>
+                          <button
+                            onClick={() => {
+                              setActiveTag(null)
+                              setShowUnassigned(false)
+                            }}
+                            className="text-xs text-blue-600 hover:text-blue-800 underline"
+                          >
+                            Clear all filters
+                          </button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* Channel List */}
+                <div ref={channelListRef} className="space-y-6">
+                  {getFilteredChannels()
+                    .sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()))
+                    .map((channel) => {
+                      const selected = isChannelSelected(channel.id)
+                      const assignedTag = selections.find(s => s.channelId === channel.id)?.tagId
+                      const assignedTagName = assignedTag ? tags.find(t => t.id === assignedTag)?.name : null
+
+                      return (
+                        <div
+                          key={channel.id}
+                          id={`channel-${channel.id}`}
+                          className={`border-2 rounded-lg transition-all duration-200 ${
+                            selected
+                              ? 'border-green-400 bg-[var(--success-bg)] hover:bg-green-100'
+                              : 'border-[var(--border-color)] hover:border-[var(--border-hover)] hover:bg-[var(--accent-bg)]'
+                          }`}
+                        >
+                          {/* Channel Header */}
+                          <div className={`p-4 ${selected ? 'bg-gradient-to-r from-blue-50 to-emerald-50' : 'cursor-pointer hover:bg-[var(--accent-bg)]'}`} onClick={() => toggleChannelSelection(channel.id)}>
+                            <div className="flex items-start space-x-4">
+                              {/* Selection Checkbox/Indicator - Left aligned */}
+                              <div className="flex-shrink-0 pt-1">
+                                {selected ? (
+                                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white p-2 rounded-full shadow-md">
+                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                  </div>
+                                ) : (
+                                  <div className="w-7 h-7"></div>
+                                )}
+                              </div>
+
+                              {/* Clickable Identity Section */}
+                              <div className="flex items-start space-x-4 flex-1">
+                                {/* Clickable Avatar */}
+                                {channel.channelUrl ? (
+                                  <a
+                                    href={channel.channelUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex-shrink-0"
+                                    onClick={(e) => e.stopPropagation()}
+                                  >
+                                    <img
+                                      src={channel.thumbnails?.medium?.url || channel.thumbnails?.default?.url || '/placeholder-channel.png'}
+                                      alt={channel.title}
+                                      className="w-16 h-16 rounded-full object-cover hover:ring-2 hover:ring-blue-400 transition-all duration-200"
+                                    />
+                                  </a>
+                                ) : (
                                   <img
                                     src={channel.thumbnails?.medium?.url || channel.thumbnails?.default?.url || '/placeholder-channel.png'}
                                     alt={channel.title}
-                                    className="w-16 h-16 rounded-full object-cover hover:ring-2 hover:ring-blue-400 transition-all duration-200"
+                                    className="w-16 h-16 rounded-full object-cover flex-shrink-0"
                                   />
-                                </a>
-                              ) : (
-                                <img
-                                  src={channel.thumbnails?.medium?.url || channel.thumbnails?.default?.url || '/placeholder-channel.png'}
-                                  alt={channel.title}
-                                  className="w-16 h-16 rounded-full object-cover flex-shrink-0"
-                                />
-                              )}
+                                )}
 
-                              {/* Channel Info */}
-                              <div className="flex-1 min-w-0">
-                                {/* Clickable Title */}
-                                <div className="mb-2">
-                                  {channel.channelUrl ? (
-                                    <a
-                                      href={channel.channelUrl}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className={`font-semibold text-lg hover:text-blue-600 hover:underline cursor-pointer transition-all duration-200 block ${selected ? 'text-emerald-900' : 'text-[var(--text-primary)]'}`}
-                                      onClick={(e) => e.stopPropagation()}
-                                    >
-                                      {channel.title}
-                                    </a>
-                                  ) : (
-                                    <p className={`font-semibold text-lg ${selected ? 'text-emerald-900' : 'text-[var(--text-primary)]'}`}>
-                                      {channel.title}
+                                {/* Channel Info */}
+                                <div className="flex-1 min-w-0">
+                                  {/* Clickable Title */}
+                                  <div className="mb-2">
+                                    {channel.channelUrl ? (
+                                      <a
+                                        href={channel.channelUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className={`font-semibold text-lg hover:text-blue-600 hover:underline cursor-pointer transition-all duration-200 block ${selected ? 'text-emerald-900' : 'text-[var(--text-primary)]'}`}
+                                        onClick={(e) => e.stopPropagation()}
+                                      >
+                                        {channel.title}
+                                      </a>
+                                    ) : (
+                                      <p className={`font-semibold text-lg ${selected ? 'text-emerald-900' : 'text-[var(--text-primary)]'}`}>
+                                        {channel.title}
+                                      </p>
+                                    )}
+                                  </div>
+
+                                  {/* Metadata Badges Row */}
+                                  <div className="inline-flex gap-2 items-center mt-1 mb-2">
+                                    {/* Total Videos Badge */}
+                                    {channel.contentDetails?.totalItemCount && (
+                                      <span className="bg-[var(--accent-bg)] text-[var(--text-secondary)] rounded px-2 py-0.5 text-xs font-medium">
+                                        📊 {channel.contentDetails.totalItemCount.toLocaleString()} videos
+                                      </span>
+                                    )}
+
+                                    {/* Since Year Badge */}
+                                    {channel.publishedAt && (
+                                      <span className="bg-green-100 text-green-800 rounded px-2 py-0.5 text-xs font-medium">
+                                        📅 Since {new Date(channel.publishedAt).getFullYear()}
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  {/* Expandable Description */}
+                                  <div className="mb-2">
+                                    <p className={`text-sm text-[var(--text-muted)] ${expandedDescriptions[channel.id] ? '' : 'line-clamp-2'}`}>
+                                      {channel.description}
+                                    </p>
+
+                                    {/* Expand/Collapse Button - Only show if description > 100 characters */}
+                                    {channel.description && channel.description.length > 100 && (
+                                      <button
+                                        onClick={(e) => {
+                                          e.stopPropagation()
+                                          setExpandedDescriptions(prev => ({
+                                            ...prev,
+                                            [channel.id]: !prev[channel.id]
+                                          }))
+                                        }}
+                                        className="text-xs text-blue-600 hover:text-blue-800 mt-1 font-medium transition-colors"
+                                        aria-expanded={expandedDescriptions[channel.id] || false}
+                                      >
+                                        {expandedDescriptions[channel.id] ? '▲ Less' : '▼ More'}
+                                      </button>
+                                    )}
+                                  </div>
+
+                                  {/* Selection Status */}
+                                  {selected && (
+                                    <p className="text-xs text-emerald-600 font-medium">
+                                      ✓ Selected for digest
                                     </p>
                                   )}
                                 </div>
+                              </div>
+                            </div>
+                          </div>
 
-                                {/* Metadata Badges Row */}
-                                <div className="inline-flex gap-2 items-center mt-1 mb-2">
-                                  {/* Total Videos Badge */}
-                                  {channel.contentDetails?.totalItemCount && (
-                                    <span className="bg-[var(--accent-bg)] text-[var(--text-secondary)] rounded px-2 py-0.5 text-xs font-medium">
-                                      📊 {channel.contentDetails.totalItemCount.toLocaleString()} videos
-                                    </span>
-                                  )}
+                          {/* Tag Assignment Section */}
+                          {selected && (
+                            <div className="px-4 pb-4 border-t border-[var(--border-color)] bg-[var(--card-bg)]">
+                              <div className="mt-4">
+                                <p className="text-sm font-medium text-[var(--text-primary)] mb-3">Assign to Category:</p>
 
-                                  {/* Since Year Badge */}
-                                  {channel.publishedAt && (
-                                    <span className="bg-green-100 text-green-800 rounded px-2 py-0.5 text-xs font-medium">
-                                      📅 Since {new Date(channel.publishedAt).getFullYear()}
-                                    </span>
-                                  )}
+                                {/* Tag Chips */}
+                                <div className="flex flex-wrap gap-2">
+                                  {/* Existing Tags */}
+                                  {tags.map((tag) => {
+                                    const isAssigned = assignedTag === tag.id
+                                    return (
+                                      <button
+                                        key={tag.id}
+                                        onClick={() => {
+                                          if (isAssigned) {
+                                            // Remove assignment
+                                            removeChannelFromTag(channel.id, tag.id)
+                                          } else {
+                                            // Assign to this tag
+                                            assignChannelToTag(channel.id, tag.id)
+                                          }
+                                        }}
+                                        className={`px-2 py-1 rounded-full text-xs font-semibold transition-all duration-200 shadow-md transform ${
+                                          isAssigned
+                                            ? 'bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 text-white shadow-yellow-200 scale-105 ring-1 ring-purple-300 ring-opacity-50 hover:scale-110'
+                                            : 'bg-[var(--accent-bg)] text-[var(--text-secondary)] hover:bg-[var(--border-color)] border border-[var(--border-color)] hover:border-[var(--border-hover)] hover:scale-102'
+                                        }`}
+                                        style={isAssigned ? {
+                                          background: 'linear-gradient(to right, #fbbf24, #f472b6, #a855f7)',
+                                          boxShadow: '0 4px 6px -1px rgba(251, 191, 36, 0.2), 0 2px 4px -1px rgba(251, 191, 36, 0.1)'
+                                        } : {}}
+                                      >
+                                        {tag.name}
+                                        {isAssigned && (
+                                          <svg className="w-4 h-4 ml-2 inline" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                          </svg>
+                                        )}
+                                      </button>
+                                    )
+                                  })}
+
+                                  {/* Create New Tag Chip */}
+                                  <button
+                                    onClick={async () => {
+                                      const tagName = prompt('Enter new category name (max 20 characters):')
+                                      if (tagName) {
+                                        // Validate length
+                                        if (tagName.length > 20) {
+                                          alert('❌ Category name must be 20 characters or less')
+                                          return
+                                        }
+                                        if (tagName.trim().length === 0) {
+                                          alert('❌ Category name cannot be empty')
+                                          return
+                                        }
+
+                                        const newTag = await createTag(tagName.trim())
+                                        if (newTag) {
+                                          await assignChannelToTag(channel.id, newTag.id)
+                                        }
+                                      }
+                                    }}
+                                    className="px-2 py-1 rounded-full text-xs font-medium bg-dashed border-2 border-dashed border-[var(--border-color)] text-[var(--text-secondary)] hover:bg-[var(--accent-bg)] transition-all duration-200"
+                                  >
+                                    <svg className="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                    + Tag
+                                  </button>
                                 </div>
 
-                                {/* Expandable Description */}
-                                <div className="mb-2">
-                                  <p className={`text-sm text-[var(--text-muted)] ${expandedDescriptions[channel.id] ? '' : 'line-clamp-2'}`}>
-                                    {channel.description}
-                                  </p>
-
-                                  {/* Expand/Collapse Button - Only show if description > 100 characters */}
-                                  {channel.description && channel.description.length > 100 && (
-                                    <button
-                                      onClick={(e) => {
-                                        e.stopPropagation()
-                                        setExpandedDescriptions(prev => ({
-                                          ...prev,
-                                          [channel.id]: !prev[channel.id]
-                                        }))
-                                      }}
-                                      className="text-xs text-blue-600 hover:text-blue-800 mt-1 font-medium transition-colors"
-                                      aria-expanded={expandedDescriptions[channel.id] || false}
-                                    >
-                                      {expandedDescriptions[channel.id] ? '▲ Less' : '▼ More'}
-                                    </button>
-                                  )}
-                                </div>
-
-                                {/* Selection Status */}
-                                {selected && (
-                                  <p className="text-xs text-emerald-600 font-medium">
-                                    ✓ Selected for digest
-                                  </p>
+                                {/* Assignment Status */}
+                                {assignedTagName && (
+                                  <div className="mt-3 p-2 bg-[var(--success-bg)] rounded-lg border border-[var(--success-border)]">
+                                    <p className="text-xs text-[var(--success-text)] flex items-center">
+                                      <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                                      </svg>
+                                      ✓ Assigned to <span className="font-semibold ml-1">{assignedTagName}</span>
+                                    </p>
+                                  </div>
                                 )}
                               </div>
                             </div>
-                          </div>
+                          )}
                         </div>
-
-                        {/* Tag Assignment Section */}
-                        {selected && (
-                          <div className="px-4 pb-4 border-t border-[var(--border-color)] bg-[var(--card-bg)]">
-                            <div className="mt-4">
-                              <p className="text-sm font-medium text-[var(--text-primary)] mb-3">Assign to Category:</p>
-
-                              {/* Tag Chips */}
-                              <div className="flex flex-wrap gap-2">
-                                {/* Existing Tags */}
-                                {tags.map((tag) => {
-                                  const isAssigned = assignedTag === tag.id
-                                  return (
-                                    <button
-                                      key={tag.id}
-                                      onClick={() => {
-                                        if (isAssigned) {
-                                          // Remove assignment
-                                          removeChannelFromTag(channel.id, tag.id)
-                                        } else {
-                                          // Assign to this tag
-                                          assignChannelToTag(channel.id, tag.id)
-                                        }
-                                      }}
-                                      className={`px-2 py-1 rounded-full text-xs font-semibold transition-all duration-200 shadow-md transform ${
-                                        isAssigned
-                                          ? 'bg-gradient-to-r from-yellow-300 via-pink-400 to-purple-500 text-white shadow-yellow-200 scale-105 ring-1 ring-purple-300 ring-opacity-50 hover:scale-110'
-                                          : 'bg-[var(--accent-bg)] text-[var(--text-secondary)] hover:bg-[var(--border-color)] border border-[var(--border-color)] hover:border-[var(--border-hover)] hover:scale-102'
-                                      }`}
-                                      style={isAssigned ? {
-                                        background: 'linear-gradient(to right, #fbbf24, #f472b6, #a855f7)',
-                                        boxShadow: '0 4px 6px -1px rgba(251, 191, 36, 0.2), 0 2px 4px -1px rgba(251, 191, 36, 0.1)'
-                                      } : {}}
-                                    >
-                                      {tag.name}
-                                      {isAssigned && (
-                                        <svg className="w-4 h-4 ml-2 inline" fill="currentColor" viewBox="0 0 20 20">
-                                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                        </svg>
-                                      )}
-                                    </button>
-                                  )
-                                })}
-
-                                {/* Create New Tag Chip */}
-                                <button
-                                  onClick={async () => {
-                                    const tagName = prompt('Enter new category name (max 20 characters):')
-                                    if (tagName) {
-                                      // Validate length
-                                      if (tagName.length > 20) {
-                                        alert('❌ Category name must be 20 characters or less')
-                                        return
-                                      }
-                                      if (tagName.trim().length === 0) {
-                                        alert('❌ Category name cannot be empty')
-                                        return
-                                      }
-
-                                      const newTag = await createTag(tagName.trim())
-                                      if (newTag) {
-                                        await assignChannelToTag(channel.id, newTag.id)
-                                      }
-                                    }
-                                  }}
-                                  className="px-2 py-1 rounded-full text-xs font-medium bg-dashed border-2 border-dashed border-[var(--border-color)] text-[var(--text-secondary)] hover:bg-[var(--accent-bg)] transition-all duration-200"
-                                >
-                                  <svg className="w-4 h-4 mr-1 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                  </svg>
-                                  + Tag
-                                </button>
-                              </div>
-
-                              {/* Assignment Status */}
-                              {assignedTagName && (
-                                <div className="mt-3 p-2 bg-[var(--success-bg)] rounded-lg border border-[var(--success-border)]">
-                                  <p className="text-xs text-[var(--success-text)] flex items-center">
-                                    <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                    </svg>
-                                    ✓ Assigned to <span className="font-semibold ml-1">{assignedTagName}</span>
-                                  </p>
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    )
-                  })}
+                      )
+                    })}
                 </div>
 
                 {/* A-Z Button - Always Visible */}
