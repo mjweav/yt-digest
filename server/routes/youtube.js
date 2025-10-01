@@ -55,12 +55,17 @@ router.get('/subscriptions', async (req, res) => {
             high: item.snippet.thumbnails?.high?.url
           });
 
+          // Construct channel URL from channel ID as fallback
+          const channelId = item.snippet.resourceId.channelId;
+          const channelUrl = `https://youtube.com/channel/${channelId}`;
+
           const channelData = {
             // Basic channel information
-            id: item.snippet.resourceId.channelId,
+            id: channelId,
             title: item.snippet.title,
             description: item.snippet.description,
             publishedAt: item.snippet.publishedAt,
+            channelUrl: channelUrl, // Add channel URL at top level for frontend
 
             // Complete thumbnail set
             thumbnails: {
@@ -78,16 +83,18 @@ router.get('/subscriptions', async (req, res) => {
               activityType: item.contentDetails.activityType
             } : null,
 
-            // Subscriber information
+            // Subscriber information with constructed channel URL
             subscriberSnippet: item.subscriberSnippet ? {
-              channelUrl: item.subscriberSnippet.channelUrl,
+              channelUrl: channelUrl, // Use constructed URL as fallback
               channelTitle: item.subscriberSnippet.channelTitle
-            } : null,
+            } : {
+              channelUrl: channelUrl // Use constructed URL when no subscriberSnippet
+            },
 
             // Resource information
             resourceId: {
               kind: item.snippet.resourceId.kind,
-              channelId: item.snippet.resourceId.channelId
+              channelId: channelId
             },
 
             // Raw API response for debugging/validation
@@ -138,50 +145,58 @@ router.get('/subscriptions', async (req, res) => {
                 pageToken: nextPageToken
               });
 
-              const pageSubscriptions = retryResponse.data.items.map(item => ({
-                // Basic channel information
-                id: item.snippet.resourceId.channelId,
-                title: item.snippet.title,
-                description: item.snippet.description,
-                publishedAt: item.snippet.publishedAt,
+              // Transform retry response data with channel URL construction
+              const pageSubscriptions = retryResponse.data.items.map(item => {
+                const channelId = item.snippet.resourceId.channelId;
+                const channelUrl = `https://youtube.com/channel/${channelId}`;
 
-                // Complete thumbnail set
-                thumbnails: {
-                  default: item.snippet.thumbnails?.default,
-                  medium: item.snippet.thumbnails?.medium,
-                  high: item.snippet.thumbnails?.high,
-                  standard: item.snippet.thumbnails?.standard,
-                  maxres: item.snippet.thumbnails?.maxres
-                },
+                return {
+                  // Basic channel information
+                  id: channelId,
+                  title: item.snippet.title,
+                  description: item.snippet.description,
+                  publishedAt: item.snippet.publishedAt,
 
-                // Content details (video counts, activity type)
-                contentDetails: item.contentDetails ? {
-                  totalItemCount: item.contentDetails.totalItemCount,
-                  newItemCount: item.contentDetails.newItemCount,
-                  activityType: item.contentDetails.activityType
-                } : null,
+                  // Complete thumbnail set
+                  thumbnails: {
+                    default: item.snippet.thumbnails?.default,
+                    medium: item.snippet.thumbnails?.medium,
+                    high: item.snippet.thumbnails?.high,
+                    standard: item.snippet.thumbnails?.standard,
+                    maxres: item.snippet.thumbnails?.maxres
+                  },
 
-                // Subscriber information
-                subscriberSnippet: item.subscriberSnippet ? {
-                  channelUrl: item.subscriberSnippet.channelUrl,
-                  channelTitle: item.subscriberSnippet.channelTitle
-                } : null,
+                  // Content details (video counts, activity type)
+                  contentDetails: item.contentDetails ? {
+                    totalItemCount: item.contentDetails.totalItemCount,
+                    newItemCount: item.contentDetails.newItemCount,
+                    activityType: item.contentDetails.activityType
+                  } : null,
 
-                // Resource information
-                resourceId: {
-                  kind: item.snippet.resourceId.kind,
-                  channelId: item.snippet.resourceId.channelId
-                },
+                  // Subscriber information with constructed channel URL
+                  subscriberSnippet: item.subscriberSnippet ? {
+                    channelUrl: channelUrl, // Use constructed URL as fallback
+                    channelTitle: item.subscriberSnippet.channelTitle
+                  } : {
+                    channelUrl: channelUrl // Use constructed URL when no subscriberSnippet
+                  },
 
-                // Raw API response for debugging/validation
-                _raw: {
-                  snippet: item.snippet,
-                  contentDetails: item.contentDetails,
-                  subscriberSnippet: item.subscriberSnippet,
-                  etag: item.etag,
-                  kind: item.kind
-                }
-              }));
+                  // Resource information
+                  resourceId: {
+                    kind: item.snippet.resourceId.kind,
+                    channelId: channelId
+                  },
+
+                  // Raw API response for debugging/validation
+                  _raw: {
+                    snippet: item.snippet,
+                    contentDetails: item.contentDetails,
+                    subscriberSnippet: item.subscriberSnippet,
+                    etag: item.etag,
+                    kind: item.kind
+                  }
+                };
+              });
 
               allSubscriptions = allSubscriptions.concat(pageSubscriptions);
               nextPageToken = retryResponse.data.nextPageToken;
@@ -655,6 +670,162 @@ router.get('/validate', async (req, res) => {
     console.error('Validation error:', error);
     res.status(500).json({
       error: 'Validation failed',
+      message: error.message
+    });
+  }
+});
+
+/**
+ * Debug endpoint: Count videos uploaded in last 7 days per channel
+ * GET /api/youtube/debug/newLast7Days
+ */
+router.get('/debug/newLast7Days', async (req, res) => {
+  try {
+    // Get authenticated user
+    const usersData = JsonStore.getData('users');
+    const user = usersData.users[usersData.users.length - 1];
+
+    if (!user) {
+      return res.status(401).json({
+        error: 'No authenticated user found. Please complete OAuth first.'
+      });
+    }
+
+    // Get all channels
+    const channelsData = JsonStore.getData('channels');
+    const channels = channelsData.channels || [];
+
+    if (channels.length === 0) {
+      return res.json({
+        error: 'No channels found. Please fetch subscriptions first.',
+        results: []
+      });
+    }
+
+    console.log(`🔍 DEBUG: Analyzing last 7 days uploads for ${channels.length} channels`);
+    const youtube = await GoogleAuth.getYouTubeClient(user.id);
+
+    const results = [];
+    const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+    for (const channel of channels) {
+      try {
+        console.log(`🔍 DEBUG: Checking channel: ${channel.title}`);
+
+        // Get channel's upload playlist ID
+        const channelResponse = await youtube.channels.list({
+          part: 'contentDetails',
+          id: channel.id
+        });
+
+        if (channelResponse.data.items?.length === 0) {
+          console.log(`❌ No channel found for ID: ${channel.id}`);
+          continue;
+        }
+
+        const uploadPlaylistId = channelResponse.data.items[0].contentDetails.relatedPlaylists.uploads;
+
+        if (!uploadPlaylistId) {
+          console.log(`❌ No upload playlist found for channel: ${channel.title}`);
+          results.push({
+            channelId: channel.id,
+            title: channel.title,
+            newLast7Days: 0,
+            sample: [],
+            error: 'No upload playlist found'
+          });
+          continue;
+        }
+
+        // Fetch recent uploads from playlist
+        const playlistResponse = await youtube.playlistItems.list({
+          part: 'snippet,contentDetails',
+          playlistId: uploadPlaylistId,
+          maxResults: 50 // Get up to 50 recent uploads
+        });
+
+        if (!playlistResponse.data.items) {
+          console.log(`❌ No playlist items found for channel: ${channel.title}`);
+          results.push({
+            channelId: channel.id,
+            title: channel.title,
+            newLast7Days: 0,
+            sample: [],
+            error: 'No playlist items found'
+          });
+          continue;
+        }
+
+        // Filter and count videos from last 7 days
+        const recentVideos = playlistResponse.data.items.filter(item => {
+          const publishedAt = new Date(item.snippet.publishedAt);
+          return publishedAt >= sevenDaysAgo;
+        });
+
+        // Get sample of recent videos (up to 5)
+        const sample = recentVideos.slice(0, 5).map(item => ({
+          videoId: item.contentDetails.videoId,
+          publishedAt: item.snippet.publishedAt,
+          title: item.snippet.title
+        }));
+
+        console.log(`✅ ${channel.title}: ${recentVideos.length} uploads in last 7 days`);
+
+        results.push({
+          channelId: channel.id,
+          title: channel.title,
+          newLast7Days: recentVideos.length,
+          sample: sample,
+          totalUploadsChecked: playlistResponse.data.items.length
+        });
+
+      } catch (channelError) {
+        console.error(`❌ Error checking channel ${channel.title}:`, channelError.message);
+        results.push({
+          channelId: channel.id,
+          title: channel.title,
+          newLast7Days: 0,
+          sample: [],
+          error: channelError.message
+        });
+      }
+    }
+
+    // Sort by newLast7Days count (descending)
+    results.sort((a, b) => b.newLast7Days - a.newLast7Days);
+
+    const summary = {
+      totalChannels: results.length,
+      channelsWithNewVideos: results.filter(r => r.newLast7Days > 0).length,
+      totalNewVideosLast7Days: results.reduce((sum, r) => sum + r.newLast7Days, 0)
+    };
+
+    console.log(`🔍 DEBUG SUMMARY: ${summary.channelsWithNewVideos}/${summary.totalChannels} channels have new videos in last 7 days (${summary.totalNewVideosLast7Days} total)`);
+
+    res.json({
+      success: true,
+      summary: summary,
+      results: results,
+      debugInfo: {
+        sevenDaysAgo: sevenDaysAgo.toISOString(),
+        generatedAt: new Date().toISOString(),
+        note: 'This endpoint helps validate the accuracy of new video counts displayed in the UI'
+      }
+    });
+
+  } catch (error) {
+    console.error('Debug endpoint error:', error);
+
+    // Handle specific OAuth errors
+    if (error.message.includes('invalid_grant') || error.message.includes('token')) {
+      return res.status(401).json({
+        error: 'Authentication expired. Please reconnect your YouTube account.',
+        code: 'AUTH_EXPIRED'
+      });
+    }
+
+    res.status(500).json({
+      error: 'Debug endpoint failed',
       message: error.message
     });
   }

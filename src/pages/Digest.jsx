@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { SunIcon, MoonIcon } from '@heroicons/react/24/outline'
 
 function Digest() {
   const [tags, setTags] = useState([])
@@ -12,6 +13,13 @@ function Digest() {
   const [dateRange, setDateRange] = useState('30') // Default to 30 days
   const [lastUpdated, setLastUpdated] = useState(null)
   const [expandedCategories, setExpandedCategories] = useState({})
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  // Dark mode toggle function
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode)
+    document.documentElement.classList.toggle('dark')
+  }
 
   // Load data on component mount
   useEffect(() => {
@@ -290,19 +298,19 @@ function Digest() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-4">
+    <div className="min-h-screen bg-[var(--page-bg)] py-4">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
         <div className="space-y-4">
           {/* Compact Header */}
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">Video Digest</h1>
-            <p className="text-sm text-gray-600">
+            <h1 className="text-2xl font-bold text-[var(--text-primary)] mb-1">Video Digest</h1>
+            <p className="text-sm text-[var(--text-secondary)]">
               Your curated videos organized by categories
             </p>
           </div>
 
           {/* Compact Controls Section */}
-          <div className="bg-white rounded-lg shadow-lg p-4">
+          <div className="bg-[var(--card-bg)] rounded-lg shadow-[var(--card-shadow)] p-4">
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
               {/* Date Range Filter - Updated Green Theme */}
               <div className="flex items-center space-x-4">
@@ -312,11 +320,11 @@ function Digest() {
                   </svg>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Date Range</label>
+                  <label className="block text-sm font-medium text-[var(--text-primary)] mb-1">Date Range</label>
                   <select
                     value={dateRange}
                     onChange={(e) => handleDateRangeChange(e.target.value)}
-                    className="px-4 py-2 text-lg rounded-lg border-2 border-gray-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition-all duration-200"
+                    className="px-4 py-2 text-lg rounded-lg border-2 border-[var(--input-border)] focus:border-[var(--input-focus)] focus:ring-2 focus:ring-emerald-200 transition-all duration-200 bg-[var(--input-bg)] text-[var(--text-primary)]"
                   >
                     <option value="7">Last 7 days</option>
                     <option value="1">Last 24 hours</option>
@@ -347,9 +355,9 @@ function Digest() {
               </button>
             </div>
 
-            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+            <div className="mt-4 p-4 bg-[var(--accent-bg)] rounded-lg">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                <p className="text-sm text-gray-600 flex items-center">
+                <p className="text-sm text-[var(--text-secondary)] flex items-center">
                   <svg className="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                   </svg>
@@ -383,12 +391,12 @@ function Digest() {
 
           {/* No Channels Selected */}
           {selections.filter(s => s.selected).length === 0 ? (
-            <div className="bg-white rounded-xl shadow-lg p-16 text-center">
-              <svg className="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-[var(--card-bg)] rounded-xl shadow-[var(--card-shadow)] p-16 text-center">
+              <svg className="w-24 h-24 text-[var(--text-muted)] mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">No Channels Selected</h2>
-              <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
+              <h2 className="text-2xl font-semibold text-[var(--text-primary)] mb-4">No Channels Selected</h2>
+              <p className="text-[var(--text-secondary)] text-lg mb-8 max-w-md mx-auto">
                 Please pick some channels in the Channel Picker to see your personalized video digest
               </p>
               <Link
@@ -402,12 +410,12 @@ function Digest() {
               </Link>
             </div>
           ) : tags.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-lg p-16 text-center">
-              <svg className="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-[var(--card-bg)] rounded-xl shadow-[var(--card-shadow)] p-16 text-center">
+              <svg className="w-24 h-24 text-[var(--text-muted)] mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">No Categories Found</h2>
-              <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
+              <h2 className="text-2xl font-semibold text-[var(--text-primary)] mb-4">No Categories Found</h2>
+              <p className="text-[var(--text-secondary)] text-lg mb-8 max-w-md mx-auto">
                 Create categories and assign channels in the Channel Picker to see your personalized video digest
               </p>
               <Link
@@ -421,12 +429,12 @@ function Digest() {
               </Link>
             </div>
           ) : videos.length === 0 ? (
-            <div className="bg-white rounded-xl shadow-lg p-16 text-center">
-              <svg className="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="bg-[var(--card-bg)] rounded-xl shadow-[var(--card-shadow)] p-16 text-center">
+              <svg className="w-24 h-24 text-[var(--text-muted)] mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
-              <h2 className="text-2xl font-semibold text-gray-900 mb-4">No Videos Found</h2>
-              <p className="text-gray-600 text-lg mb-8 max-w-md mx-auto">
+              <h2 className="text-2xl font-semibold text-[var(--text-primary)] mb-4">No Videos Found</h2>
+              <p className="text-[var(--text-secondary)] text-lg mb-8 max-w-md mx-auto">
                 No new videos found in the selected date range for your chosen channels
               </p>
               <button
@@ -445,7 +453,7 @@ function Digest() {
                 const totalVideos = tagGroup.channels ? tagGroup.channels.reduce((total, ch) => total + ch.videos.length, 0) : 0;
 
                 return (
-                  <div key={tagGroup.tagId} className="bg-white rounded-lg shadow-lg overflow-hidden">
+                  <div key={tagGroup.tagId} className="bg-[var(--card-bg)] rounded-lg shadow-[var(--card-shadow)] overflow-hidden">
                     {/* Compact Category Header - New Green Theme */}
                     <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-4">
                       <div className="flex items-center justify-between">
@@ -482,9 +490,9 @@ function Digest() {
                     {isCategoryExpanded(tagGroup.tagId) && (
                       <div className="p-4 space-y-4">
                         {tagGroup.channels?.map((channel) => (
-                          <div key={channel.channelId} className="border border-gray-200 rounded-lg overflow-hidden">
+                          <div key={channel.channelId} className="border border-[var(--border-color)] rounded-lg overflow-hidden">
                             {/* Channel Header */}
-                            <div className="bg-gray-50 px-3 py-2 border-b border-gray-200">
+                            <div className="bg-[var(--accent-bg)] px-3 py-2 border-b border-[var(--border-color)]">
                               <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-3">
                                   <img
@@ -492,13 +500,13 @@ function Digest() {
                                     alt={channel.channelTitle}
                                     className="w-6 h-6 rounded-full object-cover"
                                   />
-                                  <span className="text-sm font-medium text-gray-900">{channel.channelTitle}</span>
-                                  <span className="text-xs text-gray-500">({channel.videos.length} videos)</span>
+                                  <span className="text-sm font-medium text-[var(--text-primary)]">{channel.channelTitle}</span>
+                                  <span className="text-xs text-[var(--text-muted)]">({channel.videos.length} videos)</span>
                                 </div>
 
                                 {/* Reserved Action Button Space */}
                                 <div className="flex items-center space-x-2">
-                                  <button className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1 rounded">
+                                  <button className="text-xs text-[var(--text-muted)] hover:text-[var(--text-secondary)] px-2 py-1 rounded">
                                     ⋯
                                   </button>
                                 </div>
@@ -510,9 +518,9 @@ function Digest() {
                               <div className="flex gap-3 overflow-x-auto pb-2">
                                 {channel.videos.map((video) => (
                                   <div key={video.videoId} className="video-card flex-none w-48 group">
-                                    <div className="bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
+                                    <div className="bg-[var(--accent-bg)] rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all duration-200">
                                       {/* Video Thumbnail */}
-                                      <div className="relative aspect-video bg-gray-200 group-hover:bg-gray-300 transition-colors">
+                                      <div className="relative aspect-video bg-[var(--border-color)] group-hover:bg-gray-300 transition-colors">
                                         <img
                                           src={video.thumbnail}
                                           alt={video.title}
@@ -539,11 +547,11 @@ function Digest() {
 
                                       {/* Video Info */}
                                       <div className="p-2">
-                                        <h3 className="font-medium text-gray-900 line-clamp-2 text-sm leading-tight mb-1">
+                                        <h3 className="font-medium text-[var(--text-primary)] line-clamp-2 text-sm leading-tight mb-1">
                                           {video.title}
                                         </h3>
-                                        <p className="text-xs text-gray-600 mb-1">{new Date(video.publishedAt).toLocaleDateString()}</p>
-                                        <p className="text-xs text-gray-500">{video.viewCount} views</p>
+                                        <p className="text-xs text-[var(--text-secondary)] mb-1">{new Date(video.publishedAt).toLocaleDateString()}</p>
+                                        <p className="text-xs text-[var(--text-muted)]">{video.viewCount} views</p>
 
                                         {/* Compact Action Buttons */}
                                         <div className="flex gap-1 mt-2">
@@ -592,7 +600,7 @@ function Digest() {
           )}
 
           {/* Compact Navigation Footer */}
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-4 border-t border-gray-200 bg-white rounded-lg p-3 shadow-lg">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 pt-4 border-t border-[var(--border-color)] bg-[var(--card-bg)] rounded-lg p-3 shadow-[var(--card-shadow)]">
             <Link
               to="/channels"
               className="flex items-center text-blue-600 hover:text-blue-800 font-semibold text-sm transition-colors group"
@@ -603,7 +611,7 @@ function Digest() {
               Back to Channel Picker
             </Link>
 
-            <div className="flex items-center text-gray-500 bg-gray-50 px-2 py-1 rounded">
+            <div className="flex items-center text-[var(--text-muted)] bg-[var(--accent-bg)] px-2 py-1 rounded">
               <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>

@@ -2,6 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme Variables */
+:root {
+  --page-bg: theme(colors.gray.50);
+  --card-bg: theme(colors.white);
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --text-primary: theme(colors.gray.900);
+  --text-secondary: theme(colors.gray.600);
+  --text-muted: theme(colors.gray.500);
+  --border-color: theme(colors.gray.200);
+  --border-hover: theme(colors.gray.300);
+  --input-bg: theme(colors.white);
+  --input-border: theme(colors.gray.300);
+  --input-focus: theme(colors.blue.500);
+  --button-primary: theme(colors.emerald.600);
+  --button-primary-hover: theme(colors.emerald.700);
+  --accent-bg: theme(colors.gray.100);
+  --success-bg: theme(colors.green.50);
+  --success-border: theme(colors.green.200);
+  --success-text: theme(colors.green.800);
+}
+
+.dark {
+  --page-bg: theme(colors.gray.900);
+  --card-bg: theme(colors.gray.800);
+  --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --text-primary: theme(colors.gray.100);
+  --text-secondary: theme(colors.gray.300);
+  --text-muted: theme(colors.gray.400);
+  --border-color: theme(colors.gray.700);
+  --border-hover: theme(colors.gray.600);
+  --input-bg: theme(colors.gray.700);
+  --input-border: theme(colors.gray.600);
+  --input-focus: theme(colors.blue.400);
+  --button-primary: theme(colors.emerald.500);
+  --button-primary-hover: theme(colors.emerald.400);
+  --accent-bg: theme(colors.gray.800);
+  --success-bg: theme(colors.green.900);
+  --success-border: theme(colors.green.800);
+  --success-text: theme(colors.green.100);
+}
+
 /* Global Styles */
 * {
   box-sizing: border-box;
