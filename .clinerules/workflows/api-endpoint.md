@@ -9,4 +9,4 @@
 3. Update `server/index.js` to register the route.
 4. Update or create corresponding API docs in `README.md`.
 5. Add validation steps (curl test or Postman request).
-6. Create Commit Message with prefix: `feat(api): ...`.
+6. **Present commit message in concise bullet format for user approval** (do not commit automatically)`.

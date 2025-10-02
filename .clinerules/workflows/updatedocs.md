@@ -8,4 +8,4 @@
 2. If the change was a **feature** → add entry to `CHANGELOG.md`.
 3. If it's a next actionable step → add/update `TODO.md`.
 4. If it affects setup/run → update `README.md`.
-5. Create Commit Message with bullets`.
+5. **Present commit message in concise bullet format for user approval** (do not commit automatically)`.

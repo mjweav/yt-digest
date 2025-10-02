@@ -10,4 +10,4 @@
 4. If interactive, wire to backend API call.
 5. Validate manually: run `npm run dev`, check layout & interaction.
 6. Update `CHANGELOG.md` with a short note.
-7. Create Commit Message with prefix: `feat(ui): ...`.
+7. **Present commit message in concise bullet format for user approval** (do not commit automatically)`.
