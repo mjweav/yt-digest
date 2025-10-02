@@ -60,3 +60,10 @@ All notable changes to YT Digest will be documented here.
   - Inline tags row preserved
 - Added filters: empty categories, recent videos
 - Fixed displaced checkbox position
+
+## Phase 14 – Immediate Autosave
+- Channel selections now save automatically on toggle
+- Optimistic UI updates for instant feedback
+- Comprehensive error handling with state reversion
+- Manual sync button repurposed as fallback option
+- Enhanced user experience with real-time persistence

@@ -126,21 +126,52 @@ function ChannelPicker() {
     }
   }
 
-  const toggleChannelSelection = (channelId) => {
+  const toggleChannelSelection = async (channelId) => {
     const channel = channels.find(c => c.id === channelId)
     const wasSelected = selections.some(s => s.channelId === channelId)
 
-    setSelections(prev =>
-      prev.some(s => s.channelId === channelId)
-        ? prev.filter(s => s.channelId !== channelId)
-        : [...prev, { channelId, selected: true }]
-    )
+    // Optimistic UI update - immediately update local state
+    const updatedSelections = selections.some(s => s.channelId === channelId)
+      ? selections.filter(s => s.channelId !== channelId)
+      : [...selections, { channelId, selected: true }]
+
+    setSelections(updatedSelections)
 
     // Validation logging
     if (wasSelected) {
       console.log(`Channel Picker validation: Deselected channel: ${channel?.title || channelId}`)
     } else {
       console.log(`Channel Picker validation: Selected channel: ${channel?.title || channelId}`)
+    }
+
+    // Immediate API call for autosave
+    try {
+      const response = await fetch('/api/selections', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          selections: updatedSelections
+        })
+      })
+
+      if (response.ok) {
+        const result = await response.json()
+        console.log(`Autosave: ${result.selectionsCount} channel selections saved`)
+      } else {
+        throw new Error('Failed to autosave selections')
+      }
+    } catch (error) {
+      console.error('Autosave error:', error)
+
+      // Revert optimistic update on error
+      setSelections(selections)
+
+      // Show error feedback
+      setToastMessage(`❌ Failed to save selection. Please try again.`)
+      setTimeout(() => setToastMessage(''), 3000)
+
+      // Fallback to manual save
+      alert('❌ Autosave failed. Please use the "Save Selection" button to manually save your changes.')
     }
   }
 
@@ -548,19 +579,20 @@ function ChannelPicker() {
               <button
                 onClick={saveChannelSelections}
                 disabled={saving || selections.length === 0}
-                className="bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 disabled:from-gray-400 disabled:to-gray-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 disabled:from-gray-400 disabled:to-gray-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
+                title="Manual sync - selections are automatically saved when you select/deselect channels"
               >
                 {saving ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                    Saving...
+                    Syncing...
                   </>
                 ) : (
                   <>
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                     </svg>
-                    Save Selection ({selections.length})
+                    Manual Sync ({selections.length})
                   </>
                 )}
               </button>

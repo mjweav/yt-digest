@@ -1,0 +1,121 @@
+{
+  "timestamp": "2025-10-02T04:55:19.261Z",
+  "summary": {
+    "total": 22,
+    "errors": 0,
+    "success": 6
+  },
+  "results": [
+    {
+      "timestamp": "2025-10-02T04:55:19.253Z",
+      "type": "info",
+      "message": "🚀 Starting YT-Digest Autosave Validation Tests"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.259Z",
+      "type": "info",
+      "message": "==============================================="
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.260Z",
+      "type": "info",
+      "message": "Testing toggleChannelSelection function structure..."
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.260Z",
+      "type": "success",
+      "message": "✓ toggleChannelSelection function structure is correct"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.260Z",
+      "type": "info",
+      "message": "Testing error handling patterns..."
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.260Z",
+      "type": "success",
+      "message": "✓ Error handling patterns are correct"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.260Z",
+      "type": "info",
+      "message": "Testing save button role changes..."
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.260Z",
+      "type": "success",
+      "message": "✓ Save button role changes are correct"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.260Z",
+      "type": "info",
+      "message": "Testing API endpoint structure..."
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.260Z",
+      "type": "success",
+      "message": "✓ API endpoint structure is correct"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "info",
+      "message": "Testing optimistic update logic..."
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "success",
+      "message": "✓ Optimistic update logic is correct"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "info",
+      "message": "==============================================="
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "info",
+      "message": "Test Results: 5 passed, 0 failed"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "success",
+      "message": "🎉 All validation tests passed!"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "info",
+      "message": ""
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "info",
+      "message": "✅ Autosave Implementation Validated:"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "info",
+      "message": "  • Immediate API calls on channel selection"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "info",
+      "message": "  • Optimistic UI updates with error reversion"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "info",
+      "message": "  • Comprehensive error handling"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "info",
+      "message": "  • Updated manual sync button role"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:19.261Z",
+      "type": "info",
+      "message": "  • Proper API endpoint structure"
+    }
+  ],
+  "errors": []
+}

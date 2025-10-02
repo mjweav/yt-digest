@@ -1,0 +1,122 @@
+{
+  "timestamp": "2025-10-02T04:55:44.374Z",
+  "testType": "integration",
+  "summary": {
+    "total": 22,
+    "errors": 0,
+    "success": 6
+  },
+  "results": [
+    {
+      "timestamp": "2025-10-02T04:55:44.367Z",
+      "type": "info",
+      "message": "🔧 Starting YT-Digest Autosave Integration Tests"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.372Z",
+      "type": "info",
+      "message": "==============================================="
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.372Z",
+      "type": "info",
+      "message": "Testing successful autosave scenario..."
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.373Z",
+      "type": "success",
+      "message": "✓ Successful autosave scenario validated"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.373Z",
+      "type": "info",
+      "message": "Testing failed autosave scenario..."
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.373Z",
+      "type": "success",
+      "message": "✓ Failed autosave scenario validated"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.373Z",
+      "type": "info",
+      "message": "Testing optimistic update behavior..."
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.373Z",
+      "type": "success",
+      "message": "✓ Optimistic update behavior validated"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.373Z",
+      "type": "info",
+      "message": "Testing manual sync button functionality..."
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.373Z",
+      "type": "success",
+      "message": "✓ Manual sync button functionality validated"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.373Z",
+      "type": "info",
+      "message": "Testing edge cases and error conditions..."
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "success",
+      "message": "✓ Edge cases and error conditions validated"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "info",
+      "message": "==============================================="
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "info",
+      "message": "Integration Test Results: 5 passed, 0 failed"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "success",
+      "message": "🎉 All integration tests passed!"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "info",
+      "message": ""
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "info",
+      "message": "✅ Integration Scenarios Validated:"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "info",
+      "message": "  • Successful autosave with API response"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "info",
+      "message": "  • Failed autosave with error handling"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "info",
+      "message": "  • Optimistic updates with proper ordering"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "info",
+      "message": "  • Manual sync fallback functionality"
+    },
+    {
+      "timestamp": "2025-10-02T04:55:44.374Z",
+      "type": "info",
+      "message": "  • Edge cases and error conditions"
+    }
+  ],
+  "errors": []
+}
