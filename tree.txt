@@ -1,0 +1,55 @@
+.
+├── _chats
+│   ├── cline_task_sep-30-2025_10-20-57-pm.md
+│   └── cline_task_sep-30-2025_11-24-26-am.md
+├── CHANGELOG.md
+├── client_secret.json
+├── CONTRIBUTING.md
+├── data
+│   ├── channels.json
+│   ├── digests.json
+│   ├── selections.json
+│   ├── tags.json
+│   ├── users.json
+│   └── watched.json
+├── docs
+│   ├── Bits.txt
+│   ├── PRD.md
+│   └── YT_Digest_NewLast7Days_Plan.md
+├── package-lock.json
+├── package.json
+├── README.md
+├── restart.sh
+├── ROADMAP.md
+├── server
+│   ├── index.js
+│   ├── package.json
+│   ├── routes
+│   │   ├── auth.js
+│   │   └── youtube.js
+│   └── utils
+│       ├── googleAuth.js
+│       └── jsonStore.js
+├── src
+│   ├── App.jsx
+│   ├── components
+│   ├── dist
+│   │   ├── assets
+│   │   │   ├── index-1642d4c4.css
+│   │   │   └── index-eb25220f.js
+│   │   └── index.html
+│   ├── index.css
+│   ├── index.html
+│   ├── main.jsx
+│   ├── package.json
+│   ├── pages
+│   │   ├── ChannelPicker.jsx
+│   │   ├── Digest.jsx
+│   │   └── Settings.jsx
+│   ├── postcss.config.js
+│   ├── tailwind.config.js
+│   └── vite.config.js
+├── TODO.md
+└── tree.txt
+
+12 directories, 41 files
