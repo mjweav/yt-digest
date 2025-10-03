@@ -85,3 +85,14 @@ All notable changes to YT Digest will be documented here.
 - **Avatar retry sweep**: Added retry manager for failed CDN thumbnails with backoff (up to 2 retries), post-load sweep runs 3s after mount and on scroll end
 - **Categories UX fix**: Newly created categories now appear immediately in drop-up menu without requiring page reload
 - **Size variance improvement**: Changed from quartiles to p15/p50/p85 percentiles for more visual spread in avatar sizes (more lg contrast, smaller xs)
+
+## Microstep 1.9 – Real categories, real assignment, clear UI state, sticky header
+- **Server**: Real categories with persistent storage via categoriesStore.js, auto-seeding from existing channel data, JSON persistence for categories and assignments
+- **Frontend**: Live categories list refresh, optimistic UI updates for assignments, strong visual indicators (emerald ring + centered check overlay) for assigned channels
+- **UI**: Sticky header that pins controls while clusters scroll underneath, proper content padding to prevent overlap
+- **Persistence**: Categories and channel assignments persist across server restarts, bulk assignment with proper validation and error handling
+
+## Microstep 1.9a – Hydrate "assigned" on initial load
+- **Server**: Enhanced /api/auto-organize to merge per-channel categories from assignments store, added cats field to AOChannel type definition
+- **Frontend**: Derive assigned state from server response on first paint, build assigned Map from channel.cats array for immediate UI hydration
+- **Integration**: Categories assigned in previous sessions now show visual indicators immediately on page load without requiring user interaction

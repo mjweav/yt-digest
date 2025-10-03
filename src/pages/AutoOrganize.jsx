@@ -25,7 +25,7 @@ function scheduleRetry(id, fn, delay = 2000) {
 }
 
 // ===== Avatar component =====
-function Avatar({ ch, isSelected, onRetry }) {
+function Avatar({ ch, isSelected, isAssigned, onRetry }) {
   const [errored, setErrored] = useState(false);
   const [src, setSrc] = useState(null);
   const [nonce, setNonce] = useState(0);
@@ -98,7 +98,7 @@ function Avatar({ ch, isSelected, onRetry }) {
       className={[
         "relative rounded-full overflow-hidden bg-slate-800 border border-white/10",
         sizeCls,
-        isSelected ? "ring-2 ring-emerald-300 ring-offset-0" : ""
+        isSelected ? "ring-2 ring-emerald-300" : isAssigned ? "ring-2 ring-emerald-500/70" : ""
       ].join(" ")}
     >
       {src && !errored ? (
@@ -116,6 +116,14 @@ function Avatar({ ch, isSelected, onRetry }) {
           {initials}
         </div>
       )}
+
+      {isAssigned && (
+        <div className="absolute inset-0 flex items-center justify-center bg-emerald-600/25">
+          <svg viewBox="0 0 24 24" className="w-9 h-9 text-emerald-300 drop-shadow">
+            <path fill="currentColor" d="M9 16.2l-3.5-3.5L4 14.2l5 5 11-11-1.5-1.5z"/>
+          </svg>
+        </div>
+      )}
     </div>
   );
 }
@@ -131,11 +139,27 @@ export default function AutoOrganize() {
   const [categoryInput, setCategoryInput] = useState('');
   const [cats, setCats] = useState([]);
   const [catOpen, setCatOpen] = useState(false);
+  const [assigned, setAssigned] = useState(new Map()); // channelId -> true
   const catBtnRef = useRef(null);
   const catMenuRef = useRef(null);
 
   useEffect(() => {
-    fetch('/api/auto-organize').then(r => r.json()).then(setData);
+    fetch('/api/auto-organize')
+      .then(r => r.json())
+      .then(json => {
+        setData(json);
+
+        // Build assigned map: channelId -> true if has any cats
+        const map = new Map();
+        for (const c of json.clusters || []) {
+          for (const ch of c.channels || []) {
+            if (Array.isArray(ch.cats) && ch.cats.length > 0) {
+              map.set(ch.id, true);
+            }
+          }
+        }
+        setAssigned(map);
+      });
   }, []);
 
   useEffect(() => {
@@ -235,6 +259,14 @@ export default function AutoOrganize() {
         body: JSON.stringify({ channelIds: ids, category })
       });
       if (!res.ok) throw new Error('bulk-assign failed');
+
+      // optimistic mark
+      setAssigned(prev => {
+        const next = new Map(prev);
+        ids.forEach(id => next.set(id, true));
+        return next;
+      });
+
       // TODO: toast success (e.g., `Added ${ids.length} to ${category}`)
       // optional: clear selection
       // setSelected(new Set());
@@ -260,8 +292,9 @@ export default function AutoOrganize() {
       });
     } catch {}
 
-    // Make it immediately available in the menu
-    setCats(prev => prev.includes(trimmed) ? prev : [...prev, trimmed]);
+    // Refresh from server to get the live list
+    const res = await fetch('/api/categories', { cache: 'no-store' }).then(r => r.json());
+    setCats(Array.isArray(res.categories) ? res.categories : []);
 
     await handleBulkAssign(trimmed);
   }
@@ -278,8 +311,8 @@ export default function AutoOrganize() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
       {/* Header */}
-      <div className="border-b border-white/10 bg-slate-900/50 backdrop-blur">
-        <div className="max-w-7xl mx-auto px-4 py-4">
+      <div className="sticky top-0 z-40 backdrop-blur bg-slate-950/70 border-b border-white/5">
+        <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <h1 className="text-2xl font-bold text-white">🔄 Auto Organize</h1>
@@ -310,7 +343,7 @@ export default function AutoOrganize() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto p-6">
+      <div className="max-w-7xl mx-auto p-4 pb-28 pt-3">
         {/* Hidden clusters indicator */}
         {hidden.size > 0 && (
           <div className="mb-4">
@@ -403,7 +436,11 @@ export default function AutoOrganize() {
                       <div key={ch.id}
                            className="flex flex-col items-center gap-1 cursor-pointer"
                            onClick={() => toggle(ch.id)}>
-                        <Avatar ch={withEager} isSelected={selected.has(ch.id)} />
+                        <Avatar
+                          ch={withEager}
+                          isSelected={selected.has(ch.id)}
+                          isAssigned={assigned.get(ch.id) === true}
+                        />
                         <div className="w-full text-center text-xs text-white/80 truncate" title={ch.title}>
                           {ch.title}
                         </div>

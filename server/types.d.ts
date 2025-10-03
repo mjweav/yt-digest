@@ -1,5 +1,6 @@
 export type AOChannel = {
   id: string; title: string; desc?: string; thumb?: string; videoCount?: number;
+  cats?: string[]; // NEW: categories this channel is assigned to
 };
 export type AOCluster = {
   id: string; label: string; span: 1|2|3|4;

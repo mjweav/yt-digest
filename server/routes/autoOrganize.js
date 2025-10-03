@@ -1,12 +1,27 @@
 import express from 'express';
 const router = express.Router();
 import { buildAutoOrganize, readCached } from '../autoOrganize/builder.js';
+import * as store from '../data/categoriesStore.js';
 
 /** GET /api/auto-organize */
 router.get('/', async (_req, res) => {
   try {
     const data = await readCached() || await buildAutoOrganize({ force: true });
-    res.json(data);
+
+    // NEW: merge assignments
+    const assigns = await store.getAssignments(); // { channelId: [cats...] }
+    const merged = {
+      ...data,
+      clusters: data.clusters.map(c => ({
+        ...c,
+        channels: c.channels.map(ch => ({
+          ...ch,
+          cats: Array.isArray(assigns[ch.id]) ? assigns[ch.id] : []
+        }))
+      }))
+    };
+
+    res.json(merged);
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Failed to build auto-organize view' });
