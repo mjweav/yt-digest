@@ -5,6 +5,7 @@ import { GoogleAuth } from './utils/googleAuth.js';
 // Import routes
 import authRoutes from './routes/auth.js';
 import youtubeRoutes from './routes/youtube.js';
+import autoOrganizeRoutes from './routes/autoOrganize.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -186,6 +187,7 @@ app.get('/api/digests/latest', (req, res) => {
 // Mount API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/youtube', youtubeRoutes);
+app.use('/api/auto-organize', autoOrganizeRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

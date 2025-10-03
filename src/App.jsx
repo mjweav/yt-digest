@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import ChannelPicker from './pages/ChannelPicker'
 import Digest from './pages/Digest'
 import Settings from './pages/Settings'
+import AutoOrganize from './pages/AutoOrganize'
 
 function App() {
   console.log('🎬 App component rendering...')
@@ -79,7 +80,17 @@ function App() {
                     : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border-2 border-gray-200 hover:border-emerald-300'
                 }`}
               >
-                📺 Channel Picker
+                📺 Classic Picker
+              </Link>
+              <Link
+                to="/auto-organize"
+                className={`px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-300 transform hover:scale-105 ${
+                  location.pathname === '/auto-organize'
+                    ? 'bg-gradient-to-r from-emerald-500 to-teal-600 text-white shadow-lg'
+                    : 'bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 border-2 border-gray-200 hover:border-emerald-300'
+                }`}
+              >
+                🔄 Auto Organize
               </Link>
               <Link
                 to="/digest"
@@ -145,6 +156,7 @@ function App() {
           } />
           <Route path="/settings" element={<Settings />} />
           <Route path="/channels" element={<ChannelPicker />} />
+          <Route path="/auto-organize" element={<AutoOrganize />} />
           <Route path="/digest" element={<Digest />} />
         </Routes>
       </main>

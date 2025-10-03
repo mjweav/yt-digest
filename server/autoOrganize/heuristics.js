@@ -23,4 +23,4 @@ function assignClusterLabel(ch) {
   return hit ? hit[0] : 'General / Misc';
 }
 
-module.exports = { assignClusterLabel };
+export { assignClusterLabel };

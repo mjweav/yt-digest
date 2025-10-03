@@ -1,6 +1,10 @@
-const fs = require('fs/promises');
-const path = require('path');
-const { assignClusterLabel } = require('./heuristics');
+import fs from 'fs/promises';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { assignClusterLabel } from './heuristics.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const CACHE = path.join(__dirname, '../../data/autoOrganize.json');
 
 function qQuartiles(nums) {
@@ -76,7 +80,14 @@ async function buildAutoOrganize({ force } = {}){
   const clusters = Array.from(buckets.entries()).map(([label, arr]) => {
     const channels = arr
       .sort((a,b)=> (b.videoCount - a.videoCount) || a.title.localeCompare(b.title))
-      .map(c => ({ id: c.id, size: sizeClass(c.videoCount, qs) }));
+      .map(c => ({
+        id: c.id,
+        title: c.title,
+        thumb: c.thumb,
+        desc: c.desc,
+        videoCount: c.videoCount,
+        size: sizeClass(c.videoCount, qs)
+      }));
     return {
       id: label.toLowerCase().replace(/\s+/g,'-'),
       label,
@@ -90,4 +101,4 @@ async function buildAutoOrganize({ force } = {}){
   return payload;
 }
 
-module.exports = { buildAutoOrganize, readCached };
+export { buildAutoOrganize, readCached };
