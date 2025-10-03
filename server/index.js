@@ -6,6 +6,7 @@ import { GoogleAuth } from './utils/googleAuth.js';
 import authRoutes from './routes/auth.js';
 import youtubeRoutes from './routes/youtube.js';
 import autoOrganizeRoutes from './routes/autoOrganize.js';
+import categoriesRoutes from './routes/categories.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -188,6 +189,7 @@ app.get('/api/digests/latest', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/youtube', youtubeRoutes);
 app.use('/api/auto-organize', autoOrganizeRoutes);
+app.use('/api/categories', categoriesRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

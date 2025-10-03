@@ -1,4 +1,95 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+
+// ===== simple gate to cap concurrent image starts =====
+const MAX_IN_FLIGHT = 12;
+let inflight = 0;
+const queue = [];
+function gateLoad(start) {
+  if (inflight < MAX_IN_FLIGHT) {
+    inflight++;
+    start().finally(() => {
+      inflight--;
+      const next = queue.shift();
+      if (next) gateLoad(next);
+    });
+  } else {
+    queue.push(start);
+  }
+}
+
+// ===== Avatar component =====
+function Avatar({ ch, isSelected }) {
+  const [errored, setErrored] = useState(false);
+  const [src, setSrc] = useState(null);
+  const ref = useRef(null);
+
+  const sizeCls =
+    ch.size === 'xs' ? "w-14 h-14" :
+    ch.size === 'sm' ? "w-18 h-18" :
+    ch.size === 'md' ? "w-24 h-24" : "w-32 h-32";
+
+  const initials = (ch.title || "?")
+    .split(' ').slice(0,2).map(s => s[0]).join('').toUpperCase();
+
+  useEffect(() => {
+    if (!ref.current) return;
+    let observer;
+    let cancelled = false;
+
+    const start = () => new Promise(resolve => {
+      if (cancelled) return resolve();
+      setSrc(ch.thumb || null);
+      resolve();
+    });
+
+    if (ch._eager) {
+      // First screenful per cluster: start immediately but still through the gate
+      gateLoad(start);
+      return () => { cancelled = true; };
+    }
+
+    observer = new IntersectionObserver(entries => {
+      const e = entries[0];
+      if (e && e.isIntersecting) {
+        observer.disconnect();
+        gateLoad(start);
+      }
+    }, { rootMargin: '250px' });
+
+    observer.observe(ref.current);
+    return () => {
+      cancelled = true;
+      if (observer) observer.disconnect();
+    };
+  }, [ch.thumb, ch._eager]);
+
+  return (
+    <div
+      ref={ref}
+      className={[
+        "relative rounded-full overflow-hidden bg-slate-800 border border-white/10",
+        sizeCls,
+        isSelected ? "ring-2 ring-emerald-300 ring-offset-0" : ""
+      ].join(" ")}
+    >
+      {src && !errored ? (
+        <img
+          src={src}
+          alt={ch.title}
+          loading={ch._eager ? "eager" : "lazy"}
+          fetchpriority={ch._eager ? "high" : "auto"}
+          decoding="async"
+          className="w-full h-full object-cover"
+          onError={() => setErrored(true)}
+        />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center text-slate-200 font-semibold">
+          {initials}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default function AutoOrganize() {
   const [data, setData] = useState(null);
@@ -9,9 +100,17 @@ export default function AutoOrganize() {
   const [hoveredChannel, setHoveredChannel] = useState(null);
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const [categoryInput, setCategoryInput] = useState('');
+  const [cats, setCats] = useState([]);
 
   useEffect(() => {
     fetch('/api/auto-organize').then(r => r.json()).then(setData);
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/categories')
+      .then(r => r.json())
+      .then(d => setCats(Array.isArray(d.categories) ? d.categories : []))
+      .catch(() => setCats([]));
   }, []);
 
   const clusters = useMemo(() => {
@@ -49,25 +148,38 @@ export default function AutoOrganize() {
     setSelected(next);
   }
 
-  function handleBulkAssign() {
-    if (!categoryInput.trim() || selected.size === 0) return;
-
-    fetch('/api/categories/bulk-assign', {
+  async function handleBulkAssign(category) {
+    if (!category) return;
+    const ids = Array.from(selected);
+    if (ids.length === 0) {
+      // TODO: toast "Nothing selected"
+      return;
+    }
+    const res = await fetch('/api/categories/bulk-assign', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        channelIds: Array.from(selected),
-        category: categoryInput.trim()
-      })
-    }).then(r => r.json()).then(result => {
-      if (result.ok) {
-        setSelected(new Set());
-        setCategoryInput('');
-        setShowCategoryMenu(false);
-        // Show success toast
-        console.log('Categories assigned successfully');
-      }
+      body: JSON.stringify({ channelIds: ids, category })
     });
+    if (res.ok) {
+      // TODO: toast success
+      setSelected(new Set());
+      setShowCategoryMenu(false);
+    } else {
+      // TODO: toast error
+    }
+  }
+
+  async function handleCustomCategory() {
+    const name = window.prompt('Enter category name…');
+    if (!name) return;
+    try {
+      await fetch('/api/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name })
+      });
+    } catch {}
+    await handleBulkAssign(name);
   }
 
   if (!data) return (
@@ -200,49 +312,20 @@ export default function AutoOrganize() {
               {/* Channels Grid */}
               <div className="p-4">
                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                  {cluster.channels.map(ch => (
-                    <div
-                      key={ch.id}
-                      className="flex flex-col items-center gap-1 cursor-pointer"
-                      onClick={() => toggle(ch.id)}
-                    >
-                      {/* Avatar wrapper is the thing that needs the ring */}
-                      <div
-                        className={[
-                          "relative rounded-full overflow-hidden bg-slate-800 border border-white/10",
-                          ch.size === 'xs' ? "w-14 h-14" :
-                          ch.size === 'sm' ? "w-18 h-18" :
-                          ch.size === 'md' ? "w-24 h-24" : "w-32 h-32",
-                          selected.has(ch.id) ? "ring-2 ring-blue-300 ring-offset-0" : ""
-                        ].join(" ")}
-                      >
-                        {ch.thumb ? (
-                          <img
-                            src={ch.thumb}
-                            alt={ch.title}
-                            loading="lazy"
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center text-slate-200 font-semibold">
-                            {(ch.title || "?").split(' ').slice(0,2).map(s=>s[0]).join('').toUpperCase()}
-                          </div>
-                        )}
-
-                        {/* Tooltip */}
-                        <div className="hidden group-hover:block absolute left-1/2 -translate-x-1/2 bottom-[calc(100%+10px)] w-72
-                                        bg-slate-900 text-slate-100 border border-white/10 shadow-xl rounded-lg p-3 text-xs z-50">
-                          <div className="font-semibold mb-1">{ch.title}</div>
-                          <div className="opacity-80 line-clamp-4">{ch.desc}</div>
-                          <div className="opacity-60 mt-1">Videos: {ch.videoCount ?? 0}</div>
+                  {cluster.channels.map((ch, idx) => {
+                    const eager = idx < 32; // tweak if needed
+                    const withEager = { ...ch, _eager: eager };
+                    return (
+                      <div key={ch.id}
+                           className="flex flex-col items-center gap-1 cursor-pointer"
+                           onClick={() => toggle(ch.id)}>
+                        <Avatar ch={withEager} isSelected={selected.has(ch.id)} />
+                        <div className="w-full text-center text-xs text-white/80 truncate" title={ch.title}>
+                          {ch.title}
                         </div>
                       </div>
-
-                      <div className="w-full text-center text-xs text-white/80 truncate" title={ch.title}>
-                        {ch.title}
-                      </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -267,33 +350,26 @@ export default function AutoOrganize() {
               </button>
 
               {showCategoryMenu && (
-                <div className="absolute bottom-full mb-2 left-0 bg-slate-800 border border-white/10 rounded-lg shadow-xl p-3 min-w-64">
-                  <input
-                    type="text"
-                    value={categoryInput}
-                    onChange={(e) => setCategoryInput(e.target.value)}
-                    placeholder="Enter category name..."
-                    className="w-full px-3 py-2 bg-slate-700 border border-white/10 rounded-lg text-white text-sm outline-none mb-3"
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') handleBulkAssign();
-                      if (e.key === 'Escape') setShowCategoryMenu(false);
-                    }}
-                    autoFocus
-                  />
-                  <div className="flex gap-2">
+                <div className="absolute bottom-12 left-0 bg-slate-900/95 border border-white/10 rounded-lg p-1 min-w-[240px] z-50">
+                  {cats.length === 0 && (
+                    <div className="px-3 py-2 text-xs text-slate-300">No categories yet</div>
+                  )}
+                  {cats.map(name => (
                     <button
-                      className="flex-1 px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-sm font-medium"
-                      onClick={handleBulkAssign}
+                      key={name}
+                      className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/5"
+                      onClick={() => handleBulkAssign(name)}
                     >
-                      Assign
+                      {name}
                     </button>
-                    <button
-                      className="px-3 py-2 bg-slate-600 hover:bg-slate-500 text-white rounded-lg text-sm"
-                      onClick={() => setShowCategoryMenu(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
+                  ))}
+                  <div className="border-t border-white/10 my-1" />
+                  <button
+                    className="w-full text-left px-3 py-2 text-sm text-white hover:bg-white/5"
+                    onClick={handleCustomCategory}
+                  >
+                    Custom…
+                  </button>
                 </div>
               )}
             </div>
