@@ -1,70 +1,81 @@
+// server/routes/autoOrganize.js (ES Module)
 import express from 'express';
-const router = express.Router();
-import { buildAutoOrganize, readCached } from '../autoOrganize/builder.js';
-import { explainLabel } from '../autoOrganize/heuristics.js';
+import fs from 'fs';
+import path from 'path';
+import { buildAutoOrganize, loadChannels, loadOverrides } from '../autoOrganize/builder.js';
 import * as store from '../data/categoriesStore.js';
+import { resolveDataPath } from '../utils/paths.js';
 
-/** GET /api/auto-organize */
+const router = express.Router();
+
 router.get('/', async (req, res) => {
   try {
     const debug = req.query.debug === '1';
-    const data = await readCached() || await buildAutoOrganize({ force: true });
-    const assigns = await store.getAssignments();
+    const channels = await loadChannels();
+    const overrides = await loadOverrides();
+    const { clusters, debugRows } = await buildAutoOrganize({ channels, overrides, debug });
 
+    // merge assignments
+    const assigns = await store.getAssignments();
     const merged = {
-      ...data,
-      clusters: data.clusters.map(c => ({
+      builtAt: new Date().toISOString(),
+      clusters: (Array.isArray(clusters) ? clusters : []).map(c => ({
         ...c,
-        channels: c.channels.map(ch => {
-          const cats = Array.isArray(assigns[ch.id]) ? assigns[ch.id] : [];
-          const extra = debug ? { why: explainLabel(ch) } : {};
-          return { ...ch, cats, ...extra };
-        })
+        channels: c.channels.map(ch => ({
+          ...ch,
+          cats: Array.isArray(assigns[ch.id]) ? assigns[ch.id] : []
+        }))
       }))
     };
 
-    res.json(merged);
+    if (debug) {
+      const p = resolveDataPath('autoOrganize.debug.json');
+      try {
+        fs.writeFileSync(p, JSON.stringify({ when: merged.builtAt, rows: debugRows }, null, 2), 'utf8');
+      } catch (e) {
+        console.error('Failed to write debug file:', e);
+      }
+      return res.json({ ...merged, debug: { file: 'data/autoOrganize.debug.json', rows: debugRows.length } });
+    }
+
+    return res.json(merged);
   } catch (e) {
-    console.error(e);
+    console.error('GET /api/auto-organize error', e);
     res.status(500).json({ error: 'Failed to build auto-organize view' });
   }
 });
 
-/** POST /api/auto-organize/recompute */
 router.post('/recompute', async (_req, res) => {
   try {
-    const data = await buildAutoOrganize({ force: true });
-    res.json({ ok: true, builtAt: data.builtAt });
+    const channels = await loadChannels();
+    const overrides = await loadOverrides();
+    const { clusters } = await buildAutoOrganize({ channels, overrides, debug: false });
+    const builtAt = new Date().toISOString();
+
+    // optional: write cache to data/autoOrganize.json for parity
+    const p = resolveDataPath('autoOrganize.json');
+    fs.writeFileSync(p, JSON.stringify({ builtAt, clusters }, null, 2), 'utf8');
+
+    return res.json({ ok: true, builtAt, clusters: clusters.length });
   } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: 'Recompute failed' });
+    console.error('POST /api/auto-organize/recompute error', e);
+    res.status(500).json({ error: 'recompute failed' });
   }
 });
 
-/** POST /api/categories/bulk-assign */
-router.post('/bulk-assign', async (req, res) => {
+// explicit debug export
+router.post('/debug/export', async (_req, res) => {
   try {
-    const { channelIds, category } = req.body;
-
-    if (!Array.isArray(channelIds) || !category) {
-      return res.status(400).json({
-        error: 'channelIds (array) and category (string) are required'
-      });
-    }
-
-    // For spike: log payload and return success
-    console.log('Bulk assign request:', { channelIds, category, count: channelIds.length });
-
-    // TODO: Integrate with existing category persistence when available
-    // For now, just log and return success
-    res.json({
-      ok: true,
-      count: channelIds.length,
-      message: 'Categories assigned successfully (spike implementation)'
-    });
+    const channels = await loadChannels();
+    const overrides = await loadOverrides();
+    const { debugRows } = await buildAutoOrganize({ channels, overrides, debug: true });
+    const when = new Date().toISOString();
+    const p = resolveDataPath('autoOrganize.debug.json');
+    fs.writeFileSync(p, JSON.stringify({ when, rows: debugRows }, null, 2), 'utf8');
+    res.json({ ok: true, file: 'data/autoOrganize.debug.json', rows: debugRows.length });
   } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: 'Bulk assign failed' });
+    console.error('POST /api/auto-organize/debug/export error', e);
+    res.status(500).json({ error: 'debug export failed' });
   }
 });
 

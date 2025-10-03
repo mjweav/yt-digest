@@ -27,13 +27,21 @@ It solves the problem of information overload for users with hundreds of subscri
 
 ## Data Storage
 - `channels.json` — subscriptions metadata
-- `tags.json` — categories
-- `selections.json` — channel-to-tag mappings
+- `categories.json` — user-defined categories
+- `channelCategories.json` — channel-to-category assignments
 - `watched.json` — watched videos
 - `digests.json` — generated digests
 - `users.json` — OAuth tokens
+- `autoOrganize.json` — generated clusters
+- `autoOrganize.debug.json` — debug introspection data
+- `autoOrganize.overrides.json` — manual cluster overrides
 
 ## Out of Scope (MVP)
-- AI-based categorization
 - Social features
 - Native mobile app
+
+## Implemented Features (Post-MVP)
+- **Auto Organize**: AI-powered categorization using weighted keyword heuristics
+- **Manual Overrides**: Human corrections for edge cases
+- **Debug Introspection**: Detailed scoring analysis and export
+- **Path Resolution**: Robust data directory detection with environment overrides

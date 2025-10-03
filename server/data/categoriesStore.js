@@ -1,16 +1,16 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { resolveDataPath, getDataDir } from '../utils/paths.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const DATA_DIR = path.join(__dirname, '../../data');
-const CATS_FILE = path.join(DATA_DIR, 'categories.json');          // ["AI", "Music", ...]
-const ASSIGN_FILE = path.join(DATA_DIR, 'channelCategories.json');  // { "<channelId>": ["AI","Music"] }
+const CATS_FILE = resolveDataPath('categories.json');          // ["AI", "Music", ...]
+const ASSIGN_FILE = resolveDataPath('channelCategories.json');  // { "<channelId>": ["AI","Music"] }
 
 async function ensureDir() {
-  await fs.mkdir(DATA_DIR, { recursive: true });
+  await fs.mkdir(getDataDir(), { recursive: true });
 }
 async function readJSON(file, fallback) {
   try { return JSON.parse(await fs.readFile(file, 'utf-8')); }
@@ -27,7 +27,7 @@ async function seedFromExistingIfEmpty() {
   if (cats && cats.length) return cats;
 
   // Heuristic seed: scan channels.json for 'tags' or 'categories' fields
-  const channelsFile = path.join(DATA_DIR, 'channels.json');
+  const channelsFile = resolveDataPath('channels.json');
   const legacy = await readJSON(channelsFile, []);
   const arr = Array.isArray(legacy.channels) ? legacy.channels : legacy;
   const found = new Set();

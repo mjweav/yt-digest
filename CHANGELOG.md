@@ -96,3 +96,11 @@ All notable changes to YT Digest will be documented here.
 - **Server**: Enhanced /api/auto-organize to merge per-channel categories from assignments store, added cats field to AOChannel type definition
 - **Frontend**: Derive assigned state from server response on first paint, build assigned Map from channel.cats array for immediate UI hydration
 - **Integration**: Categories assigned in previous sessions now show visual indicators immediately on page load without requiring user interaction
+
+## [Unreleased] — Auto Organize: heuristics v2, debug, overrides, and path fix
+- Added weighted scoring classifier with negatives and tie margin.
+- Introduced manual overrides via `data/autoOrganize.overrides.json`.
+- Added debug export: `GET /api/auto-organize?debug=1` writes `data/autoOrganize.debug.json`.
+- Hardened path resolver to correctly target repo `data/` (supports `DATA_DIR` override).
+- Normalized builder to always return `{ clusters, debugRows }` and hydrate categories.
+- Validation commands added to docs.
