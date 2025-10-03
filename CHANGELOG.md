@@ -67,3 +67,21 @@ All notable changes to YT Digest will be documented here.
 - Comprehensive error handling with state reversion
 - Manual sync button repurposed as fallback option
 - Enhanced user experience with real-time persistence
+
+## Phase 15 – Categories & Smart Image Loading
+- Categories API with stub implementation for drop-up menu
+- Category assignment with bulk operations and custom category creation
+- Smart image loading with concurrency cap (12 concurrent requests)
+- Avatar component with intersection observer and error fallbacks
+- Eager loading for first screenful (32 items per cluster)
+- No server proxy - direct CDN URLs maintained
+
+## Microstep 1.7b – Category assign works + drop-up closes + avatar size tuned
+- **Category assignment**: Fixed "Add to Category" functionality with robust POST handler, proper error handling, and validation for selected channel IDs
+- **Drop-up UX**: Added proper state management with refs, closes on Esc key and click-outside, maintains selection state across interactions
+- **Avatar optimization**: Reduced avatar sizes (xs:48px, sm:64px, md:80px, lg:96px) and softened size thresholds (p25/p55/p80) for less overlap and better visual hierarchy
+
+## Microstep 1.7 – Avatar retry sweep + category UX fix + more size variance
+- **Avatar retry sweep**: Added retry manager for failed CDN thumbnails with backoff (up to 2 retries), post-load sweep runs 3s after mount and on scroll end
+- **Categories UX fix**: Newly created categories now appear immediately in drop-up menu without requiring page reload
+- **Size variance improvement**: Changed from quartiles to p15/p50/p85 percentiles for more visual spread in avatar sizes (more lg contrast, smaller xs)

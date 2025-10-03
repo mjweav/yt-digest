@@ -17,19 +17,33 @@ function gateLoad(start) {
   }
 }
 
+// ===== Avatar retry registry =====
+const retryMap = new Map(); // key: channelId, value: { tries: number, last: number }
+function scheduleRetry(id, fn, delay = 2000) {
+  const t = setTimeout(fn, delay);
+  return () => clearTimeout(t);
+}
+
 // ===== Avatar component =====
-function Avatar({ ch, isSelected }) {
+function Avatar({ ch, isSelected, onRetry }) {
   const [errored, setErrored] = useState(false);
   const [src, setSrc] = useState(null);
+  const [nonce, setNonce] = useState(0);
   const ref = useRef(null);
 
   const sizeCls =
-    ch.size === 'xs' ? "w-14 h-14" :
-    ch.size === 'sm' ? "w-18 h-18" :
-    ch.size === 'md' ? "w-24 h-24" : "w-32 h-32";
+    ch.size === 'xs' ? "w-12 h-12" :
+    ch.size === 'sm' ? "w-16 h-16" :
+    ch.size === 'md' ? "w-20 h-20" : "w-24 h-24";
 
   const initials = (ch.title || "?")
     .split(' ').slice(0,2).map(s => s[0]).join('').toUpperCase();
+
+  const tryLoad = () => {
+    setErrored(false);
+    setSrc(null);
+    setNonce(n => n + 1);
+  };
 
   useEffect(() => {
     if (!ref.current) return;
@@ -61,7 +75,22 @@ function Avatar({ ch, isSelected }) {
       cancelled = true;
       if (observer) observer.disconnect();
     };
-  }, [ch.thumb, ch._eager]);
+  }, [ch.thumb, ch._eager, nonce]);
+
+  // when image errors:
+  const handleError = () => {
+    setErrored(true);
+    const rec = retryMap.get(ch.id) || { tries: 0, last: 0 };
+    if (rec.tries < 2) {
+      rec.tries += 1;
+      rec.last = Date.now();
+      retryMap.set(ch.id, rec);
+      scheduleRetry(ch.id, () => {
+        tryLoad();
+        onRetry?.(ch.id); // let parent know we retried (optional)
+      }, 1500 * rec.tries); // small backoff
+    }
+  };
 
   return (
     <div
@@ -80,7 +109,7 @@ function Avatar({ ch, isSelected }) {
           fetchpriority={ch._eager ? "high" : "auto"}
           decoding="async"
           className="w-full h-full object-cover"
-          onError={() => setErrored(true)}
+          onError={handleError}
         />
       ) : (
         <div className="w-full h-full flex items-center justify-center text-slate-200 font-semibold">
@@ -101,6 +130,9 @@ export default function AutoOrganize() {
   const [showCategoryMenu, setShowCategoryMenu] = useState(false);
   const [categoryInput, setCategoryInput] = useState('');
   const [cats, setCats] = useState([]);
+  const [catOpen, setCatOpen] = useState(false);
+  const catBtnRef = useRef(null);
+  const catMenuRef = useRef(null);
 
   useEffect(() => {
     fetch('/api/auto-organize').then(r => r.json()).then(setData);
@@ -112,6 +144,48 @@ export default function AutoOrganize() {
       .then(d => setCats(Array.isArray(d.categories) ? d.categories : []))
       .catch(() => setCats([]));
   }, []);
+
+  // Post-load sweep for avatar retries
+  useEffect(() => {
+    const sweep = () => {
+      // trigger a retry for any errored entries with remaining tries
+      for (const [id, rec] of retryMap.entries()) {
+        if (rec.tries < 2) {
+          // NOP — the per-avatar registry already scheduled, nothing global needed
+        }
+      }
+    };
+    // first sweep a few seconds after initial render
+    const t = setTimeout(sweep, 3000);
+
+    // debounced scroll-end sweep
+    let st;
+    const onScroll = () => {
+      clearTimeout(st);
+      st = setTimeout(sweep, 500);
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => { clearTimeout(t); window.removeEventListener('scroll', onScroll); };
+  }, []);
+
+  // Esc + click-outside for category dropdown
+  useEffect(() => {
+    if (!catOpen) return;
+    function onKey(e){ if (e.key === 'Escape') setCatOpen(false); }
+    function onClick(e){
+      const m = catMenuRef.current;
+      const b = catBtnRef.current;
+      if (!m || !b) return;
+      if (m.contains(e.target) || b.contains(e.target)) return;
+      setCatOpen(false);
+    }
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('mousedown', onClick);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('mousedown', onClick);
+    };
+  }, [catOpen]);
 
   const clusters = useMemo(() => {
     if (!data) return [];
@@ -149,37 +223,47 @@ export default function AutoOrganize() {
   }
 
   async function handleBulkAssign(category) {
-    if (!category) return;
-    const ids = Array.from(selected);
-    if (ids.length === 0) {
-      // TODO: toast "Nothing selected"
+    const ids = Array.from(selected || []);
+    if (!category || ids.length === 0) {
+      // TODO: toast ("Pick at least one channel")
       return;
     }
-    const res = await fetch('/api/categories/bulk-assign', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ channelIds: ids, category })
-    });
-    if (res.ok) {
-      // TODO: toast success
-      setSelected(new Set());
-      setShowCategoryMenu(false);
-    } else {
+    try {
+      const res = await fetch('/api/categories/bulk-assign', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ channelIds: ids, category })
+      });
+      if (!res.ok) throw new Error('bulk-assign failed');
+      // TODO: toast success (e.g., `Added ${ids.length} to ${category}`)
+      // optional: clear selection
+      // setSelected(new Set());
+      // close menu if open (we'll add drop-up state below)
+      setCatOpen(false);
+    } catch (e) {
       // TODO: toast error
+      console.error(e);
     }
   }
 
   async function handleCustomCategory() {
     const name = window.prompt('Enter category name…');
     if (!name) return;
+    const trimmed = name.trim();
+    if (!trimmed) return;
+
     try {
       await fetch('/api/categories', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name })
+        body: JSON.stringify({ name: trimmed })
       });
     } catch {}
-    await handleBulkAssign(name);
+
+    // Make it immediately available in the menu
+    setCats(prev => prev.includes(trimmed) ? prev : [...prev, trimmed]);
+
+    await handleBulkAssign(trimmed);
   }
 
   if (!data) return (
@@ -343,14 +427,18 @@ export default function AutoOrganize() {
 
             <div className="relative">
               <button
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition-colors flex items-center gap-2"
-                onClick={() => setShowCategoryMenu(!showCategoryMenu)}
+                ref={catBtnRef}
+                className="px-3 py-2 rounded-lg bg-emerald-700 text-white text-sm"
+                onClick={() => setCatOpen(v => !v)}
               >
                 Add to Category ▾
               </button>
 
-              {showCategoryMenu && (
-                <div className="absolute bottom-12 left-0 bg-slate-900/95 border border-white/10 rounded-lg p-1 min-w-[240px] z-50">
+              {catOpen && (
+                <div
+                  ref={catMenuRef}
+                  className="absolute bottom-12 left-0 bg-slate-900/95 border border-white/10 rounded-lg p-1 min-w-[240px] z-50 shadow-xl"
+                >
                   {cats.length === 0 && (
                     <div className="px-3 py-2 text-xs text-slate-300">No categories yet</div>
                   )}

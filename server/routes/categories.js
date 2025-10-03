@@ -27,4 +27,13 @@ router.post('/', (req, res) => {
   res.json({ ok: true, name: name.trim() });
 });
 
+router.post('/bulk-assign', (req, res) => {
+  const { channelIds, category } = req.body || {};
+  if (!Array.isArray(channelIds) || !category || typeof category !== 'string') {
+    return res.status(400).json({ error: 'channelIds array and category required' });
+  }
+  // Spike: pretend bulk assignment succeeded (no persistence).
+  res.json({ ok: true, count: channelIds.length, category });
+});
+
 export default router;

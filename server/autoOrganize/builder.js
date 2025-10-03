@@ -7,20 +7,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const CACHE = path.join(__dirname, '../../data/autoOrganize.json');
 
-function qQuartiles(nums) {
+function percentiles(nums, ps = [0.15, 0.50, 0.85]) {
   if (!nums.length) return [0,0,0];
   const s = [...nums].sort((a,b)=>a-b);
-  const q1 = s[Math.floor(s.length*0.25)];
-  const q3 = s[Math.floor(s.length*0.75)];
-  const mid = Math.floor(s.length/2);
-  const median = s.length%2 ? s[mid] : (s[mid-1]+s[mid])/2;
-  return [q1, median, q3];
+  const pick = p => s[Math.min(s.length - 1, Math.max(0, Math.floor(p * s.length)))];
+  return ps.map(pick); // [p15, p50, p85]
 }
 
-function sizeClass(count, [q1, q2, q3]) {
-  if (count <= q1) return 'xs';
-  if (count <= q2) return 'sm';
-  if (count <= q3) return 'md';
+function sizeClass(count, [p15, p50, p85]) {
+  if (count <= p15) return 'xs';
+  if (count <= p50) return 'sm';
+  if (count <= p85) return 'md';
   return 'lg';
 }
 
@@ -75,7 +72,7 @@ async function buildAutoOrganize({ force } = {}){
   }
 
   const counts = norm.map(c => c.videoCount);
-  const qs = qQuartiles(counts);
+  const qs = percentiles(counts, [0.25, 0.55, 0.80]);
 
   const clusters = Array.from(buckets.entries()).map(([label, arr]) => {
     const channels = arr
