@@ -1,23 +1,25 @@
 import express from 'express';
 const router = express.Router();
 import { buildAutoOrganize, readCached } from '../autoOrganize/builder.js';
+import { explainLabel } from '../autoOrganize/heuristics.js';
 import * as store from '../data/categoriesStore.js';
 
 /** GET /api/auto-organize */
-router.get('/', async (_req, res) => {
+router.get('/', async (req, res) => {
   try {
+    const debug = req.query.debug === '1';
     const data = await readCached() || await buildAutoOrganize({ force: true });
+    const assigns = await store.getAssignments();
 
-    // NEW: merge assignments
-    const assigns = await store.getAssignments(); // { channelId: [cats...] }
     const merged = {
       ...data,
       clusters: data.clusters.map(c => ({
         ...c,
-        channels: c.channels.map(ch => ({
-          ...ch,
-          cats: Array.isArray(assigns[ch.id]) ? assigns[ch.id] : []
-        }))
+        channels: c.channels.map(ch => {
+          const cats = Array.isArray(assigns[ch.id]) ? assigns[ch.id] : [];
+          const extra = debug ? { why: explainLabel(ch) } : {};
+          return { ...ch, cats, ...extra };
+        })
       }))
     };
 

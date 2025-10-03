@@ -3,6 +3,14 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { assignClusterLabel } from './heuristics.js';
 
+async function loadOverrides() {
+  try {
+    const p = path.join(__dirname, '../../data/autoOrganize.overrides.json');
+    const raw = await fs.readFile(p, 'utf-8');
+    return JSON.parse(raw);
+  } catch { return {}; }
+}
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const CACHE = path.join(__dirname, '../../data/autoOrganize.json');
@@ -49,6 +57,7 @@ async function loadChannels(){
 
 async function buildAutoOrganize({ force } = {}){
   const channels = await loadChannels();
+  const overrides = await loadOverrides();
   const norm = channels.map(ch => {
     const stats = ch.statistics || {};
     const cd = ch.contentDetails || {};
@@ -63,10 +72,11 @@ async function buildAutoOrganize({ force } = {}){
     };
   });
 
-  // Heuristic bucketing
+  // Heuristic bucketing (with overrides applied after normalization and before bucketing)
   const buckets = new Map();
   for (const ch of norm) {
-    const label = assignClusterLabel(ch);
+    const overrideLabel = overrides[ch.id];
+    const label = overrideLabel || assignClusterLabel(ch);
     if (!buckets.has(label)) buckets.set(label, []);
     buckets.get(label).push(ch);
   }
