@@ -52,7 +52,21 @@ function Avatar({ ch, isSelected, isAssigned, onRetry }) {
 
     const start = () => new Promise(resolve => {
       if (cancelled) return resolve();
-      setSrc(ch.thumb || null);
+
+      const img = new Image();
+      img.loading = ch._eager ? 'eager' : 'lazy';
+      img.decoding = 'async';
+      img.referrerPolicy = 'no-referrer';
+      img.src = ch.thumb;
+
+      // Try to decode for better performance
+      if (img.decode) {
+        img.decode().catch(() => {
+          // Ignore decode errors, image will still load
+        });
+      }
+
+      setSrc(ch.thumb);
       resolve();
     });
 
@@ -68,7 +82,11 @@ function Avatar({ ch, isSelected, isAssigned, onRetry }) {
         observer.disconnect();
         gateLoad(start);
       }
-    }, { rootMargin: '250px' });
+    }, {
+      root: null,                // viewport
+      rootMargin: '500px 0px',   // load early
+      threshold: 0               // any intersection
+    });
 
     observer.observe(ref.current);
     return () => {
@@ -80,15 +98,13 @@ function Avatar({ ch, isSelected, isAssigned, onRetry }) {
   // when image errors:
   const handleError = () => {
     setErrored(true);
-    const rec = retryMap.get(ch.id) || { tries: 0, last: 0 };
-    if (rec.tries < 2) {
-      rec.tries += 1;
-      rec.last = Date.now();
-      retryMap.set(ch.id, rec);
-      scheduleRetry(ch.id, () => {
+    // Single retry after 300ms with cache-buster
+    if (!retryMap.has(ch.id)) {
+      retryMap.set(ch.id, true);
+      setTimeout(() => {
         tryLoad();
-        onRetry?.(ch.id); // let parent know we retried (optional)
-      }, 1500 * rec.tries); // small backoff
+        onRetry?.(ch.id);
+      }, 300);
     }
   };
 
@@ -169,27 +185,30 @@ export default function AutoOrganize() {
       .catch(() => setCats([]));
   }, []);
 
-  // Post-load sweep for avatar retries
+  // QC sweep - one-shot after mount to fix any failed avatars
   useEffect(() => {
-    const sweep = () => {
-      // trigger a retry for any errored entries with remaining tries
-      for (const [id, rec] of retryMap.entries()) {
-        if (rec.tries < 2) {
-          // NOP — the per-avatar registry already scheduled, nothing global needed
-        }
-      }
-    };
-    // first sweep a few seconds after initial render
-    const t = setTimeout(sweep, 3000);
+    const qcSweep = () => {
+      // Query avatar <img> nodes within the AO root container
+      const container = document.querySelector('.min-h-screen.bg-gradient-to-br');
+      if (!container) return;
 
-    // debounced scroll-end sweep
-    let st;
-    const onScroll = () => {
-      clearTimeout(st);
-      st = setTimeout(sweep, 500);
+      const avatars = container.querySelectorAll('img[alt]');
+      avatars.forEach(img => {
+        // Check if image failed to load and we have original data-src
+        if (!img.complete || img.naturalWidth === 0) {
+          const originalSrc = img.src;
+          if (originalSrc && !originalSrc.includes('r=')) {
+            // Add cache-buster to retry
+            const retrySrc = `${originalSrc}${originalSrc.includes('?') ? '&' : '?'}r=${Date.now()}`;
+            img.src = retrySrc;
+          }
+        }
+      });
     };
-    window.addEventListener('scroll', onScroll);
-    return () => { clearTimeout(t); window.removeEventListener('scroll', onScroll); };
+
+    // Run once ~1.5s after mount
+    const t = setTimeout(qcSweep, 1500);
+    return () => clearTimeout(t);
   }, []);
 
   // Esc + click-outside for category dropdown

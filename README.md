@@ -38,7 +38,9 @@ npm install
 
 ### Running & Restarting the App
 
-We provide a helper script `restart.sh` to simplify starting, stopping, and restarting the servers.
+**⚠️ IMPORTANT: Always use the restart script for server management**
+
+We provide a helper script `restart.sh` to simplify starting, stopping, and restarting the servers. **Never run `npm run dev` directly** - use the restart script to prevent multiple instances and ensure proper cleanup.
 
 #### Usage
 ```bash
@@ -62,9 +64,9 @@ We provide a helper script `restart.sh` to simplify starting, stopping, and rest
 ```
 
 #### URLs
-- Frontend: [http://localhost:3000](http://localhost:3000)  
-- Backend: [http://localhost:3001](http://localhost:3001)  
-- Health check: [http://localhost:3001/api/health](http://localhost:3001/api/health)  
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend: [http://localhost:3001](http://localhost:3001)
+- Health check: [http://localhost:3001/api/health](http://localhost:3001/api/health)
 
 This script automatically:
 - Stops any existing processes on ports 3000/3001

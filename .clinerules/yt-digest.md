@@ -20,6 +20,12 @@
   - Enriched video cards (title, views, publish date, “watched” tracking).
 - Styling: prefer light-gray backgrounds or theme toggle to reduce brightness.
 
+**Server Management**
+- Always use `./restart.sh` for starting/restarting servers instead of manual commands.
+- Available modes: `dev` (default), `prod`, `backend-only`, `frontend-only`.
+- Use `-flush` flag to clear npm cache and reinstall dependencies when needed.
+- Never run `npm run dev` or similar commands directly - use the restart script to prevent multiple instances.
+
 **Workflows**
 - After each feature, update `CHANGELOG.md`.
 - Update `PRD.md` only for architectural/milestone changes.
