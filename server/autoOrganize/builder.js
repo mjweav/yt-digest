@@ -134,7 +134,15 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
     });
 
     if (debug) {
-      debugRows.push({ id: ch.id, title: ch.title, url: ch.url, label, why });
+      debugRows.push({
+        id: ch.id,
+        title: ch.title,
+        desc: ch.desc,
+        url: ch.url,
+        descLen: ch.desc ? ch.desc.length : 0,
+        label,
+        why
+      });
     }
   }
 
