@@ -1,0 +1,109 @@
+{
+  "timestamp": "2025-10-05T05:24:40.744Z",
+  "summary": {
+    "total": 19,
+    "errors": 2,
+    "success": 6
+  },
+  "results": [
+    {
+      "timestamp": "2025-10-05T05:24:40.737Z",
+      "type": "info",
+      "message": "🚀 Starting YT-Digest Semantic Deduplication Validation Tests"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.742Z",
+      "type": "info",
+      "message": "========================================================"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.742Z",
+      "type": "info",
+      "message": "Testing function existence in builder.js..."
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.742Z",
+      "type": "success",
+      "message": "✓ All required functions exist in builder.js"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.742Z",
+      "type": "info",
+      "message": "Testing integration in buildAutoOrganize function..."
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.742Z",
+      "type": "success",
+      "message": "✓ Functions properly integrated in buildAutoOrganize"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.742Z",
+      "type": "info",
+      "message": "Testing debug output enhancements in routes..."
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.743Z",
+      "type": "success",
+      "message": "✓ Debug output properly enhanced"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.743Z",
+      "type": "info",
+      "message": "Testing cosine and jaccard similarity functions..."
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.743Z",
+      "type": "success",
+      "message": "✓ Similarity functions properly implemented"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.743Z",
+      "type": "info",
+      "message": "Testing discriminative labeling logic..."
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.743Z",
+      "type": "success",
+      "message": "✓ Discriminative labeling logic is correct"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.743Z",
+      "type": "info",
+      "message": "Testing canonical key generation..."
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.744Z",
+      "type": "error",
+      "message": "Stemming implementation not found"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.744Z",
+      "type": "info",
+      "message": "Testing parent-scope uniqueness logic..."
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.744Z",
+      "type": "success",
+      "message": "✓ Parent-scope uniqueness logic is correct"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.744Z",
+      "type": "info",
+      "message": "========================================================"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.744Z",
+      "type": "info",
+      "message": "Test Results: 6 passed, 1 failed"
+    },
+    {
+      "timestamp": "2025-10-05T05:24:40.744Z",
+      "type": "error",
+      "message": "❌ 1 test(s) failed. Please review the errors above."
+    }
+  ],
+  "errors": [
+    "Stemming implementation not found",
+    "❌ 1 test(s) failed. Please review the errors above."
+  ]
+}
