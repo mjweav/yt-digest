@@ -254,6 +254,45 @@ const CATS = [
     ]),
     exclude: buildPattern(["trailer", "clips"]),
   },
+  {
+    label: "Drone & Aerial Tech",
+    include: buildPattern([
+      "drone", "drones", "aerial", "fpv", "uas", "uav", "quadcopter",
+      "hexacopter", "octocopter", "drone pilot", "drone racing",
+      "drone photography", "aerial photography", "aerial filming"
+    ]),
+    exclude: buildPattern(["bee drone", "military drone", "weapon"]),
+  },
+  {
+    label: "Science & Academia",
+    include: buildPattern([
+      "cosmolog*", "astronom*", "institute", "lecture", "seminar",
+      "plenary", "professor", "university", "research", "academic",
+      "physics", "chemistry", "biology", "geology", "astrophysics",
+      "theoretical", "quantum", "particle", "nasa", "esa", "space agency"
+    ]),
+    exclude: buildPattern(["music", "entertainment", "gaming"]),
+  },
+  {
+    label: "Accounting & Finance",
+    include: buildPattern([
+      "accounting", "accountant", "cpa", "bookkeeping", "audit",
+      "tax", "financial", "finance", "bookkeeping", "balance sheet",
+      "income statement", "cash flow", "ledger", "journal",
+      "accounts payable", "accounts receivable", "financial statement"
+    ]),
+    exclude: buildPattern(["music", "entertainment", "crypto art"]),
+  },
+  {
+    label: "Music Production & Audio",
+    include: buildPattern([
+      "fingerstyle", "ambient", "synthwave", "vocoder", "composer",
+      "live session", "music production", "audio engineering",
+      "mixing", "mastering", "recording", "studio", "producer",
+      "sound design", "electronic music", "instrumental"
+    ]),
+    exclude: buildPattern(["storm", "weather", "news"]),
+  },
 ];
 
 const LABEL_ALIASES = {

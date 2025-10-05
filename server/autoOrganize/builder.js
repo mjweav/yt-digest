@@ -18,6 +18,7 @@ const STOPWORDS = new Set([
 
 function tokenize(text) {
   return text.toLowerCase()
+    .normalize('NFKD') // Normalize diacritics
     .replace(/[^\w\s]/g, ' ')
     .split(/\s+/)
     .filter(word => word.length >= 3 && !STOPWORDS.has(word))
@@ -280,6 +281,89 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
               totalNeighbors: neighbors.length
             };
             console.log(`TF-IDF fallback: ${ch.title} -> ${finalLabel} (sim: ${neighbors[0].similarity.toFixed(3)}, votes: ${maxVotes})`);
+          }
+        }
+      }
+    }
+
+    // TF-IDF neighbor-consensus relabel for normal-desc channels only
+    if (ch.descLen >= 20 && initialLabel === 'Unclassified') {
+      const targetVector = tokenize(`${ch.title} ${ch.desc}`);
+
+      if (Object.keys(targetVector).length > 0 && vectors.size > 0) {
+        const neighbors = findNearestNeighbors(targetVector, vectors, 5);
+
+        if (neighbors.length > 0) {
+          // Filter to only consider neighbors that already have a label (ignore Unclassified neighbors)
+          const labeledNeighbors = neighbors.filter(n => n.label !== 'Unclassified');
+
+          if (labeledNeighbors.length > 0) {
+            // Count votes per category from labeled neighbors
+            const voteCounts = new Map();
+            let totalSimilarity = 0;
+
+            for (const neighbor of labeledNeighbors) {
+              const votes = (voteCounts.get(neighbor.label) || 0) + 1;
+              voteCounts.set(neighbor.label, votes);
+              totalSimilarity += neighbor.similarity;
+            }
+
+            // Find the category with most votes
+            let maxVotes = 0;
+            let consensusCategory = null;
+            let votesForConsensus = 0;
+
+            for (const [category, votes] of voteCounts) {
+              if (votes > maxVotes) {
+                maxVotes = votes;
+                consensusCategory = category;
+                votesForConsensus = votes;
+              }
+            }
+
+            const avgSimilarity = totalSimilarity / labeledNeighbors.length;
+            const topSim = labeledNeighbors[0]?.similarity || 0;
+
+            // Apply consensus relabel if conditions are met:
+            // (2 of top 3 neighbors agree) AND title hits that category's include tokens, OR
+            // (3 of top 5 neighbors agree) (no title condition)
+            let shouldRelabel = false;
+
+            if (consensusCategory && avgSimilarity >= 0.22) {
+              if (votesForConsensus >= 3) {
+                // 3 of top 5 neighbors agree - no title condition needed
+                shouldRelabel = true;
+              } else if (votesForConsensus >= 2 && labeledNeighbors.length >= 3) {
+                // Check if top 3 neighbors agree
+                const top3Labels = labeledNeighbors.slice(0, 3).map(n => n.label);
+                const top3Consensus = top3Labels.filter(label => label === consensusCategory).length;
+                if (top3Consensus >= 2) {
+                  // Check if title hits the consensus category's include tokens
+                  const res = classifyChannel({ title: ch.title, desc: ch.desc, url: ch.url });
+                  const categoryFound = res.scores.some(score =>
+                    score.label === consensusCategory && score.score > 0
+                  );
+                  if (categoryFound) {
+                    shouldRelabel = true;
+                  }
+                }
+              }
+            }
+
+            if (shouldRelabel) {
+              finalLabel = consensusCategory;
+              finalWhy = {
+                method: 'tfidf-consensus',
+                label: finalLabel,
+                consensus: {
+                  k: 5,
+                  votesFor: votesForConsensus,
+                  topSim: topSim,
+                  avgSim: avgSimilarity
+                }
+              };
+              console.log(`TF-IDF consensus: ${ch.title} -> ${finalLabel} (votes: ${votesForConsensus}, sim: ${avgSimilarity.toFixed(3)})`);
+            }
           }
         }
       }

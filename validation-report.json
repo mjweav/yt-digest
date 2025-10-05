@@ -1,0 +1,74 @@
+{
+  "totalChannels": 503,
+  "unclassifiedCount": 88,
+  "unclassifiedPercentage": "17.5",
+  "methodStats": {
+    "heuristic": 418,
+    "tfidf": 82,
+    "tfidf-consensus": 3
+  },
+  "normalDescUnclassified": 62,
+  "reclassifiedCount": 85,
+  "sampleReclassifications": [
+    {
+      "title": "Alter Bridge",
+      "newLabel": "Film/Trailers & Entertainment",
+      "method": "tfidf",
+      "confidence": 0.16970556911963697
+    },
+    {
+      "title": "alyankovic",
+      "newLabel": "Film/Trailers & Entertainment",
+      "method": "tfidf",
+      "confidence": 0.19046968251797947
+    },
+    {
+      "title": "Arc De Soleil",
+      "newLabel": "News & Commentary",
+      "method": "tfidf",
+      "confidence": 0.33294191390916644
+    },
+    {
+      "title": "Asianometry",
+      "newLabel": "News & Commentary",
+      "method": "tfidf",
+      "confidence": 0.16288158231495845
+    },
+    {
+      "title": "ATHLEAN-X™",
+      "newLabel": "Video Editing & Creative Tools",
+      "method": "tfidf",
+      "confidence": 0.15194419280160748
+    },
+    {
+      "title": "Barry KDP",
+      "newLabel": "Business & Marketing",
+      "method": "tfidf",
+      "confidence": 0.17285792952206738
+    },
+    {
+      "title": "Ben Claremont",
+      "newLabel": "Video Editing & Creative Tools",
+      "method": "tfidf",
+      "confidence": 0.2100220570751934
+    },
+    {
+      "title": "Captain Steeeve",
+      "newLabel": "News & Commentary",
+      "method": "tfidf",
+      "confidence": 0.20770934421208728
+    },
+    {
+      "title": "China Insights",
+      "newLabel": "News & Commentary",
+      "method": "tfidf",
+      "confidence": 0.3523501458929922
+    },
+    {
+      "title": "Chris Ramsay",
+      "newLabel": "News & Commentary",
+      "method": "tfidf",
+      "confidence": 0.16112312698895948
+    }
+  ]
+}
