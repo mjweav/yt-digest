@@ -146,6 +146,21 @@ router.get('/', async (req, res) => {
       const uniqueLabels = labelCounts.size;
       const duplicateLabels = clusters.length - uniqueLabels;
 
+      // Calculate merge metrics
+      const mergedClusters = clusters.filter(c => c._merged).length;
+      const canonicalizedLabels = clusters.filter(c => {
+        // Check if label has canonicalized format (sorted, capitalized terms)
+        const parts = c.label.split(' • ');
+        if (parts.length >= 3) { // Parent + at least 2 terms
+          const terms = parts.slice(1);
+          // Check if terms are properly capitalized and sorted
+          return terms.every(term =>
+            term === term.charAt(0).toUpperCase() + term.slice(1).toLowerCase()
+          );
+        }
+        return false;
+      }).length;
+
       return res.json({
         ...merged,
         debug: {
@@ -160,6 +175,10 @@ router.get('/', async (req, res) => {
           labels: {
             uniqueLabels,
             duplicateLabels
+          },
+          merges: {
+            mergedClusters,
+            canonicalizedLabels
           },
           cache: {
             clusterCount: clusters.length,

@@ -306,8 +306,11 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
       // Merge subclusters that are too small or have poor separation
       const mergedSubclusters = await mergeSmallSubclusters(validSubclusters, S_min, debug);
 
+      // Merge near-duplicate subclusters by centroid similarity (>= 0.85 threshold)
+      const similarityMergedSubclusters = await mergeNearDuplicateSubclusters(mergedSubclusters, parentLabel, debug);
+
       // Add parent field to each subcluster
-      const finalSubclusters = mergedSubclusters.map((sc, index) => ({
+      const finalSubclusters = similarityMergedSubclusters.map((sc, index) => ({
         ...sc,
         parent: parentLabel,
         subclusterId: `${parentLabel.toLowerCase().replace(/\s+/g, '-')}-sub${index + 1}`
@@ -412,9 +415,10 @@ function createClusterFromChannels(channels, parentLabel, subclusterIndex, debug
     .slice(0, 10)
     .map(([term]) => term);
 
-  // Create enriched label combining parent + topTerms
-  const topLabelTerms = (topTerms || []).slice(0, 2).join(' • ');
-  const enrichedLabel = `${parentLabel} • ${topLabelTerms}`.trim();
+  // Create canonicalized label with sorted, capitalized terms
+  const sortedTerms = (topTerms || []).slice(0, 2).map(t => t.trim()).sort();
+  const labelTerms = sortedTerms.map(t => t.charAt(0).toUpperCase() + t.slice(1));
+  const enrichedLabel = `${parentLabel} • ${labelTerms.join(' • ')}`.trim();
 
   // Compute exemplarId (first channel as exemplar for single clusters)
   const exemplarId = channels[0]?.id || channelIds[0];
@@ -623,6 +627,76 @@ function calculateCentroid(vectors) {
   return centroid;
 }
 
+// Helper function to merge near-duplicate subclusters by centroid similarity
+async function mergeNearDuplicateSubclusters(subclusters, parentLabel, debug) {
+  if (subclusters.length <= 1) return subclusters;
+
+  const mergedClusters = [];
+  const usedIndices = new Set();
+  let mergedCount = 0;
+
+  for (let i = 0; i < subclusters.length; i++) {
+    if (usedIndices.has(i)) continue;
+
+    const clusterA = subclusters[i];
+    let mergedCluster = { ...clusterA };
+    const mergedIndices = [i];
+
+    // Find all similar subclusters to merge with clusterA
+    for (let j = i + 1; j < subclusters.length; j++) {
+      if (usedIndices.has(j)) continue;
+
+      const clusterB = subclusters[j];
+
+      // Only merge subclusters from the same parent
+      if (clusterA.parent !== clusterB.parent) continue;
+
+      // Calculate centroid similarity
+      const { vectors: vectorsA } = buildTfIdfVectors(
+        mergedCluster.channels.map(({ ch }) => ({ ...ch, label: parentLabel }))
+      );
+      const { vectors: vectorsB } = buildTfIdfVectors(
+        clusterB.channels.map(({ ch }) => ({ ...ch, label: parentLabel }))
+      );
+
+      const centroidA = calculateCentroid(vectorsA);
+      const centroidB = calculateCentroid(vectorsB);
+
+      if (centroidA && centroidB) {
+        const similarity = cosineSimilarity(centroidA, centroidB);
+
+        if (similarity >= 0.85) {
+          // Merge clusterB into mergedCluster
+          mergedCluster.channels.push(...clusterB.channels);
+          mergedCluster.size += clusterB.size;
+          mergedIndices.push(j);
+          usedIndices.add(j);
+          mergedCount++;
+
+          if (debug) {
+            console.log(`[Merge Pass] Merged subcluster ${j + 1} into ${i + 1} (similarity: ${similarity.toFixed(3)})`);
+          }
+        }
+      }
+    }
+
+    // Mark as merged if we actually merged something
+    if (mergedIndices.length > 1) {
+      mergedCluster._merged = true;
+      mergedCluster._mergedFrom = mergedIndices.length;
+    }
+
+    mergedClusters.push(mergedCluster);
+    usedIndices.add(i);
+  }
+
+  if (debug && mergedCount > 0) {
+    console.log(`[Merge Pass] Merged ${mergedCount} subclusters into ${mergedClusters.length} final clusters`);
+  }
+
+  return mergedClusters;
+}
+
 // Write autoOrganize.meta.json with build information
 async function writeAutoOrganizeMeta({ clusters, buildParams, parentMetrics } = {}) {
   if (!clusters || !Array.isArray(clusters)) {
@@ -682,6 +756,21 @@ async function writeAutoOrganizeMeta({ clusters, buildParams, parentMetrics } = 
       { parent: null, totalChannels: 0 }
     );
 
+    // Calculate merge pass statistics
+    const mergedClusters = clusters.filter(c => c._merged).length;
+    const canonicalizedLabels = clusters.filter(c => {
+      // Check if label has canonicalized format (sorted, capitalized terms)
+      const parts = c.label.split(' • ');
+      if (parts.length >= 3) { // Parent + at least 2 terms
+        const terms = parts.slice(1);
+        // Check if terms are properly capitalized and sorted
+        return terms.every(term =>
+          term === term.charAt(0).toUpperCase() + term.slice(1).toLowerCase()
+        );
+      }
+      return false;
+    }).length;
+
     const meta = {
       builtAt: new Date().toISOString(),
       buildVersion: 3,
@@ -697,6 +786,10 @@ async function writeAutoOrganizeMeta({ clusters, buildParams, parentMetrics } = 
             "N > 60": "k≈√(N/5), S_min=10, M_max=6"
           }
         }
+      },
+      mergePass: {
+        threshold: 0.85,
+        merged: mergedClusters
       },
       channelFingerprint,
       summary: {
