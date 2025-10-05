@@ -4,6 +4,94 @@ import path from 'path';
 import { classifyChannel } from './heuristics2.js';
 import { resolveDataPath } from '../utils/paths.js';
 
+// Simple tokenizer and stopwords for TF-IDF
+const STOPWORDS = new Set([
+  'a', 'an', 'and', 'are', 'as', 'at', 'be', 'by', 'for', 'from', 'has', 'he', 'in', 'is', 'it',
+  'its', 'of', 'on', 'that', 'the', 'to', 'was', 'will', 'with', 'have', 'had', 'has', 'do',
+  'does', 'did', 'but', 'or', 'not', 'no', 'yes', 'this', 'these', 'those', 'they', 'them',
+  'their', 'there', 'here', 'where', 'when', 'why', 'how', 'what', 'which', 'who', 'whom',
+  'i', 'me', 'my', 'you', 'your', 'we', 'us', 'our', 'she', 'her', 'he', 'him', 'his',
+  'it', 'its', 'they', 'them', 'their', 'channel', 'video', 'videos', 'subscribe', 'like',
+  'comment', 'share', 'watch', 'new', 'latest', 'today', 'daily', 'weekly', 'monthly'
+]);
+
+function tokenize(text) {
+  return text.toLowerCase()
+    .replace(/[^\w\s]/g, ' ')
+    .split(/\s+/)
+    .filter(word => word.length >= 3 && !STOPWORDS.has(word))
+    .reduce((acc, word) => {
+      acc[word] = (acc[word] || 0) + 1;
+      return acc;
+    }, {});
+}
+
+function cosineSimilarity(vecA, vecB) {
+  const allKeys = new Set([...Object.keys(vecA), ...Object.keys(vecB)]);
+  let dotProduct = 0, normA = 0, normB = 0;
+
+  for (const key of allKeys) {
+    const a = vecA[key] || 0;
+    const b = vecB[key] || 0;
+    dotProduct += a * b;
+    normA += a * a;
+    normB += b * b;
+  }
+
+  const magnitude = Math.sqrt(normA) * Math.sqrt(normB);
+  return magnitude === 0 ? 0 : dotProduct / magnitude;
+}
+
+function buildTfIdfVectors(channels) {
+  const vectors = new Map();
+  const documentFreq = new Map();
+
+  // Build document frequency (DF) for IDF calculation
+  for (const ch of channels) {
+    if (ch.label && ch.label !== 'Unclassified') {
+      const tokens = tokenize(`${ch.title} ${ch.desc}`);
+      const uniqueTokens = new Set(Object.keys(tokens));
+
+      for (const token of uniqueTokens) {
+        documentFreq.set(token, (documentFreq.get(token) || 0) + 1);
+      }
+    }
+  }
+
+  // Build TF-IDF vectors for classified channels only
+  for (const ch of channels) {
+    if (ch.label && ch.label !== 'Unclassified') {
+      const tokens = tokenize(`${ch.title} ${ch.desc}`);
+      const vector = {};
+
+      for (const [token, tf] of Object.entries(tokens)) {
+        const df = documentFreq.get(token) || 1;
+        const idf = Math.log(channels.length / df);
+        vector[token] = tf * idf;
+      }
+
+      vectors.set(ch.id, { vector, label: ch.label });
+    }
+  }
+
+  return { vectors, documentFreq };
+}
+
+function findNearestNeighbors(targetVector, classifiedVectors, k = 12) {
+  const similarities = [];
+
+  for (const [id, { vector, label }] of classifiedVectors) {
+    const similarity = cosineSimilarity(targetVector, vector);
+    if (similarity > 0) {
+      similarities.push({ id, label, similarity });
+    }
+  }
+
+  return similarities
+    .sort((a, b) => b.similarity - a.similarity)
+    .slice(0, k);
+}
+
 async function loadJSON(p, fallback) {
   try { return JSON.parse(await fsp.readFile(p, 'utf8')); }
   catch { return fallback; }
@@ -105,6 +193,9 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
     return { clusters: [], debugRows: [] };
   }
 
+  // First pass: classify all channels with heuristics
+  const channelClassifications = new Map();
+
   for (const raw of src) {
     const ch = normalizeChannel(raw);
     if (!ch.id) {
@@ -115,22 +206,84 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
     let label, why;
     if (ov[ch.id]) {
       label = ov[ch.id];
-      why = { mode: 'override', label };
+      why = { method: 'override', label };
     } else {
       const res = classifyChannel({ title: ch.title, desc: ch.desc, url: ch.url });
       label = res.label || 'Unclassified';
-      why = { mode: 'scored', label, best: res.best, runner: res.runner, scores: res.scores };
+      why = {
+        method: 'heuristic',
+        label,
+        bestScore: res.best.score,
+        margin: res.best.score - res.runner.score,
+        best: res.best,
+        runner: res.runner,
+        scores: res.scores
+      };
     }
 
-    if (!clustersMap.has(label)) clustersMap.set(label, { label, items: [] });
-    clustersMap.get(label).items.push({
+    channelClassifications.set(ch.id, { ch, label, why });
+  }
+
+  // Build TF-IDF vectors from classified channels only
+  const { vectors } = buildTfIdfVectors(Array.from(channelClassifications.values())
+    .map(({ ch, label }) => ({ ...ch, label })));
+
+  console.log(`Built TF-IDF vectors for ${vectors.size} classified channels`);
+
+  // Second pass: apply TF-IDF fallback for low-confidence classifications
+  for (const [id, { ch, label: initialLabel, why: initialWhy }] of channelClassifications) {
+    let finalLabel = initialLabel;
+    let finalWhy = initialWhy;
+
+    // Apply TF-IDF fallback for Unclassified or low-confidence items
+    if (initialLabel === 'Unclassified' || initialWhy.bestScore <= 0 ||
+        (initialWhy.bestScore - initialWhy.runner?.score < 0.35)) {
+
+      const targetVector = tokenize(`${ch.title} ${ch.desc}`);
+
+      if (Object.keys(targetVector).length > 0 && vectors.size > 0) {
+        const neighbors = findNearestNeighbors(targetVector, vectors, 12);
+
+        if (neighbors.length > 0) {
+          // Count votes per category
+          const voteCounts = new Map();
+          let maxVotes = 0;
+          let topCategory = null;
+
+          for (const neighbor of neighbors) {
+            const votes = (voteCounts.get(neighbor.label) || 0) + 1;
+            voteCounts.set(neighbor.label, votes);
+            if (votes > maxVotes) {
+              maxVotes = votes;
+              topCategory = neighbor.label;
+            }
+          }
+
+          // Apply fallback if we have enough votes and similarity threshold (relaxed for better coverage)
+          if (maxVotes >= 3 && neighbors[0].similarity >= 0.15) {
+            finalLabel = topCategory;
+            finalWhy = {
+              method: 'tfidf',
+              label: finalLabel,
+              topSim: neighbors[0].similarity,
+              neighborVotes: maxVotes,
+              totalNeighbors: neighbors.length
+            };
+            console.log(`TF-IDF fallback: ${ch.title} -> ${finalLabel} (sim: ${neighbors[0].similarity.toFixed(3)}, votes: ${maxVotes})`);
+          }
+        }
+      }
+    }
+
+    if (!clustersMap.has(finalLabel)) clustersMap.set(finalLabel, { label: finalLabel, items: [] });
+    clustersMap.get(finalLabel).items.push({
       id: ch.id,
       title: ch.title,
       desc: ch.desc,
       thumb: ch.thumb,
       videoCount: ch.videoCount,
       size: sizeFromCount(ch.videoCount),
-      ...(debug ? { why } : {})
+      ...(debug ? { why: finalWhy } : {})
     });
 
     if (debug) {
@@ -140,8 +293,8 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
         desc: ch.desc,
         url: ch.url,
         descLen: ch.desc ? ch.desc.length : 0,
-        label,
-        why
+        label: finalLabel,
+        why: finalWhy
       });
     }
   }

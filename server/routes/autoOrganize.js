@@ -29,24 +29,75 @@ router.get('/', async (req, res) => {
     };
 
     if (debug) {
-      // Add debug summary logging
+      // Enhanced debug summary logging
       const byLabel = new Map();
+      const byMethod = new Map();
+      const unclassifiedRows = [];
+
       for (const r of debugRows) {
-        const l = r.label || 'Unclassified';
-        byLabel.set(l, (byLabel.get(l) || 0) + 1);
+        const label = r.label || 'Unclassified';
+        byLabel.set(label, (byLabel.get(label) || 0) + 1);
+
+        if (r.why?.method) {
+          byMethod.set(r.why.method, (byMethod.get(r.why.method) || 0) + 1);
+        }
+
+        if (label === 'Unclassified') {
+          unclassifiedRows.push(r);
+        }
       }
-      const sorted = [...byLabel.entries()].sort((a,b)=>b[1]-a[1]).slice(0,10);
-      console.log('[AO DEBUG] totals:', { rows: debugRows.length, top: sorted });
-      const uncls = debugRows.filter(r => (r.label||'Unclassified') === 'Unclassified').slice(0,5);
-      console.log('[AO DEBUG] samples (Unclassified):', uncls.map(u => ({title:u.title, descLen:u.descLen})));
+
+      const sortedLabels = [...byLabel.entries()].sort((a,b)=>b[1]-a[1]);
+      const sortedMethods = [...byMethod.entries()].sort((a,b)=>b[1]-a[1]);
+
+      console.log('[AO DEBUG] totals:', {
+        rows: debugRows.length,
+        labels: sortedLabels,
+        methods: sortedMethods
+      });
+
+      // Sample unclassified titles for debugging
+      const unclsSamples = unclassifiedRows.slice(0,5);
+      console.log('[AO DEBUG] samples (Unclassified):', unclsSamples.map(u => ({
+        title: u.title.substring(0, 80),
+        descLen: u.descLen,
+        method: u.why?.method || 'unknown'
+      })));
+
+      // Build compact debug structure
+      const debugSummary = {
+        when: merged.builtAt,
+        summary: {
+          total: debugRows.length,
+          byLabel: Object.fromEntries(sortedLabels),
+          byMethod: Object.fromEntries(sortedMethods),
+          unclassified: byLabel.get('Unclassified') || 0
+        },
+        samples: {
+          unclassified: unclassifiedRows.slice(0, 8).map(r => ({
+            title: r.title.substring(0, 160),
+            descLen: r.descLen,
+            method: r.why?.method || 'unknown'
+          }))
+        }
+      };
 
       const p = resolveDataPath('autoOrganize.debug.json');
       try {
-        fs.writeFileSync(p, JSON.stringify({ when: merged.builtAt, rows: debugRows }, null, 2), 'utf8');
+        fs.writeFileSync(p, JSON.stringify(debugSummary, null, 2), 'utf8');
+        console.log(`[AO DEBUG] Written debug file: ${p}`);
       } catch (e) {
         console.error('Failed to write debug file:', e);
       }
-      return res.json({ ...merged, debug: { file: 'data/autoOrganize.debug.json', rows: debugRows.length } });
+
+      return res.json({
+        ...merged,
+        debug: {
+          file: 'data/autoOrganize.debug.json',
+          summary: debugSummary.summary,
+          samples: debugSummary.samples
+        }
+      });
     }
 
     return res.json(merged);

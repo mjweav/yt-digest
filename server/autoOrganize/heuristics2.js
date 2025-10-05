@@ -2,7 +2,7 @@
 
 const FIELD_WEIGHTS = { title: 3.0, desc: 1.6, url: 0.6 };
 const BASELINE = 0;
-const MIN_MARGIN = 0.5;
+const MIN_MARGIN = 0.35; // Lowered from 0.5 for better classification
 
 // Build a single alternation regex from tokens:
 //  - "word"        -> \bword\b
@@ -96,7 +96,8 @@ const CATS = [
     include: buildPattern([
       "guitar", "bass", "drums", "piano", "vocal", "singer", "songwriter",
       "mix", "master", "daw", "ableton", "logic pro", "pro tools", "pedal",
-      "riff", "chord", "jazz"
+      "riff", "chord", "jazz", "concert", "symphony", "orchestra", "classical",
+      "arte", "live music", "musician", "band", "album", "song", "music video"
     ]),
     exclude: buildPattern(["storm", "flight", "pilot", "camera", "lens"]),
   },
@@ -143,7 +144,89 @@ const CATS = [
     ]),
     exclude: buildPattern([]),
   },
-  // …you can append more categories here as needed
+  {
+    label: "Trains & Rail",
+    include: buildPattern([
+      "train", "railway", "railroad", "locomotive", "railfan", "railfanning",
+      "freight", "passenger train", "rail", "track", "station", "depot",
+      "amtrak", "csx", "bnsf", "union pacific", "norfolk southern",
+      "railway", "railroads", "trainspotting", "model train", "toy train"
+    ]),
+    exclude: buildPattern(["running", "fitness", "exercise"]),
+  },
+  {
+    label: "Travel & Vlogs",
+    include: buildPattern([
+      "travel", "vlog", "trip", "vacation", "holiday", "adventure",
+      "backpacking", "road trip", "wanderlust", "nomad", "expat",
+      "passport", "visa", "culture", "explore", "destination"
+    ]),
+    exclude: buildPattern(["storm", "weather", "news"]),
+  },
+  {
+    label: "Film/Trailers & Entertainment",
+    include: buildPattern([
+      "movie", "film", "cinema", "trailer", "hollywood", "bollywood",
+      "netflix", "disney", "marvel", "dc", "pixar", "animation",
+      "actor", "actress", "director", "producer", "screenplay",
+      "clips", "4k", "hd", "entertainment", "show", "series", "episode"
+    ]),
+    exclude: buildPattern(["music video", "concert", "live performance"]),
+  },
+  {
+    label: "Pools/Home Services",
+    include: buildPattern([
+      "pool", "swimming pool", "spa", "hot tub", "plumbing", "hvac",
+      "electrician", "contractor", "renovation", "repair", "maintenance",
+      "cleaning service", "landscaping", "pest control", "home service"
+    ]),
+    exclude: buildPattern(["swimming", "fitness", "exercise"]),
+  },
+  {
+    label: "Architecture & Design",
+    include: buildPattern([
+      "architect", "architecture", "design", "interior design", "building",
+      "structure", "blueprint", "cad", "sketchup", "revit", "3d model",
+      "urban planning", "landscape architecture", "sustainable design"
+    ]),
+    exclude: buildPattern(["fashion", "graphic design", "web design"]),
+  },
+  {
+    label: "Programming & Tutorials",
+    include: buildPattern([
+      "programming", "coding", "tutorial", "javascript", "python", "java",
+      "c++", "react", "node.js", "api", "database", "algorithm",
+      "data structure", "web development", "software engineering"
+    ]),
+    exclude: buildPattern(["music production", "video editing"]),
+  },
+  {
+    label: "Podcasts & Long-form",
+    include: buildPattern([
+      "podcast", "interview", "conversation", "discussion", "deep dive",
+      "long-form", "episode", "season", "host", "guest", "dialogue",
+      "monologue", "narrative", "storytelling", "documentary"
+    ]),
+    exclude: buildPattern(["music", "song", "album"]),
+  },
+  {
+    label: "Cybersecurity",
+    include: buildPattern([
+      "cybersecurity", "cyber security", "hacking", "pentest", "penetration testing",
+      "vulnerability", "malware", "virus", "firewall", "encryption",
+      "cyber attack", "data breach", "privacy", "security audit"
+    ]),
+    exclude: buildPattern(["ethical hacking", "white hat"]),
+  },
+  {
+    label: "Finance & Investing",
+    include: buildPattern([
+      "finance", "investing", "stock", "crypto", "cryptocurrency", "bitcoin",
+      "trading", "portfolio", "dividend", "etf", "mutual fund",
+      "real estate", "retirement", "wealth management", "financial planning"
+    ]),
+    exclude: buildPattern(["crypto art", "nft"]),
+  },
 ];
 
 const LABEL_ALIASES = {
@@ -189,6 +272,26 @@ export function classifyChannel({ title, desc, url }) {
       best = { label, score: rawScore };
     } else if (rawScore > runner.score) {
       runner = { label, score: rawScore };
+    }
+  }
+
+  // Apply title-contains-label keyword bump (+0.75) before tie-break
+  if (best.score > BASELINE) {
+    let bestIndex = -1;
+    for (let i = 0; i < CATS.length; i++) {
+      const cat = CATS[i];
+      const label = LABEL_ALIASES[cat.label] || cat.label;
+      if (label === best.label) {
+        bestIndex = i;
+        break;
+      }
+    }
+
+    if (bestIndex >= 0) {
+      const bestCat = CATS[bestIndex];
+      if (bestCat.include && bestCat.include.test(fields.title)) {
+        best.score += 0.75; // Title hit boost
+      }
     }
   }
 
