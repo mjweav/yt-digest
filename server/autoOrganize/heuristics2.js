@@ -227,6 +227,33 @@ const CATS = [
     ]),
     exclude: buildPattern(["crypto art", "nft"]),
   },
+  {
+    label: "Food & Cooking",
+    include: buildPattern([
+      "recipe", "recipes", "cooking", "cook", "baking", "bake", "kitchen",
+      "chef", "sous vide", "bbq", "smoker", "grilling", "grill", "meal prep",
+      "pastry", "dessert", "desserts", "steak", "sauce", "sauces"
+    ]),
+    exclude: buildPattern(["trailer", "clips"]),
+  },
+  {
+    label: "Beauty & Hair",
+    include: buildPattern([
+      "haircut", "hairstyle", "blowout", "salon", "barber", "barbershop",
+      "barbering", "stylist", "hair care", "makeup", "skincare",
+      "cosmetic", "cosmetics", "nail", "nails"
+    ]),
+    exclude: buildPattern([]),
+  },
+  {
+    label: "360 / Virtual Tours",
+    include: buildPattern([
+      "3dvista", "virtual tour", "virtual tours", "360", "360°",
+      "street view", "panorama", "panoramas", "virtual walkthrough",
+      "tour creator", "spherical", "fisheye", "equirectangular", "vr"
+    ]),
+    exclude: buildPattern(["trailer", "clips"]),
+  },
 ];
 
 const LABEL_ALIASES = {
@@ -249,6 +276,20 @@ function scoreOne(cat, fields) {
       if (hits) s += hits.length * (FIELD_WEIGHTS[k] || 1);
     }
   }
+
+  // Apply title nudges for specific high-signal names
+  const title = fields.title || '';
+
+  // Alex Hormozi → Business & Marketing
+  if (/\bAlex\s+Hormozi\b/i.test(title) && cat.label === "Business & Marketing") {
+    s += 2.0; // Increased nudge for better classification
+  }
+
+  // The Voice → Music & Musicians
+  if (/\bThe\s+Voice\b/i.test(title) && cat.label === "Music & Musicians") {
+    s += 2.0; // Increased nudge for better classification
+  }
+
   return s;
 }
 

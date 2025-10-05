@@ -33,6 +33,8 @@ router.get('/', async (req, res) => {
       const byLabel = new Map();
       const byMethod = new Map();
       const unclassifiedRows = [];
+      let totalDescLen = 0;
+      let zeroDescCount = 0;
 
       for (const r of debugRows) {
         const label = r.label || 'Unclassified';
@@ -44,6 +46,13 @@ router.get('/', async (req, res) => {
 
         if (label === 'Unclassified') {
           unclassifiedRows.push(r);
+        }
+
+        // Calculate hydration metrics
+        const descLen = r.descLen || 0;
+        totalDescLen += descLen;
+        if (descLen === 0) {
+          zeroDescCount++;
         }
       }
 
@@ -72,6 +81,11 @@ router.get('/', async (req, res) => {
           byLabel: Object.fromEntries(sortedLabels),
           byMethod: Object.fromEntries(sortedMethods),
           unclassified: byLabel.get('Unclassified') || 0
+        },
+        hydration: {
+          total: debugRows.length,
+          zeroDesc: zeroDescCount,
+          avgDescLen: debugRows.length > 0 ? (totalDescLen / debugRows.length).toFixed(1) : 0
         },
         samples: {
           unclassified: unclassifiedRows.slice(0, 8).map(r => ({

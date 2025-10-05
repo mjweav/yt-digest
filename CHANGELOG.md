@@ -113,3 +113,11 @@ All notable changes to YT Digest will be documented here.
 - **Enhanced debugging**: Updated debug output with method indicators ("heuristic", "tfidf", "override"), category counts, and compact debug file structure
 - **Performance**: TF-IDF vectors built in memory only, no disk persistence, using pure JavaScript implementation
 - **Results**: Achieved 20.1% Unclassified rate (101/503) - well below 25% target, with TF-IDF fallback successfully classifying 87 additional channels
+
+## Microstep 2.1b — Reduce residual Unclassified: desc hydration + 3 new categories + tiny nudges
+- **Enhanced description hydration**: Improved normalizeChannel to try multiple description sources in order (current AO desc, channels.json.snippet.description, localized description, about field, empty string fallback)
+- **Added descLen metrics**: Track description length for hydration analysis in debug output
+- **New categories added**: Food & Cooking (recipe, cooking, baking, kitchen, chef, etc.), Beauty & Hair (haircut, makeup, skincare, salon, etc.), 360 / Virtual Tours (3dvista, virtual tour, 360°, panorama, etc.)
+- **Title nudges implemented**: Alex Hormozi → +2.0 to Business & Marketing, The Voice → +2.0 to Music & Musicians (applied before base scoring)
+- **Enhanced debug output**: Added hydration metrics (total, zeroDesc, avgDescLen) to debug summary for coverage verification
+- **Results**: Unclassified reduced to 18.5% (93/503), improved description coverage (zeroDesc: 31/503 = 6.2%), new categories successfully classifying channels, title nudges working for high-signal names

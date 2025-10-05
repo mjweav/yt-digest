@@ -137,8 +137,16 @@ function normalizeChannel(c) {
   // accept both your normal form and YT API-ish shape
   const title =
     c.title || c.snippet?.title || '';
-  const desc =
-    c.desc || c.description || c.snippet?.description || '';
+
+  // Enhanced description hydration - try multiple sources in order
+  let desc = '';
+  if (c.desc) desc = c.desc;
+  else if (c.description) desc = c.description;
+  else if (c.snippet?.description) desc = c.snippet.description;
+  else if (c.snippet?.localized?.description) desc = c.snippet.localized.description;
+  else if (c.about) desc = c.about;
+  else desc = ''; // empty string fallback
+
   const url =
     c.url || c.channelUrl || c.customUrl || '';
   const thumbs =
@@ -155,6 +163,7 @@ function normalizeChannel(c) {
     url,
     thumb,
     videoCount: Number(videoCount) || 0,
+    descLen: desc ? desc.length : 0, // Add descLen for metrics
   };
 }
 
