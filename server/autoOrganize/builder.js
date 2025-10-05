@@ -1,7 +1,7 @@
 import fs from 'fs';
 import fsp from 'fs/promises';
 import path from 'path';
-import { classifyChannel } from './heuristics2.js';
+import { classifyChannel } from './heuristics3.js';
 import { resolveDataPath } from '../utils/paths.js';
 import { stableHash } from '../utils/hash.js';
 
@@ -183,6 +183,7 @@ function spanFromCount(n) {
   return 1;
 }
 
+// AO Parent/Subcluster Pivot - Two-tier clustering system
 async function buildAutoOrganize({ channels, overrides, debug } = {}) {
   console.log('buildAutoOrganize called with:', {
     channelsProvided: Array.isArray(channels) ? channels.length : 'none',
@@ -196,15 +197,15 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
   const ov  = overrides || await loadOverrides();
   console.log('Loaded overrides count:', Object.keys(ov).length);
 
-  const clustersMap = new Map();
   const debugRows = [];
+  const parentMetrics = new Map();
 
   if (!Array.isArray(src)) {
     console.error('Source is not an array:', typeof src, src);
     return { clusters: [], debugRows: [] };
   }
 
-  // First pass: classify all channels with heuristics
+  // STEP 1: Classify all channels with coarse parent heuristics
   const channelClassifications = new Map();
 
   for (const raw of src) {
@@ -214,16 +215,16 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
       continue;
     }
 
-    let label, why;
+    let parent, why;
     if (ov[ch.id]) {
-      label = ov[ch.id];
-      why = { method: 'override', label };
+      parent = ov[ch.id];
+      why = { method: 'override', label: parent };
     } else {
       const res = classifyChannel({ title: ch.title, desc: ch.desc, url: ch.url });
-      label = res.label || 'Unclassified';
+      parent = res.label || 'Unclassified';
       why = {
         method: 'heuristic',
-        label,
+        label: parent,
         bestScore: res.best.score,
         margin: res.best.score - res.runner.score,
         best: res.best,
@@ -232,154 +233,104 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
       };
     }
 
-    channelClassifications.set(ch.id, { ch, label, why });
+    channelClassifications.set(ch.id, { ch, parent, why });
   }
 
-  // Build TF-IDF vectors from classified channels only
-  const { vectors, documentFreq } = buildTfIdfVectors(Array.from(channelClassifications.values())
-    .map(({ ch, label }) => ({ ...ch, label })));
+  console.log(`Classified ${channelClassifications.size} channels into parents`);
 
-  console.log(`Built TF-IDF vectors for ${vectors.size} classified channels`);
+  // STEP 2: Group channels by parent
+  const parentGroups = new Map();
 
-  // Second pass: apply TF-IDF fallback for low-confidence classifications
-  for (const [id, { ch, label: initialLabel, why: initialWhy }] of channelClassifications) {
-    let finalLabel = initialLabel;
-    let finalWhy = initialWhy;
+  for (const [id, { ch, parent, why }] of channelClassifications) {
+    if (!parentGroups.has(parent)) {
+      parentGroups.set(parent, { parent, channels: [] });
+    }
+    parentGroups.get(parent).channels.push({ id, ch, why });
+  }
 
-    // Apply TF-IDF fallback for Unclassified or low-confidence items
-    if (initialLabel === 'Unclassified' || initialWhy.bestScore <= 0 ||
-        (initialWhy.bestScore - initialWhy.runner?.score < 0.35)) {
+  console.log(`Grouped into ${parentGroups.size} parent categories`);
 
-      const targetVector = tokenize(`${ch.title} ${ch.desc}`);
+  // STEP 3: For each parent, build TF-IDF vectors and run adaptive subclustering
+  const allClusters = [];
+  let totalSubclusters = 0;
 
-      if (Object.keys(targetVector).length > 0 && vectors.size > 0) {
-        const neighbors = findNearestNeighbors(targetVector, vectors, 12);
+  for (const [parentLabel, group] of parentGroups) {
+    const N = group.channels.length;
+    parentMetrics.set(parentLabel, { N, numSubclusters: 0, avgSize: 0, merged: 0 });
 
-        if (neighbors.length > 0) {
-          // Count votes per category
-          const voteCounts = new Map();
-          let maxVotes = 0;
-          let topCategory = null;
+    if (N === 0) continue;
 
-          for (const neighbor of neighbors) {
-            const votes = (voteCounts.get(neighbor.label) || 0) + 1;
-            voteCounts.set(neighbor.label, votes);
-            if (votes > maxVotes) {
-              maxVotes = votes;
-              topCategory = neighbor.label;
-            }
-          }
+    console.log(`Processing parent "${parentLabel}" with ${N} channels`);
 
-          // Apply fallback if we have enough votes and similarity threshold (relaxed for better coverage)
-          if (maxVotes >= 3 && neighbors[0].similarity >= 0.15) {
-            finalLabel = topCategory;
-            finalWhy = {
-              method: 'tfidf',
-              label: finalLabel,
-              topSim: neighbors[0].similarity,
-              neighborVotes: maxVotes,
-              totalNeighbors: neighbors.length
-            };
-            console.log(`TF-IDF fallback: ${ch.title} -> ${finalLabel} (sim: ${neighbors[0].similarity.toFixed(3)}, votes: ${maxVotes})`);
-          }
-        }
-      }
+    // Adaptive subclustering rules
+    let k, S_min, M_max;
+
+    if (N < 10) {
+      // No split - single cluster
+      k = 1;
+      S_min = N;
+      M_max = 1;
+    } else if (N <= 25) {
+      // Try k=2, keep only if both >= S_min=6
+      k = 2;
+      S_min = 6;
+      M_max = 2;
+    } else if (N <= 60) {
+      // k ≈ sqrt(N/8), min S=8, max 4 islands
+      k = Math.round(Math.sqrt(N / 8));
+      S_min = 8;
+      M_max = 4;
+    } else {
+      // k ≈ sqrt(N/5), min S=10, max 6 islands
+      k = Math.round(Math.sqrt(N / 5));
+      S_min = 10;
+      M_max = 6;
     }
 
-    // TF-IDF neighbor-consensus relabel for normal-desc channels only
-    if (ch.descLen >= 20 && initialLabel === 'Unclassified') {
-      const targetVector = tokenize(`${ch.title} ${ch.desc}`);
+    console.log(`Parent "${parentLabel}": N=${N}, k=${k}, S_min=${S_min}, M_max=${M_max}`);
 
-      if (Object.keys(targetVector).length > 0 && vectors.size > 0) {
-        const neighbors = findNearestNeighbors(targetVector, vectors, 5);
+    if (k === 1) {
+      // Single cluster case
+      const cluster = createClusterFromChannels(group.channels, parentLabel, 0, debug, channelClassifications);
+      allClusters.push(cluster);
+      parentMetrics.get(parentLabel).numSubclusters = 1;
+      parentMetrics.get(parentLabel).avgSize = N;
+      totalSubclusters += 1;
+    } else {
+      // Multi-cluster case - build subclusters
+      const subclusters = await buildSubclusters(group.channels, parentLabel, k, S_min, M_max, debug, channelClassifications);
 
-        if (neighbors.length > 0) {
-          // Filter to only consider neighbors that already have a label (ignore Unclassified neighbors)
-          const labeledNeighbors = neighbors.filter(n => n.label !== 'Unclassified');
+      // Filter out subclusters below minimum size
+      const validSubclusters = subclusters.filter(sc => sc.channels.length >= S_min);
 
-          if (labeledNeighbors.length > 0) {
-            // Count votes per category from labeled neighbors
-            const voteCounts = new Map();
-            let totalSimilarity = 0;
+      // Merge subclusters that are too small or have poor separation
+      const mergedSubclusters = await mergeSmallSubclusters(validSubclusters, S_min, debug);
 
-            for (const neighbor of labeledNeighbors) {
-              const votes = (voteCounts.get(neighbor.label) || 0) + 1;
-              voteCounts.set(neighbor.label, votes);
-              totalSimilarity += neighbor.similarity;
-            }
+      // Add parent field to each subcluster
+      const finalSubclusters = mergedSubclusters.map((sc, index) => ({
+        ...sc,
+        parent: parentLabel,
+        subclusterId: `${parentLabel.toLowerCase().replace(/\s+/g, '-')}-sub${index + 1}`
+      }));
 
-            // Find the category with most votes
-            let maxVotes = 0;
-            let consensusCategory = null;
-            let votesForConsensus = 0;
+      allClusters.push(...finalSubclusters);
 
-            for (const [category, votes] of voteCounts) {
-              if (votes > maxVotes) {
-                maxVotes = votes;
-                consensusCategory = category;
-                votesForConsensus = votes;
-              }
-            }
+      const numSubclusters = finalSubclusters.length;
+      const totalChannels = finalSubclusters.reduce((sum, sc) => sum + sc.channels.length, 0);
+      const avgSize = numSubclusters > 0 ? totalChannels / numSubclusters : 0;
+      const merged = subclusters.length - validSubclusters.length;
 
-            const avgSimilarity = totalSimilarity / labeledNeighbors.length;
-            const topSim = labeledNeighbors[0]?.similarity || 0;
+      parentMetrics.get(parentLabel).numSubclusters = numSubclusters;
+      parentMetrics.get(parentLabel).avgSize = Math.round(avgSize);
+      parentMetrics.get(parentLabel).merged = merged;
+      totalSubclusters += numSubclusters;
 
-            // Apply consensus relabel if conditions are met:
-            // (2 of top 3 neighbors agree) AND title hits that category's include tokens, OR
-            // (3 of top 5 neighbors agree) (no title condition)
-            let shouldRelabel = false;
-
-            if (consensusCategory && avgSimilarity >= 0.22) {
-              if (votesForConsensus >= 3) {
-                // 3 of top 5 neighbors agree - no title condition needed
-                shouldRelabel = true;
-              } else if (votesForConsensus >= 2 && labeledNeighbors.length >= 3) {
-                // Check if top 3 neighbors agree
-                const top3Labels = labeledNeighbors.slice(0, 3).map(n => n.label);
-                const top3Consensus = top3Labels.filter(label => label === consensusCategory).length;
-                if (top3Consensus >= 2) {
-                  // Check if title hits the consensus category's include tokens
-                  const res = classifyChannel({ title: ch.title, desc: ch.desc, url: ch.url });
-                  const categoryFound = res.scores.some(score =>
-                    score.label === consensusCategory && score.score > 0
-                  );
-                  if (categoryFound) {
-                    shouldRelabel = true;
-                  }
-                }
-              }
-            }
-
-            if (shouldRelabel) {
-              finalLabel = consensusCategory;
-              finalWhy = {
-                method: 'tfidf-consensus',
-                label: finalLabel,
-                consensus: {
-                  k: 5,
-                  votesFor: votesForConsensus,
-                  topSim: topSim,
-                  avgSim: avgSimilarity
-                }
-              };
-              console.log(`TF-IDF consensus: ${ch.title} -> ${finalLabel} (votes: ${votesForConsensus}, sim: ${avgSimilarity.toFixed(3)})`);
-            }
-          }
-        }
-      }
+      console.log(`Parent "${parentLabel}": ${numSubclusters} subclusters, avg size ${Math.round(avgSize)}, merged ${merged}`);
     }
+  }
 
-    if (!clustersMap.has(finalLabel)) clustersMap.set(finalLabel, { label: finalLabel, items: [] });
-    clustersMap.get(finalLabel).items.push({
-      id: ch.id,
-      title: ch.title,
-      desc: ch.desc,
-      thumb: ch.thumb,
-      videoCount: ch.videoCount,
-      size: sizeFromCount(ch.videoCount),
-      ...(debug ? { why: finalWhy } : {})
-    });
-
+  // STEP 4: Create debug rows for all channels
+  for (const [id, { ch, parent, why }] of channelClassifications) {
     if (debug) {
       debugRows.push({
         id: ch.id,
@@ -387,133 +338,278 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
         desc: ch.desc,
         url: ch.url,
         descLen: ch.desc ? ch.desc.length : 0,
-        label: finalLabel,
-        why: finalWhy
+        parent,
+        label: parent, // For compatibility
+        why
       });
     }
   }
 
-  // Enhanced cluster creation with stable IDs, topTerms, exemplarId, and methodStats
-  const clusters = Array.from(clustersMap.values()).map(c => {
-    const channelIds = c.items.map(item => item.id).sort();
-    const buildParams = {
-      heuristicsVersion: 2, // Track heuristics version
-      minMargin: 0.35,
-      tfidf: { k: 12, votes: 3, sim: 0.15 }
-    };
-
-    // Compute stable clusterId
-    const clusterIdInput = JSON.stringify({
-      members: channelIds,
-      params: buildParams
-    });
-    const clusterId = stableHash(clusterIdInput);
-
-    // Compute topTerms from cluster members
-    const clusterVectors = new Map();
-    const termWeights = new Map();
-
-    for (const item of c.items) {
-      const ch = channelClassifications.get(item.id);
-      if (ch && ch.ch) {
-        const tokens = tokenize(`${ch.ch.title} ${ch.ch.desc}`);
-        for (const [term, weight] of Object.entries(tokens)) {
-          termWeights.set(term, (termWeights.get(term) || 0) + weight);
-        }
-      }
-    }
-
-    // Get top terms (6-12 terms), excluding stopwords and short tokens
-    const topTerms = Array.from(termWeights.entries())
-      .filter(([term]) => term.length >= 4 && !STOPWORDS.has(term))
-      .sort((a, b) => b[1] - a[1])
-      .slice(0, 10)
-      .map(([term]) => term);
-
-    // Compute exemplarId (closest to centroid)
-    let exemplarId = channelIds[0]; // fallback to first
-    if (c.items.length > 1) {
-      // Build cluster centroid from TF-IDF vectors
-      const centroid = {};
-      let vectorCount = 0;
-
-      for (const item of c.items) {
-        const ch = channelClassifications.get(item.id);
-        if (ch && ch.ch) {
-          const tokens = tokenize(`${ch.ch.title} ${ch.ch.desc}`);
-          for (const [term, tf] of Object.entries(tokens)) {
-            if (term.length >= 3 && !STOPWORDS.has(term)) {
-              const idf = Math.log(src.length / (documentFreq.get(term) || 1));
-              centroid[term] = (centroid[term] || 0) + (tf * idf);
-            }
-          }
-          vectorCount++;
-        }
-      }
-
-      // Average the centroid
-      for (const term in centroid) {
-        centroid[term] /= vectorCount;
-      }
-
-      // Find closest channel to centroid
-      let maxSimilarity = -1;
-      for (const item of c.items) {
-        const ch = channelClassifications.get(item.id);
-        if (ch && ch.ch) {
-          const tokens = tokenize(`${ch.ch.title} ${ch.ch.desc}`);
-          const channelVector = {};
-          for (const [term, tf] of Object.entries(tokens)) {
-            if (term.length >= 3 && !STOPWORDS.has(term)) {
-              const idf = Math.log(src.length / (documentFreq.get(term) || 1));
-              channelVector[term] = tf * idf;
-            }
-          }
-
-          const similarity = cosineSimilarity(centroid, channelVector);
-          if (similarity > maxSimilarity) {
-            maxSimilarity = similarity;
-            exemplarId = item.id;
-          }
-        }
-      }
-    }
-
-    // Compute methodStats
-    const methodStats = { heuristic: 0, tfidf: 0, override: 0 };
-    for (const item of c.items) {
-      const ch = channelClassifications.get(item.id);
-      if (ch && ch.why) {
-        const method = ch.why.method;
-        if (method === 'heuristic') methodStats.heuristic++;
-        else if (method === 'tfidf') methodStats.tfidf++;
-        else if (method === 'override') methodStats.override++;
-      }
-    }
-
-    return {
-      id: c.label.toLowerCase().replace(/\s+/g, '-'),
-      label: c.label,
-      span: spanFromCount(c.items.length),
-      channels: c.items,
-      clusterId,
-      topTerms,
-      exemplarId,
-      methodStats,
-      buildParams
-    };
-  });
-
   console.log('buildAutoOrganize returning:', {
-    clustersCount: clusters.length,
-    debugRowsCount: debugRows.length
+    clustersCount: allClusters.length,
+    debugRowsCount: debugRows.length,
+    totalSubclusters,
+    parentMetrics: Object.fromEntries(parentMetrics)
   });
 
-  return { clusters, debugRows };
+  return { clusters: allClusters, debugRows, parentMetrics, totalSubclusters };
+}
+
+// Helper function to create a cluster from channels
+function createClusterFromChannels(channels, parentLabel, subclusterIndex, debug, channelClassifications) {
+  const channelItems = channels.map(({ id, ch, why }) => ({
+    id: ch.id,
+    title: ch.title,
+    desc: ch.desc,
+    thumb: ch.thumb,
+    videoCount: ch.videoCount,
+    size: sizeFromCount(ch.videoCount),
+    ...(debug ? { why } : {})
+  }));
+
+  const channelIds = channels.map(({ id }) => id).sort();
+  const buildParams = {
+    heuristicsVersion: 3,
+    minMargin: 0.35,
+    subclustering: { enabled: true, parent: parentLabel }
+  };
+
+  const clusterIdInput = JSON.stringify({
+    members: channelIds,
+    parent: parentLabel,
+    subclusterIndex,
+    params: buildParams
+  });
+  const clusterId = stableHash(clusterIdInput);
+
+  // Compute topTerms from cluster members
+  const termWeights = new Map();
+
+  for (const { id } of channels) {
+    const ch = channelClassifications.get(id);
+    if (ch && ch.ch) {
+      const tokens = tokenize(`${ch.ch.title} ${ch.ch.desc}`);
+      for (const [term, weight] of Object.entries(tokens)) {
+        termWeights.set(term, (termWeights.get(term) || 0) + weight);
+      }
+    }
+  }
+
+  const topTerms = Array.from(termWeights.entries())
+    .filter(([term]) => term.length >= 4 && !STOPWORDS.has(term))
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10)
+    .map(([term]) => term);
+
+  // Compute exemplarId (first channel as exemplar for single clusters)
+  const exemplarId = channels[0]?.id || channelIds[0];
+
+  // Compute methodStats
+  const methodStats = { heuristic: 0, tfidf: 0, override: 0 };
+  for (const { id } of channels) {
+    const ch = channelClassifications.get(id);
+    if (ch && ch.why) {
+      const method = ch.why.method;
+      if (method === 'heuristic') methodStats.heuristic++;
+      else if (method === 'tfidf') methodStats.tfidf++;
+      else if (method === 'override') methodStats.override++;
+    }
+  }
+
+  return {
+    id: `${parentLabel.toLowerCase().replace(/\s+/g, '-')}${subclusterIndex > 0 ? `-sub${subclusterIndex}` : ''}`,
+    label: parentLabel,
+    parent: parentLabel,
+    span: spanFromCount(channels.length),
+    channels: channelItems,
+    clusterId,
+    topTerms,
+    exemplarId,
+    methodStats,
+    buildParams,
+    size: channels.length
+  };
+}
+
+// Helper function to build subclusters using TF-IDF + cosine similarity
+async function buildSubclusters(channels, parentLabel, k, S_min, M_max, debug, channelClassifications) {
+  if (channels.length < 2 || k <= 1) {
+    return [createClusterFromChannels(channels, parentLabel, 0, debug, channelClassifications)];
+  }
+
+  // Build TF-IDF vectors for subclustering
+  const { vectors, documentFreq } = buildTfIdfVectors(channels.map(({ ch }) => ({ ...ch, label: parentLabel })));
+
+  if (vectors.size < 2) {
+    return [createClusterFromChannels(channels, parentLabel, 0, debug, channelClassifications)];
+  }
+
+  // Use k-means-like clustering with cosine similarity
+  const subclusters = [];
+  const usedChannels = new Set();
+
+  for (let i = 0; i < Math.min(k, channels.length); i++) {
+    // Pick a random unused channel as centroid
+    const availableChannels = channels.filter(ch => !usedChannels.has(ch.id));
+    if (availableChannels.length === 0) break;
+
+    const centroidChannel = availableChannels[Math.floor(Math.random() * availableChannels.length)];
+    usedChannels.add(centroidChannel.id);
+
+    const centroidVector = tokenize(`${centroidChannel.ch.title} ${centroidChannel.ch.desc}`);
+
+    // Find nearest neighbors to this centroid from remaining channels
+    const similarities = [];
+    for (const ch of channels) {
+      if (ch.id !== centroidChannel.id && !usedChannels.has(ch.id)) {
+        const targetVector = tokenize(`${ch.ch.title} ${ch.ch.desc}`);
+        const similarity = cosineSimilarity(centroidVector, targetVector);
+        similarities.push({ channel: ch, similarity });
+      }
+    }
+
+    // Sort by similarity and take top channels for this subcluster
+    similarities.sort((a, b) => b.similarity - a.similarity);
+
+    // For first cluster, take higher number to ensure good coverage
+    const takeCount = i === 0 ? Math.ceil(channels.length / k) + 2 : Math.ceil(channels.length / k);
+    const subclusterChannels = [centroidChannel];
+
+    for (const sim of similarities.slice(0, takeCount - 1)) {
+      if (subclusterChannels.length < takeCount) {
+        subclusterChannels.push(sim.channel);
+        usedChannels.add(sim.channel.id);
+      }
+    }
+
+    if (subclusterChannels.length >= S_min) {
+      subclusters.push(createClusterFromChannels(subclusterChannels, parentLabel, i + 1, debug, channelClassifications));
+    }
+  }
+
+  // Handle any remaining channels by adding them to existing subclusters or creating new ones
+  const remainingChannels = channels.filter(ch => !usedChannels.has(ch.id));
+
+  for (const remainingCh of remainingChannels) {
+    // Find the most similar existing subcluster
+    let bestSubcluster = null;
+    let bestSimilarity = -1;
+
+    for (const subcluster of subclusters) {
+      if (subcluster.channels.length < 50) { // Limit subcluster size
+        const subclusterVector = tokenize(
+          subcluster.channels.map(ch => `${ch.title} ${ch.desc}`).join(' ')
+        );
+        const remainingVector = tokenize(`${remainingCh.ch.title} ${remainingCh.ch.desc}`);
+        const similarity = cosineSimilarity(subclusterVector, remainingVector);
+
+        if (similarity > bestSimilarity) {
+          bestSimilarity = similarity;
+          bestSubcluster = subcluster;
+        }
+      }
+    }
+
+    if (bestSubcluster && bestSimilarity > 0.1) {
+      // Add to existing subcluster
+      bestSubcluster.channels.push({
+        id: remainingCh.ch.id,
+        title: remainingCh.ch.title,
+        desc: remainingCh.ch.desc,
+        thumb: remainingCh.ch.thumb,
+        videoCount: remainingCh.ch.videoCount,
+        size: sizeFromCount(remainingCh.ch.videoCount),
+        ...(debug ? { why: remainingCh.why } : {})
+      });
+      usedChannels.add(remainingCh.id);
+    }
+  }
+
+  // Handle any still-remaining channels by creating a new subcluster
+  const stillRemainingChannels = channels.filter(ch => !usedChannels.has(ch.id));
+  if (stillRemainingChannels.length > 0) {
+    subclusters.push(createClusterFromChannels(stillRemainingChannels, parentLabel, subclusters.length + 1, debug, channelClassifications));
+  }
+
+  return subclusters;
+}
+
+// Helper function to merge small subclusters
+async function mergeSmallSubclusters(subclusters, S_min, debug) {
+  if (subclusters.length <= 1) return subclusters;
+
+  const validSubclusters = subclusters.filter(sc => sc.channels.length >= S_min);
+  const smallSubclusters = subclusters.filter(sc => sc.channels.length < S_min);
+
+  if (smallSubclusters.length === 0) return validSubclusters;
+
+  // Merge small subclusters into the most similar valid subcluster
+  for (const smallSC of smallSubclusters) {
+    let bestMatch = null;
+    let bestSimilarity = -1;
+
+    // Build vectors for similarity comparison
+    const { vectors: smallVectors } = buildTfIdfVectors(smallSC.channels.map(({ ch }) => ({ ...ch, label: smallSC.parent })));
+    const { vectors: validVectors } = buildTfIdfVectors(validSubclusters.flatMap(sc =>
+      sc.channels.map(({ ch }) => ({ ...ch, label: sc.parent }))
+    ));
+
+    for (let i = 0; i < validSubclusters.length; i++) {
+      const validSC = validSubclusters[i];
+      const { vectors: validSCVectors } = buildTfIdfVectors(validSC.channels.map(({ ch }) => ({ ...ch, label: validSC.parent })));
+
+      // Compare small subcluster centroid with valid subcluster centroid
+      const smallCentroid = calculateCentroid(smallVectors);
+      const validCentroid = calculateCentroid(validSCVectors);
+
+      if (smallCentroid && validCentroid) {
+        const similarity = cosineSimilarity(smallCentroid, validCentroid);
+        if (similarity > bestSimilarity) {
+          bestSimilarity = similarity;
+          bestMatch = i;
+        }
+      }
+    }
+
+    if (bestMatch !== null && bestSimilarity > 0.15) {
+      // Merge into best matching subcluster
+      validSubclusters[bestMatch].channels.push(...smallSC.channels);
+      if (debug) {
+        console.log(`Merged small subcluster (${smallSC.channels.length} channels) into subcluster ${bestMatch + 1}`);
+      }
+    } else {
+      // Add as separate subcluster if no good match found
+      validSubclusters.push(smallSC);
+    }
+  }
+
+  return validSubclusters;
+}
+
+// Helper function to calculate centroid vector
+function calculateCentroid(vectors) {
+  if (vectors.size === 0) return null;
+
+  const centroid = {};
+  let vectorCount = 0;
+
+  for (const [id, { vector }] of vectors) {
+    for (const [term, weight] of Object.entries(vector)) {
+      centroid[term] = (centroid[term] || 0) + weight;
+    }
+    vectorCount++;
+  }
+
+  // Average the weights
+  for (const term in centroid) {
+    centroid[term] /= vectorCount;
+  }
+
+  return centroid;
 }
 
 // Write autoOrganize.meta.json with build information
-async function writeAutoOrganizeMeta({ clusters, buildParams } = {}) {
+async function writeAutoOrganizeMeta({ clusters, buildParams, parentMetrics } = {}) {
   if (!clusters || !Array.isArray(clusters)) {
     console.error('writeAutoOrganizeMeta: invalid clusters provided');
     return;
@@ -533,15 +629,73 @@ async function writeAutoOrganizeMeta({ clusters, buildParams } = {}) {
     const sortedChannelIds = Array.from(allChannelIds).sort();
     const channelFingerprint = stableHash(sortedChannelIds.join(','));
 
+    // Calculate parent and subcluster metrics
+    const parents = {};
+    const subclustersByParent = new Map();
+
+    for (const cluster of clusters) {
+      const parent = cluster.parent || cluster.label;
+
+      if (!parents[parent]) {
+        parents[parent] = {
+          count: 0,
+          totalChannels: 0,
+          subclusters: []
+        };
+      }
+
+      parents[parent].count++;
+      parents[parent].totalChannels += cluster.channels?.length || 0;
+      parents[parent].subclusters.push({
+        id: cluster.subclusterId || cluster.id,
+        size: cluster.channels?.length || 0,
+        clusterId: cluster.clusterId
+      });
+
+      if (!subclustersByParent.has(parent)) {
+        subclustersByParent.set(parent, []);
+      }
+      subclustersByParent.get(parent).push(cluster);
+    }
+
+    // Calculate summary statistics
+    const totalParents = Object.keys(parents).length;
+    const totalSubclusters = clusters.length;
+    const avgSubclustersPerParent = totalParents > 0 ? totalSubclusters / totalParents : 0;
+    const largestParent = Object.entries(parents).reduce((max, [parent, data]) =>
+      data.totalChannels > max.totalChannels ? { parent, ...data } : max,
+      { parent: null, totalChannels: 0 }
+    );
+
     const meta = {
       builtAt: new Date().toISOString(),
       buildVersion: 3,
       params: buildParams || {
-        heuristicsVersion: 2,
+        heuristicsVersion: 3,
         minMargin: 0.35,
-        tfidf: { k: 12, votes: 3, sim: 0.15 }
+        subclustering: {
+          enabled: true,
+          rules: {
+            "N < 10": "single cluster",
+            "10 ≤ N ≤ 25": "k=2, S_min=6, M_max=2",
+            "25 < N ≤ 60": "k≈√(N/8), S_min=8, M_max=4",
+            "N > 60": "k≈√(N/5), S_min=10, M_max=6"
+          }
+        }
       },
       channelFingerprint,
+      summary: {
+        totalChannels: allChannelIds.size,
+        totalParents,
+        totalSubclusters,
+        avgSubclustersPerParent: Math.round(avgSubclustersPerParent * 10) / 10,
+        largestParent: largestParent.parent ? {
+          name: largestParent.parent,
+          channels: largestParent.totalChannels,
+          subclusters: largestParent.count
+        } : null
+      },
+      parents,
       clusters: {
         count: clusters.length,
         idsSample: clusters.slice(0, 3).map(c => c.clusterId).filter(Boolean)
@@ -552,7 +706,8 @@ async function writeAutoOrganizeMeta({ clusters, buildParams } = {}) {
     await fsp.writeFile(metaPath, JSON.stringify(meta, null, 2), 'utf8');
 
     console.log(`[AO Meta] Written meta file: ${metaPath}`);
-    console.log(`[AO Meta] Build info: ${clusters.length} clusters, fingerprint: ${channelFingerprint.substring(0, 8)}...`);
+    console.log(`[AO Meta] Build info: ${allChannelIds.size} channels, ${totalParents} parents, ${totalSubclusters} subclusters`);
+    console.log(`[AO Meta] Largest parent: ${largestParent.parent || 'N/A'} (${largestParent.totalChannels} channels, ${largestParent.count} subclusters)`);
 
     return meta;
   } catch (error) {

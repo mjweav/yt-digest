@@ -104,12 +104,49 @@ router.get('/', async (req, res) => {
         console.error('Failed to write debug file:', e);
       }
 
+      // Add parent/subcluster metrics to debug response
+      const parentMetrics = {};
+      const subclusterSummary = {};
+
+      for (const cluster of clusters) {
+        const parent = cluster.parent || cluster.label;
+
+        if (!parentMetrics[parent]) {
+          parentMetrics[parent] = {
+            subclusters: 0,
+            totalChannels: 0,
+            sizes: []
+          };
+        }
+
+        parentMetrics[parent].subclusters++;
+        parentMetrics[parent].totalChannels += cluster.channels?.length || 0;
+        parentMetrics[parent].sizes.push(cluster.channels?.length || 0);
+      }
+
+      // Calculate subcluster statistics per parent
+      for (const [parent, metrics] of Object.entries(parentMetrics)) {
+        const sizes = metrics.sizes;
+        subclusterSummary[parent] = {
+          subclusters: metrics.subclusters,
+          totalChannels: metrics.totalChannels,
+          avgSize: sizes.length > 0 ? Math.round(sizes.reduce((a, b) => a + b, 0) / sizes.length) : 0,
+          minSize: sizes.length > 0 ? Math.min(...sizes) : 0,
+          maxSize: sizes.length > 0 ? Math.max(...sizes) : 0
+        };
+      }
+
       return res.json({
         ...merged,
         debug: {
           file: 'data/autoOrganize.debug.json',
           summary: debugSummary.summary,
           samples: debugSummary.samples,
+          parents: {
+            count: Object.keys(parentMetrics).length,
+            metrics: parentMetrics,
+            subclusterSummary
+          },
           cache: {
             clusterCount: clusters.length,
             clusterIds: clusters.slice(0, 3).map(c => c.clusterId),
