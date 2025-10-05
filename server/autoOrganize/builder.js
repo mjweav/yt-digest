@@ -345,6 +345,17 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
     }
   }
 
+  // STEP 5: Ensure label uniqueness with safeguard
+  const seen = new Set();
+  for (let i = 0; i < allClusters.length; i++) {
+    const cluster = allClusters[i];
+    if (seen.has(cluster.label)) {
+      // Append index to make it unique
+      cluster.label += ` • ${i + 1}`;
+    }
+    seen.add(cluster.label);
+  }
+
   console.log('buildAutoOrganize returning:', {
     clustersCount: allClusters.length,
     debugRowsCount: debugRows.length,
@@ -401,6 +412,10 @@ function createClusterFromChannels(channels, parentLabel, subclusterIndex, debug
     .slice(0, 10)
     .map(([term]) => term);
 
+  // Create enriched label combining parent + topTerms
+  const topLabelTerms = (topTerms || []).slice(0, 2).join(' • ');
+  const enrichedLabel = `${parentLabel} • ${topLabelTerms}`.trim();
+
   // Compute exemplarId (first channel as exemplar for single clusters)
   const exemplarId = channels[0]?.id || channelIds[0];
 
@@ -418,7 +433,7 @@ function createClusterFromChannels(channels, parentLabel, subclusterIndex, debug
 
   return {
     id: `${parentLabel.toLowerCase().replace(/\s+/g, '-')}${subclusterIndex > 0 ? `-sub${subclusterIndex}` : ''}`,
-    label: parentLabel,
+    label: enrichedLabel,
     parent: parentLabel,
     span: spanFromCount(channels.length),
     channels: channelItems,

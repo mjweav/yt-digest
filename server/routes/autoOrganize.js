@@ -136,6 +136,16 @@ router.get('/', async (req, res) => {
         };
       }
 
+      // Calculate unique labels and duplicates
+      const labelCounts = new Map();
+      for (const cluster of clusters) {
+        const label = cluster.label;
+        labelCounts.set(label, (labelCounts.get(label) || 0) + 1);
+      }
+
+      const uniqueLabels = labelCounts.size;
+      const duplicateLabels = clusters.length - uniqueLabels;
+
       return res.json({
         ...merged,
         debug: {
@@ -146,6 +156,10 @@ router.get('/', async (req, res) => {
             count: Object.keys(parentMetrics).length,
             metrics: parentMetrics,
             subclusterSummary
+          },
+          labels: {
+            uniqueLabels,
+            duplicateLabels
           },
           cache: {
             clusterCount: clusters.length,
