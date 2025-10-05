@@ -29,6 +29,17 @@ router.get('/', async (req, res) => {
     };
 
     if (debug) {
+      // Add debug summary logging
+      const byLabel = new Map();
+      for (const r of debugRows) {
+        const l = r.label || 'Unclassified';
+        byLabel.set(l, (byLabel.get(l) || 0) + 1);
+      }
+      const sorted = [...byLabel.entries()].sort((a,b)=>b[1]-a[1]).slice(0,10);
+      console.log('[AO DEBUG] totals:', { rows: debugRows.length, top: sorted });
+      const uncls = debugRows.filter(r => (r.label||'Unclassified') === 'Unclassified').slice(0,5);
+      console.log('[AO DEBUG] samples (Unclassified):', uncls.map(u => ({title:u.title, descLen:u.descLen})));
+
       const p = resolveDataPath('autoOrganize.debug.json');
       try {
         fs.writeFileSync(p, JSON.stringify({ when: merged.builtAt, rows: debugRows }, null, 2), 'utf8');

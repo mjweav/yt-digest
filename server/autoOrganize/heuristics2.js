@@ -4,69 +4,87 @@ const FIELD_WEIGHTS = { title: 3.0, desc: 1.6, url: 0.6 };
 const BASELINE = 0;
 const MIN_MARGIN = 0.5;
 
-const rx = (parts, flags = "i") => {
-  const patterns = parts.map(p => {
-    // Escape special regex characters
-    const escaped = p.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&');
-    // Handle multi-word phrases by allowing optional whitespace between words
-    return escaped.replace(/ /g, '\\s*');
-  });
-  return new RegExp(`\\b(?:${patterns.join("|")})\\b`, flags);
-};
+// Build a single alternation regex from tokens:
+//  - "word"        -> \bword\b
+//  - "multi word"  -> \bmulti\s+word\b
+//  - "prefix*"     -> \bprefix\w*
+// Returns a global, case-insensitive RegExp.
+function buildPattern(tokens) {
+  const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const asPiece = (t) => {
+    const raw = t.trim().toLowerCase();
+    if (!raw) return null;
+    const isPrefix = raw.endsWith('*');
+    const core = isPrefix ? raw.slice(0, -1) : raw;
+    if (core.includes(' ')) {
+      // phrase
+      return `\\b${core.split(/\s+/).map(esc).join('\\s+')}\\b`;
+    }
+    // single token
+    return isPrefix
+      ? `\\b${esc(core)}\\w*`
+      : `\\b${esc(core)}\\b`;
+  };
+  const parts = (tokens || []).map(asPiece).filter(Boolean);
+  if (!parts.length) return null;
+  return new RegExp(`(?:${parts.join('|')})`, 'gi'); // NOTE: 'g' added
+}
 
 const CATS = [
   {
     label: "Health & Medicine",
-    include: rx([
-      "doctor", "dr\\.?\\s", "md\\b", "physician", "medicine", "medical", "cardio", "metabolic", "endocrin",
+    include: buildPattern([
+      "doctor", "dr\\.?\\s", "md\\b", "physician", "medicine", "medical", "endocrin*", "cardio*", "metabol*", "physiology*",
       "neuro", "sleep", "nutrition", "diet", "fasting", "cholesterol", "insulin", "glucose", "exercise physiology"
     ]),
-    exclude: rx([
+    exclude: buildPattern([
       // avoid music producer "Doctor Mix", "Dr. Dre", etc.
       "doctor mix", "dr\\.?\\s?dre", "doctor who", "drum", "dj\\b"
     ]),
   },
   {
     label: "AI & Emerging Tech",
-    include: rx([
+    include: buildPattern([
       "ai", "artificial intelligence", "gpt", "chatgpt", "llm", "deep learning",
       "machine learning", "ml\\b", "generative", "midjourney", "stable diffusion", "prompt",
       "karpathy", "openai", "anthropic", "llama", "mistral"
     ]),
-    exclude: rx(["makeup ai", "ai art nails"]), // examples of lifestyle overlaps
+    exclude: buildPattern(["makeup ai", "ai art nails"]), // examples of lifestyle overlaps
   },
   {
     label: "General Tech & Reviews",
-    include: rx([
+    include: buildPattern([
       "tech", "review", "unboxing", "gadgets?", "apple", "iphone", "ipad", "mac",
       "android", "windows", "pc build", "benchmark"
     ]),
-    exclude: rx(["photography", "camera", "drone", "flight sim"]),
+    exclude: buildPattern(["photography", "camera", "drone", "flight sim"]),
   },
   {
     label: "Photography & Cameras",
-    include: rx([
+    include: buildPattern([
       "camera", "photograph", "lens", "sony", "canon", "nikon", "fujifilm",
-      "lightroom", "photoshop", "mirrorless", "brandon li", "allan walls"
+      "lightroom", "photoshop", "mirrorless", "brandon li", "allan walls",
+      "gimbal", "cinewhoop", "b-roll"
     ]),
-    exclude: rx(["security camera", "body cam", "dashcam", "marketing", "dropship", "ecom", "crypto", "stocks"]),
+    exclude: buildPattern(["security camera", "body cam", "dashcam", "marketing", "dropship", "ecom", "crypto", "stocks"]),
   },
   {
     label: "Video Editing & Creative Tools",
-    include: rx([
+    include: buildPattern([
       "edit", "premiere", "final cut", "davinci resolve", "after effects",
-      "motionvfx", "filmora", "bretfx", "color grade", "timeline"
+      "motionvfx", "filmora", "bretfx", "color grade", "timeline",
+      "3dvista", "virtual tour", "360", "vr", "fusion", "motion"
     ]),
-    exclude: rx(["sales", "agency", "dropship"]),
+    exclude: buildPattern(["sales", "agency", "dropship"]),
   },
   {
     label: "Business & Marketing",
-    include: rx([
+    include: buildPattern([
       "marketing", "ads", "adwords", "funnels", "funnel", "sales", "saas",
       "ecommerce", "brand", "branding", "agency", "entrepreneur", "entrepreneurship",
       "startup", "shopify", "amazon fba"
     ]),
-    exclude: rx([
+    exclude: buildPattern([
       "flight", "storm", "camera", "lens", "photo", "premiere", "filmora",
       "davinci", "final cut", "garden", "seed", "compost", "orchestra",
       "guitar", "mix", "piano", "trailer", "trailers", "clip", "clips",
@@ -75,55 +93,55 @@ const CATS = [
   },
   {
     label: "Music & Musicians",
-    include: rx([
+    include: buildPattern([
       "guitar", "bass", "drums", "piano", "vocal", "singer", "songwriter",
       "mix", "master", "daw", "ableton", "logic pro", "pro tools", "pedal",
       "riff", "chord", "jazz"
     ]),
-    exclude: rx(["storm", "flight", "pilot", "camera", "lens"]),
+    exclude: buildPattern(["storm", "flight", "pilot", "camera", "lens"]),
   },
   {
     label: "DIY, Home & Construction",
-    include: rx(["diy", "home", "renovation", "woodworking", "craftsman", "garage", "concrete", "builder"]),
-    exclude: rx([]),
+    include: buildPattern(["diy", "home", "renovation", "woodworking", "craftsman", "garage", "concrete", "builder"]),
+    exclude: buildPattern([]),
   },
 
   {
     label: "Weather & Storms",
-    include: rx([
+    include: buildPattern([
       "storm", "tornado", "tornadoes", "hurricane", "hurricanes", "hail", "severe", "severe weather",
-      "forecast", "radar", "meteorolog", "meteorologist", "storm chaser", "storm chasing", "chaser",
+      "forecast", "radar", "meteorolog*", "meteorologist", "storm chaser", "storm chasing", "chaser",
       "noaa", "nws", "supercell", "twister", "winter storm", "ryan hall", "reed timmer",
-      "live storms media", "weather"
+      "live storms media", "weather", "wx", "mesoscale", "outflow", "funnel cloud"
     ]),
-    exclude: rx([]),
+    exclude: buildPattern([]),
   },
   {
     label: "Aviation & Flight",
-    include: rx([
+    include: buildPattern([
       "pilot", "aviation", "airliner", "jet", "cockpit", "atc", "boeing",
       "airbus", "737", "a320", "sim", "simulator", "flight sim", "mentour",
-      "airline", "flight"
+      "airline", "flight", "icao", "ifr", "vfr", "checkride", "aircrash", "atpl"
     ]),
-    exclude: rx([]),
+    exclude: buildPattern([]),
   },
   {
     label: "Gardening & Outdoors",
-    include: rx([
+    include: buildPattern([
       "garden", "gardening", "homestead", "homesteading", "compost", "mulch",
       "seed", "seedling", "raised bed", "orchard", "pruning", "lawn", "landscape", "landscaping",
       "organic food", "grow food"
     ]),
-    exclude: rx([]),
+    exclude: buildPattern([]),
   },
   {
     label: "News & Commentary",
-    include: rx([
+    include: buildPattern([
       "news", "breaking", "report", "analysis", "commentary", "opinion",
       "politics", "geopolitics", "world", "international", "global",
       "dw news", "cna", "bbc", "journalism", "correspondents"
     ]),
-    exclude: rx([]),
+    exclude: buildPattern([]),
   },
   // …you can append more categories here as needed
 ];
