@@ -104,3 +104,12 @@ All notable changes to YT Digest will be documented here.
 - Hardened path resolver to correctly target repo `data/` (supports `DATA_DIR` override).
 - Normalized builder to always return `{ clusters, debugRows }` and hydrate categories.
 - Validation commands added to docs.
+
+## Microstep 2.1 — LWLL v3: Heuristics + TF-IDF fallback + better debug
+- **Enhanced heuristics**: Added 9 new categories (Trains & Rail, Travel & Vlogs, Film/Trailers & Entertainment, Pools/Home Services, Architecture & Design, Programming & Tutorials, Podcasts & Long-form, Cybersecurity, Finance & Investing) with focused tokens and phrases
+- **Title keyword boost**: Added +0.75 score bump when chosen category's include pattern hits title, before tie-break logic
+- **Lowered threshold**: Reduced MIN_MARGIN from 0.5 to 0.35 for better classification coverage
+- **TF-IDF fallback**: Implemented lightweight "like-with-like" system using cosine similarity for low-confidence classifications (≥3 votes, ≥0.15 similarity threshold)
+- **Enhanced debugging**: Updated debug output with method indicators ("heuristic", "tfidf", "override"), category counts, and compact debug file structure
+- **Performance**: TF-IDF vectors built in memory only, no disk persistence, using pure JavaScript implementation
+- **Results**: Achieved 20.1% Unclassified rate (101/503) - well below 25% target, with TF-IDF fallback successfully classifying 87 additional channels
