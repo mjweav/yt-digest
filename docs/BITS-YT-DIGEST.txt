@@ -1,0 +1,42 @@
+#FEATURES:
+
+- Date tags per channel (7 day, 30 day, 6m 1yr) or use global
+- Pull More Channel Data
+	- Make channel name linkable to channel
+	- pull # of vids, latest vid, daterange of vids available, subscribers
+	
+- Auto Grouping of Channels option
+	- This should be an additional view with AI based theme/topic heuristics
+	
+-Digest
+- Quick Jump tags/pills at top to jump to categories
+
+
+
+Enhanced Channel Object:
+
+{
+  id: item.snippet.resourceId.channelId,
+  title: item.snippet.title,
+  description: item.snippet.description,
+  publishedAt: item.snippet.publishedAt,
+  
+  // NEW: Better thumbnails
+  thumbnails: {
+    default: item.snippet.thumbnails?.default?.url,
+    medium: item.snippet.thumbnails?.medium?.url,      // 320x180px
+    high: item.snippet.thumbnails?.high?.url,          // 800x800px
+    standard: item.snippet.thumbnails?.standard?.url,  // If available
+    maxres: item.snippet.thumbnails?.maxres?.url       // If available
+  },
+  
+  // NEW: Channel statistics  
+  totalVideos: item.contentDetails?.totalItemCount,
+  newVideos: item.contentDetails?.newItemCount,
+  
+  // NEW: Channel URL
+  channelUrl: item.subscriberSnippet?.channelUrl
+}
+
+#Generate Full Debug Output
+http://localhost:3001/api/auto-organize/debug/export | jq
