@@ -13,7 +13,12 @@ router.get('/', async (req, res) => {
     const debug = req.query.debug === '1';
     const channels = await loadChannels();
     const overrides = await loadOverrides();
-    const { clusters, debugRows } = await buildAutoOrganize({ channels, overrides, debug });
+    const { clusters, debugRows, mergedClustersSemantic, dedupGroups } = await buildAutoOrganize({ channels, overrides, debug });
+
+    // Store dedup groups in res.locals for use in debug response
+    if (debug && dedupGroups) {
+      res.locals.dedupGroups = dedupGroups;
+    }
 
     // merge assignments
     const assigns = await store.getAssignments();
@@ -35,6 +40,7 @@ router.get('/', async (req, res) => {
       const unclassifiedRows = [];
       let totalDescLen = 0;
       let zeroDescCount = 0;
+      let tfidfParentAssigned = 0;
 
       for (const r of debugRows) {
         const label = r.label || 'Unclassified';
@@ -42,6 +48,9 @@ router.get('/', async (req, res) => {
 
         if (r.why?.method) {
           byMethod.set(r.why.method, (byMethod.get(r.why.method) || 0) + 1);
+          if (r.why.method === 'tfidfParent') {
+            tfidfParentAssigned++;
+          }
         }
 
         if (label === 'Unclassified') {
@@ -80,7 +89,8 @@ router.get('/', async (req, res) => {
           total: debugRows.length,
           byLabel: Object.fromEntries(sortedLabels),
           byMethod: Object.fromEntries(sortedMethods),
-          unclassified: byLabel.get('Unclassified') || 0
+          unclassified: byLabel.get('Unclassified') || 0,
+          tfidfParentAssigned
         },
         hydration: {
           total: debugRows.length,
@@ -88,7 +98,7 @@ router.get('/', async (req, res) => {
           avgDescLen: debugRows.length > 0 ? (totalDescLen / debugRows.length).toFixed(1) : 0
         },
         samples: {
-          unclassified: unclassifiedRows.slice(0, 8).map(r => ({
+          unclassified: unclassifiedRows.slice(0, 5).map(r => ({
             title: r.title.substring(0, 160),
             descLen: r.descLen,
             method: r.why?.method || 'unknown'
@@ -148,6 +158,7 @@ router.get('/', async (req, res) => {
 
       // Calculate merge metrics
       const mergedClusters = clusters.filter(c => c._merged).length;
+      const mergedClustersSemantic = mergedClusters; // For backward compatibility
       const canonicalizedLabels = clusters.filter(c => {
         // Check if label has canonicalized format (sorted, capitalized terms)
         const parts = c.label.split(' • ');
@@ -160,6 +171,9 @@ router.get('/', async (req, res) => {
         }
         return false;
       }).length;
+
+      // Extract dedup groups from the build result if available
+      const dedupGroups = res.locals.dedupGroups || [];
 
       return res.json({
         ...merged,
@@ -178,7 +192,13 @@ router.get('/', async (req, res) => {
           },
           merges: {
             mergedClusters,
+            mergedClustersSemantic,
             canonicalizedLabels
+          },
+          semanticDedup: {
+            mergedClustersSemantic,
+            dedupGroups: dedupGroups.slice(0, 10), // Limit to first 10 for response size
+            dedupGroupsCount: dedupGroups.length
           },
           cache: {
             clusterCount: clusters.length,

@@ -44,6 +44,140 @@ function cosineSimilarity(vecA, vecB) {
   return magnitude === 0 ? 0 : dotProduct / magnitude;
 }
 
+function jaccardSimilarity(setA, setB) {
+  const intersection = new Set([...setA].filter(x => setB.has(x)));
+  const union = new Set([...setA, ...setB]);
+  return union.size === 0 ? 0 : intersection.size / union.size;
+}
+
+function stem(word) {
+  // Simple stemming - remove common suffixes
+  return word.toLowerCase()
+    .replace(/ing$/, '')
+    .replace(/ed$/, '')
+    .replace(/er$/, '')
+    .replace(/est$/, '')
+    .replace(/ly$/, '')
+    .replace(/s$/, '');
+}
+
+// TF-IDF Parent Reassignment Function
+async function performTfIdfParentReassignment(channelClassifications, debug) {
+  const PARENT_SIM_MIN = 0.25;
+  const MIN_MEMBERS_PER_PARENT = 5;
+
+  // Gather unclassified channels with sufficient description length
+  const unclassifiedChannels = [];
+  const classifiedChannels = [];
+
+  for (const [id, { ch, parent }] of channelClassifications) {
+    if (parent === 'Unclassified' && ch.descLen >= 20) {
+      unclassifiedChannels.push({ id, ch });
+    } else if (parent !== 'Unclassified') {
+      classifiedChannels.push({ id, ch, parent });
+    }
+  }
+
+  if (unclassifiedChannels.length === 0) {
+    console.log('[TF-IDF Reassign] No unclassified channels with sufficient description length');
+    return 0;
+  }
+
+  console.log(`[TF-IDF Reassign] Processing ${unclassifiedChannels.length} unclassified channels (${classifiedChannels.length} classified)`);
+
+  // Group classified channels by parent
+  const parentGroups = new Map();
+  for (const { id, ch, parent } of classifiedChannels) {
+    if (!parentGroups.has(parent)) {
+      parentGroups.set(parent, []);
+    }
+    parentGroups.get(parent).push({ id, ch });
+  }
+
+  // Filter parents with at least MIN_MEMBERS_PER_PARENT members
+  const validParents = [];
+  for (const [parent, channels] of parentGroups) {
+    if (channels.length >= MIN_MEMBERS_PER_PARENT) {
+      validParents.push(parent);
+    } else {
+      console.log(`[TF-IDF Reassign] Skipping parent "${parent}" - only ${channels.length} members (need ${MIN_MEMBERS_PER_PARENT})`);
+    }
+  }
+
+  if (validParents.length === 0) {
+    console.log('[TF-IDF Reassign] No parents with sufficient members for centroid calculation');
+    return 0;
+  }
+
+  // Build TF-IDF vectors for all channels (both classified and unclassified)
+  const allChannels = [...classifiedChannels, ...unclassifiedChannels];
+  const { vectors, documentFreq } = buildTfIdfVectors(allChannels);
+
+  // Compute parent centroids
+  const parentCentroids = new Map();
+  for (const parent of validParents) {
+    const parentChannels = parentGroups.get(parent);
+    const parentVectors = new Map();
+
+    // Collect vectors for this parent
+    for (const { id } of parentChannels) {
+      if (vectors.has(id)) {
+        parentVectors.set(id, vectors.get(id));
+      }
+    }
+
+    // Calculate centroid
+    const centroid = calculateCentroid(parentVectors);
+    if (centroid) {
+      parentCentroids.set(parent, centroid);
+      console.log(`[TF-IDF Reassign] Computed centroid for "${parent}" (${parentChannels.length} channels)`);
+    }
+  }
+
+  // Reassign unclassified channels
+  let reassignedCount = 0;
+  for (const { id, ch } of unclassifiedChannels) {
+    const channelVector = vectors.get(id);
+    if (!channelVector) continue;
+
+    let bestParent = null;
+    let bestSimilarity = -1;
+
+    // Compare against all parent centroids
+    for (const [parent, centroid] of parentCentroids) {
+      const similarity = cosineSimilarity(channelVector.vector, centroid);
+      if (similarity > bestSimilarity) {
+        bestSimilarity = similarity;
+        bestParent = parent;
+      }
+    }
+
+    // Reassign if similarity meets threshold
+    if (bestParent && bestSimilarity >= PARENT_SIM_MIN) {
+      const classification = channelClassifications.get(id);
+      if (classification) {
+        classification.parent = bestParent;
+        classification.why = {
+          method: 'tfidfParent',
+          label: bestParent,
+          parentSim: {
+            best: bestSimilarity,
+            parent: bestParent
+          }
+        };
+        reassignedCount++;
+
+        if (debug) {
+          console.log(`[TF-IDF Reassign] Moved "${ch.title.substring(0, 50)}..." from Unclassified to "${bestParent}" (similarity: ${bestSimilarity.toFixed(3)})`);
+        }
+      }
+    }
+  }
+
+  console.log(`[TF-IDF Reassign] Reassigned ${reassignedCount}/${unclassifiedChannels.length} channels`);
+  return reassignedCount;
+}
+
 function buildTfIdfVectors(channels) {
   const vectors = new Map();
   const documentFreq = new Map();
@@ -60,20 +194,18 @@ function buildTfIdfVectors(channels) {
     }
   }
 
-  // Build TF-IDF vectors for classified channels only
+  // Build TF-IDF vectors for all channels
   for (const ch of channels) {
-    if (ch.label && ch.label !== 'Unclassified') {
-      const tokens = tokenize(`${ch.title} ${ch.desc}`);
-      const vector = {};
+    const tokens = tokenize(`${ch.title} ${ch.desc}`);
+    const vector = {};
 
-      for (const [token, tf] of Object.entries(tokens)) {
-        const df = documentFreq.get(token) || 1;
-        const idf = Math.log(channels.length / df);
-        vector[token] = tf * idf;
-      }
-
-      vectors.set(ch.id, { vector, label: ch.label });
+    for (const [token, tf] of Object.entries(tokens)) {
+      const df = documentFreq.get(token) || 1;
+      const idf = Math.log(channels.length / df);
+      vector[token] = tf * idf;
     }
+
+    vectors.set(ch.id, { vector, label: ch.label });
   }
 
   return { vectors, documentFreq };
@@ -238,7 +370,11 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
 
   console.log(`Classified ${channelClassifications.size} channels into parents`);
 
-  // STEP 2: Group channels by parent
+  // STEP 2: TF-IDF Parent Reassignment Pass
+  const tfidfReassigned = await performTfIdfParentReassignment(channelClassifications, debug);
+  console.log(`TF-IDF reassignment: ${tfidfReassigned} channels moved from Unclassified`);
+
+  // STEP 3: Group channels by parent
   const parentGroups = new Map();
 
   for (const [id, { ch, parent, why }] of channelClassifications) {
@@ -348,25 +484,34 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
     }
   }
 
-  // STEP 5: Ensure label uniqueness with safeguard
-  const seen = new Set();
-  for (let i = 0; i < allClusters.length; i++) {
-    const cluster = allClusters[i];
-    if (seen.has(cluster.label)) {
-      // Append index to make it unique
-      cluster.label += ` • ${i + 1}`;
-    }
-    seen.add(cluster.label);
-  }
+  // STEP 5: Semantic deduplication pass
+  const dedupResult = await dedupSimilarClusters(allClusters, debug);
+  const dedupedClusters = dedupResult.clusters;
+  const mergedClustersSemantic = dedupResult.mergedCount;
+  const dedupGroups = dedupResult.dedupGroups;
+
+  // STEP 6: Ensure label uniqueness within parent scope
+  const finalClusters = ensureParentLabelUniqueness(dedupedClusters, debug);
+
+  // STEP 7: Apply discriminative labeling
+  const discriminativelyLabeledClusters = await applyDiscriminativeLabeling(finalClusters, debug);
 
   console.log('buildAutoOrganize returning:', {
-    clustersCount: allClusters.length,
+    clustersCount: discriminativelyLabeledClusters.length,
     debugRowsCount: debugRows.length,
     totalSubclusters,
+    mergedClustersSemantic,
     parentMetrics: Object.fromEntries(parentMetrics)
   });
 
-  return { clusters: allClusters, debugRows, parentMetrics, totalSubclusters };
+  return {
+    clusters: discriminativelyLabeledClusters,
+    debugRows,
+    parentMetrics,
+    totalSubclusters,
+    mergedClustersSemantic,
+    dedupGroups
+  };
 }
 
 // Helper function to create a cluster from channels
@@ -697,6 +842,352 @@ async function mergeNearDuplicateSubclusters(subclusters, parentLabel, debug) {
   return mergedClusters;
 }
 
+// Semantic deduplication function - dedupSimilarClusters
+async function dedupSimilarClusters(clusters, debug) {
+  if (clusters.length <= 1) {
+    return { clusters, mergedCount: 0, dedupGroups: [] };
+  }
+
+  console.log(`[Semantic Dedup] Starting with ${clusters.length} clusters`);
+
+  // Group clusters by parent category using canonical keys
+  const parentGroups = new Map();
+
+  for (const cluster of clusters) {
+    const parent = cluster.parent || 'Unclassified';
+    const topTerms = cluster.topTerms || [];
+
+    // Build canonical key: parent + sorted(stem(topTerms.slice(0,4))).join(',')
+    const stemmedTerms = topTerms.slice(0, 4).map(term => stem(term)).sort();
+    const canonicalKey = `${parent}|${stemmedTerms.join(',')}`;
+
+    if (!parentGroups.has(canonicalKey)) {
+      parentGroups.set(canonicalKey, {
+        key: canonicalKey,
+        parent,
+        clusters: []
+      });
+    }
+    parentGroups.get(canonicalKey).clusters.push(cluster);
+  }
+
+  const dedupGroups = [];
+  const finalClusters = [];
+  let mergedCount = 0;
+
+  // Process each group
+  for (const [key, group] of parentGroups) {
+    if (group.clusters.length <= 1) {
+      // No duplicates, keep as is
+      finalClusters.push(...group.clusters);
+      continue;
+    }
+
+    console.log(`[Semantic Dedup] Processing group "${key}" with ${group.clusters.length} clusters`);
+
+    // For groups with multiple clusters, find similar pairs and merge
+    const clustersToProcess = [...group.clusters];
+    const processedIndices = new Set();
+
+    for (let i = 0; i < clustersToProcess.length; i++) {
+      if (processedIndices.has(i)) continue;
+
+      const clusterA = clustersToProcess[i];
+      let mergedCluster = { ...clusterA };
+      const mergedIndices = [i];
+      const mergeDetails = [];
+
+      // Find similar clusters to merge with clusterA
+      for (let j = i + 1; j < clustersToProcess.length; j++) {
+        if (processedIndices.has(j)) continue;
+
+        const clusterB = clustersToProcess[j];
+
+        // Calculate cosine similarity of centroids
+        const { vectors: vectorsA } = buildTfIdfVectors(
+          clusterA.channels.map(({ ch }) => ({ ...ch, label: clusterA.parent }))
+        );
+        const { vectors: vectorsB } = buildTfIdfVectors(
+          clusterB.channels.map(({ ch }) => ({ ...ch, label: clusterB.parent }))
+        );
+
+        const centroidA = calculateCentroid(vectorsA);
+        const centroidB = calculateCentroid(vectorsB);
+
+        let cosineSim = 0;
+        if (centroidA && centroidB) {
+          cosineSim = cosineSimilarity(centroidA, centroidB);
+        }
+
+        // Calculate Jaccard overlap of topTerms[0..5]
+        const topTermsA = new Set((clusterA.topTerms || []).slice(0, 5));
+        const topTermsB = new Set((clusterB.topTerms || []).slice(0, 5));
+        const jaccardSim = jaccardSimilarity(topTermsA, topTermsB);
+
+        // Merge if either similarity threshold is met
+        if (cosineSim >= 0.80 || jaccardSim >= 0.6) {
+          console.log(`[Semantic Dedup] Merging clusters: "${clusterA.label}" + "${clusterB.label}" (cosine: ${cosineSim.toFixed(3)}, jaccard: ${jaccardSim.toFixed(3)})`);
+
+          // Merge clusterB into mergedCluster
+          mergedCluster.channels.push(...clusterB.channels);
+          mergedCluster.size += clusterB.size;
+          mergedIndices.push(j);
+          processedIndices.add(j);
+          mergedCount++;
+
+          // Record merge details for debug
+          mergeDetails.push({
+            mergedLabel: clusterB.label,
+            cosineSim,
+            jaccardSim
+          });
+
+          // Recompute topTerms for merged cluster
+          const allChannels = mergedCluster.channels;
+          const termWeights = new Map();
+
+          for (const { ch } of allChannels) {
+            if (ch) {
+              const tokens = tokenize(`${ch.title} ${ch.desc}`);
+              for (const [term, weight] of Object.entries(tokens)) {
+                termWeights.set(term, (termWeights.get(term) || 0) + weight);
+              }
+            }
+          }
+
+          mergedCluster.topTerms = Array.from(termWeights.entries())
+            .filter(([term]) => term.length >= 4 && !STOPWORDS.has(term))
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 10)
+            .map(([term]) => term);
+
+          // Update label with new topTerms
+          const sortedTerms = (mergedCluster.topTerms || []).slice(0, 2).map(t => t.trim()).sort();
+          const labelTerms = sortedTerms.map(t => t.charAt(0).toUpperCase() + t.slice(1));
+          mergedCluster.label = `${mergedCluster.parent} • ${labelTerms.join(' • ')}`.trim();
+
+          // Mark as merged
+          mergedCluster._merged = true;
+          mergedCluster._mergedFrom = mergedIndices.length;
+        }
+      }
+
+      // Record dedup group for debug
+      if (mergeDetails.length > 0) {
+        dedupGroups.push({
+          parent: group.parent,
+          originalLabels: [clusterA.label, ...mergeDetails.map(d => d.mergedLabel)],
+          finalLabel: mergedCluster.label,
+          cosineSims: mergeDetails.map(d => d.cosineSim),
+          jaccardSims: mergeDetails.map(d => d.jaccardSim),
+          mergedCount: mergedIndices.length
+        });
+      }
+
+      finalClusters.push(mergedCluster);
+      processedIndices.add(i);
+    }
+  }
+
+  console.log(`[Semantic Dedup] Completed: ${mergedCount} merges, ${finalClusters.length} final clusters`);
+
+  return {
+    clusters: finalClusters,
+    mergedCount,
+    dedupGroups
+  };
+}
+
+// Parent-scope uniqueness rule function
+function ensureParentLabelUniqueness(clusters, debug) {
+  if (clusters.length <= 1) return clusters;
+
+  // Group clusters by parent
+  const parentGroups = new Map();
+
+  for (const cluster of clusters) {
+    const parent = cluster.parent || 'Unclassified';
+    if (!parentGroups.has(parent)) {
+      parentGroups.set(parent, []);
+    }
+    parentGroups.get(parent).push(cluster);
+  }
+
+  const finalClusters = [];
+
+  for (const [parent, parentClusters] of parentGroups) {
+    if (parentClusters.length <= 1) {
+      finalClusters.push(...parentClusters);
+      continue;
+    }
+
+    // Check for duplicate labels within this parent
+    const labelCounts = new Map();
+    for (const cluster of parentClusters) {
+      const label = cluster.label;
+      labelCounts.set(label, (labelCounts.get(label) || 0) + 1);
+    }
+
+    const duplicateLabels = new Set();
+    for (const [label, count] of labelCounts) {
+      if (count > 1) {
+        duplicateLabels.add(label);
+      }
+    }
+
+    if (duplicateLabels.size === 0) {
+      // No duplicates, keep as is
+      finalClusters.push(...parentClusters);
+      continue;
+    }
+
+    console.log(`[Parent Uniqueness] Resolving ${duplicateLabels.size} duplicate labels in parent "${parent}"`);
+
+    // Resolve duplicates by adding discriminative terms or suffixes
+    const processedClusters = new Map(); // label -> cluster
+
+    for (const cluster of parentClusters) {
+      const originalLabel = cluster.label;
+
+      if (!duplicateLabels.has(originalLabel)) {
+        // Not a duplicate, keep as is
+        processedClusters.set(originalLabel, cluster);
+        continue;
+      }
+
+      // This is a duplicate label, need to make it unique
+      let uniqueLabel = originalLabel;
+      let attempts = 0;
+      const maxAttempts = 3;
+
+      while (processedClusters.has(uniqueLabel) && attempts < maxAttempts) {
+        attempts++;
+
+        if (attempts === 1) {
+          // First attempt: add next discriminative term (topTerms[2] or [3])
+          const topTerms = cluster.topTerms || [];
+          const nextTerms = topTerms.slice(2, 4); // indices 2 and 3
+
+          if (nextTerms.length > 0) {
+            const sortedTerms = nextTerms.map(t => t.trim()).sort();
+            const labelTerms = sortedTerms.map(t => t.charAt(0).toUpperCase() + t.slice(1));
+            uniqueLabel = `${parent} • ${labelTerms.join(' • ')}`.trim();
+          }
+        } else if (attempts === 2) {
+          // Second attempt: try topTerms[4] or [5]
+          const topTerms = cluster.topTerms || [];
+          const nextTerms = topTerms.slice(4, 6); // indices 4 and 5
+
+          if (nextTerms.length > 0) {
+            const sortedTerms = nextTerms.map(t => t.trim()).sort();
+            const labelTerms = sortedTerms.map(t => t.charAt(0).toUpperCase() + t.slice(1));
+            uniqueLabel = `${parent} • ${labelTerms.join(' • ')}`.trim();
+          }
+        } else {
+          // Final attempt: add suffix
+          uniqueLabel = `${originalLabel} • Alt`;
+        }
+      }
+
+      // If still colliding after all attempts, add V2, V3, etc.
+      let counter = 2;
+      let baseLabel = uniqueLabel;
+      while (processedClusters.has(uniqueLabel)) {
+        uniqueLabel = `${baseLabel} • V${counter}`;
+        counter++;
+      }
+
+      // Update cluster label
+      cluster.label = uniqueLabel;
+      processedClusters.set(uniqueLabel, cluster);
+
+      if (debug) {
+        console.log(`[Parent Uniqueness] Changed "${originalLabel}" to "${uniqueLabel}"`);
+      }
+    }
+
+    finalClusters.push(...Array.from(processedClusters.values()));
+  }
+
+  return finalClusters;
+}
+
+// Discriminative labeling function
+async function applyDiscriminativeLabeling(clusters, debug) {
+  if (clusters.length === 0) return clusters;
+
+  // Build parent corpus for TF-IDF calculation
+  const parentCorpora = new Map();
+
+  for (const cluster of clusters) {
+    const parent = cluster.parent || 'Unclassified';
+    if (!parentCorpora.has(parent)) {
+      parentCorpora.set(parent, []);
+    }
+    parentCorpora.get(parent).push(...cluster.channels.map(({ ch }) => ({ ...ch, label: parent })));
+  }
+
+  const finalClusters = [];
+
+  for (const cluster of clusters) {
+    const parent = cluster.parent || 'Unclassified';
+    const parentChannels = parentCorpora.get(parent) || [];
+
+    if (parentChannels.length === 0) {
+      finalClusters.push(cluster);
+      continue;
+    }
+
+    // Build TF-IDF vectors for the parent corpus
+    const { vectors: parentVectors, documentFreq } = buildTfIdfVectors(parentChannels);
+
+    // Calculate TF-IDF weights for this cluster's topTerms
+    const topTerms = cluster.topTerms || [];
+    const termWeights = new Map();
+
+    for (const term of topTerms) {
+      // Calculate TF for this term in this cluster
+      let tf = 0;
+      for (const { ch } of cluster.channels) {
+        if (ch) {
+          const tokens = tokenize(`${ch.title} ${ch.desc}`);
+          tf += tokens[term] || 0;
+        }
+      }
+
+      // Calculate IDF from parent corpus
+      const df = documentFreq.get(term) || 1;
+      const idf = Math.log(parentChannels.length / df);
+
+      termWeights.set(term, tf * idf);
+    }
+
+    // Select top 2 discriminative terms (highest TF-IDF weights)
+    const discriminativeTerms = Array.from(termWeights.entries())
+      .filter(([term]) => term.length >= 4 && !STOPWORDS.has(term))
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 2)
+      .map(([term]) => term);
+
+    if (discriminativeTerms.length >= 2) {
+      // Create new discriminative label
+      const sortedTerms = discriminativeTerms.map(t => t.trim()).sort();
+      const labelTerms = sortedTerms.map(t => t.charAt(0).toUpperCase() + t.slice(1));
+      const newLabel = `${parent} • ${labelTerms.join(' • ')}`.trim();
+
+      if (debug) {
+        console.log(`[Discriminative Labeling] Changed "${cluster.label}" to "${newLabel}" (terms: ${discriminativeTerms.join(', ')})`);
+      }
+
+      cluster.label = newLabel;
+    }
+
+    finalClusters.push(cluster);
+  }
+
+  return finalClusters;
+}
+
 // Write autoOrganize.meta.json with build information
 async function writeAutoOrganizeMeta({ clusters, buildParams, parentMetrics } = {}) {
   if (!clusters || !Array.isArray(clusters)) {
@@ -786,6 +1277,10 @@ async function writeAutoOrganizeMeta({ clusters, buildParams, parentMetrics } = 
             "N > 60": "k≈√(N/5), S_min=10, M_max=6"
           }
         }
+      },
+      parentReassign: {
+        minMembersPerParent: 5,
+        similarityMin: 0.25
       },
       mergePass: {
         threshold: 0.85,

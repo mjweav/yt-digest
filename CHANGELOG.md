@@ -121,3 +121,21 @@ All notable changes to YT Digest will be documented here.
 - **Title nudges implemented**: Alex Hormozi → +2.0 to Business & Marketing, The Voice → +2.0 to Music & Musicians (applied before base scoring)
 - **Enhanced debug output**: Added hydration metrics (total, zeroDesc, avgDescLen) to debug summary for coverage verification
 - **Results**: Unclassified reduced to 18.5% (93/503), improved description coverage (zeroDesc: 31/503 = 6.2%), new categories successfully classifying channels, title nudges working for high-signal names
+
+## Microstep 3.2c – Semantic Dedup and Discriminative Labels
+- **Semantic deduplication**: Implemented `dedupSimilarClusters()` function using cosine similarity (≥0.80) and Jaccard overlap (≥0.6) of topTerms[0..5] to merge similar clusters within parent categories
+- **Canonical keys**: Built using `parent + '|' + sorted(stem(topTerms.slice(0,4))).join(',')` for consistent grouping
+- **Parent-scope uniqueness**: Added `ensureParentLabelUniqueness()` to resolve duplicate labels within parents using discriminative terms (topTerms[2-5]) or "• Alt"/"• V2" suffixes
+- **Discriminative labeling**: Implemented `applyDiscriminativeLabeling()` using TF-IDF weights vs parent corpus to select most discriminative terms for labels
+- **Enhanced debug output**: Added `mergedClustersSemantic`, `dedupGroups`, and `canonicalizedLabels` metrics to both meta.json and debug API response
+- **Label format**: Standardized to "Parent • Term1 • Term2" with capitalized, alphabetically sorted terms
+- **Performance**: Light sampling approach avoids loading large /data/*.json files into memory
+
+## Microstep 3.3 – TF-IDF Parent Reassignment (recover Unclassified)
+- **TF-IDF parent reassignment**: Added `performTfIdfParentReassignment()` function to compare Unclassified channels against parent category centroids using cosine similarity (≥0.25 threshold)
+- **Centroid calculation**: Compute parent centroids as mean TF-IDF vectors for parents with ≥5 members to avoid noise from small categories
+- **Channel filtering**: Only process Unclassified channels with descLen ≥20 characters for sufficient content analysis
+- **Enhanced classification**: Updated channel classification logic to support "tfidfParent" method with similarity scores and parent tracking
+- **Debug enhancements**: Added `tfidfParentAssigned` count, updated `byMethod` to show both "heuristic" and "tfidfParent" counts, updated unclassified count after reassignment, and 5 sample titles from remaining Unclassified
+- **Meta parameters**: Record reassignment parameters in `data/autoOrganize.meta.json` (minMembersPerParent: 5, similarityMin: 0.25)
+- **Results**: Successfully reassigned 173 channels from Unclassified to proper parents, reducing Unclassified from ~200+ to 29 (5.8% rate), maintaining total count invariant at 503
