@@ -2,7 +2,7 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
-import { buildAutoOrganize, loadChannels, loadOverrides } from '../autoOrganize/builder.js';
+import { buildAutoOrganize, loadChannels, loadOverrides, writeAutoOrganizeMeta } from '../autoOrganize/builder.js';
 import * as store from '../data/categoriesStore.js';
 import { resolveDataPath } from '../utils/paths.js';
 
@@ -109,7 +109,12 @@ router.get('/', async (req, res) => {
         debug: {
           file: 'data/autoOrganize.debug.json',
           summary: debugSummary.summary,
-          samples: debugSummary.samples
+          samples: debugSummary.samples,
+          cache: {
+            clusterCount: clusters.length,
+            clusterIds: clusters.slice(0, 3).map(c => c.clusterId),
+            builtAt: merged.builtAt
+          }
         }
       });
     }
@@ -128,14 +133,36 @@ router.post('/recompute', async (_req, res) => {
     const { clusters } = await buildAutoOrganize({ channels, overrides, debug: false });
     const builtAt = new Date().toISOString();
 
-    // optional: write cache to data/autoOrganize.json for parity
+    // Write cache to data/autoOrganize.json for parity
     const p = resolveDataPath('autoOrganize.json');
     fs.writeFileSync(p, JSON.stringify({ builtAt, clusters }, null, 2), 'utf8');
+
+    // Write meta.json with build information
+    const buildParams = clusters.length > 0 ? clusters[0].buildParams : null;
+    await writeAutoOrganizeMeta({ clusters, buildParams });
 
     return res.json({ ok: true, builtAt, clusters: clusters.length });
   } catch (e) {
     console.error('POST /api/auto-organize/recompute error', e);
     res.status(500).json({ error: 'recompute failed' });
+  }
+});
+
+// Add meta route to serve autoOrganize.meta.json
+router.get('/meta', async (_req, res) => {
+  try {
+    const metaPath = resolveDataPath('autoOrganize.meta.json');
+
+    try {
+      const meta = fs.readFileSync(metaPath, 'utf8');
+      return res.json(JSON.parse(meta));
+    } catch (fileError) {
+      // Return 404 if meta file doesn't exist
+      return res.status(404).json({ error: 'Meta file not found. Run recompute first.' });
+    }
+  } catch (e) {
+    console.error('GET /api/auto-organize/meta error', e);
+    res.status(500).json({ error: 'Failed to read meta file' });
   }
 });
 

@@ -3,6 +3,7 @@ import fsp from 'fs/promises';
 import path from 'path';
 import { classifyChannel } from './heuristics2.js';
 import { resolveDataPath } from '../utils/paths.js';
+import { stableHash } from '../utils/hash.js';
 
 // Simple tokenizer and stopwords for TF-IDF
 const STOPWORDS = new Set([
@@ -234,7 +235,7 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
   }
 
   // Build TF-IDF vectors from classified channels only
-  const { vectors } = buildTfIdfVectors(Array.from(channelClassifications.values())
+  const { vectors, documentFreq } = buildTfIdfVectors(Array.from(channelClassifications.values())
     .map(({ ch, label }) => ({ ...ch, label })));
 
   console.log(`Built TF-IDF vectors for ${vectors.size} classified channels`);
@@ -308,12 +309,116 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
     }
   }
 
-  const clusters = Array.from(clustersMap.values()).map(c => ({
-    id: c.label.toLowerCase().replace(/\s+/g, '-'),
-    label: c.label,
-    span: spanFromCount(c.items.length),
-    channels: c.items
-  }));
+  // Enhanced cluster creation with stable IDs, topTerms, exemplarId, and methodStats
+  const clusters = Array.from(clustersMap.values()).map(c => {
+    const channelIds = c.items.map(item => item.id).sort();
+    const buildParams = {
+      heuristicsVersion: 2, // Track heuristics version
+      minMargin: 0.35,
+      tfidf: { k: 12, votes: 3, sim: 0.15 }
+    };
+
+    // Compute stable clusterId
+    const clusterIdInput = JSON.stringify({
+      members: channelIds,
+      params: buildParams
+    });
+    const clusterId = stableHash(clusterIdInput);
+
+    // Compute topTerms from cluster members
+    const clusterVectors = new Map();
+    const termWeights = new Map();
+
+    for (const item of c.items) {
+      const ch = channelClassifications.get(item.id);
+      if (ch && ch.ch) {
+        const tokens = tokenize(`${ch.ch.title} ${ch.ch.desc}`);
+        for (const [term, weight] of Object.entries(tokens)) {
+          termWeights.set(term, (termWeights.get(term) || 0) + weight);
+        }
+      }
+    }
+
+    // Get top terms (6-12 terms), excluding stopwords and short tokens
+    const topTerms = Array.from(termWeights.entries())
+      .filter(([term]) => term.length >= 4 && !STOPWORDS.has(term))
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 10)
+      .map(([term]) => term);
+
+    // Compute exemplarId (closest to centroid)
+    let exemplarId = channelIds[0]; // fallback to first
+    if (c.items.length > 1) {
+      // Build cluster centroid from TF-IDF vectors
+      const centroid = {};
+      let vectorCount = 0;
+
+      for (const item of c.items) {
+        const ch = channelClassifications.get(item.id);
+        if (ch && ch.ch) {
+          const tokens = tokenize(`${ch.ch.title} ${ch.ch.desc}`);
+          for (const [term, tf] of Object.entries(tokens)) {
+            if (term.length >= 3 && !STOPWORDS.has(term)) {
+              const idf = Math.log(src.length / (documentFreq.get(term) || 1));
+              centroid[term] = (centroid[term] || 0) + (tf * idf);
+            }
+          }
+          vectorCount++;
+        }
+      }
+
+      // Average the centroid
+      for (const term in centroid) {
+        centroid[term] /= vectorCount;
+      }
+
+      // Find closest channel to centroid
+      let maxSimilarity = -1;
+      for (const item of c.items) {
+        const ch = channelClassifications.get(item.id);
+        if (ch && ch.ch) {
+          const tokens = tokenize(`${ch.ch.title} ${ch.ch.desc}`);
+          const channelVector = {};
+          for (const [term, tf] of Object.entries(tokens)) {
+            if (term.length >= 3 && !STOPWORDS.has(term)) {
+              const idf = Math.log(src.length / (documentFreq.get(term) || 1));
+              channelVector[term] = tf * idf;
+            }
+          }
+
+          const similarity = cosineSimilarity(centroid, channelVector);
+          if (similarity > maxSimilarity) {
+            maxSimilarity = similarity;
+            exemplarId = item.id;
+          }
+        }
+      }
+    }
+
+    // Compute methodStats
+    const methodStats = { heuristic: 0, tfidf: 0, override: 0 };
+    for (const item of c.items) {
+      const ch = channelClassifications.get(item.id);
+      if (ch && ch.why) {
+        const method = ch.why.method;
+        if (method === 'heuristic') methodStats.heuristic++;
+        else if (method === 'tfidf') methodStats.tfidf++;
+        else if (method === 'override') methodStats.override++;
+      }
+    }
+
+    return {
+      id: c.label.toLowerCase().replace(/\s+/g, '-'),
+      label: c.label,
+      span: spanFromCount(c.items.length),
+      channels: c.items,
+      clusterId,
+      topTerms,
+      exemplarId,
+      methodStats,
+      buildParams
+    };
+  });
 
   console.log('buildAutoOrganize returning:', {
     clustersCount: clusters.length,
@@ -323,4 +428,52 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
   return { clusters, debugRows };
 }
 
-export { buildAutoOrganize, loadChannels, loadOverrides };
+// Write autoOrganize.meta.json with build information
+async function writeAutoOrganizeMeta({ clusters, buildParams } = {}) {
+  if (!clusters || !Array.isArray(clusters)) {
+    console.error('writeAutoOrganizeMeta: invalid clusters provided');
+    return;
+  }
+
+  try {
+    // Get all channel IDs from clusters
+    const allChannelIds = new Set();
+    for (const cluster of clusters) {
+      if (cluster.channels) {
+        for (const channel of cluster.channels) {
+          if (channel.id) allChannelIds.add(channel.id);
+        }
+      }
+    }
+
+    const sortedChannelIds = Array.from(allChannelIds).sort();
+    const channelFingerprint = stableHash(sortedChannelIds.join(','));
+
+    const meta = {
+      builtAt: new Date().toISOString(),
+      buildVersion: 3,
+      params: buildParams || {
+        heuristicsVersion: 2,
+        minMargin: 0.35,
+        tfidf: { k: 12, votes: 3, sim: 0.15 }
+      },
+      channelFingerprint,
+      clusters: {
+        count: clusters.length,
+        idsSample: clusters.slice(0, 3).map(c => c.clusterId).filter(Boolean)
+      }
+    };
+
+    const metaPath = resolveDataPath('autoOrganize.meta.json');
+    await fsp.writeFile(metaPath, JSON.stringify(meta, null, 2), 'utf8');
+
+    console.log(`[AO Meta] Written meta file: ${metaPath}`);
+    console.log(`[AO Meta] Build info: ${clusters.length} clusters, fingerprint: ${channelFingerprint.substring(0, 8)}...`);
+
+    return meta;
+  } catch (error) {
+    console.error('Error writing autoOrganize meta:', error);
+  }
+}
+
+export { buildAutoOrganize, loadChannels, loadOverrides, writeAutoOrganizeMeta };
