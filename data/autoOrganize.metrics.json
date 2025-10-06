@@ -9,6 +9,7 @@
       "label": "Unclassified",
       "size": 204,
       "channelCount": 204,
+      "purity": 0,
       "methodStats": {
         "scored": 204
       }
@@ -17,6 +18,7 @@
       "label": "Aviation",
       "size": 8,
       "channelCount": 8,
+      "purity": 0,
       "methodStats": {
         "scored": 8
       }
@@ -25,6 +27,7 @@
       "label": "Photography & Cameras",
       "size": 42,
       "channelCount": 42,
+      "purity": 0,
       "methodStats": {
         "scored": 42
       }
@@ -33,6 +36,7 @@
       "label": "DIY, Home & Construction",
       "size": 48,
       "channelCount": 48,
+      "purity": 0,
       "methodStats": {
         "scored": 48
       }
@@ -41,6 +45,7 @@
       "label": "Business & Marketing",
       "size": 40,
       "channelCount": 40,
+      "purity": 0,
       "methodStats": {
         "scored": 40
       }
@@ -49,6 +54,7 @@
       "label": "News",
       "size": 33,
       "channelCount": 33,
+      "purity": 0,
       "methodStats": {
         "scored": 33
       }
@@ -57,6 +63,7 @@
       "label": "AI & Emerging Tech",
       "size": 10,
       "channelCount": 10,
+      "purity": 0,
       "methodStats": {
         "scored": 10
       }
@@ -65,6 +72,7 @@
       "label": "General Tech & Reviews",
       "size": 36,
       "channelCount": 36,
+      "purity": 0,
       "methodStats": {
         "scored": 36
       }
@@ -73,6 +81,7 @@
       "label": "Health & Medicine",
       "size": 9,
       "channelCount": 9,
+      "purity": 0,
       "methodStats": {
         "scored": 9
       }
@@ -81,6 +90,7 @@
       "label": "Video Editing & Creative Tools",
       "size": 11,
       "channelCount": 11,
+      "purity": 0,
       "methodStats": {
         "scored": 11
       }
@@ -89,6 +99,7 @@
       "label": "Music & Musicians",
       "size": 42,
       "channelCount": 42,
+      "purity": 0,
       "methodStats": {
         "scored": 42
       }
@@ -97,6 +108,7 @@
       "label": "Gardening",
       "size": 20,
       "channelCount": 20,
+      "purity": 0,
       "methodStats": {
         "scored": 20
       }
@@ -105,5 +117,5 @@
   "methodStats": {
     "scored": 503
   },
-  "generatedAt": "2025-10-06T22:59:29.564Z"
+  "generatedAt": "2025-10-06T23:24:19.731Z"
 }

@@ -136,7 +136,14 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
     } else {
       const res = await classifyChannel({ title: ch.title, desc: ch.desc, url: ch.url });
       label = res.label || 'Unclassified';
-      why = { mode: 'scored', label, best: res.best, runner: res.runner, scores: res.scores, margin: res.margin };
+      why = {
+        mode: res.method || 'scored',
+        label,
+        topScore: res.topScore,
+        secondScore: res.secondScore,
+        margin: res.margin,
+        scores: res.scores
+      };
     }
 
     if (!clustersMap.has(label)) clustersMap.set(label, { label, items: [] });

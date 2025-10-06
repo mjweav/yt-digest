@@ -143,6 +143,7 @@ function generateMetrics(clusters, debugRows) {
       label: cluster.label,
       size: clusterChannels.length,
       channelCount: clusterChannels.length,
+      purity: cluster.purity || 0,
       methodStats: clusterMethodStats
     };
   });

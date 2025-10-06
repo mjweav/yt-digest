@@ -163,3 +163,10 @@ Next: 4.2b precision pass - further threshold tuning required
 - **Reporting diagnostics**: Added comprehensive governance reporting with promoted/demoted arrays, thresholds, and bypass status
 - **Validation results**: 503 channels ✓, 12 clusters (all visible, no demotions), 204 unclassified ✓, governance bypass not triggered
 - **Root cause addressed**: Fixed over-aggressive demotion logic that was filtering to allowlist-only in edge cases
+
+## Microstep 4.2c.1 — Scoring visibility plumbing (no behavior changes to rules)
+- **Enhanced scoring visibility**: Modified `classifyChannel` in `heuristics2.js` to build `scoreByLabel` Record during rule application and return structured format with `topScore`, `secondScore`, `margin`, and sorted `scores` array
+- **Cluster purity computation**: Updated `builder.js` to compute per-cluster purity as average margin across member channels and attach to cluster objects for metrics output
+- **Debug data enhancement**: Updated `exportAO.js` to ensure debug rows include new scoring fields (`topScore`, `secondScore`, `margin`, `scores`) and metrics include per-cluster purity values
+- **Validation confirmed**: 503 channels ✓, governed clusters within display cap ✓, unclassified ≈204 ✓, new scoring fields properly populated in debug data and metrics
+- **No rule changes**: Pure plumbing enhancement with zero behavior changes to classification rules or thresholds

@@ -143,12 +143,13 @@ export async function classifyChannel({ title, desc, url }) {
 
   let best = { label: null, score: -Infinity };
   let runner = { label: null, score: -Infinity };
-  const perCat = [];
+  const scoreByLabel = {};
 
   for (const cat of CATS) {
     const rawScore = scoreOne(cat, fields, FIELD_WEIGHTS);
     const label = LABEL_ALIASES[cat.label] || cat.label;
-    perCat.push({ label, score: rawScore });
+    scoreByLabel[label] = rawScore;
+
     if (rawScore > best.score) {
       runner = best;
       best = { label, score: rawScore };
@@ -215,13 +216,17 @@ export async function classifyChannel({ title, desc, url }) {
   const secondScore = runner.score > -Infinity ? runner.score : 0;
   const margin = topScore - secondScore;
 
+  // Build scores array from scoreByLabel, sorted by score descending
+  const scores = Object.entries(scoreByLabel)
+    .map(([label, score]) => ({ label, score: Number(score) || 0 }))
+    .sort((a, b) => b.score - a.score);
+
   return {
     label: chosen,
-    scores: perCat.sort((a, b) => b.score - a.score).slice(0, 5),
-    best,
-    runner,
+    method: "scored",
     topScore,
     secondScore,
     margin,
+    scores
   };
 }
