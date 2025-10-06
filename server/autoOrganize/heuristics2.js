@@ -39,13 +39,47 @@ async function getRules() {
 }
 
 const rx = (parts, flags = "i") => {
-  const patterns = parts.map(p => {
-    // Escape special regex characters
-    const escaped = p.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&');
-    // Handle multi-word phrases by allowing optional whitespace between words
-    return escaped.replace(/ /g, '\\s*');
-  });
-  return new RegExp(`\\b(?:${patterns.join("|")})\\b`, flags);
+  // Separate string patterns from regex patterns
+  const stringPatterns = [];
+  const regexPatterns = [];
+
+  for (const p of parts) {
+    if (typeof p === 'object' && p.re) {
+      // Extract the inner pattern from regex syntax like (?i)\b(pattern)\b
+      let pattern = p.re;
+      // Remove case-insensitive flag
+      pattern = pattern.replace(/^\(\?i\)/, '');
+      // Remove word boundaries
+      pattern = pattern.replace(/^\b|\b$/g, '');
+      // Remove grouping
+      pattern = pattern.replace(/^\(\?:|\)$/g, '');
+      // Split by | to get individual patterns
+      const subPatterns = pattern.split('|');
+      subPatterns.forEach(sub => {
+        if (sub.trim()) {
+          // Escape special regex characters for the extracted pattern
+          const escaped = sub.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&');
+          // Handle multi-word phrases by allowing optional whitespace between words
+          const processed = escaped.replace(/ /g, '\\s*');
+          stringPatterns.push(processed);
+        }
+      });
+    } else if (typeof p === 'string') {
+      // This is a string pattern that needs escaping
+      const escaped = p.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\$&');
+      // Handle multi-word phrases by allowing optional whitespace between words
+      const processed = escaped.replace(/ /g, '\\s*');
+      stringPatterns.push(processed);
+    }
+  }
+
+  // Filter out any empty patterns and join with |
+  const validPatterns = stringPatterns.filter(p => p && p.length > 0);
+  if (validPatterns.length === 0) {
+    return null;
+  }
+
+  return new RegExp(`\\b(?:${validPatterns.join("|")})\\b`, flags);
 };
 
 // Convert category data to regex patterns
@@ -55,6 +89,7 @@ async function buildCategories() {
     label: cat.label,
     include: cat.include.length > 0 ? rx(cat.include) : null,
     exclude: cat.exclude.length > 0 ? rx(cat.exclude) : null,
+    threshold: cat.threshold || 0,
   }));
 }
 
@@ -87,7 +122,11 @@ function scoreOne(cat, fields, FIELD_WEIGHTS) {
     for (const [k, text] of Object.entries(fields)) {
       if (!text) continue;
       const hits = text.match(include);
-      if (hits) s += hits.length * (FIELD_WEIGHTS[k] || 1);
+      if (hits) {
+        // Handle weighted patterns - each pattern object has its own weight
+        const weight = FIELD_WEIGHTS[k] || 1;
+        s += hits.length * weight;
+      }
     }
   }
   return s;
@@ -119,9 +158,12 @@ export async function classifyChannel({ title, desc, url }) {
   }
 
   let chosen = null;
-  if (best.score > BASELINE && (best.score - runner.score >= MIN_MARGIN)) {
+  // Use category-specific threshold if available, otherwise fall back to global baseline
+  const bestThreshold = best.score > -Infinity ? (CATS.find(cat => (LABEL_ALIASES[cat.label] || cat.label) === best.label)?.threshold || BASELINE) : BASELINE;
+
+  if (best.score > bestThreshold && (best.score - runner.score >= MIN_MARGIN)) {
     chosen = best.label;
-  } else if (best.score > BASELINE && (best.score - runner.score < MIN_MARGIN)) {
+  } else if (best.score > bestThreshold && (best.score - runner.score < MIN_MARGIN)) {
     // Tie-break fallback logic
     let bestIndex = -1, runnerIndex = -1;
 

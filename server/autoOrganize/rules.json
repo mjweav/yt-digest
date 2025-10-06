@@ -5,7 +5,7 @@
     "url": 0.6
   },
   "baseline": 0,
-  "minMargin": 0.5,
+  "minMargin": 1.0,
   "categories": [
     {
       "label": "Health & Medicine",
@@ -15,7 +15,8 @@
       ],
       "exclude": [
         "doctor mix", "dr\\.?\\s?dre", "doctor who", "drum", "dj\\b"
-      ]
+      ],
+      "threshold": 1.2
     },
     {
       "label": "AI & Emerging Tech",
@@ -26,27 +27,35 @@
       ],
       "exclude": [
         "makeup ai", "ai art nails"
-      ]
+      ],
+      "threshold": 1.2
     },
     {
       "label": "General Tech & Reviews",
       "include": [
         "tech", "review", "unboxing", "gadgets?", "apple", "iphone", "ipad", "mac",
-        "android", "windows", "pc build", "benchmark"
+        "android", "windows", "pc build", "benchmark",
+        { "re": "(?i)\\b(review(s)?|unboxing|tech|gadget(s)?)\\b", "w": 1.0 },
+        { "re": "(?i)\\b(apple|android|iphone|mac|windows)\\b", "w": 0.7 }
       ],
       "exclude": [
-        "photography", "camera", "drone", "flight sim"
-      ]
+        "photography", "camera", "drone", "flight sim",
+        { "re": "(?i)\\b(camera|photography|filmmaking)\\b" }
+      ],
+      "threshold": 1.3
     },
     {
       "label": "Photography & Cameras",
       "include": [
         "camera", "photograph", "lens", "sony", "canon", "nikon", "fujifilm",
-        "lightroom", "photoshop", "mirrorless", "brandon li", "allan walls"
+        "lightroom", "photoshop", "mirrorless", "brandon li", "allan walls",
+        { "re": "(?i)\\b(camera|photograph(y|er)|filmmak(e|ing)|lens(es)?|gimbal)\\b", "w": 1.0 },
+        { "re": "(?i)\\b(sony|canon|nikon|fujifilm|lumix|insta360|gopro|blackmagic)\\b", "w": 0.9 }
       ],
       "exclude": [
         "security camera", "body cam", "dashcam", "marketing", "dropship", "ecom", "crypto", "stocks"
-      ]
+      ],
+      "threshold": 1.2
     },
     {
       "label": "Video Editing & Creative Tools",
@@ -56,39 +65,86 @@
       ],
       "exclude": [
         "sales", "agency", "dropship"
-      ]
+      ],
+      "threshold": 1.2
     },
     {
       "label": "Business & Marketing",
       "include": [
         "marketing", "ads", "adwords", "funnels", "funnel", "sales", "saas",
         "ecommerce", "brand", "branding", "agency", "entrepreneur", "entrepreneurship",
-        "startup", "shopify", "amazon fba"
+        "startup", "shopify", "amazon fba",
+        { "re": "(?i)\\b(startup(s)?|entrepreneur(ship)?|SaaS|agency|e[- ]?commerce|marketing|sales|funnel|brand(ing)?)\\b", "w": 1.0 }
       ],
       "exclude": [
         "flight", "storm", "camera", "lens", "photo", "premiere", "filmora",
         "davinci", "final cut", "garden", "seed", "compost", "orchestra",
         "guitar", "mix", "piano", "trailer", "trailers", "clip", "clips",
-        "cinema", "movie", "film", "entertainment"
-      ]
+        "cinema", "movie", "film", "entertainment",
+        { "re": "(?i)\\bmusic marketing\\b" }
+      ],
+      "threshold": 1.2
     },
     {
       "label": "Music & Musicians",
       "include": [
         "guitar", "bass", "drums", "piano", "vocal", "singer", "songwriter",
         "mix", "master", "daw", "ableton", "logic pro", "pro tools", "pedal",
-        "riff", "chord", "jazz"
+        "riff", "chord", "jazz",
+        { "re": "(?i)\\b(official)\\b.*\\b(album|single|records|band|tour|live set)\\b", "w": 1.2 },
+        { "re": "(?i)\\b(lyrics?|guitar(ist)?|drums?|DJ|beats?|remix)\\b", "w": 0.8 }
       ],
       "exclude": [
-        "storm", "flight", "pilot", "camera", "lens"
-      ]
+        "storm", "flight", "pilot", "camera", "lens",
+        { "re": "(?i)\\btutorial(s)?\\b" },
+        { "re": "(?i)\\breview(s)?\\b" }
+      ],
+      "threshold": 1.3
     },
     {
       "label": "DIY, Home & Construction",
       "include": [
-        "diy", "home", "renovation", "woodworking", "craftsman", "garage", "concrete", "builder"
+        "diy", "home", "renovation", "woodworking", "craftsman", "garage", "concrete", "builder",
+        { "re": "(?i)\\bDIY\\b|\\bhow[- ]to\\b|\\b(build|builder|building|repair|fix(ing)?)\\b|\\btutorial\\b|\\bwoodworking\\b", "w": 1.0 }
       ],
-      "exclude": []
+      "exclude": [
+        { "re": "(?i)\\bDIY (music|beats)\\b" }
+      ],
+      "threshold": 1.0
+    },
+    {
+      "label": "News",
+      "include": [
+        { "re": "(?i)\\b(news|newscast|headlines|breaking news|world news)\\b", "w": 1.0 },
+        { "re": "(?i)\\b(news (update|report|analysis|digest)|briefing)\\b", "w": 0.9 }
+      ],
+      "exclude": [
+        { "re": "(?i)\\b(product|game|camera)\\s+news\\b" },
+        { "re": "(?i)\\breview(s)?\\b" }
+      ],
+      "threshold": 2.0
+    },
+    {
+      "label": "Gardening",
+      "include": [
+        { "re": "(?i)\\b(garden(ing)?|gardener|raised beds?|compost|permaculture|homestead(ing)?)\\b", "w": 1.0 },
+        { "re": "(?i)\\b(lawn|landscap(e|ing))\\b", "w": 0.8 }
+      ],
+      "exclude": [
+        { "re": "(?i)\\bgarden (route|state)\\b" }
+      ],
+      "threshold": 2.0
+    },
+    {
+      "label": "Aviation",
+      "include": [
+        { "re": "(?i)\\b(aviation|pilot(s)?|airline(s)?|airbus|boeing|ATC)\\b", "w": 1.0 },
+        { "re": "(?i)\\b(flight (sim|simulator|training)|MSFS|X-Plane|VATSIM)\\b", "w": 0.9 }
+      ],
+      "exclude": [
+        { "re": "(?i)\\b(drone photography)\\b" }
+      ],
+      "threshold": 2.0
     }
   ],
   "labelAliases": {

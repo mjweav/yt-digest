@@ -43,6 +43,22 @@ Baseline metrics captured on 2025-10-06 for Phase 4 refactor validation.
 - Music & Musicians == 35
 - DIY, Home & Construction == 30
 
+### Microstep 4.2a Delta Windows (Rules Pack v1)
+- **Unclassified:** must decrease by ≥20 and ≤80 in 4.2a.
+- **Target clusters** may increase by ≤+40 each in 4.2a:
+  - News: new cluster (baseline 0)
+  - Gardening: new cluster (baseline 0)
+  - Aviation: new cluster (baseline 0)
+  - Music & Musicians: may increase by ≤+40 (baseline 35)
+  - Business & Marketing: may increase by ≤+40 (baseline 27)
+  - Photography & Cameras: may increase by ≤+40 (baseline 19)
+  - General Tech & Reviews: may increase by ≤+40 (baseline 20)
+  - DIY, Home & Construction: may increase by ≤+40 (baseline 30)
+- **Non-target clusters:** no change:
+  - Health & Medicine: must remain 15
+  - AI & Emerging Tech: must remain 20
+  - Video Editing & Creative Tools: must remain 17
+
 ### Classification Method Distribution
 - All current classifications use "scored" method (heuristic/TFIDF)
 - No override classifications currently exist

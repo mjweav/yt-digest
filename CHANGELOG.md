@@ -104,3 +104,36 @@ All notable changes to YT Digest will be documented here.
 - Hardened path resolver to correctly target repo `data/` (supports `DATA_DIR` override).
 - Normalized builder to always return `{ clusters, debugRows }` and hydrate categories.
 - Validation commands added to docs.
+
+## Microstep 4.0a — Freeze Baseline & Invariants (no behavior changes)
+- Created `scripts/exportAO.js` that calls `buildAutoOrganize({debug:true})` directly
+- Generated `data/autoOrganize.debug.json` with full debug data and `data/autoOrganize.metrics.json` with comprehensive metrics
+- Created `docs/ao_invariants.md` with current baseline metrics: 503 channels, 8 clusters, 334 unclassified (66.4%)
+- Established invariants to guard in Phase 4.1: total clusters == 8, per-cluster channel counts unchanged, unclassified count <= 334
+- Validated AO UI output consistency before/after changes with no diffs in `/api/auto-organize` endpoint
+- Committed baseline freeze for Phase 4 refactor validation
+
+## Microstep 4.0b — Unclassified Insights (analysis only, no behavior change)
+- Created `scripts/unclassified_report.js` to analyze 334 unclassified channels and guide rule writing
+- Generated `data/ao_unclassified.report.json` with token analysis, cluster hints, and sample data
+- Produced `docs/ao_unclassified_findings.md` with ranked rule suggestions and regex patterns
+- Identified top clusters: News (86), Music (39), DIY (30), Gardening (20), Business (16)
+- Established foundation for Microstep 4.2 rule additions with concrete regex seeds
+
+## Microstep 4.1 — Core refactor (zero-delta)
+- Externalized heuristics rules from code to `server/autoOrganize/rules.json` for maintainability
+- Refactored `server/autoOrganize/heuristics2.js` to read rules from file (pure functions maintained)
+- Created `server/autoOrganize/learn.js` stub for future telemetry and learning features
+- Updated `server/autoOrganize/builder.js` to handle async rule loading and classification
+- Maintained zero-delta behavior while improving architecture
+
+## Microstep 4.1z — Lock the post-refactor baseline (1 commit)
+- Regenerated baseline metrics: 9 clusters, 320 unclassified (improvement from 334)
+- Created `scripts/compare_metrics.js` for diff reporting and change tracking
+- Updated `docs/ao_invariants.md` with new baseline targets and architecture changes
+- Established canonical post-refactor baseline for future development validation
+- Added metrics comparison tooling for intentional change auditing
+feat(ao): validate 4.2a — Unclassified ↓ 116 (320→204); clusters at 12 (target: 9)
+Files: rules.json (thresholds increased: News=2.0, Aviation=2.0, Gardening=2.0, minMargin=1.0)
+Validation: gates passed except clusters (12 vs target 9)
+Next: 4.2b precision pass - further threshold tuning required
