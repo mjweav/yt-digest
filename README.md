@@ -121,6 +121,153 @@ This script automatically:
 └── tree.txt                   # Project structure snapshot
 ```
 
+## 🔧 Debug & Development Tools
+
+### Auto-Organize Debug Features
+
+The auto-organize system includes comprehensive debugging tools to help diagnose clustering issues and monitor system performance.
+
+#### Debug Endpoints
+
+**GET `/api/auto-organize?debug=1`**
+- **Purpose**: Returns enhanced clustering data with detailed debug information
+- **URL**: `http://localhost:3001/api/auto-organize?debug=1`
+- **Returns**:
+  - Standard cluster data with additional debug fields
+  - Debug summary with clustering statistics
+  - Sample data for troubleshooting
+  - Cache information including cluster IDs and build timestamp
+
+**Example Response Structure**:
+```json
+{
+  "builtAt": "2025-10-05T02:12:00.682Z",
+  "clusters": [...],
+  "debug": {
+    "file": "data/autoOrganize.debug.json",
+    "summary": {
+      "total": 503,
+      "byLabel": {
+        "Video Editing & Creative Tools": 22,
+        "Music & Musicians": 45,
+        "Unclassified": 93
+      },
+      "byMethod": {
+        "heuristic": 410,
+        "tfidf": 0,
+        "override": 0
+      },
+      "unclassified": 93
+    },
+    "samples": {
+      "unclassified": [...]
+    },
+    "cache": {
+      "clusterCount": 25,
+      "clusterIds": ["1310173e", "a570a933", "01e87362"],
+      "builtAt": "2025-10-05T02:12:00.682Z"
+    }
+  }
+}
+```
+
+**POST `/api/auto-organize/recompute`**
+- **Purpose**: Forces recomputation of all clusters and updates cache files
+- **URL**: `http://localhost:3001/api/auto-organize/recompute`
+- **Method**: POST
+- **Returns**: Confirmation with build timestamp and cluster count
+- **Side Effects**:
+  - Updates `data/autoOrganize.json` with new cluster data
+  - Generates `data/autoOrganize.meta.json` with build metadata
+  - Maintains backward compatibility with existing cache consumers
+
+**Example Usage**:
+```bash
+curl -X POST http://localhost:3001/api/auto-organize/recompute
+```
+
+**GET `/api/auto-organize/meta`**
+- **Purpose**: Returns metadata about the current auto-organize build
+- **URL**: `http://localhost:3001/api/auto-organize/meta`
+- **Returns**: Build information, parameters, and cluster statistics
+- **Returns 404 if**: Meta file doesn't exist (run recompute first)
+
+**Example Response**:
+```json
+{
+  "builtAt": "2025-10-05T02:12:00.682Z",
+  "buildVersion": 3,
+  "params": {
+    "heuristicsVersion": 2,
+    "minMargin": 0.35,
+    "tfidf": {
+      "k": 12,
+      "votes": 3,
+      "sim": 0.15
+    }
+  },
+  "channelFingerprint": "hash_of_sorted_channel_ids",
+  "clusters": {
+    "count": 25,
+    "idsSample": ["1310173e", "a570a933", "01e87362"]
+  }
+}
+```
+
+**POST `/api/auto-organize/debug/export`**
+- **Purpose**: Exports full debug data for detailed analysis
+- **URL**: `http://localhost:3001/api/auto-organize/debug/export`
+- **Method**: POST
+- **Returns**: Confirmation with file location and row count
+- **Side Effects**: Writes `data/autoOrganize.debug.json` with complete debug data
+
+#### Debug Information Fields
+
+**Debug Summary (`debug.summary`)**:
+- `total`: Total number of processed channels
+- `byLabel`: Channel count per cluster label
+- `byMethod`: Classification method statistics (heuristic/tfidf/override)
+- `unclassified`: Number of channels that couldn't be classified
+
+**Hydration Metrics (`debug.hydration`)**:
+- `total`: Total channels processed
+- `zeroDesc`: Channels with empty descriptions
+- `avgDescLen`: Average description length in characters
+
+**Cache Information (`debug.cache`)**:
+- `clusterCount`: Number of generated clusters
+- `clusterIds`: Sample of cluster IDs for stability verification
+- `builtAt`: Build timestamp for cache invalidation
+
+#### Common Debug Workflows
+
+**1. Check Clustering Quality**:
+```bash
+curl -s "http://localhost:3001/api/auto-organize?debug=1" | jq '.debug.summary'
+```
+
+**2. Verify Cluster Stability**:
+```bash
+# Save current cluster IDs
+curl -s "http://localhost:3001/api/auto-organize?debug=1" | jq '.debug.cache.clusterIds' > /tmp/before.json
+
+# Recompute and compare
+curl -X POST http://localhost:3001/api/auto-organize/recompute >/dev/null
+curl -s "http://localhost:3001/api/auto-organize?debug=1" | jq '.debug.cache.clusterIds' > /tmp/after.json
+
+diff /tmp/before.json /tmp/after.json || echo "Clusters changed"
+```
+
+**3. Analyze Unclassified Channels**:
+```bash
+curl -s "http://localhost:3001/api/auto-organize?debug=1" | jq '.debug.samples.unclassified'
+```
+
+**4. Monitor Build Metadata**:
+```bash
+curl -s http://localhost:3001/api/auto-organize/meta | jq '.'
+```
+
 ## 📚 Documentation
 - [PRD.md](./docs/PRD.md)
 - [CHANGELOG.md](./CHANGELOG.md)
