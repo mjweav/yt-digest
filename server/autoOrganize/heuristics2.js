@@ -1,8 +1,42 @@
 // server/autoOrganize/heuristics2.js (ESM)
+// Externalized rules from rules.json
 
-const FIELD_WEIGHTS = { title: 3.0, desc: 1.6, url: 0.6 };
-const BASELINE = 0;
-const MIN_MARGIN = 0.5;
+import fs from 'fs';
+import fsp from 'fs/promises';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load rules from external file
+async function loadRules() {
+  const rulesPath = path.join(__dirname, 'rules.json');
+  try {
+    const rulesData = await fsp.readFile(rulesPath, 'utf8');
+    return JSON.parse(rulesData);
+  } catch (error) {
+    console.error('Error loading rules:', error);
+    // Fallback to empty rules if file doesn't exist
+    return {
+      fieldWeights: { title: 3.0, desc: 1.6, url: 0.6 },
+      baseline: 0,
+      minMargin: 0.5,
+      categories: [],
+      labelAliases: {}
+    };
+  }
+}
+
+// Cache for loaded rules
+let rulesCache = null;
+
+async function getRules() {
+  if (!rulesCache) {
+    rulesCache = await loadRules();
+  }
+  return rulesCache;
+}
 
 const rx = (parts, flags = "i") => {
   const patterns = parts.map(p => {
@@ -14,126 +48,34 @@ const rx = (parts, flags = "i") => {
   return new RegExp(`\\b(?:${patterns.join("|")})\\b`, flags);
 };
 
-const CATS = [
-  {
-    label: "Health & Medicine",
-    include: rx([
-      "doctor", "dr\\.?\\s", "md\\b", "physician", "medicine", "medical", "cardio", "metabolic", "endocrin",
-      "neuro", "sleep", "nutrition", "diet", "fasting", "cholesterol", "insulin", "glucose", "exercise physiology"
-    ]),
-    exclude: rx([
-      // avoid music producer "Doctor Mix", "Dr. Dre", etc.
-      "doctor mix", "dr\\.?\\s?dre", "doctor who", "drum", "dj\\b"
-    ]),
-  },
-  {
-    label: "AI & Emerging Tech",
-    include: rx([
-      "ai", "artificial intelligence", "gpt", "chatgpt", "llm", "deep learning",
-      "machine learning", "ml\\b", "generative", "midjourney", "stable diffusion", "prompt",
-      "karpathy", "openai", "anthropic", "llama", "mistral"
-    ]),
-    exclude: rx(["makeup ai", "ai art nails"]), // examples of lifestyle overlaps
-  },
-  {
-    label: "General Tech & Reviews",
-    include: rx([
-      "tech", "review", "unboxing", "gadgets?", "apple", "iphone", "ipad", "mac",
-      "android", "windows", "pc build", "benchmark"
-    ]),
-    exclude: rx(["photography", "camera", "drone", "flight sim"]),
-  },
-  {
-    label: "Photography & Cameras",
-    include: rx([
-      "camera", "photograph", "lens", "sony", "canon", "nikon", "fujifilm",
-      "lightroom", "photoshop", "mirrorless", "brandon li", "allan walls"
-    ]),
-    exclude: rx(["security camera", "body cam", "dashcam", "marketing", "dropship", "ecom", "crypto", "stocks"]),
-  },
-  {
-    label: "Video Editing & Creative Tools",
-    include: rx([
-      "edit", "premiere", "final cut", "davinci resolve", "after effects",
-      "motionvfx", "filmora", "bretfx", "color grade", "timeline"
-    ]),
-    exclude: rx(["sales", "agency", "dropship"]),
-  },
-  {
-    label: "Business & Marketing",
-    include: rx([
-      "marketing", "ads", "adwords", "funnels", "funnel", "sales", "saas",
-      "ecommerce", "brand", "branding", "agency", "entrepreneur", "entrepreneurship",
-      "startup", "shopify", "amazon fba"
-    ]),
-    exclude: rx([
-      "flight", "storm", "camera", "lens", "photo", "premiere", "filmora",
-      "davinci", "final cut", "garden", "seed", "compost", "orchestra",
-      "guitar", "mix", "piano", "trailer", "trailers", "clip", "clips",
-      "cinema", "movie", "film", "entertainment"
-    ]),
-  },
-  {
-    label: "Music & Musicians",
-    include: rx([
-      "guitar", "bass", "drums", "piano", "vocal", "singer", "songwriter",
-      "mix", "master", "daw", "ableton", "logic pro", "pro tools", "pedal",
-      "riff", "chord", "jazz"
-    ]),
-    exclude: rx(["storm", "flight", "pilot", "camera", "lens"]),
-  },
-  {
-    label: "DIY, Home & Construction",
-    include: rx(["diy", "home", "renovation", "woodworking", "craftsman", "garage", "concrete", "builder"]),
-    exclude: rx([]),
-  },
-
-  {
-    label: "Weather & Storms",
-    include: rx([
-      "storm", "tornado", "tornadoes", "hurricane", "hurricanes", "hail", "severe", "severe weather",
-      "forecast", "radar", "meteorolog", "meteorologist", "storm chaser", "storm chasing", "chaser",
-      "noaa", "nws", "supercell", "twister", "winter storm", "ryan hall", "reed timmer",
-      "live storms media", "weather"
-    ]),
-    exclude: rx([]),
-  },
-  {
-    label: "Aviation & Flight",
-    include: rx([
-      "pilot", "aviation", "airliner", "jet", "cockpit", "atc", "boeing",
-      "airbus", "737", "a320", "sim", "simulator", "flight sim", "mentour",
-      "airline", "flight"
-    ]),
-    exclude: rx([]),
-  },
-  {
-    label: "Gardening & Outdoors",
-    include: rx([
-      "garden", "gardening", "homestead", "homesteading", "compost", "mulch",
-      "seed", "seedling", "raised bed", "orchard", "pruning", "lawn", "landscape", "landscaping",
-      "organic food", "grow food"
-    ]),
-    exclude: rx([]),
-  },
-  {
-    label: "News & Commentary",
-    include: rx([
-      "news", "breaking", "report", "analysis", "commentary", "opinion",
-      "politics", "geopolitics", "world", "international", "global",
-      "dw news", "cna", "bbc", "journalism", "correspondents"
-    ]),
-    exclude: rx([]),
-  },
-  // …you can append more categories here as needed
-];
+// Convert category data to regex patterns
+async function buildCategories() {
+  const rules = await getRules();
+  return rules.categories.map(cat => ({
+    label: cat.label,
+    include: cat.include.length > 0 ? rx(cat.include) : null,
+    exclude: cat.exclude.length > 0 ? rx(cat.exclude) : null,
+  }));
+}
 
 const LABEL_ALIASES = {
   "AI / ML": "AI & Emerging Tech",
   "Tech Reviews": "General Tech & Reviews",
 };
 
-function scoreOne(cat, fields) {
+// Async function to get constants from rules file
+async function getConstants() {
+  const rules = await getRules();
+  return {
+    FIELD_WEIGHTS: rules.fieldWeights,
+    BASELINE: rules.baseline,
+    MIN_MARGIN: rules.minMargin,
+    CATS: await buildCategories(),
+    LABEL_ALIASES: { ...LABEL_ALIASES, ...rules.labelAliases }
+  };
+}
+
+function scoreOne(cat, fields, FIELD_WEIGHTS) {
   let s = 0;
   const { include, exclude } = cat;
   if (exclude) {
@@ -151,7 +93,9 @@ function scoreOne(cat, fields) {
   return s;
 }
 
-export function classifyChannel({ title, desc, url }) {
+export async function classifyChannel({ title, desc, url }) {
+  const { FIELD_WEIGHTS, BASELINE, MIN_MARGIN, CATS, LABEL_ALIASES } = await getConstants();
+
   const fields = {
     title: (title || "").toLowerCase(),
     desc:  (desc  || "").toLowerCase(),
@@ -163,7 +107,7 @@ export function classifyChannel({ title, desc, url }) {
   const perCat = [];
 
   for (const cat of CATS) {
-    const rawScore = scoreOne(cat, fields);
+    const rawScore = scoreOne(cat, fields, FIELD_WEIGHTS);
     const label = LABEL_ALIASES[cat.label] || cat.label;
     perCat.push({ label, score: rawScore });
     if (rawScore > best.score) {
@@ -194,8 +138,8 @@ export function classifyChannel({ title, desc, url }) {
       const runnerCat = CATS[runnerIndex];
 
       // Check which category hits the title
-      const bestHitsTitle = bestCat.include.test(fields.title);
-      const runnerHitsTitle = runnerCat.include.test(fields.title);
+      const bestHitsTitle = bestCat.include && bestCat.include.test(fields.title);
+      const runnerHitsTitle = runnerCat.include && runnerCat.include.test(fields.title);
 
       if (bestHitsTitle && !runnerHitsTitle) {
         chosen = best.label;
@@ -207,8 +151,8 @@ export function classifyChannel({ title, desc, url }) {
 
         for (const [fieldName, text] of Object.entries(fields)) {
           if (text) {
-            const bestMatches = text.match(bestCat.include);
-            const runnerMatches = text.match(runnerCat.include);
+            const bestMatches = bestCat.include && text.match(bestCat.include);
+            const runnerMatches = runnerCat.include && text.match(runnerCat.include);
             if (bestMatches) bestTotalHits += bestMatches.length;
             if (runnerMatches) runnerTotalHits += runnerMatches.length;
           }

@@ -117,7 +117,7 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
       label = ov[ch.id];
       why = { mode: 'override', label };
     } else {
-      const res = classifyChannel({ title: ch.title, desc: ch.desc, url: ch.url });
+      const res = await classifyChannel({ title: ch.title, desc: ch.desc, url: ch.url });
       label = res.label || 'Unclassified';
       why = { mode: 'scored', label, best: res.best, runner: res.runner, scores: res.scores };
     }

@@ -1,0 +1,98 @@
+{
+  "fieldWeights": {
+    "title": 3.0,
+    "desc": 1.6,
+    "url": 0.6
+  },
+  "baseline": 0,
+  "minMargin": 0.5,
+  "categories": [
+    {
+      "label": "Health & Medicine",
+      "include": [
+        "doctor", "dr\\.?\\s", "md\\b", "physician", "medicine", "medical", "cardio", "metabolic", "endocrin",
+        "neuro", "sleep", "nutrition", "diet", "fasting", "cholesterol", "insulin", "glucose", "exercise physiology"
+      ],
+      "exclude": [
+        "doctor mix", "dr\\.?\\s?dre", "doctor who", "drum", "dj\\b"
+      ]
+    },
+    {
+      "label": "AI & Emerging Tech",
+      "include": [
+        "ai", "artificial intelligence", "gpt", "chatgpt", "llm", "deep learning",
+        "machine learning", "ml\\b", "generative", "midjourney", "stable diffusion", "prompt",
+        "karpathy", "openai", "anthropic", "llama", "mistral"
+      ],
+      "exclude": [
+        "makeup ai", "ai art nails"
+      ]
+    },
+    {
+      "label": "General Tech & Reviews",
+      "include": [
+        "tech", "review", "unboxing", "gadgets?", "apple", "iphone", "ipad", "mac",
+        "android", "windows", "pc build", "benchmark"
+      ],
+      "exclude": [
+        "photography", "camera", "drone", "flight sim"
+      ]
+    },
+    {
+      "label": "Photography & Cameras",
+      "include": [
+        "camera", "photograph", "lens", "sony", "canon", "nikon", "fujifilm",
+        "lightroom", "photoshop", "mirrorless", "brandon li", "allan walls"
+      ],
+      "exclude": [
+        "security camera", "body cam", "dashcam", "marketing", "dropship", "ecom", "crypto", "stocks"
+      ]
+    },
+    {
+      "label": "Video Editing & Creative Tools",
+      "include": [
+        "edit", "premiere", "final cut", "davinci resolve", "after effects",
+        "motionvfx", "filmora", "bretfx", "color grade", "timeline"
+      ],
+      "exclude": [
+        "sales", "agency", "dropship"
+      ]
+    },
+    {
+      "label": "Business & Marketing",
+      "include": [
+        "marketing", "ads", "adwords", "funnels", "funnel", "sales", "saas",
+        "ecommerce", "brand", "branding", "agency", "entrepreneur", "entrepreneurship",
+        "startup", "shopify", "amazon fba"
+      ],
+      "exclude": [
+        "flight", "storm", "camera", "lens", "photo", "premiere", "filmora",
+        "davinci", "final cut", "garden", "seed", "compost", "orchestra",
+        "guitar", "mix", "piano", "trailer", "trailers", "clip", "clips",
+        "cinema", "movie", "film", "entertainment"
+      ]
+    },
+    {
+      "label": "Music & Musicians",
+      "include": [
+        "guitar", "bass", "drums", "piano", "vocal", "singer", "songwriter",
+        "mix", "master", "daw", "ableton", "logic pro", "pro tools", "pedal",
+        "riff", "chord", "jazz"
+      ],
+      "exclude": [
+        "storm", "flight", "pilot", "camera", "lens"
+      ]
+    },
+    {
+      "label": "DIY, Home & Construction",
+      "include": [
+        "diy", "home", "renovation", "woodworking", "craftsman", "garage", "concrete", "builder"
+      ],
+      "exclude": []
+    }
+  ],
+  "labelAliases": {
+    "AI / ML": "AI & Emerging Tech",
+    "Tech Reviews": "General Tech & Reviews"
+  }
+}
