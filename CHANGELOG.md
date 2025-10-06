@@ -164,9 +164,14 @@ Next: 4.2b precision pass - further threshold tuning required
 - **Validation results**: 503 channels ✓, 12 clusters (all visible, no demotions), 204 unclassified ✓, governance bypass not triggered
 - **Root cause addressed**: Fixed over-aggressive demotion logic that was filtering to allowlist-only in edge cases
 
-## Microstep 4.2c.1 — Scoring visibility plumbing (no behavior changes to rules)
-- **Enhanced scoring visibility**: Modified `classifyChannel` in `heuristics2.js` to build `scoreByLabel` Record during rule application and return structured format with `topScore`, `secondScore`, `margin`, and sorted `scores` array
-- **Cluster purity computation**: Updated `builder.js` to compute per-cluster purity as average margin across member channels and attach to cluster objects for metrics output
-- **Debug data enhancement**: Updated `exportAO.js` to ensure debug rows include new scoring fields (`topScore`, `secondScore`, `margin`, `scores`) and metrics include per-cluster purity values
-- **Validation confirmed**: 503 channels ✓, governed clusters within display cap ✓, unclassified ≈204 ✓, new scoring fields properly populated in debug data and metrics
-- **No rule changes**: Pure plumbing enhancement with zero behavior changes to classification rules or thresholds
+## Microstep 4.2c.2 — Scoring fields + purity propagation hotfix (no rule changes)
+- **Flattened scoring fields**: Modified `builder.js` to flatten `topScore`, `secondScore`, `margin`, and `scores[]` from classifier into debugRows for exporter access
+- **Channel margin storage**: Added lightweight `marginForPurity` property on each channel object for purity aggregation (available even when debug=false)
+- **Cluster purity computation**: Implemented per-cluster purity as average margin of member channels with proper numeric handling and precision formatting
+- **Governance preservation**: Updated reportingClusters mapping to preserve purity through governance pipeline using spread operator
+- **Metrics enhancement**: Ensured governed metrics include per-cluster purity in both `autoOrganize.metrics.json` and `autoOrganize.metrics.raw.json`
+- **API route fix**: Modified `/api/auto-organize?debug=1` to return full debugRows without field slimming for complete data access
+- **Export validation**: Confirmed `exportAO.js` writes full debug rows and per-cluster purity to JSON outputs
+- **CSV integration**: Verified `export_csv.js` correctly reads flattened scoring fields and sorts by cluster then channel name
+- **Validation results**: 299 rows with non-zero margins ✓, per-cluster purity populated ✓, CSVs show purity and scoring fields ✓
+- **No rule changes**: Pure hotfix for data propagation with zero behavior changes to classification rules or thresholds

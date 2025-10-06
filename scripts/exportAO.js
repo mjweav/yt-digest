@@ -81,7 +81,7 @@ async function exportAutoOrganize() {
 
     // Write debug data (governed)
     const debugPath = path.join('data', 'autoOrganize.debug.json');
-    await fs.promises.writeFile(debugPath, JSON.stringify({ clusters, debugRows }, null, 2));
+    await fs.promises.writeFile(debugPath, JSON.stringify({ debugRows }, null, 2));
     console.log(`Wrote debug data to ${debugPath}`);
 
     // Generate governed metrics

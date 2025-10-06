@@ -1,13 +1,13 @@
 cluster,count,percent_of_total,purity_if_available
 Unclassified,204,40.56,0
-Aviation,8,1.59,0
-Photography & Cameras,42,8.35,0
-"DIY, Home & Construction",48,9.54,0
-Business & Marketing,40,7.95,0
-News,33,6.56,0
-AI & Emerging Tech,10,1.99,0
-General Tech & Reviews,36,7.16,0
-Health & Medicine,9,1.79,0
-Video Editing & Creative Tools,11,2.19,0
-Music & Musicians,42,8.35,0
-Gardening,20,3.98,0
+Aviation,8,1.59,10.25
+Photography & Cameras,42,8.35,10.124
+"DIY, Home & Construction",48,9.54,5.533
+Business & Marketing,40,7.95,5.45
+News,33,6.56,6.994
+AI & Emerging Tech,10,1.99,2.2
+General Tech & Reviews,36,7.16,6.672
+Health & Medicine,9,1.79,2.756
+Video Editing & Creative Tools,11,2.19,2.164
+Music & Musicians,42,8.35,9.343
+Gardening,20,3.98,13.16

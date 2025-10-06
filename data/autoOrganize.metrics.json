@@ -2,7 +2,7 @@
   "totals": {
     "channels": 503,
     "clusters": 12,
-    "unclassified": 204
+    "unclassified": 0
   },
   "perCluster": [
     {
@@ -10,112 +10,88 @@
       "size": 204,
       "channelCount": 204,
       "purity": 0,
-      "methodStats": {
-        "scored": 204
-      }
+      "methodStats": {}
     },
     {
       "label": "Aviation",
       "size": 8,
       "channelCount": 8,
-      "purity": 0,
-      "methodStats": {
-        "scored": 8
-      }
+      "purity": 10.25,
+      "methodStats": {}
     },
     {
       "label": "Photography & Cameras",
       "size": 42,
       "channelCount": 42,
-      "purity": 0,
-      "methodStats": {
-        "scored": 42
-      }
+      "purity": 10.124,
+      "methodStats": {}
     },
     {
       "label": "DIY, Home & Construction",
       "size": 48,
       "channelCount": 48,
-      "purity": 0,
-      "methodStats": {
-        "scored": 48
-      }
+      "purity": 5.533,
+      "methodStats": {}
     },
     {
       "label": "Business & Marketing",
       "size": 40,
       "channelCount": 40,
-      "purity": 0,
-      "methodStats": {
-        "scored": 40
-      }
+      "purity": 5.45,
+      "methodStats": {}
     },
     {
       "label": "News",
       "size": 33,
       "channelCount": 33,
-      "purity": 0,
-      "methodStats": {
-        "scored": 33
-      }
+      "purity": 6.994,
+      "methodStats": {}
     },
     {
       "label": "AI & Emerging Tech",
       "size": 10,
       "channelCount": 10,
-      "purity": 0,
-      "methodStats": {
-        "scored": 10
-      }
+      "purity": 2.2,
+      "methodStats": {}
     },
     {
       "label": "General Tech & Reviews",
       "size": 36,
       "channelCount": 36,
-      "purity": 0,
-      "methodStats": {
-        "scored": 36
-      }
+      "purity": 6.672,
+      "methodStats": {}
     },
     {
       "label": "Health & Medicine",
       "size": 9,
       "channelCount": 9,
-      "purity": 0,
-      "methodStats": {
-        "scored": 9
-      }
+      "purity": 2.756,
+      "methodStats": {}
     },
     {
       "label": "Video Editing & Creative Tools",
       "size": 11,
       "channelCount": 11,
-      "purity": 0,
-      "methodStats": {
-        "scored": 11
-      }
+      "purity": 2.164,
+      "methodStats": {}
     },
     {
       "label": "Music & Musicians",
       "size": 42,
       "channelCount": 42,
-      "purity": 0,
-      "methodStats": {
-        "scored": 42
-      }
+      "purity": 9.343,
+      "methodStats": {}
     },
     {
       "label": "Gardening",
       "size": 20,
       "channelCount": 20,
-      "purity": 0,
-      "methodStats": {
-        "scored": 20
-      }
+      "purity": 13.16,
+      "methodStats": {}
     }
   ],
   "methodStats": {
     "scored": 503
   },
-  "generatedAt": "2025-10-06T23:24:19.731Z"
+  "generatedAt": "2025-10-06T23:38:41.894Z"
 }

@@ -146,6 +146,9 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
       };
     }
 
+    // Extract numeric margin for purity computation
+    const marginForPurity = Number((why?.margin ?? 0));
+
     if (!clustersMap.has(label)) clustersMap.set(label, { label, items: [] });
     clustersMap.get(label).items.push({
       id: ch.id,
@@ -154,18 +157,26 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
       thumb: ch.thumb,
       videoCount: ch.videoCount,
       size: sizeFromCount(ch.videoCount),
+      margin: marginForPurity, // Always include margin for purity aggregation
       ...(debug ? { why } : {})
     });
 
     if (debug) {
       debugRows.push({
         id: ch.id,
-        title: ch.title,
-        desc: ch.desc,
-        url: ch.url,
-        descLen: ch.desc ? ch.desc.length : 0,
-        label,
-        why
+        name: ch.title || ch.name || "",
+        description: ch.desc || ch.description || "",
+        assignedLabel: label,
+        method: "scored",
+        // Keep full trace for deep debugging
+        why: why,
+        // Flattened fields for exporters:
+        topScore: Number((why?.topScore ?? 0)),
+        secondScore: Number((why?.secondScore ?? 0)),
+        margin: Number((why?.margin ?? 0)),
+        scores: Array.isArray(why?.scores)
+          ? why.scores.map(s => ({ label: s.label, score: Number(s.score ?? 0) }))
+          : []
       });
     }
   }
@@ -181,19 +192,12 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
   const taxonomy = await loadTaxonomy();
 
   // Compute per-cluster purity = average margin of member channels
-  const clustersWithPurity = rawClusters.map(cluster => {
-    const channelsWithMargins = cluster.channels
-      .map(ch => ch.why?.margin)
-      .filter(margin => margin !== undefined);
-
-    const avgPurity = channelsWithMargins.length > 0
-      ? channelsWithMargins.reduce((sum, margin) => sum + margin, 0) / channelsWithMargins.length
-      : 0;
-
-    return {
-      ...cluster,
-      purity: avgPurity
-    };
+  const clustersWithPurity = rawClusters.map(c => {
+    const margins = c.channels
+      .map(ch => Number(ch.margin ?? ch?.why?.margin ?? 0))
+      .filter(Number.isFinite);
+    const avg = margins.length ? margins.reduce((a,b)=>a+b,0) / margins.length : 0;
+    return { ...c, purity: Number(avg.toFixed(3)) };
   });
 
   // Compute displayCap from taxonomy.displayCapFormula and totals.channels
@@ -313,14 +317,9 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
     }
   }
 
-  const reportingClusters = promoted.map(({ label, size, purity }) => {
-    const originalCluster = clustersWithPurity.find(c => c.label === label);
-    return {
-      id: originalCluster.id,
-      label: originalCluster.label,
-      span: originalCluster.span,
-      channels: originalCluster.channels
-    };
+  const reportingClusters = promoted.map(p => {
+    const src = clustersWithPurity.find(c => c.label === p.label);
+    return { ...src }; // includes purity
   });
 
   // Add reportingDiagnostics

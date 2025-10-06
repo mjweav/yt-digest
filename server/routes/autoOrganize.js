@@ -35,7 +35,8 @@ router.get('/', async (req, res) => {
       } catch (e) {
         console.error('Failed to write debug file:', e);
       }
-      return res.json({ ...merged, debug: { file: 'data/autoOrganize.debug.json', rows: debugRows.length } });
+      // Return full debugRows without slimming for ?debug=1
+      return res.json({ ...merged, debug: { file: 'data/autoOrganize.debug.json', rows: debugRows.length }, debugRows });
     }
 
     return res.json(merged);
