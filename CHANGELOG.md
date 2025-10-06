@@ -137,3 +137,11 @@ feat(ao): validate 4.2a — Unclassified ↓ 116 (320→204); clusters at 12 (ta
 Files: rules.json (thresholds increased: News=2.0, Aviation=2.0, Gardening=2.0, minMargin=1.0)
 Validation: gates passed except clusters (12 vs target 9)
 Next: 4.2b precision pass - further threshold tuning required
+
+## Microstep 4.2b – Subcluster governance with configurable taxonomy
+- **Configurable taxonomy**: Added `taxonomy.json` with display cap formula, min size/purity thresholds, and allowlist/blocklist
+- **Clarity metrics**: Enhanced `classifyChannel` to expose `topScore`, `secondScore`, and `margin` for classification confidence
+- **Governance logic**: Implemented cluster promotion (allowlist OR size ≥5 AND purity ≥0.7) with display cap enforcement
+- **Dual metrics**: Generate both governed (`autoOrganize.metrics.json`) and raw (`autoOrganize.metrics.raw.json`) metrics
+- **Reporting diagnostics**: Added governance diagnostics to debug data showing promoted/demoted clusters and thresholds
+- **Validation**: 503 channels, 11 clusters (within [9,20] displayCap), 204 unclassified (no increase), governance working correctly

@@ -1,0 +1,7 @@
+{
+  "displayCapFormula": { "base": 25, "min": 12, "max": 40 },
+  "minMicrotopicSize": 5,
+  "minPurity": 0.7,
+  "promoteAllowlist": ["Video Editing & Creative Tools"],
+  "promoteBlocklist": []
+}

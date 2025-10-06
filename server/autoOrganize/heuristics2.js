@@ -210,10 +210,18 @@ export async function classifyChannel({ title, desc, url }) {
     }
   }
 
+  // Calculate clarity metrics
+  const topScore = best.score > -Infinity ? best.score : 0;
+  const secondScore = runner.score > -Infinity ? runner.score : 0;
+  const margin = topScore - secondScore;
+
   return {
     label: chosen,
     scores: perCat.sort((a, b) => b.score - a.score).slice(0, 5),
     best,
     runner,
+    topScore,
+    secondScore,
+    margin,
   };
 }

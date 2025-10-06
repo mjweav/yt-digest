@@ -91,3 +91,29 @@ diff /tmp/ao-output-new.json /tmp/ao-output-baseline.json
 - Unclassified represents the largest category (66.4%) - primary optimization target
 - Per-cluster channel counts should never increase during refactoring
 - Total cluster count should remain stable (new clusters may be added but existing ones should not be removed)
+
+## Governance Changes (Phase 4.2b)
+
+- **Governed metrics** now reflect filtered clusters (reportingClusters) based on configurable taxonomy rules
+- **Raw metrics** available in `autoOrganize.metrics.raw.json` for comparison with baseline
+- **Display cap** computed as `clamp(min, floor(totalChannels/base), max)` from taxonomy.json
+- **Cluster promotion** based on allowlist OR (size ≥ minMicrotopicSize AND purity ≥ minPurity)
+- **Purity metric** = average margin of member channels (clarity of classification confidence)
+- **Demotion logic** hides clusters from reporting if count exceeds displayCap (sorted by size desc, purity desc)
+
+## Updated Invariants (Post-Governance)
+
+### Governed Metrics (Primary)
+- Total channels == 503 (unchanged)
+- Displayed clusters within [9, displayCap] where displayCap = clamp(12, floor(503/25), 40) = 20
+- Unclassified count reflects baseline (no change to underlying assignments)
+
+### Taxonomy Constants (Configurable)
+- minMicrotopicSize == 5
+- minPurity == 0.7
+- displayCap computed from formula { base: 25, min: 12, max: 40 }
+
+### Raw Metrics (Reference)
+- Raw cluster count may exceed governed count
+- Raw unclassified count matches baseline (320)
+- All baseline per-cluster invariants apply to raw metrics only
