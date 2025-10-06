@@ -164,14 +164,10 @@ Next: 4.2b precision pass - further threshold tuning required
 - **Validation results**: 503 channels ✓, 12 clusters (all visible, no demotions), 204 unclassified ✓, governance bypass not triggered
 - **Root cause addressed**: Fixed over-aggressive demotion logic that was filtering to allowlist-only in edge cases
 
-## Microstep 4.2c.2 — Scoring fields + purity propagation hotfix (no rule changes)
-- **Flattened scoring fields**: Modified `builder.js` to flatten `topScore`, `secondScore`, `margin`, and `scores[]` from classifier into debugRows for exporter access
-- **Channel margin storage**: Added lightweight `marginForPurity` property on each channel object for purity aggregation (available even when debug=false)
-- **Cluster purity computation**: Implemented per-cluster purity as average margin of member channels with proper numeric handling and precision formatting
-- **Governance preservation**: Updated reportingClusters mapping to preserve purity through governance pipeline using spread operator
-- **Metrics enhancement**: Ensured governed metrics include per-cluster purity in both `autoOrganize.metrics.json` and `autoOrganize.metrics.raw.json`
-- **API route fix**: Modified `/api/auto-organize?debug=1` to return full debugRows without field slimming for complete data access
-- **Export validation**: Confirmed `exportAO.js` writes full debug rows and per-cluster purity to JSON outputs
-- **CSV integration**: Verified `export_csv.js` correctly reads flattened scoring fields and sorts by cluster then channel name
-- **Validation results**: 299 rows with non-zero margins ✓, per-cluster purity populated ✓, CSVs show purity and scoring fields ✓
-- **No rule changes**: Pure hotfix for data propagation with zero behavior changes to classification rules or thresholds
+## Microstep 4.2c.3 — Exporter integrity fix (preserve purity in RAW metrics; sync totals.unclassified)
+- **RAW purity preservation**: Modified `generateRawClusters()` in `exportAO.js` to compute and include purity for raw clusters using same logic as governed clusters
+- **Totals sync fix**: Updated `generateMetrics()` to sync `totals.unclassified` with the actual Unclassified cluster's `channelCount` from perCluster array for both governed and raw metrics
+- **Explicit purity formatting**: Ensured perCluster entries explicitly format purity as `Number((cluster.purity ?? 0).toFixed(3))` in both RAW and governed metrics
+- **Margin computation**: Added margin calculation for raw clusters using classifier results (0 for overrides) to enable purity computation
+- **Validation results**: 503 channels ✓, purity preserved in both files ✓, totals.unclassified (204) matches Unclassified cluster channelCount (204) in both governed and raw metrics ✓
+- **No rule or builder changes**: Surgical edits to `exportAO.js` only with zero impact on classification rules, thresholds, or governance logic

@@ -21,14 +21,16 @@ async function generateRawClusters(channels, overrides) {
 
     if (!ch.id) continue;
 
-    let label;
+    let label, margin;
     if (overrides[ch.id]) {
       label = overrides[ch.id];
+      margin = 0; // No margin for overrides
     } else {
       // Import classifyChannel dynamically to avoid circular dependency
       const { classifyChannel } = await import('../server/autoOrganize/heuristics2.js');
       const res = await classifyChannel({ title: ch.title, desc: ch.desc, url: ch.url });
       label = res.label || 'Unclassified';
+      margin = res.margin || 0;
     }
 
     if (!clustersMap.has(label)) clustersMap.set(label, { label, items: [] });
@@ -38,6 +40,7 @@ async function generateRawClusters(channels, overrides) {
       desc: ch.desc,
       thumb: ch.thumb,
       videoCount: ch.videoCount,
+      margin: Number(margin || 0),
     });
 
     debugRows.push({
@@ -47,15 +50,26 @@ async function generateRawClusters(channels, overrides) {
       url: ch.url,
       descLen: ch.desc ? ch.desc.length : 0,
       label,
+      margin: Number(margin || 0),
     });
   }
 
-  return Array.from(clustersMap.values()).map(c => ({
+  // Convert to array and compute purity for each cluster
+  const rawClusters = Array.from(clustersMap.values()).map(c => ({
     id: c.label.toLowerCase().replace(/\s+/g, '-'),
     label: c.label,
     span: c.items.length >= 90 ? 4 : c.items.length >= 45 ? 3 : c.items.length >= 18 ? 2 : 1,
     channels: c.items
   }));
+
+  // Compute purity for each cluster (same logic as builder.js)
+  return rawClusters.map(c => {
+    const margins = c.channels
+      .map(ch => Number(ch.margin ?? 0))
+      .filter(Number.isFinite);
+    const avg = margins.length ? margins.reduce((a,b)=>a+b,0) / margins.length : 0;
+    return { ...c, purity: Number(avg.toFixed(3)) };
+  });
 }
 
 async function exportAutoOrganize() {
@@ -113,13 +127,6 @@ async function exportAutoOrganize() {
 function generateMetrics(clusters, debugRows) {
   const totalChannels = debugRows.length;
   const totalClusters = clusters.length;
-  const unclassifiedCount = debugRows.filter(row => row.label === 'Unclassified').length;
-
-  // Count channels per cluster
-  const clusterChannelCounts = {};
-  clusters.forEach(cluster => {
-    clusterChannelCounts[cluster.label] = cluster.channels.length;
-  });
 
   // Analyze classification methods
   const methodStats = {};
@@ -128,7 +135,7 @@ function generateMetrics(clusters, debugRows) {
     methodStats[method] = (methodStats[method] || 0) + 1;
   });
 
-  // Per-cluster metrics
+  // Per-cluster metrics - explicitly include purity and compute channelCount from channels.length
   const perClusterMetrics = clusters.map(cluster => {
     const clusterChannels = cluster.channels;
     const clusterDebugRows = debugRows.filter(row => row.label === cluster.label);
@@ -143,16 +150,20 @@ function generateMetrics(clusters, debugRows) {
       label: cluster.label,
       size: clusterChannels.length,
       channelCount: clusterChannels.length,
-      purity: cluster.purity || 0,
+      purity: Number((cluster.purity ?? 0).toFixed(3)),
       methodStats: clusterMethodStats
     };
   });
+
+  // Sync totals.unclassified with the Unclassified cluster's channelCount
+  const unclassifiedCluster = perClusterMetrics.find(c => c.label === "Unclassified");
+  const syncedUnclassified = unclassifiedCluster?.channelCount ?? 0;
 
   return {
     totals: {
       channels: totalChannels,
       clusters: totalClusters,
-      unclassified: unclassifiedCount
+      unclassified: syncedUnclassified
     },
     perCluster: perClusterMetrics,
     methodStats: methodStats,
