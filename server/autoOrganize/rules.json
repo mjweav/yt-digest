@@ -28,7 +28,7 @@
       "exclude": [
         "makeup ai", "ai art nails"
       ],
-      "threshold": 1.2
+      "threshold": 1.1
     },
     {
       "label": "General Tech & Reviews",
@@ -39,7 +39,7 @@
         { "re": "(?i)\\b(apple|android|iphone|mac|windows)\\b", "w": 0.7 }
       ],
       "exclude": [
-        "photography", "camera", "drone", "flight sim",
+        "photography", "camera", "drone", "flight sim", "tutorial", "tutorials",
         { "re": "(?i)\\b(camera|photography|filmmaking)\\b" }
       ],
       "threshold": 1.3
@@ -55,7 +55,7 @@
       "exclude": [
         "security camera", "body cam", "dashcam", "marketing", "dropship", "ecom", "crypto", "stocks"
       ],
-      "threshold": 1.2
+      "threshold": 1.3
     },
     {
       "label": "Video Editing & Creative Tools",
@@ -95,11 +95,11 @@
         { "re": "(?i)\\b(lyrics?|guitar(ist)?|drums?|DJ|beats?|remix)\\b", "w": 0.8 }
       ],
       "exclude": [
-        "storm", "flight", "pilot", "camera", "lens",
+        "storm", "flight", "pilot", "camera", "lens", "tutorial", "tutorials", "review", "reviews",
         { "re": "(?i)\\btutorial(s)?\\b" },
         { "re": "(?i)\\breview(s)?\\b" }
       ],
-      "threshold": 1.3
+      "threshold": 1.2
     },
     {
       "label": "DIY, Home & Construction",
@@ -119,10 +119,11 @@
         { "re": "(?i)\\b(news (update|report|analysis|digest)|briefing)\\b", "w": 0.9 }
       ],
       "exclude": [
+        "product news", "game news", "games news", "review", "reviews",
         { "re": "(?i)\\b(product|game|camera)\\s+news\\b" },
         { "re": "(?i)\\breview(s)?\\b" }
       ],
-      "threshold": 2.0
+      "threshold": 1.8
     },
     {
       "label": "Gardening",

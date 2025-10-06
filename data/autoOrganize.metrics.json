@@ -47,18 +47,18 @@
     },
     {
       "label": "AI & Emerging Tech",
-      "size": 9,
-      "channelCount": 9,
+      "size": 10,
+      "channelCount": 10,
       "methodStats": {
-        "scored": 9
+        "scored": 10
       }
     },
     {
       "label": "General Tech & Reviews",
-      "size": 41,
-      "channelCount": 41,
+      "size": 36,
+      "channelCount": 36,
       "methodStats": {
-        "scored": 41
+        "scored": 36
       }
     },
     {
@@ -71,10 +71,10 @@
     },
     {
       "label": "Video Editing & Creative Tools",
-      "size": 7,
-      "channelCount": 7,
+      "size": 11,
+      "channelCount": 11,
       "methodStats": {
-        "scored": 7
+        "scored": 11
       }
     },
     {
@@ -97,5 +97,5 @@
   "methodStats": {
     "scored": 503
   },
-  "generatedAt": "2025-10-06T22:07:35.245Z"
+  "generatedAt": "2025-10-06T22:46:05.543Z"
 }
