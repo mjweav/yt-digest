@@ -198,46 +198,112 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
   );
 
   // Build reportingClusters with governance
+  const raw = clustersWithPurity; // original array
   const promoted = [];
   const demoted = [];
 
-  for (const cluster of clustersWithPurity) {
+  if (taxonomy.debugVerbose) {
+    console.log('Governance step - raw clusters:', raw.length);
+  }
+
+  for (const cluster of raw) {
     const isAllowlisted = taxonomy.promoteAllowlist.includes(cluster.label);
     const meetsSizeRequirement = cluster.channels.length >= taxonomy.minMicrotopicSize;
     const meetsPurityRequirement = cluster.purity >= taxonomy.minPurity;
 
-    if (isAllowlisted || (meetsSizeRequirement && meetsPurityRequirement)) {
+    if (isAllowlisted) {
+      // Allowlisted clusters always get promoted
       promoted.push({
         label: cluster.label,
         size: cluster.channels.length,
-        purity: cluster.purity
+        purity: cluster.purity,
+        allowlisted: true
       });
-    } else {
-      demoted.push({
+    } else if (meetsSizeRequirement && meetsPurityRequirement) {
+      // Qualifying clusters get promoted
+      promoted.push({
         label: cluster.label,
         size: cluster.channels.length,
-        purity: cluster.purity
+        purity: cluster.purity,
+        allowlisted: false
+      });
+    } else {
+      // NOTE: for this hotfix, keep non-qualifying clusters visible (do NOT drop them yet)
+      promoted.push({
+        label: cluster.label,
+        size: cluster.channels.length,
+        purity: cluster.purity,
+        allowlisted: false
       });
     }
   }
 
-  // Sort demoted clusters by size desc, purity desc for potential promotion
-  demoted.sort((a, b) => {
-    if (a.size !== b.size) return b.size - a.size;
-    return b.purity - a.purity;
-  });
+  if (taxonomy.debugVerbose) {
+    console.log('Governance step - after promotion:', promoted.length, 'demoted:', demoted.length);
+  }
 
-  // If we have too many promoted clusters, demote the smallest/least-pure ones
+  // Bug guard: if promoted.length <= 1 but raw.length > 1, bypass governance
+  let bypassed = false;
+  if (promoted.length <= 1 && raw.length > 1) {
+    if (taxonomy.debugVerbose) {
+      console.log('Governance bypass triggered - only one cluster would be shown');
+    }
+    bypassed = true;
+    // Set promoted = raw so we never show just 1 cluster by mistake
+    promoted.length = 0;
+    for (const cluster of raw) {
+      promoted.push({
+        label: cluster.label,
+        size: cluster.channels.length,
+        purity: cluster.purity,
+        allowlisted: taxonomy.promoteAllowlist.includes(cluster.label)
+      });
+    }
+  }
+
+  // Demotion rule (apply ONLY if promoted.length > displayCap)
   if (promoted.length > displayCap) {
-    const excessCount = promoted.length - displayCap;
-    const toDemote = promoted.splice(-excessCount);
-    demoted.push(...toDemote);
+    if (taxonomy.debugVerbose) {
+      console.log('Governance step - demoting from', promoted.length, 'to', displayCap);
+    }
 
-    // Re-sort demoted after adding new items
-    demoted.sort((a, b) => {
+    // Sort promoted by (allowlisted first), then size desc, then purity desc
+    promoted.sort((a, b) => {
+      // Allowlisted first
+      if (a.allowlisted && !b.allowlisted) return -1;
+      if (!a.allowlisted && b.allowlisted) return 1;
+      // Then size desc
       if (a.size !== b.size) return b.size - a.size;
+      // Then purity desc
       return b.purity - a.purity;
     });
+
+    // Demote from the end until length == displayCap
+    const excessCount = promoted.length - displayCap;
+    const toDemote = promoted.splice(-excessCount);
+    demoted.push(...toDemote.map(c => ({ label: c.label, size: c.size, purity: c.purity })));
+
+    if (taxonomy.debugVerbose) {
+      console.log('Governance step - demoted', demoted.length, 'clusters');
+    }
+  }
+
+  // Unclassified must never be demoted or removed
+  const unclassifiedIndex = promoted.findIndex(c => c.label === 'Unclassified');
+  if (unclassifiedIndex === -1 && raw.find(c => c.label === 'Unclassified')) {
+    // Unclassified was demoted, restore it
+    const unclassifiedCluster = raw.find(c => c.label === 'Unclassified');
+    if (unclassifiedCluster) {
+      promoted.push({
+        label: unclassifiedCluster.label,
+        size: unclassifiedCluster.channels.length,
+        purity: unclassifiedCluster.purity,
+        allowlisted: false
+      });
+      if (taxonomy.debugVerbose) {
+        console.log('Governance step - restored Unclassified cluster');
+      }
+    }
   }
 
   const reportingClusters = promoted.map(({ label, size, purity }) => {
@@ -250,15 +316,16 @@ async function buildAutoOrganize({ channels, overrides, debug } = {}) {
     };
   });
 
-  // Add reportingDiagnostics to debug
+  // Add reportingDiagnostics
   const reportingDiagnostics = {
-    promoted: promoted.map(({ label, size, purity }) => ({ label, size, purity })),
+    promoted: promoted.map(({ label, size, purity, allowlisted }) => ({ label, size, purity, allowlisted })),
     demoted: demoted.map(({ label, size, purity }) => ({ label, size, purity })),
     thresholds: {
       minSize: taxonomy.minMicrotopicSize,
       minPurity: taxonomy.minPurity,
       displayCap: displayCap
-    }
+    },
+    bypassed
   };
 
   // Add governance diagnostics to the first debug row if debug is enabled

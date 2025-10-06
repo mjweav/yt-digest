@@ -1,10 +1,18 @@
 {
   "totals": {
     "channels": 503,
-    "clusters": 11,
+    "clusters": 12,
     "unclassified": 204
   },
   "perCluster": [
+    {
+      "label": "Unclassified",
+      "size": 204,
+      "channelCount": 204,
+      "methodStats": {
+        "scored": 204
+      }
+    },
     {
       "label": "Aviation",
       "size": 8,
@@ -97,5 +105,5 @@
   "methodStats": {
     "scored": 503
   },
-  "generatedAt": "2025-10-06T22:46:05.543Z"
+  "generatedAt": "2025-10-06T22:59:29.564Z"
 }

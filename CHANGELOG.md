@@ -153,3 +153,13 @@ Next: 4.2b precision pass - further threshold tuning required
 - **Results**: 503 channels ✓, 11 clusters (within governance cap), Unclassified reduced 36.25% (320→204, exceeded target 10-20% but within acceptable range)
 - **Target clusters**: All gained appropriately (News: +33, General Tech & Reviews: +16, Music & Musicians: +7, Photography & Cameras: +23, Business & Marketing: +13, all within +40 limit)
 - **Stability**: Classification results stable across threshold adjustments, indicating robust rule matching
+
+## Microstep 4.2b.1 — Hotfix governance reporting: only one cluster displayed
+- **Safety flags added**: Added `governanceEnabled` and `debugVerbose` flags to `taxonomy.json` for better control and monitoring
+- **Hotfix governance logic**: Modified promotion rules to keep non-qualifying clusters visible during transition (prevents showing only allowlisted clusters)
+- **Bypass guard implemented**: Added safety check to bypass governance entirely if only 1 cluster would be shown (prevents single-cluster regression)
+- **Enhanced sorting**: Implemented proper sort order (allowlisted first, then size desc, then purity desc) for demotion decisions
+- **Unclassified protection**: Added explicit guard to ensure Unclassified cluster is never demoted or removed
+- **Reporting diagnostics**: Added comprehensive governance reporting with promoted/demoted arrays, thresholds, and bypass status
+- **Validation results**: 503 channels ✓, 12 clusters (all visible, no demotions), 204 unclassified ✓, governance bypass not triggered
+- **Root cause addressed**: Fixed over-aggressive demotion logic that was filtering to allowlist-only in edge cases
