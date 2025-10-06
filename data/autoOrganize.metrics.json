@@ -1,0 +1,77 @@
+{
+  "totals": {
+    "channels": 503,
+    "clusters": 8,
+    "unclassifiedCount": 334
+  },
+  "perCluster": [
+    {
+      "label": "Unclassified",
+      "size": 334,
+      "channelCount": 334,
+      "methodStats": {
+        "scored": 334
+      }
+    },
+    {
+      "label": "Photography & Cameras",
+      "size": 20,
+      "channelCount": 20,
+      "methodStats": {
+        "scored": 20
+      }
+    },
+    {
+      "label": "Business & Marketing",
+      "size": 32,
+      "channelCount": 32,
+      "methodStats": {
+        "scored": 32
+      }
+    },
+    {
+      "label": "AI & Emerging Tech",
+      "size": 21,
+      "channelCount": 21,
+      "methodStats": {
+        "scored": 21
+      }
+    },
+    {
+      "label": "General Tech & Reviews",
+      "size": 27,
+      "channelCount": 27,
+      "methodStats": {
+        "scored": 27
+      }
+    },
+    {
+      "label": "Health & Medicine",
+      "size": 16,
+      "channelCount": 16,
+      "methodStats": {
+        "scored": 16
+      }
+    },
+    {
+      "label": "Video Editing & Creative Tools",
+      "size": 17,
+      "channelCount": 17,
+      "methodStats": {
+        "scored": 17
+      }
+    },
+    {
+      "label": "Music & Musicians",
+      "size": 36,
+      "channelCount": 36,
+      "methodStats": {
+        "scored": 36
+      }
+    }
+  ],
+  "methodStats": {
+    "scored": 503
+  },
+  "generatedAt": "2025-10-06T18:21:47.674Z"
+}
