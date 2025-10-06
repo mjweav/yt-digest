@@ -39,7 +39,7 @@ Enhanced Channel Object:
 }
 
 #Generate Full Debug Output
-http://localhost:3001/api/auto-organize/debug/export | jq
+http://localhost:3001/api/auto-organize?debug=1
 
 #Recompute 
 http://localhost:3001/api/auto-organize/recompute >/dev/null

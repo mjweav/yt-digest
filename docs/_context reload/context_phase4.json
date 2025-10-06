@@ -1,0 +1,18 @@
+{
+  "project": "YT-Digest",
+  "phase": 4,
+  "baseline_commit": "67ead4a1b587ef9e18032f50350c44ddd9ff54f8",
+  "core_engine": "heuristics2.js",
+  "key_docs": [
+    "heuristics2_resume_plan.md",
+    "phase4_primer.md"
+  ],
+  "current_focus": [
+    "portability",
+    "adaptive heuristics",
+    "GUI reassignment workflow",
+    "user vs smart category clarity"
+  ],
+  "pending_microstep": "4.1_refactor_core",
+  "conversation_summary": "Phase 3 completed; TF-IDF shelved; Heuristics2 chosen as core; preparing modularization and adaptive rule system for Phase 4."
+}
