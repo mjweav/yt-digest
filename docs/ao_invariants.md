@@ -2,46 +2,56 @@
 
 Baseline metrics captured on 2025-10-06 for Phase 4 refactor validation.
 
+**Post-refactor baseline established 2025-10-06 after externalizing rules to rules.json**
+
 ## Current Baseline Metrics
 
 **Totals:**
 - **Channels:** 503
-- **Clusters:** 8
-- **Unclassified Count:** 334
+- **Clusters:** 9
+- **Unclassified Count:** 320
 
 **Per-Cluster Distribution:**
-- **Unclassified:** 334 channels (66.4% of total)
-- **Photography & Cameras:** 20 channels (4.0% of total)
-- **Business & Marketing:** 32 channels (6.4% of total)
-- **AI & Emerging Tech:** 21 channels (4.2% of total)
-- **General Tech & Reviews:** 27 channels (5.4% of total)
-- **Health & Medicine:** 16 channels (3.2% of total)
+- **Unclassified:** 320 channels (63.6% of total)
+- **Photography & Cameras:** 19 channels (3.8% of total)
+- **Business & Marketing:** 27 channels (5.4% of total)
+- **AI & Emerging Tech:** 20 channels (4.0% of total)
+- **General Tech & Reviews:** 20 channels (4.0% of total)
+- **Health & Medicine:** 15 channels (3.0% of total)
 - **Video Editing & Creative Tools:** 17 channels (3.4% of total)
-- **Music & Musicians:** 36 channels (7.2% of total)
+- **Music & Musicians:** 35 channels (7.0% of total)
+- **DIY, Home & Construction:** 30 channels (6.0% of total)
 
 **Classification Methods:**
 - **Scored (heuristic/TFIDF):** 503 channels (100%)
 - **Override:** 0 channels (0%)
 
-## Invariants to Guard in Phase 4.1
+## Invariants to Guard in Phase 4.2+
 
 ### Total Metrics (Must Remain Equal)
-- Total clusters == 8
+- Total clusters == 9
 - Total channels == 503
 
 ### Per-Cluster Channel Counts (Must Not Increase)
-- Unclassified channels <= 334 (ideally should decrease)
-- Photography & Cameras == 20
-- Business & Marketing == 32
-- AI & Emerging Tech == 21
-- General Tech & Reviews == 27
-- Health & Medicine == 16
+- Unclassified channels <= 320 (ideally should decrease)
+- Photography & Cameras == 19
+- Business & Marketing == 27
+- AI & Emerging Tech == 20
+- General Tech & Reviews == 20
+- Health & Medicine == 15
 - Video Editing & Creative Tools == 17
-- Music & Musicians == 36
+- Music & Musicians == 35
+- DIY, Home & Construction == 30
 
 ### Classification Method Distribution
 - All current classifications use "scored" method (heuristic/TFIDF)
 - No override classifications currently exist
+
+## Architecture Changes (Phase 4.1)
+- **Rules externalized** from heuristics2.js to server/autoOrganize/rules.json
+- **Pure functions** maintained in heuristics2.js (scoreChannel, classifyChannel)
+- **Stub created** for future telemetry features (server/autoOrganize/learn.js)
+- **Async pattern** introduced for rule loading and classification
 
 ## Validation Commands
 
