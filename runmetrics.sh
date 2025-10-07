@@ -30,4 +30,9 @@ if [[ -f "$BASELINE_JSON" ]] && [[ -f "$ROOT_DIR/scripts/compare_metrics_simple.
   node "$ROOT_DIR/scripts/compare_metrics_simple.js" "$BASELINE_JSON" "$METRICS_JSON" || true
 fi
 
+# 4) Writing low-margin CSV
+echo "--> Writing low-margin CSV..."
+node scripts/export_lowmargin.js --perCluster=15 --overall=50
+
+
 echo "=== Done."
