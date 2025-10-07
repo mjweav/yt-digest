@@ -186,3 +186,8 @@ Next: 4.2b precision pass - further threshold tuning required
 - **News rule tightening**: Reduced generic term weights (world/global: 0.5→0.4), added comprehensive excludes for editing tools, photo/gear, music, DIY/maker, comedy, and big brands to prevent bleed
 - **Targeted positive anchors**: Added low-weight anchors across affected clusters (Photography & Cameras: B&H patterns +1.2, Video Editing: Ripple/No Film School/Hollywood FCP/Ben Halsall +1.2, Music: Callum Graham/Doctor Mix/Vic Firth +1.2, Business: Creator Magic/Sean Dollwet/Matthew Berman +1.2, Gardening: Joe Gardener TV +1.3, AI: Prompt Engineering/Rob AI Genius +1.2, DIY verticals: Magic Plan/Sketchup/Practical Engineering +1.1, General Tech: Microsoft +1.0)
 - **Validation results**: 503 channels ✓, 15 clusters (≤20 displayCap ✓), Unclassified 159 (slight increase from 155 target but within acceptable range), News bleed eliminated, targeted channels moved to correct clusters
+
+## 2025-10-06 — DIY Cleanup v1
+- **DIY vertical lexicons**: Strengthened portable includes for Woodworking & Fabrication (+1.0~1.2), Home Repair & Tools (+1.0~1.1), Construction & Trades (+1.1), Maker & 3D Printing (+1.1) with disambiguation for router/electronics collisions
+- **Cross-cluster guards**: Added DIY term excludes to General Tech & Reviews, AI & Emerging Tech, and News to prevent drift and improve purity
+- **Validation results**: 503 channels ✓, 17 clusters (≤20 displayCap ✓), Unclassified 159 (maintained), DIY microtopics established baseline for future promotion when size ≥5 and purity ≥0.7

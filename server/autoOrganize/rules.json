@@ -33,7 +33,8 @@
         { "re": "(?i)\\brob\\s*the\\s*ai\\s*genius\\b", "w": 1.2 }
       ],
       "exclude": [
-        "makeup ai", "ai art nails"
+        "makeup ai", "ai art nails",
+        { "re": "(?i)\\b(router\\s*bit|lathe|bandsaw|planer|dovetail|rebar|joist|rafter|concrete)\\b" }
       ],
       "threshold": 1.1,
       "scope": "universal",
@@ -50,7 +51,8 @@
       ],
       "exclude": [
         "photography", "camera", "drone", "flight sim", "tutorial", "tutorials",
-        { "re": "(?i)\\b(camera|photography|filmmaking)\\b" }
+        { "re": "(?i)\\b(camera|photography|filmmaking)\\b" },
+        { "re": "(?i)\\b(jointer|planer|bandsaw|lathe|dovetail|mortis(e|ing)|rebar|joist|rafter|router\\s*bit|stud\\s*finder|osb|framing)\\b" }
       ],
       "threshold": 1.3
     },
@@ -156,9 +158,16 @@
       "label": "Woodworking & Fabrication",
       "include": [
         { "re": "(?i)\\brouter\\b|\\bjointer\\b|\\bplaner\\b|\\bbandsaw\\b|\\blathe\\b|\\bdovetail\\b|\\bmortis(e|ing)\\b|\\bchisels?\\b", "w": 1.0 },
-        { "re": "(?i)\\bCNC\\b|\\bhardwood\\b|\\bplywood\\b|\\brip\\s*cut\\b", "w": 0.8 }
+        { "re": "(?i)\\bCNC\\b|\\bhardwood\\b|\\bplywood\\b|\\brip\\s*cut\\b", "w": 0.8 },
+        { "re": "(?i)\\b(jointer|planer|bandsaw|lathe|dovetail|mortis(e|ing)|tenon|chisel|jig|fence)\\b", "w": 1.1 },
+        { "re": "(?i)\\b(cabinet(?:ry)?|hardwood|softwood|plywood|mdf|kerf|rip\\s*cut|cross\\s*cut)\\b", "w": 1.0 },
+        { "re": "(?i)\\b(cnc|spoil\\s*board|x\\-carve|shapeoko)\\b", "w": 1.0 },
+        { "re": "(?i)\\brouter\\s*(bit|table|fence|collet|carbide|shank)\\b", "w": 1.2 },
+        { "re": "(?i)\\bessential\\s*craftsman|steve\\s*ramsey|izzy\\s*swan\\b", "w": 0.8 }
       ],
-      "exclude": [],
+      "exclude": [
+        { "re": "(?i)\\b(wi[-\\s]?fi|ethernet|mesh|firmware|router\\s*login)\\b" }
+      ],
       "threshold": 1.0,
       "scope": "vertical",
       "source": "curated"
@@ -169,9 +178,13 @@
         { "re": "(?i)\\bdrywall\\b|\\bplumbing\\b|\\bhvac\\b|\\boutlet\\b|\\bstud\\s*finder\\b|\\bimpact\\s*driver\\b", "w": 1.0 },
         { "re": "(?i)\\boscillating\\s*multi-?tool\\b|\\bcaulk\\b|\\bgrout\\b|\\bbreaker\\b|\\bsolder\\b", "w": 0.9 },
         { "re": "(?i)\\bmagic\\s*plan\\b", "w": 1.1 },
-        { "re": "(?i)\\bmagicplan\\b", "w": 1.1 }
+        { "re": "(?i)\\bmagicplan\\b", "w": 1.1 },
+        { "re": "(?i)\\b(drywall|plumbing|hvac|thermostat|outlet|breaker|stud\\s*finder|caulk|grout|solder|flux)\\b", "w": 1.0 },
+        { "re": "(?i)\\b(impact\\s*driver|oscillating\\s*(multi[-\\s]?tool)?|reciprocating\\s*saw)\\b", "w": 1.1 }
       ],
-      "exclude": [],
+      "exclude": [
+        { "re": "(?i)\\b(usb|driver\\s*update|gpu\\s*driver|display\\s*driver)\\b" }
+      ],
       "threshold": 1.0,
       "scope": "vertical",
       "source": "curated"
@@ -181,9 +194,12 @@
       "include": [
         { "re": "(?i)\\bframing\\b|\\brebar\\b|\\bOSB\\b|\\bmasonry\\b|\\bconcrete\\b|\\bpour\\b|\\bcuring\\b", "w": 1.0 },
         { "re": "(?i)\\bformwork\\b|\\bjoist\\b|\\brafter\\b|\\banchor\\s*bolt\\b", "w": 0.8 },
-        { "re": "(?i)\\bpractical\\s*engineering\\b", "w": 1.1 }
+        { "re": "(?i)\\bpractical\\s*engineering\\b", "w": 1.1 },
+        { "re": "(?i)\\b(framing|joist|rafter|ledger|rebar|masonry|formwork|footing|anchor\\s*bolt|sheathing|osb|truss|concrete|pour|curing)\\b", "w": 1.1 }
       ],
-      "exclude": [],
+      "exclude": [
+        { "re": "(?i)\\b(software|sdk|api|release\\s*notes)\\b" }
+      ],
       "threshold": 1.0,
       "scope": "vertical",
       "source": "curated"
@@ -193,9 +209,12 @@
       "include": [
         { "re": "(?i)\\bPLA\\b|\\bPETG\\b|\\bSTL\\b|\\bslicer\\b|\\bnozzle\\b", "w": 1.0 },
         { "re": "(?i)\\bMarlin\\b|\\bPrusa\\b|\\bEnder\\b", "w": 0.9 },
-        { "re": "(?i)\\bsketchup\\b", "w": 1.1 }
+        { "re": "(?i)\\bsketchup\\b", "w": 1.1 },
+        { "re": "(?i)\\b(pla|petg|abs|stl|gcode|slicer|nozzle|extruder|marlin|klipper|prusa|ender)\\b", "w": 1.1 }
       ],
-      "exclude": [],
+      "exclude": [
+        { "re": "(?i)\\b(vst|plugin|preset)\\b" }
+      ],
       "threshold": 1.0,
       "scope": "vertical",
       "source": "curated"
@@ -223,7 +242,8 @@
         { "re": "(?i)\\b(guitar|drum|drummer|band|record|mix|studio)\\b" },
         { "re": "(?i)\\b(sketchup|cad|cnc|router\\s*bit|lathe|bandsaw|planer|mortise|dovetail)\\b" },
         { "re": "(?i)\\b(prank|comedy|sketch|jfl)\\b" },
-        { "re": "(?i)\\b(red\\s*bull|paramount\\s*pictures|microsoft)\\b" }
+        { "re": "(?i)\\b(red\\s*bull|paramount\\s*pictures|microsoft)\\b" },
+        { "re": "(?i)\\b(drywall|framing|joist|rafter|mortise|lathe|bandsaw|planer)\\b" }
       ],
       "threshold": 1.8,
       "scope": "universal",

@@ -1,7 +1,7 @@
 {
   "totals": {
     "channels": 503,
-    "clusters": 15,
+    "clusters": 17,
     "unclassified": 159
   },
   "perCluster": [
@@ -28,30 +28,30 @@
     },
     {
       "label": "DIY, Home & Construction",
-      "size": 35,
-      "channelCount": 35,
-      "purity": 5.171,
+      "size": 34,
+      "channelCount": 34,
+      "purity": 4.776,
       "methodStats": {}
     },
     {
       "label": "Business & Marketing",
       "size": 57,
       "channelCount": 57,
-      "purity": 8.765,
+      "purity": 8.681,
       "methodStats": {}
     },
     {
       "label": "News",
       "size": 61,
       "channelCount": 61,
-      "purity": 11.036,
+      "purity": 10.961,
       "methodStats": {}
     },
     {
       "label": "General Tech & Reviews",
-      "size": 32,
-      "channelCount": 32,
-      "purity": 7.344,
+      "size": 31,
+      "channelCount": 31,
+      "purity": 7.471,
       "methodStats": {}
     },
     {
@@ -97,6 +97,20 @@
       "methodStats": {}
     },
     {
+      "label": "Woodworking & Fabrication",
+      "size": 1,
+      "channelCount": 1,
+      "purity": 7.2,
+      "methodStats": {}
+    },
+    {
+      "label": "Home Repair & Tools",
+      "size": 1,
+      "channelCount": 1,
+      "purity": 10.4,
+      "methodStats": {}
+    },
+    {
       "label": "News Brands",
       "size": 1,
       "channelCount": 1,
@@ -107,12 +121,12 @@
       "label": "Maker & 3D Printing",
       "size": 1,
       "channelCount": 1,
-      "purity": 4.6,
+      "purity": 9.2,
       "methodStats": {}
     }
   ],
   "methodStats": {
     "scored": 503
   },
-  "generatedAt": "2025-10-07T02:39:30.984Z"
+  "generatedAt": "2025-10-07T02:49:54.915Z"
 }
