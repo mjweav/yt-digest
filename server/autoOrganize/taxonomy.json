@@ -5,5 +5,41 @@
   "minMicrotopicSize": 5,
   "minPurity": 0.7,
   "promoteAllowlist": ["Video Editing & Creative Tools"],
-  "promoteBlocklist": []
+  "promoteBlocklist": [],
+  "verticalMicrotopics": {
+    "Woodworking & Fabrication": {
+      "parent": "DIY, Home & Construction",
+      "include": [
+        "router", "jointer", "planer", "bandsaw", "lathe", "dovetail", "mortise", "mortising", "chisels", "chisel",
+        "CNC", "hardwood", "plywood", "rip cut", "rip-cut"
+      ],
+      "scope": "vertical",
+      "source": "curated"
+    },
+    "Home Repair & Tools": {
+      "parent": "DIY, Home & Construction",
+      "include": [
+        "drywall", "plumbing", "hvac", "outlet", "stud finder", "stud-finder", "impact driver", "impact-driver",
+        "oscillating multi-tool", "oscillating tool", "caulk", "grout", "breaker", "solder", "soldering"
+      ],
+      "scope": "vertical",
+      "source": "curated"
+    },
+    "Construction & Trades": {
+      "parent": "DIY, Home & Construction",
+      "include": [
+        "framing", "rebar", "OSB", "masonry", "concrete", "pour", "curing", "formwork", "joist", "rafter", "anchor bolt", "anchor-bolt"
+      ],
+      "scope": "vertical",
+      "source": "curated"
+    },
+    "Maker & 3D Printing": {
+      "parent": "DIY, Home & Construction",
+      "include": [
+        "PLA", "PETG", "STL", "slicer", "nozzle", "Marlin", "Prusa", "Ender"
+      ],
+      "scope": "vertical",
+      "source": "curated"
+    }
+  }
 }

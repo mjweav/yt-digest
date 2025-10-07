@@ -171,3 +171,13 @@ Next: 4.2b precision pass - further threshold tuning required
 - **Margin computation**: Added margin calculation for raw clusters using classifier results (0 for overrides) to enable purity computation
 - **Validation results**: 503 channels ✓, purity preserved in both files ✓, totals.unclassified (204) matches Unclassified cluster channelCount (204) in both governed and raw metrics ✓
 - **No rule or builder changes**: Surgical edits to `exportAO.js` only with zero impact on classification rules, thresholds, or governance logic
+
+## Microstep 4.2d — Rule Pack v1 (portable-first + scoped brand anchors) and DIY vertical lexicons (flat UI, parent tagging)
+- **Portable rule pack**: Added/extended portable includes/excludes for News, AI & Emerging Tech, Photography & Cameras, Video Editing & Creative Tools, Business & Marketing, Music & Musicians, Aviation with weights [0.5-1.2]
+- **Brand/entity anchors**: Added scoped brand anchors with metadata and capped weights for News (CNA, BBC, Sky, NPR, Vox/VICE), Video Editing (Ripple Training), Music (Pomplamoose, Jack Conte), Health (Athlean-X, Ken D Berry, Fit Father Project, Keto) with scope:"brand", provenance:"curated", weightCap set
+- **DIY vertical microtopics**: Created DIY vertical microtopics in taxonomy.json with parent tagging (Woodworking & Fabrication, Home Repair & Tools, Construction & Trades, Maker & 3D Printing) all parent:"DIY, Home & Construction"
+- **DIY portable includes**: Added portable includes for microtopics in rules.json with weights [0.8-1.0] (router|jointer|planer|bandsaw|lathe|dovetail|mortise|chisels|CNC|hardwood|plywood|rip-cut, etc.)
+- **No UI changes**: Maintained flat UI with parent tags data-only for governance surfacing when size≥5 && purity≥0.7
+- **Validation results**: 503 channels ✓, 15 clusters (within displayCap ≤20), Unclassified 155 (improvement from 204), News gained obvious outlets, DIY items moved to proper microtopics, Health/Editing/Music misroutes fixed
+- **Brand anchor exclusions**: Added exclude guard for tech-y "md" (md5|markdown) in Health brands to prevent false matches
+- **Scope and source fields**: Tagged rules with scope ("universal", "vertical", "brand") and source ("curated") fields for future telemetry
