@@ -191,3 +191,8 @@ Next: 4.2b precision pass - further threshold tuning required
 - **DIY vertical lexicons**: Strengthened portable includes for Woodworking & Fabrication (+1.0~1.2), Home Repair & Tools (+1.0~1.1), Construction & Trades (+1.1), Maker & 3D Printing (+1.1) with disambiguation for router/electronics collisions
 - **Cross-cluster guards**: Added DIY term excludes to General Tech & Reviews, AI & Emerging Tech, and News to prevent drift and improve purity
 - **Validation results**: 503 channels ✓, 17 clusters (≤20 displayCap ✓), Unclassified 159 (maintained), DIY microtopics established baseline for future promotion when size ≥5 and purity ≥0.7
+
+## 2025-10-06 — LWL Fixes v1
+- **Fixed regex syntax**: Corrected malformed character class in `scripts/label_terms.js` normalize function
+- **Fixed CSV literals**: Updated header strings in `scripts/lwl_cluster.js` with proper newline escapes
+- **Validation results**: LWL harness runs cleanly, generates 3 output files (lwl_clusters.json: 121K, lwl_channels.csv: 46K, lwl_summary.csv: 6.4K)
