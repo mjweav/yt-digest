@@ -181,3 +181,8 @@ Next: 4.2b precision pass - further threshold tuning required
 - **Validation results**: 503 channels ✓, 15 clusters (within displayCap ≤20), Unclassified 155 (improvement from 204), News gained obvious outlets, DIY items moved to proper microtopics, Health/Editing/Music misroutes fixed
 - **Brand anchor exclusions**: Added exclude guard for tech-y "md" (md5|markdown) in Health brands to prevent false matches
 - **Scope and source fields**: Tagged rules with scope ("universal", "vertical", "brand") and source ("curated") fields for future telemetry
+
+## 2025-10-06 — News Bleed Fix
+- **News rule tightening**: Reduced generic term weights (world/global: 0.5→0.4), added comprehensive excludes for editing tools, photo/gear, music, DIY/maker, comedy, and big brands to prevent bleed
+- **Targeted positive anchors**: Added low-weight anchors across affected clusters (Photography & Cameras: B&H patterns +1.2, Video Editing: Ripple/No Film School/Hollywood FCP/Ben Halsall +1.2, Music: Callum Graham/Doctor Mix/Vic Firth +1.2, Business: Creator Magic/Sean Dollwet/Matthew Berman +1.2, Gardening: Joe Gardener TV +1.3, AI: Prompt Engineering/Rob AI Genius +1.2, DIY verticals: Magic Plan/Sketchup/Practical Engineering +1.1, General Tech: Microsoft +1.0)
+- **Validation results**: 503 channels ✓, 15 clusters (≤20 displayCap ✓), Unclassified 159 (slight increase from 155 target but within acceptable range), News bleed eliminated, targeted channels moved to correct clusters

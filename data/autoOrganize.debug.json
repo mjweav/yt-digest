@@ -176,7 +176,7 @@
         "promoted": [
           {
             "label": "Unclassified",
-            "size": 155,
+            "size": 159,
             "purity": 0,
             "allowlisted": false
           },
@@ -188,38 +188,38 @@
           },
           {
             "label": "Photography & Cameras",
-            "size": 45,
-            "purity": 12.871,
+            "size": 46,
+            "purity": 14.922,
             "allowlisted": false
           },
           {
             "label": "DIY, Home & Construction",
-            "size": 33,
-            "purity": 5.291,
+            "size": 35,
+            "purity": 5.171,
             "allowlisted": false
           },
           {
             "label": "Business & Marketing",
-            "size": 54,
-            "purity": 8.007,
+            "size": 57,
+            "purity": 8.765,
             "allowlisted": false
           },
           {
             "label": "News",
-            "size": 87,
-            "purity": 10.028,
+            "size": 61,
+            "purity": 11.036,
             "allowlisted": false
           },
           {
             "label": "General Tech & Reviews",
-            "size": 30,
-            "purity": 6.453,
+            "size": 32,
+            "purity": 7.344,
             "allowlisted": false
           },
           {
             "label": "AI & Emerging Tech",
-            "size": 9,
-            "purity": 4.089,
+            "size": 10,
+            "purity": 3.8,
             "allowlisted": false
           },
           {
@@ -236,20 +236,20 @@
           },
           {
             "label": "Music & Musicians",
-            "size": 42,
-            "purity": 9.195,
+            "size": 49,
+            "purity": 9.592,
             "allowlisted": false
           },
           {
             "label": "Video Editing & Creative Tools",
-            "size": 8,
-            "purity": 4.85,
+            "size": 12,
+            "purity": 4.9,
             "allowlisted": true
           },
           {
             "label": "Gardening",
-            "size": 18,
-            "purity": 14.178,
+            "size": 20,
+            "purity": 17.23,
             "allowlisted": false
           },
           {
@@ -259,9 +259,9 @@
             "allowlisted": false
           },
           {
-            "label": "Video Editing Brands",
+            "label": "Maker & 3D Printing",
             "size": 1,
-            "purity": 0.2,
+            "purity": 4.6,
             "allowlisted": false
           }
         ],
@@ -839,10 +839,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -880,6 +876,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -921,10 +921,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -962,6 +958,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -1539,10 +1539,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -1572,6 +1568,10 @@
           },
           {
             "label": "Video Editing & Creative Tools",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -1621,10 +1621,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -1654,6 +1650,10 @@
         },
         {
           "label": "Video Editing & Creative Tools",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -3450,10 +3450,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -3476,6 +3472,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -3532,10 +3532,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -3558,6 +3554,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -5518,10 +5518,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -5551,6 +5547,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -5600,10 +5600,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -5634,6 +5630,10 @@
         {
           "label": "Music & Musicians",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -5641,18 +5641,18 @@
       "id": "UCHIRBiAd-PtmNxAcLnGfwog",
       "name": "B&H Photo Video Pro Audio",
       "description": "We love what we do. We are both professional and avid photographers, filmmakers, and audio professionals. We enjoy getting out to explore the world as creators and teachers. On our channel, you’ll see videos, podcasts, and tutorials showing this passion for craft, as well as other artists that love what they do as much as we do.\n \nWant to see more of something you love doing, or want to do better? Drop us a line at askbh@bhphoto.com\n\nHead to our B&H Event Space YouTube channel for more seminars! https://bhpho.to/BHEventSpaceYT",
-      "assignedLabel": "News",
+      "assignedLabel": "Photography & Cameras",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
+        "label": "Photography & Cameras",
+        "topScore": 36.8,
         "secondScore": 0,
-        "margin": 11.200000000000001,
+        "margin": 36.8,
         "scores": [
           {
-            "label": "News",
-            "score": 11.200000000000001
+            "label": "Photography & Cameras",
+            "score": 36.8
           },
           {
             "label": "Health & Medicine",
@@ -5660,10 +5660,6 @@
           },
           {
             "label": "AI & Emerging Tech",
-            "score": 0
-          },
-          {
-            "label": "Photography & Cameras",
             "score": 0
           },
           {
@@ -5725,16 +5721,20 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
+      "topScore": 36.8,
       "secondScore": 0,
-      "margin": 11.200000000000001,
+      "margin": 36.8,
       "scores": [
         {
-          "label": "News",
-          "score": 11.200000000000001
+          "label": "Photography & Cameras",
+          "score": 36.8
         },
         {
           "label": "Health & Medicine",
@@ -5742,10 +5742,6 @@
         },
         {
           "label": "AI & Emerging Tech",
-          "score": 0
-        },
-        {
-          "label": "Photography & Cameras",
           "score": 0
         },
         {
@@ -5806,6 +5802,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -5987,19 +5987,15 @@
       "id": "UCZtDUmC3W7j25XHZWFT_XgQ",
       "name": "BBC Music",
       "description": "BBC Music brings you the biggest artists in the world from the biggest events.\n\nThere's tracks from the legendary festivals like Glastonbury and Reading and Leeds,  sessions from emerging artists with BBC Music Introducing,  performances from the iconic Later… with Jools Holland series, unique performances from Radio 2 as well as moments from all of the other music content from across the BBC.\n\n\nIf you're making music, upload it at bbc.co.uk/introducing and let us hear what you have to offer. Your music could be played on BBC Radio, or you might even be invited to record a session, play live at a festival or perform at one of BBC Introducing's international showcases.",
-      "assignedLabel": "News",
+      "assignedLabel": "Music & Musicians",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 8,
-        "margin": 3.200000000000001,
+        "label": "Music & Musicians",
+        "topScore": 8,
+        "secondScore": 0,
+        "margin": 8,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Music & Musicians",
             "score": 8
@@ -6071,17 +6067,17 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 8,
-      "margin": 3.200000000000001,
+      "topScore": 8,
+      "secondScore": 0,
+      "margin": 8,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Music & Musicians",
           "score": 8
@@ -6153,6 +6149,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -6506,19 +6506,15 @@
       "id": "UCQbfC3DLce4TYulsmwf2lzQ",
       "name": "Ben Halsall: Final Cut Pro & Adobe Tutorials",
       "description": "I am a videographer, editor, university instructor & teach Final Cut Pro & Adobe workshops across Canada.\n\nVideos are often answers to questions from students, clients & subscribers. Drop me a message to ask yours.\n\nPRIVACY POLICY and FULL DISCLOSURE:\n°Ben Halsall is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees  by advertising and linking to amazon.com\n°Ben Halsall is a participant in the MotionVFX affiliate program that provides an advertising commission if you purchase through our links. \n*Additional affiliate links you may find include BretFX Affiliate Program, Other World Computing Affiliate Program & Envato Pty Ltd Affiliate Program.\n°If you purchase something from my affiliate links will get a small commission with no extra cost to you. This makes it possible for us to make more videos. Thank you! \n°We DO NOT collect, store, use, or share any data about you.",
-      "assignedLabel": "News",
+      "assignedLabel": "Video Editing & Creative Tools",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 9.2,
-        "margin": 2.0000000000000018,
+        "label": "Video Editing & Creative Tools",
+        "topScore": 9.2,
+        "secondScore": 0,
+        "margin": 9.2,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Video Editing & Creative Tools",
             "score": 9.2
@@ -6590,17 +6586,17 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 9.2,
-      "margin": 2.0000000000000018,
+      "topScore": 9.2,
+      "secondScore": 0,
+      "margin": 9.2,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Video Editing & Creative Tools",
           "score": 9.2
@@ -6671,6 +6667,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -7771,10 +7771,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -7800,6 +7796,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -7853,10 +7853,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -7882,6 +7878,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -8282,10 +8282,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -8319,6 +8315,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -8364,10 +8364,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -8402,6 +8398,10 @@
         {
           "label": "Business & Marketing",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -8415,16 +8415,12 @@
         "mode": "scored",
         "label": "Photography & Cameras",
         "topScore": 36.8,
-        "secondScore": 11.200000000000001,
-        "margin": 25.599999999999994,
+        "secondScore": 0,
+        "margin": 36.8,
         "scores": [
           {
             "label": "Photography & Cameras",
             "score": 36.8
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -8493,20 +8489,20 @@
           {
             "label": "General Tech & Reviews",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 36.8,
-      "secondScore": 11.200000000000001,
-      "margin": 25.599999999999994,
+      "secondScore": 0,
+      "margin": 36.8,
       "scores": [
         {
           "label": "Photography & Cameras",
           "score": 36.8
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -8574,6 +8570,10 @@
         },
         {
           "label": "General Tech & Reviews",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -8628,10 +8628,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -8665,6 +8661,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -8710,10 +8710,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -8747,6 +8743,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -9674,10 +9674,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -9703,6 +9699,10 @@
           },
           {
             "label": "Health & Medicine",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -9756,10 +9756,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -9785,6 +9781,10 @@
         },
         {
           "label": "Health & Medicine",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -10317,13 +10317,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 9.600000000000001,
+        "topScore": 11.200000000000001,
         "secondScore": 0,
-        "margin": 9.600000000000001,
+        "margin": 11.200000000000001,
         "scores": [
           {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -10399,13 +10399,13 @@
           }
         ]
       },
-      "topScore": 9.600000000000001,
+      "topScore": 11.200000000000001,
       "secondScore": 0,
-      "margin": 9.600000000000001,
+      "margin": 11.200000000000001,
       "scores": [
         {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -10663,13 +10663,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 27.6,
+        "topScore": 32.2,
         "secondScore": 13.8,
-        "margin": 13.8,
+        "margin": 18.400000000000002,
         "scores": [
           {
             "label": "Gardening",
-            "score": 27.6
+            "score": 32.2
           },
           {
             "label": "DIY, Home & Construction",
@@ -10745,13 +10745,13 @@
           }
         ]
       },
-      "topScore": 27.6,
+      "topScore": 32.2,
       "secondScore": 13.8,
-      "margin": 13.8,
+      "margin": 18.400000000000002,
       "scores": [
         {
           "label": "Gardening",
-          "score": 27.6
+          "score": 32.2
         },
         {
           "label": "DIY, Home & Construction",
@@ -10831,19 +10831,15 @@
       "id": "UC6MvbqzzXu9E6SWM2Jf-g_Q",
       "name": "Calum Graham Music",
       "description": "This Canadian fingerstyle guitarist has enthralled millions of listeners around the world with his signature playing style which has led to tours across America, Europe, Australia and China. He is also considered one of the World’s Top 30 Guitarists under 30 by Acoustic Guitar Magazine. \n\nwww.calumgraham.com",
-      "assignedLabel": "News",
+      "assignedLabel": "Music & Musicians",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 8,
-        "margin": 3.200000000000001,
+        "label": "Music & Musicians",
+        "topScore": 8,
+        "secondScore": 0,
+        "margin": 8,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Music & Musicians",
             "score": 8
@@ -10915,17 +10911,17 @@
           {
             "label": "Business & Marketing",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 8,
-      "margin": 3.200000000000001,
+      "topScore": 8,
+      "secondScore": 0,
+      "margin": 8,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Music & Musicians",
           "score": 8
@@ -10996,6 +10992,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -11577,10 +11577,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -11606,6 +11602,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -11659,10 +11659,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -11688,6 +11684,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -12566,13 +12566,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 9.600000000000001,
+        "topScore": 11.200000000000001,
         "secondScore": 4.800000000000001,
-        "margin": 4.800000000000001,
+        "margin": 6.4,
         "scores": [
           {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "DIY, Home & Construction",
@@ -12648,13 +12648,13 @@
           }
         ]
       },
-      "topScore": 9.600000000000001,
+      "topScore": 11.200000000000001,
       "secondScore": 4.800000000000001,
-      "margin": 4.800000000000001,
+      "margin": 6.4,
       "scores": [
         {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "DIY, Home & Construction",
@@ -13830,10 +13830,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -13856,6 +13852,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -13912,10 +13912,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -13938,6 +13934,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -14003,10 +14003,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -14029,6 +14025,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -14085,10 +14085,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -14111,6 +14107,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -14637,15 +14637,19 @@
       "id": "UC08Fah8EIryeOZRkjBRohcQ",
       "name": "Creator Magic",
       "description": "Creator Magic explores the latest AI tools and news, with a focus on AI coding. Our videos cover new AI tools, workflow automation, and practical ways to leverage AI for more efficient and innovative projects. Now everyone can build the idea of their dreams! Whether you're a developer or just getting started you'll learn how to integrate AI into your coding workflows and stay ahead of the curve with the most advanced AI powered solutions. Join us to discover the future of coding with AI!",
-      "assignedLabel": "News",
+      "assignedLabel": "Business & Marketing",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 4.800000000000001,
-        "margin": 6.4,
+        "label": "Business & Marketing",
+        "topScore": 36.8,
+        "secondScore": 11.200000000000001,
+        "margin": 25.599999999999994,
         "scores": [
+          {
+            "label": "Business & Marketing",
+            "score": 36.8
+          },
           {
             "label": "News",
             "score": 11.200000000000001
@@ -14672,10 +14676,6 @@
           },
           {
             "label": "Video Editing & Creative Tools",
-            "score": 0
-          },
-          {
-            "label": "Business & Marketing",
             "score": 0
           },
           {
@@ -14724,10 +14724,14 @@
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 4.800000000000001,
-      "margin": 6.4,
+      "topScore": 36.8,
+      "secondScore": 11.200000000000001,
+      "margin": 25.599999999999994,
       "scores": [
+        {
+          "label": "Business & Marketing",
+          "score": 36.8
+        },
         {
           "label": "News",
           "score": 11.200000000000001
@@ -14754,10 +14758,6 @@
         },
         {
           "label": "Video Editing & Creative Tools",
-          "score": 0
-        },
-        {
-          "label": "Business & Marketing",
           "score": 0
         },
         {
@@ -15335,16 +15335,12 @@
         "mode": "scored",
         "label": "Business & Marketing",
         "topScore": 12.8,
-        "secondScore": 11.200000000000001,
-        "margin": 1.5999999999999996,
+        "secondScore": 8,
+        "margin": 4.800000000000001,
         "scores": [
           {
             "label": "Business & Marketing",
             "score": 12.8
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "General Tech & Reviews",
@@ -15413,20 +15409,20 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 12.8,
-      "secondScore": 11.200000000000001,
-      "margin": 1.5999999999999996,
+      "secondScore": 8,
+      "margin": 4.800000000000001,
       "scores": [
         {
           "label": "Business & Marketing",
           "score": 12.8
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "General Tech & Reviews",
@@ -15495,6 +15491,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -16236,10 +16236,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -16277,6 +16273,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -16318,10 +16318,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -16359,6 +16355,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -18328,10 +18328,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -18354,6 +18350,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -18410,10 +18410,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -18436,6 +18432,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -18616,19 +18616,15 @@
       "id": "UCbzNcFN7cxA8HO18cTYyTfg",
       "name": "Doctor Mix",
       "description": "🎹🔥 BECOME A SYNTH GURU — OUT NOW! 🔥🎹  \n👉 https://doctormix.com/synthesizer-guru/ 👈  \n🚀 Join my video course today & save 25% — early bird ends soon! ⏳ \n\n43 in-depth lessons • Every type of synthesis • 30+ years of knowledge condensed into one course.\n✨ I’m Claudio Passavanti (aka Doctor Mix) – pianist, producer & synth fanatic. On this channel I: 🎛️ Explore the coolest synthesizers in the world 🎶 Recreate & break down iconic tracks 📚 Share insider tips & tutorials on music production\n🏆 Broadcasting from my London studio packed with legendary gear, I bring you the sounds, techniques & inspiration to level up your music.",
-      "assignedLabel": "News",
+      "assignedLabel": "Unclassified",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
+        "label": "Unclassified",
+        "topScore": 0,
         "secondScore": 0,
-        "margin": 11.200000000000001,
+        "margin": 0,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "AI & Emerging Tech",
             "score": 0
@@ -18700,17 +18696,17 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
+      "topScore": 0,
       "secondScore": 0,
-      "margin": 11.200000000000001,
+      "margin": 0,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "AI & Emerging Tech",
           "score": 0
@@ -18781,6 +18777,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -18835,10 +18835,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -18872,6 +18868,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -18917,10 +18917,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -18954,6 +18950,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -19543,10 +19543,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -19565,6 +19561,10 @@
           {
             "label": "Music Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -19625,10 +19625,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -19647,6 +19643,10 @@
         {
           "label": "Music Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -19885,10 +19885,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -19911,6 +19907,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -19967,10 +19967,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -19993,6 +19989,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -20179,16 +20179,12 @@
         "mode": "scored",
         "label": "Photography & Cameras",
         "topScore": 12.8,
-        "secondScore": 11.200000000000001,
-        "margin": 1.5999999999999996,
+        "secondScore": 4.800000000000001,
+        "margin": 8,
         "scores": [
           {
             "label": "Photography & Cameras",
             "score": 12.8
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "DIY, Home & Construction",
@@ -20255,22 +20251,22 @@
             "score": -999
           },
           {
+            "label": "News",
+            "score": -999
+          },
+          {
             "label": "Aviation",
             "score": -999
           }
         ]
       },
       "topScore": 12.8,
-      "secondScore": 11.200000000000001,
-      "margin": 1.5999999999999996,
+      "secondScore": 4.800000000000001,
+      "margin": 8,
       "scores": [
         {
           "label": "Photography & Cameras",
           "score": 12.8
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "DIY, Home & Construction",
@@ -20334,6 +20330,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         },
         {
@@ -20692,19 +20692,15 @@
       "id": "UCknLrEdhRCp1aegoMqRaCZg",
       "name": "DW News",
       "description": "Journalism that’s Made for Minds. Follow us for global news and analysis from the heart of Europe. DW News delivers the world's breaking news while going deep beneath the surface of what's going on. Correspondents on the ground and in the studio provide their detailed analysis and insights on issues that affect our viewers. \n\nDeutsche Welle is Germany’s international broadcaster, producing content in 30 languages. We independently report social, political and economic developments in Germany and Europe, incorporating both German and other perspectives. DW hopes to promote understanding between different cultures and peoples. \n\nWhile funded by the German government, the work of DW is regulated by the Deutsche Welle Act (http://p.dw.com/p/17MtP), meaning content is always independent of government influence. \n\nWe ask that you please keep comments and discussions on this channel clean and respectful. For further information please click the 'DW Netiquette' link below.",
-      "assignedLabel": "News",
+      "assignedLabel": "Unclassified",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 32.2,
+        "label": "Unclassified",
+        "topScore": 0,
         "secondScore": 0,
-        "margin": 32.2,
+        "margin": 0,
         "scores": [
-          {
-            "label": "News",
-            "score": 32.2
-          },
           {
             "label": "Health & Medicine",
             "score": 0
@@ -20776,17 +20772,17 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 32.2,
+      "topScore": 0,
       "secondScore": 0,
-      "margin": 32.2,
+      "margin": 0,
       "scores": [
-        {
-          "label": "News",
-          "score": 32.2
-        },
         {
           "label": "Health & Medicine",
           "score": 0
@@ -20858,6 +20854,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -20911,10 +20911,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -20948,6 +20944,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -20993,10 +20993,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -21030,6 +21026,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -21961,10 +21961,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -21987,6 +21983,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -22043,10 +22043,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -22069,6 +22065,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -22946,13 +22946,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 18,
+        "topScore": 21,
         "secondScore": 0,
-        "margin": 18,
+        "margin": 21,
         "scores": [
           {
             "label": "Gardening",
-            "score": 18
+            "score": 21
           },
           {
             "label": "Health & Medicine",
@@ -23028,13 +23028,13 @@
           }
         ]
       },
-      "topScore": 18,
+      "topScore": 21,
       "secondScore": 0,
-      "margin": 18,
+      "margin": 21,
       "scores": [
         {
           "label": "Gardening",
-          "score": 18
+          "score": 21
         },
         {
           "label": "Health & Medicine",
@@ -25059,10 +25059,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -25100,6 +25096,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -25141,10 +25141,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -25182,6 +25178,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -25541,13 +25541,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 27.6,
+        "topScore": 32.2,
         "secondScore": 4.800000000000001,
-        "margin": 22.8,
+        "margin": 27.400000000000002,
         "scores": [
           {
             "label": "Gardening",
-            "score": 27.6
+            "score": 32.2
           },
           {
             "label": "DIY, Home & Construction",
@@ -25623,13 +25623,13 @@
           }
         ]
       },
-      "topScore": 27.6,
+      "topScore": 32.2,
       "secondScore": 4.800000000000001,
-      "margin": 22.8,
+      "margin": 27.400000000000002,
       "scores": [
         {
           "label": "Gardening",
-          "score": 27.6
+          "score": 32.2
         },
         {
           "label": "DIY, Home & Construction",
@@ -25714,13 +25714,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 27.6,
+        "topScore": 32.2,
         "secondScore": 4.800000000000001,
-        "margin": 22.8,
+        "margin": 27.400000000000002,
         "scores": [
           {
             "label": "Gardening",
-            "score": 27.6
+            "score": 32.2
           },
           {
             "label": "DIY, Home & Construction",
@@ -25796,13 +25796,13 @@
           }
         ]
       },
-      "topScore": 27.6,
+      "topScore": 32.2,
       "secondScore": 4.800000000000001,
-      "margin": 22.8,
+      "margin": 27.400000000000002,
       "scores": [
         {
           "label": "Gardening",
-          "score": 27.6
+          "score": 32.2
         },
         {
           "label": "DIY, Home & Construction",
@@ -25887,13 +25887,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 27.6,
+        "topScore": 32.2,
         "secondScore": 4.800000000000001,
-        "margin": 22.8,
+        "margin": 27.400000000000002,
         "scores": [
           {
             "label": "Gardening",
-            "score": 27.6
+            "score": 32.2
           },
           {
             "label": "DIY, Home & Construction",
@@ -25969,13 +25969,13 @@
           }
         ]
       },
-      "topScore": 27.6,
+      "topScore": 32.2,
       "secondScore": 4.800000000000001,
-      "margin": 22.8,
+      "margin": 27.400000000000002,
       "scores": [
         {
           "label": "Gardening",
-          "score": 27.6
+          "score": 32.2
         },
         {
           "label": "DIY, Home & Construction",
@@ -26060,13 +26060,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 27.6,
+        "topScore": 32.2,
         "secondScore": 23,
-        "margin": 4.600000000000001,
+        "margin": 9.200000000000003,
         "scores": [
           {
             "label": "Gardening",
-            "score": 27.6
+            "score": 32.2
           },
           {
             "label": "General Tech & Reviews",
@@ -26142,13 +26142,13 @@
           }
         ]
       },
-      "topScore": 27.6,
+      "topScore": 32.2,
       "secondScore": 23,
-      "margin": 4.600000000000001,
+      "margin": 9.200000000000003,
       "scores": [
         {
           "label": "Gardening",
-          "score": 27.6
+          "score": 32.2
         },
         {
           "label": "General Tech & Reviews",
@@ -26233,13 +26233,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 27.6,
+        "topScore": 32.2,
         "secondScore": 0,
-        "margin": 27.6,
+        "margin": 32.2,
         "scores": [
           {
             "label": "Gardening",
-            "score": 27.6
+            "score": 32.2
           },
           {
             "label": "Health & Medicine",
@@ -26315,13 +26315,13 @@
           }
         ]
       },
-      "topScore": 27.6,
+      "topScore": 32.2,
       "secondScore": 0,
-      "margin": 27.6,
+      "margin": 32.2,
       "scores": [
         {
           "label": "Gardening",
-          "score": 27.6
+          "score": 32.2
         },
         {
           "label": "Health & Medicine",
@@ -27098,13 +27098,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 9.600000000000001,
+        "topScore": 11.200000000000001,
         "secondScore": 0,
-        "margin": 9.600000000000001,
+        "margin": 11.200000000000001,
         "scores": [
           {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -27180,13 +27180,13 @@
           }
         ]
       },
-      "topScore": 9.600000000000001,
+      "topScore": 11.200000000000001,
       "secondScore": 0,
-      "margin": 9.600000000000001,
+      "margin": 11.200000000000001,
       "scores": [
         {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -28477,19 +28477,15 @@
       "id": "UCZEWB-9BQ2DW-gwBlJJaWNg",
       "name": "Hollywood:FCP",
       "description": "This channel was started by Josh Beal and Jeff Asher, two editors working in scripted TV. We use Avid all day at work. Thing is, we wish we didn't have to. We wish we had the opportunity to use other systems such as Final Cut X. This baffles most of our friends and peers and we are often met with blank stares. We're here to piggy back on the great contributions of Mike Matzdorff and Michael Yanovich's channel, UNAUTHORIZED FCPX. Our channel is here to help explain what appeals to us about Final Cut and to maybe help any Avid users who are curious. It's basically Final Cut Pro X for Avid users. Be on the lookout for future brief tutorials and demos in the future. When we have time to make something we'll put it up here.\n\nThanks for visiting and be sure to check out UNAUTHORIZED FCPX for one of the best overviews of Final Cut! https://www.youtube.com/channel/UCgFm0z5RkLU2rEd4TTRst_A",
-      "assignedLabel": "News",
+      "assignedLabel": "Video Editing & Creative Tools",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 3.2,
-        "margin": 8,
+        "label": "Video Editing & Creative Tools",
+        "topScore": 3.2,
+        "secondScore": 0,
+        "margin": 3.2,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Video Editing & Creative Tools",
             "score": 3.2
@@ -28561,17 +28557,17 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 3.2,
-      "margin": 8,
+      "topScore": 3.2,
+      "secondScore": 0,
+      "margin": 3.2,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Video Editing & Creative Tools",
           "score": 3.2
@@ -28642,6 +28638,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -29561,10 +29561,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -29598,6 +29594,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -29643,10 +29643,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -29680,6 +29676,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -30442,10 +30442,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -30464,6 +30460,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -30524,10 +30524,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -30546,6 +30542,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -31979,10 +31979,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -32020,6 +32016,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -32061,10 +32061,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -32103,6 +32099,10 @@
         {
           "label": "Music & Musicians",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -32116,16 +32116,12 @@
         "mode": "scored",
         "label": "Photography & Cameras",
         "topScore": 12.8,
-        "secondScore": 11.200000000000001,
-        "margin": 1.5999999999999996,
+        "secondScore": 0,
+        "margin": 12.8,
         "scores": [
           {
             "label": "Photography & Cameras",
             "score": 12.8
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -32194,20 +32190,20 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 12.8,
-      "secondScore": 11.200000000000001,
-      "margin": 1.5999999999999996,
+      "secondScore": 0,
+      "margin": 12.8,
       "scores": [
         {
           "label": "Photography & Cameras",
           "score": 12.8
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -32275,6 +32271,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -32514,10 +32514,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -32540,6 +32536,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -32596,10 +32596,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -32622,6 +32618,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -32975,22 +32975,22 @@
       "id": "UC5PA3oLhFbaba-LlbR_xVNg",
       "name": "joegardenerTV",
       "description": "Welcome to joegardenerTV. My passion is organic gardening & growing food. I created this channel to teach you everything you need to know to grow like a pro - no experience required! In fact, I've been teaching people how to garden for over 15 years on TV as the host of 3 national gardening shows ( DIY Network & PBS). My current show - Emmy Award-winning Growing a Greener World is in its 9th season\n\nBut my real passion is in teaching people about organic gardening & how to be better, smarter gardeners through short how-to videos like these. No matter where you are in your gardening journey, from an experienced veteran or you're just getting started, if you'd like to grow like a pro, you've come to the right place. I'll be adding new videos every week. \n\nThanks for stopping by.  \nJoe Lamp'l (the \"joe\" behind joe gardener). \n\nP.S. Be sure to check out my website link below for lots more how-to gardening info, including my popular organic gardening podcast, The joe gardener Show!",
-      "assignedLabel": "News",
+      "assignedLabel": "Gardening",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 9.600000000000001,
-        "margin": 1.5999999999999996,
+        "label": "Gardening",
+        "topScore": 32.2,
+        "secondScore": 11.200000000000001,
+        "margin": 21,
         "scores": [
+          {
+            "label": "Gardening",
+            "score": 32.2
+          },
           {
             "label": "News",
             "score": 11.200000000000001
-          },
-          {
-            "label": "Gardening",
-            "score": 9.600000000000001
           },
           {
             "label": "DIY, Home & Construction",
@@ -33062,17 +33062,17 @@
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 9.600000000000001,
-      "margin": 1.5999999999999996,
+      "topScore": 32.2,
+      "secondScore": 11.200000000000001,
+      "margin": 21,
       "scores": [
+        {
+          "label": "Gardening",
+          "score": 32.2
+        },
         {
           "label": "News",
           "score": 11.200000000000001
-        },
-        {
-          "label": "Gardening",
-          "score": 9.600000000000001
         },
         {
           "label": "DIY, Home & Construction",
@@ -33202,10 +33202,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -33231,6 +33227,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -33284,10 +33284,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -33313,6 +33309,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -33840,19 +33840,15 @@
       "id": "UCqq3PZwp8Ob8_jN0esCunIw",
       "name": "Just For Laughs",
       "description": "JustForLaughs Comedy, the official YouTube Channel of the Just For Laughs Comedy Festival. What's Just For Laughs? Oh, just the biggest, funniest, most awesomest comedy festival in the whole world. No big deal. We specialize in brilliant, hilarious, original, smart, edgy stand-up, sketch, and improv.\n\nJust For Laughs is the world’s premiere destination for stand-up comedy. Founded in 1983, JFL produces the world’s largest and most prestigious comedy event every July in Montreal, as well as annual festivals in Toronto and Sydney. On this channel, you will find comedic clips from some of the most legendary comedians in the business: Chris Rock, Bill Burr, Kevin Hart, John Mulaney, Bo Burnham, Amy Schumer and many many more. If you just want to laugh, you’re in the right place.\n\n----------------------------------------------------\n\nhttp://www.hahaha.com\nhttp://facebook.com/justforlaughs\nhttp://twitter.com/justforlaughs",
-      "assignedLabel": "News",
+      "assignedLabel": "Video Editing & Creative Tools",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 3.2,
-        "margin": 8,
+        "label": "Video Editing & Creative Tools",
+        "topScore": 3.2,
+        "secondScore": 0,
+        "margin": 3.2,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Video Editing & Creative Tools",
             "score": 3.2
@@ -33924,17 +33920,17 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 3.2,
-      "margin": 8,
+      "topScore": 3.2,
+      "secondScore": 0,
+      "margin": 3.2,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Video Editing & Creative Tools",
           "score": 3.2
@@ -34005,6 +34001,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -34359,19 +34359,15 @@
       "id": "UCrBId04l9CaruJsQ5Q8y9lA",
       "name": "Kanade Sato",
       "description": "Born in Saitama Prefecture, 2002. \n\nFamiliar with Jazz fusion and Pop music from an early age. \n\nShe self-taught the melody of \"Spain (Chick Corea)\", before speaking words . She started playing drums at 3 years old, and decided to become a professional drummer at 5 years old. \n\n2009 (6 year old)\n· Co-starring with Mr. Minoru Mukaiya (ex. Casiopea). and regular co-starring afterwards. \n\n2012 (9 year old)\n· Starred in promotional events and videos of Roland V-Drums. \n\n2013 (10 year old)\n· Participated in the recording of Mr. Minoru Mukaiya. \n\n2014 (11 year old)\n· Won the \"Grand Prix\" in global competition of women drummer \"HIT LIKE A GIRL\" U-18. \n \n2016 (13 year old)\n· Appeared in Singapore Drum Fest 2016.\n​\n2017 (14 year old)\n· TV program NHK E-Tele \"Musika Piccolino  (Season 5)\" appeared as \"Lunetta\".\n\n· Endorsement contract with Pearl Drums.\n\n· Formed \"Ear Candy Jazz Factory\" with Rei Narita (Pf) and Naoko Sakurai (Bs). Held a debut live in Jakarta.",
-      "assignedLabel": "News",
+      "assignedLabel": "Music & Musicians",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 8,
-        "margin": 3.200000000000001,
+        "label": "Music & Musicians",
+        "topScore": 8,
+        "secondScore": 0,
+        "margin": 8,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Music & Musicians",
             "score": 8
@@ -34443,17 +34439,17 @@
           {
             "label": "Health & Medicine",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 8,
-      "margin": 3.200000000000001,
+      "topScore": 8,
+      "secondScore": 0,
+      "margin": 8,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Music & Musicians",
           "score": 8
@@ -34524,6 +34520,10 @@
         },
         {
           "label": "Health & Medicine",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -34928,10 +34928,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -34961,6 +34957,10 @@
           },
           {
             "label": "Video Editing & Creative Tools",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -35010,10 +35010,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -35043,6 +35039,10 @@
         },
         {
           "label": "Video Editing & Creative Tools",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -36489,10 +36489,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -36518,6 +36514,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -36571,10 +36571,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -36600,6 +36596,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -36658,10 +36658,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -36691,6 +36687,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -36740,10 +36740,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -36773,6 +36769,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -37004,10 +37004,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -37037,6 +37033,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -37086,10 +37086,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -37119,6 +37115,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -37342,10 +37342,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -37383,6 +37379,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -37424,10 +37424,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -37466,6 +37462,10 @@
         {
           "label": "Music & Musicians",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -37478,13 +37478,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 27.6,
+        "topScore": 32.2,
         "secondScore": 4.800000000000001,
-        "margin": 22.8,
+        "margin": 27.400000000000002,
         "scores": [
           {
             "label": "Gardening",
-            "score": 27.6
+            "score": 32.2
           },
           {
             "label": "DIY, Home & Construction",
@@ -37560,13 +37560,13 @@
           }
         ]
       },
-      "topScore": 27.6,
+      "topScore": 32.2,
       "secondScore": 4.800000000000001,
-      "margin": 22.8,
+      "margin": 27.400000000000002,
       "scores": [
         {
           "label": "Gardening",
-          "score": 27.6
+          "score": 32.2
         },
         {
           "label": "DIY, Home & Construction",
@@ -38388,10 +38388,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -38421,6 +38417,10 @@
           },
           {
             "label": "Video Editing & Creative Tools",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -38470,10 +38470,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -38503,6 +38499,10 @@
         },
         {
           "label": "Video Editing & Creative Tools",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -38915,10 +38915,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -38941,6 +38937,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -38997,10 +38997,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -39023,6 +39019,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -40933,19 +40933,15 @@
       "id": "UC3TqK2sSktlk7CmXGpw7_Cg",
       "name": "Low End University",
       "description": "Low End University was founded by Mark Michell, an internationally-touring and recording bassist known for his work with Scale the Summit, Tony MacAlpine, Tetrafusion, and Watermox. His most-recent albums were released to Billboard-charting acclaim in the Top 200, Top Rock Albums, Top Independent Albums, Heatseekers Albums, Top Current Albums and Contemporary Jazz Albums categories. \n\nFor over a decade, Michell has been teaching clinics to students around the globe while on tour, has enrolled thousands of students through Low End University's online bass academy, and has published six method books for bass guitar. 2016 saw the release of his instructional DVD \"Advanced Rock Bass\" after signing a worldwide publishing deal with Hal Leonard Music Corporation, and later that year was hand-selected to the panel of professors at the Warwick Bass Camp in Germany to teach alongside the best bass players in the world.",
-      "assignedLabel": "News",
+      "assignedLabel": "Music & Musicians",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 8,
-        "margin": 3.200000000000001,
+        "label": "Music & Musicians",
+        "topScore": 8,
+        "secondScore": 0,
+        "margin": 8,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Music & Musicians",
             "score": 8
@@ -41017,17 +41013,17 @@
           {
             "label": "Business & Marketing",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 8,
-      "margin": 3.200000000000001,
+      "topScore": 8,
+      "secondScore": 0,
+      "margin": 8,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Music & Musicians",
           "score": 8
@@ -41098,6 +41094,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -41971,22 +41971,22 @@
       "id": "UCqmjz2x7NffJRMg4mmeDTvg",
       "name": "magicplan",
       "description": "magicplan is the app every contractor loves. Instantly create and share floor plans, field reports, and estimates with one easy-to-use application. magicplan offers a better way to get work done while in the field. \n\nmagicplan is renowned worldwide:\n• Downloaded by over 18 million users\n• Best of the year 2012 and 2017\n• #1 iPhone Utilities in 76 countries\n• #1 iPad Utilities in 104 countries\n• Every day the equivalent of a small city is mapped with magicplan\n\nMeasuring & Sketching\nWe use state-of-the-art tech with an easy-to-use interface, allowing you to measure and sketch interior plans in 2D & 3D.\n\nReporting\nAdd photos, 360° images, notes, custom forms, and markups to create structured reports that eliminate any risk of confusion.\n\nEstimating\nWe developed a way to combine take-off and estimate to automatically calculate pricing on your mobile device.\n\nAvailable on iOS and Android",
-      "assignedLabel": "News",
+      "assignedLabel": "General Tech & Reviews",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 8,
-        "margin": 3.200000000000001,
+        "label": "General Tech & Reviews",
+        "topScore": 8,
+        "secondScore": 4.6,
+        "margin": 3.4000000000000004,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "General Tech & Reviews",
             "score": 8
+          },
+          {
+            "label": "Home Repair & Tools",
+            "score": 4.6
           },
           {
             "label": "Health & Medicine",
@@ -42021,10 +42021,6 @@
             "score": 0
           },
           {
-            "label": "Home Repair & Tools",
-            "score": 0
-          },
-          {
             "label": "Construction & Trades",
             "score": 0
           },
@@ -42055,20 +42051,24 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 8,
-      "margin": 3.200000000000001,
+      "topScore": 8,
+      "secondScore": 4.6,
+      "margin": 3.4000000000000004,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "General Tech & Reviews",
           "score": 8
+        },
+        {
+          "label": "Home Repair & Tools",
+          "score": 4.6
         },
         {
           "label": "Health & Medicine",
@@ -42103,10 +42103,6 @@
           "score": 0
         },
         {
-          "label": "Home Repair & Tools",
-          "score": 0
-        },
-        {
           "label": "Construction & Trades",
           "score": 0
         },
@@ -42137,6 +42133,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -42359,10 +42359,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -42400,6 +42396,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -42441,10 +42441,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -42482,6 +42478,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -43409,10 +43409,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -43438,6 +43434,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -43491,10 +43491,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -43520,6 +43516,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -45085,15 +45085,19 @@
       "id": "UCawZsQWqfGSbCI5yjkdVkTA",
       "name": "Matthew Berman",
       "description": "Artificial Intelligence (AI), Open Source, Generative Art, AI Art, Futurism, ChatGPT, Large Language Models (LLM), Machine Learning, Technology, Coding, Tutorials, AI News, and more",
-      "assignedLabel": "News",
+      "assignedLabel": "Business & Marketing",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 3.2,
-        "margin": 8,
+        "label": "Business & Marketing",
+        "topScore": 24,
+        "secondScore": 11.200000000000001,
+        "margin": 12.799999999999999,
         "scores": [
+          {
+            "label": "Business & Marketing",
+            "score": 24
+          },
           {
             "label": "News",
             "score": 11.200000000000001
@@ -45112,10 +45116,6 @@
           },
           {
             "label": "Video Editing & Creative Tools",
-            "score": 0
-          },
-          {
-            "label": "Business & Marketing",
             "score": 0
           },
           {
@@ -45172,10 +45172,14 @@
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 3.2,
-      "margin": 8,
+      "topScore": 24,
+      "secondScore": 11.200000000000001,
+      "margin": 12.799999999999999,
       "scores": [
+        {
+          "label": "Business & Marketing",
+          "score": 24
+        },
         {
           "label": "News",
           "score": 11.200000000000001
@@ -45194,10 +45198,6 @@
         },
         {
           "label": "Video Editing & Creative Tools",
-          "score": 0
-        },
-        {
-          "label": "Business & Marketing",
           "score": 0
         },
         {
@@ -46696,10 +46696,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -46725,6 +46721,10 @@
           },
           {
             "label": "Health & Medicine",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -46778,10 +46778,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -46807,6 +46803,10 @@
         },
         {
           "label": "Health & Medicine",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -46988,18 +46988,18 @@
       "id": "UCFtEEv80fQVKkD4h1PF-Xqw",
       "name": "Microsoft",
       "description": "Our mission is to empower every person and every organization on the planet to achieve more.\n\nSubscribe to Microsoft's official YouTube channel to explore technology’s role in making the world more sustainable, inclusive, and innovative for all.",
-      "assignedLabel": "News",
+      "assignedLabel": "General Tech & Reviews",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
+        "label": "General Tech & Reviews",
+        "topScore": 23,
         "secondScore": 0,
-        "margin": 11.200000000000001,
+        "margin": 23,
         "scores": [
           {
-            "label": "News",
-            "score": 11.200000000000001
+            "label": "General Tech & Reviews",
+            "score": 23
           },
           {
             "label": "Health & Medicine",
@@ -47007,10 +47007,6 @@
           },
           {
             "label": "AI & Emerging Tech",
-            "score": 0
-          },
-          {
-            "label": "General Tech & Reviews",
             "score": 0
           },
           {
@@ -47072,16 +47068,20 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
+      "topScore": 23,
       "secondScore": 0,
-      "margin": 11.200000000000001,
+      "margin": 23,
       "scores": [
         {
-          "label": "News",
-          "score": 11.200000000000001
+          "label": "General Tech & Reviews",
+          "score": 23
         },
         {
           "label": "Health & Medicine",
@@ -47089,10 +47089,6 @@
         },
         {
           "label": "AI & Emerging Tech",
-          "score": 0
-        },
-        {
-          "label": "General Tech & Reviews",
           "score": 0
         },
         {
@@ -47154,6 +47150,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -47166,13 +47166,13 @@
       "why": {
         "mode": "scored",
         "label": "General Tech & Reviews",
-        "topScore": 8,
+        "topScore": 23,
         "secondScore": 4.800000000000001,
-        "margin": 3.1999999999999993,
+        "margin": 18.2,
         "scores": [
           {
             "label": "General Tech & Reviews",
-            "score": 8
+            "score": 23
           },
           {
             "label": "DIY, Home & Construction",
@@ -47219,10 +47219,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -47245,16 +47241,20 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 8,
+      "topScore": 23,
       "secondScore": 4.800000000000001,
-      "margin": 3.1999999999999993,
+      "margin": 18.2,
       "scores": [
         {
           "label": "General Tech & Reviews",
-          "score": 8
+          "score": 23
         },
         {
           "label": "DIY, Home & Construction",
@@ -47301,10 +47301,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -47327,6 +47323,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -47339,13 +47339,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 9.600000000000001,
+        "topScore": 11.200000000000001,
         "secondScore": 4.800000000000001,
-        "margin": 4.800000000000001,
+        "margin": 6.4,
         "scores": [
           {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "DIY, Home & Construction",
@@ -47421,13 +47421,13 @@
           }
         ]
       },
-      "topScore": 9.600000000000001,
+      "topScore": 11.200000000000001,
       "secondScore": 4.800000000000001,
-      "margin": 4.800000000000001,
+      "margin": 6.4,
       "scores": [
         {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "DIY, Home & Construction",
@@ -47565,10 +47565,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -47591,6 +47587,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -47647,10 +47647,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -47673,6 +47669,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -50281,16 +50281,12 @@
         "mode": "scored",
         "label": "Photography & Cameras",
         "topScore": 12.8,
-        "secondScore": 11.200000000000001,
-        "margin": 1.5999999999999996,
+        "secondScore": 0,
+        "margin": 12.8,
         "scores": [
           {
             "label": "Photography & Cameras",
             "score": 12.8
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -50359,20 +50355,20 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 12.8,
-      "secondScore": 11.200000000000001,
-      "margin": 1.5999999999999996,
+      "secondScore": 0,
+      "margin": 12.8,
       "scores": [
         {
           "label": "Photography & Cameras",
           "score": 12.8
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -50440,6 +50436,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -50626,13 +50626,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 9.600000000000001,
+        "topScore": 11.200000000000001,
         "secondScore": 4.800000000000001,
-        "margin": 4.800000000000001,
+        "margin": 6.4,
         "scores": [
           {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "DIY, Home & Construction",
@@ -50708,13 +50708,13 @@
           }
         ]
       },
-      "topScore": 9.600000000000001,
+      "topScore": 11.200000000000001,
       "secondScore": 4.800000000000001,
-      "margin": 4.800000000000001,
+      "margin": 6.4,
       "scores": [
         {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "DIY, Home & Construction",
@@ -50794,22 +50794,18 @@
       "id": "UCqZQlzSHbVJrwrn5XvzrzcA",
       "name": "NBC Sports",
       "description": "NBC Sports Group serves sports fans 24/7 with premier live events, insightful studio shows, and compelling original programming. NBC Sports is an established leader in the sports media landscape with an unparalleled collection of sports properties that include the Olympics, NFL, Premier League, Big Ten, NASCAR, PGA TOUR, the Kentucky Derby, Tour de France and many more. Subscribe to our channel for the latest sporting news and highlights!\n\nVisit NBC Sports: https://www.nbcsports.com\nFind NBC Sports on Facebook: https://www.facebook.com/NBCSports\nFollow NBC Sports on Twitter: https://twitter.com/nbcsports\nFollow NBC Sports on Instagram: https://www.instagram.com/nbcsports/",
-      "assignedLabel": "News",
+      "assignedLabel": "Gardening",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
+        "label": "Gardening",
         "topScore": 11.200000000000001,
-        "secondScore": 9.600000000000001,
-        "margin": 1.5999999999999996,
+        "secondScore": 0,
+        "margin": 11.200000000000001,
         "scores": [
           {
-            "label": "News",
-            "score": 11.200000000000001
-          },
-          {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -50878,20 +50874,20 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 11.200000000000001,
-      "secondScore": 9.600000000000001,
-      "margin": 1.5999999999999996,
+      "secondScore": 0,
+      "margin": 11.200000000000001,
       "scores": [
         {
-          "label": "News",
-          "score": 11.200000000000001
-        },
-        {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -50960,6 +50956,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -51491,13 +51491,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 27.6,
+        "topScore": 32.2,
         "secondScore": 8,
-        "margin": 19.6,
+        "margin": 24.200000000000003,
         "scores": [
           {
             "label": "Gardening",
-            "score": 27.6
+            "score": 32.2
           },
           {
             "label": "Music & Musicians",
@@ -51573,13 +51573,13 @@
           }
         ]
       },
-      "topScore": 27.6,
+      "topScore": 32.2,
       "secondScore": 8,
-      "margin": 19.6,
+      "margin": 24.200000000000003,
       "scores": [
         {
           "label": "Gardening",
-          "score": 27.6
+          "score": 32.2
         },
         {
           "label": "Music & Musicians",
@@ -52011,8 +52011,8 @@
         "mode": "scored",
         "label": "Photography & Cameras",
         "topScore": 12.8,
-        "secondScore": 9.600000000000001,
-        "margin": 3.1999999999999993,
+        "secondScore": 11.200000000000001,
+        "margin": 1.5999999999999996,
         "scores": [
           {
             "label": "Photography & Cameras",
@@ -52020,7 +52020,7 @@
           },
           {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -52055,10 +52055,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Aviation",
             "score": 0
           },
@@ -52089,12 +52085,16 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 12.8,
-      "secondScore": 9.600000000000001,
-      "margin": 3.1999999999999993,
+      "secondScore": 11.200000000000001,
+      "margin": 1.5999999999999996,
       "scores": [
         {
           "label": "Photography & Cameras",
@@ -52102,7 +52102,7 @@
         },
         {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -52137,10 +52137,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Aviation",
           "score": 0
         },
@@ -52170,6 +52166,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -52224,10 +52224,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -52261,6 +52257,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -52306,10 +52306,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -52343,6 +52339,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -52578,10 +52578,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -52607,6 +52603,10 @@
           },
           {
             "label": "Photography & Cameras",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -52660,10 +52660,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -52690,6 +52686,10 @@
         {
           "label": "Photography & Cameras",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -52703,8 +52703,8 @@
         "mode": "scored",
         "label": "Photography & Cameras",
         "topScore": 12.8,
-        "secondScore": 9.600000000000001,
-        "margin": 3.1999999999999993,
+        "secondScore": 11.200000000000001,
+        "margin": 1.5999999999999996,
         "scores": [
           {
             "label": "Photography & Cameras",
@@ -52712,7 +52712,7 @@
           },
           {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -52751,10 +52751,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Aviation",
             "score": 0
           },
@@ -52781,12 +52777,16 @@
           {
             "label": "Video Editing & Creative Tools",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 12.8,
-      "secondScore": 9.600000000000001,
-      "margin": 3.1999999999999993,
+      "secondScore": 11.200000000000001,
+      "margin": 1.5999999999999996,
       "scores": [
         {
           "label": "Photography & Cameras",
@@ -52794,7 +52794,7 @@
         },
         {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -52833,10 +52833,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Aviation",
           "score": 0
         },
@@ -52862,6 +52858,10 @@
         },
         {
           "label": "Video Editing & Creative Tools",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -53061,6 +53061,10 @@
             "score": 8
           },
           {
+            "label": "Video Editing & Creative Tools",
+            "score": 6
+          },
+          {
             "label": "Health & Medicine",
             "score": 0
           },
@@ -53070,10 +53074,6 @@
           },
           {
             "label": "Photography & Cameras",
-            "score": 0
-          },
-          {
-            "label": "Video Editing & Creative Tools",
             "score": 0
           },
           {
@@ -53143,6 +53143,10 @@
           "score": 8
         },
         {
+          "label": "Video Editing & Creative Tools",
+          "score": 6
+        },
+        {
           "label": "Health & Medicine",
           "score": 0
         },
@@ -53152,10 +53156,6 @@
         },
         {
           "label": "Photography & Cameras",
-          "score": 0
-        },
-        {
-          "label": "Video Editing & Creative Tools",
           "score": 0
         },
         {
@@ -53274,10 +53274,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -53300,6 +53296,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -53356,10 +53356,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -53382,6 +53378,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -54259,13 +54259,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 9.600000000000001,
+        "topScore": 11.200000000000001,
         "secondScore": 0,
-        "margin": 9.600000000000001,
+        "margin": 11.200000000000001,
         "scores": [
           {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -54341,13 +54341,13 @@
           }
         ]
       },
-      "topScore": 9.600000000000001,
+      "topScore": 11.200000000000001,
       "secondScore": 0,
-      "margin": 9.600000000000001,
+      "margin": 11.200000000000001,
       "scores": [
         {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -54811,10 +54811,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -54857,6 +54853,10 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -54890,10 +54890,6 @@
         },
         {
           "label": "Maker & 3D Printing",
-          "score": 0
-        },
-        {
-          "label": "News",
           "score": 0
         },
         {
@@ -54938,6 +54934,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -56157,19 +56157,15 @@
       "id": "UCrRttZIypNTA1Mrfwo745Sg",
       "name": "Paramount Plus",
       "description": "Now this is peak streaming.\n\nThe stars have aligned! Paramount+ is the streaming home of SHOWTIME®. Get the Paramount+ Premium Plan - hit movies, can't-miss series, and live sports await.\n\nWith Paramount+ you can stream over 40,000 episodes and movies from CBS, BET, Comedy Central, MTV, Nickelodeon, Smithsonian Channel, Paramount Pictures, and Showtime including exclusive originals, live sports, and news.\n\nPlus, you can count on Paramount+ for the most iconic movies and the latest in live sports and news with your local CBS station, CBS News, CBS Sports HQ, and ET Live.\n\nStart your free trial now and start streaming! \nhttps://bit.ly/3kGGJmg",
-      "assignedLabel": "News",
+      "assignedLabel": "DIY, Home & Construction",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 4.800000000000001,
-        "margin": 6.4,
+        "label": "DIY, Home & Construction",
+        "topScore": 4.800000000000001,
+        "secondScore": 0,
+        "margin": 4.800000000000001,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "DIY, Home & Construction",
             "score": 4.800000000000001
@@ -56241,17 +56237,17 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 4.800000000000001,
-      "margin": 6.4,
+      "topScore": 4.800000000000001,
+      "secondScore": 0,
+      "margin": 4.800000000000001,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "DIY, Home & Construction",
           "score": 4.800000000000001
@@ -56323,6 +56319,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -57195,19 +57195,15 @@
       "id": "UCaPZyvqGjmxdTUYhyf1zEkQ",
       "name": "Peter Leyden",
       "description": "Peter Leyden is an expert on new technologies and trends shaping the future.\r\n\r\nLeyden worked for a series of innovative organizations that helped reinvent the fields of media, business and politics: He was managing editor at the original Wired Magazine that introduced the world to the digital revolution. He worked at Global Business Network, the pioneering think tank helping corporations plan for the future. He was founding director of the New Politics Institute that helped those in Washington transition to politics on the Internet. \r\n\r\nLeyden currently is founder and CEO of Reinventors, a network of innovators using the new medium of group video to carry out a series of conversations about how to reinvent America. Before that he was founder and CEO of Next Agenda.\r\n \r\nLeyden started his career as a journalist, including serving as a special correspondent for Newsweek magazine in Asia. He is the coauthor of two books on new technologies and the future: The Long Boom and What's Next.",
-      "assignedLabel": "News",
+      "assignedLabel": "DIY, Home & Construction",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 4.800000000000001,
-        "margin": 6.4,
+        "label": "DIY, Home & Construction",
+        "topScore": 4.800000000000001,
+        "secondScore": 3.2,
+        "margin": 1.6000000000000005,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "DIY, Home & Construction",
             "score": 4.800000000000001
@@ -57279,17 +57275,17 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 4.800000000000001,
-      "margin": 6.4,
+      "topScore": 4.800000000000001,
+      "secondScore": 3.2,
+      "margin": 1.6000000000000005,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "DIY, Home & Construction",
           "score": 4.800000000000001
@@ -57361,6 +57357,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -57764,10 +57764,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -57797,6 +57793,10 @@
           },
           {
             "label": "Video Editing & Creative Tools",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -57846,10 +57846,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -57879,6 +57875,10 @@
         },
         {
           "label": "Video Editing & Creative Tools",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -58102,10 +58102,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -58143,6 +58139,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -58184,10 +58184,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -58226,6 +58222,10 @@
         {
           "label": "Music & Musicians",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -58239,16 +58239,12 @@
         "mode": "scored",
         "label": "Photography & Cameras",
         "topScore": 36.8,
-        "secondScore": 11.200000000000001,
-        "margin": 25.599999999999994,
+        "secondScore": 0,
+        "margin": 36.8,
         "scores": [
           {
             "label": "Photography & Cameras",
             "score": 36.8
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -58317,20 +58313,20 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 36.8,
-      "secondScore": 11.200000000000001,
-      "margin": 25.599999999999994,
+      "secondScore": 0,
+      "margin": 36.8,
       "scores": [
         {
           "label": "Photography & Cameras",
           "score": 36.8
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -58398,6 +58394,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -58460,10 +58460,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -58489,6 +58485,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -58542,10 +58542,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -58571,6 +58567,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -59506,10 +59506,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -59528,6 +59524,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -59588,10 +59588,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -59610,6 +59606,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -60488,12 +60488,16 @@
         "mode": "scored",
         "label": "News",
         "topScore": 11.200000000000001,
-        "secondScore": 0,
-        "margin": 11.200000000000001,
+        "secondScore": 4.6,
+        "margin": 6.600000000000001,
         "scores": [
           {
             "label": "News",
             "score": 11.200000000000001
+          },
+          {
+            "label": "Construction & Trades",
+            "score": 4.6
           },
           {
             "label": "Health & Medicine",
@@ -60536,10 +60540,6 @@
             "score": 0
           },
           {
-            "label": "Construction & Trades",
-            "score": 0
-          },
-          {
             "label": "Maker & 3D Printing",
             "score": 0
           },
@@ -60570,12 +60570,16 @@
         ]
       },
       "topScore": 11.200000000000001,
-      "secondScore": 0,
-      "margin": 11.200000000000001,
+      "secondScore": 4.6,
+      "margin": 6.600000000000001,
       "scores": [
         {
           "label": "News",
           "score": 11.200000000000001
+        },
+        {
+          "label": "Construction & Trades",
+          "score": 4.6
         },
         {
           "label": "Health & Medicine",
@@ -60615,10 +60619,6 @@
         },
         {
           "label": "Home Repair & Tools",
-          "score": 0
-        },
-        {
-          "label": "Construction & Trades",
           "score": 0
         },
         {
@@ -60870,10 +60870,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -60911,6 +60907,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -60952,10 +60952,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -60994,6 +60990,10 @@
         {
           "label": "Music & Musicians",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -61006,13 +61006,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 9.600000000000001,
+        "topScore": 11.200000000000001,
         "secondScore": 4.800000000000001,
-        "margin": 4.800000000000001,
+        "margin": 6.4,
         "scores": [
           {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "DIY, Home & Construction",
@@ -61088,13 +61088,13 @@
           }
         ]
       },
-      "topScore": 9.600000000000001,
+      "topScore": 11.200000000000001,
       "secondScore": 4.800000000000001,
-      "margin": 4.800000000000001,
+      "margin": 6.4,
       "scores": [
         {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "DIY, Home & Construction",
@@ -61347,29 +61347,25 @@
       "id": "UCX6c6hTIqcphjMsXbeanJ1g",
       "name": "Prompt Engineer",
       "description": "Join the AI, AGI, ASI Revolution !\n\nStay updated with all the latest advancements in the world of Artificial Intelligence. This channel is your ultimate destination for the most recent developments and insights, all at your fingertips.\n\nJoin us to keep a vigilant eye on the cutting-edge of technology and be part of the AI revolution!\n\nTopics: Latest Trends on AI, LLMs, OpenAI, Anthroic, Google, Coding, Python, AutoGen, MemGPT, AutoGPT, API Integration, RunPoDs, Devika, Salad GPU, Microsoft Azure and much more.",
-      "assignedLabel": "News",
+      "assignedLabel": "AI & Emerging Tech",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 9.2,
-        "margin": 2.0000000000000018,
+        "label": "AI & Emerging Tech",
+        "topScore": 9.2,
+        "secondScore": 8,
+        "margin": 1.1999999999999993,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "AI & Emerging Tech",
             "score": 9.2
           },
           {
-            "label": "Health & Medicine",
-            "score": 0
+            "label": "General Tech & Reviews",
+            "score": 8
           },
           {
-            "label": "General Tech & Reviews",
+            "label": "Health & Medicine",
             "score": 0
           },
           {
@@ -61431,27 +61427,27 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 9.2,
-      "margin": 2.0000000000000018,
+      "topScore": 9.2,
+      "secondScore": 8,
+      "margin": 1.1999999999999993,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "AI & Emerging Tech",
           "score": 9.2
         },
         {
-          "label": "Health & Medicine",
-          "score": 0
+          "label": "General Tech & Reviews",
+          "score": 8
         },
         {
-          "label": "General Tech & Reviews",
+          "label": "Health & Medicine",
           "score": 0
         },
         {
@@ -61513,6 +61509,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -61578,10 +61578,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -61604,6 +61600,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -61660,10 +61660,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -61686,6 +61682,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -62385,19 +62385,15 @@
       "id": "UCblfuW_4rakIf2h6aqANefA",
       "name": "Red Bull",
       "description": "Experience the world of Red Bull like you have never seen it before, with the best action sport videos on YouTube.\n\nYou can watch plenty more on http://redbull.com",
-      "assignedLabel": "News",
+      "assignedLabel": "Unclassified",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
+        "label": "Unclassified",
+        "topScore": 0,
         "secondScore": 0,
-        "margin": 11.200000000000001,
+        "margin": 0,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Health & Medicine",
             "score": 0
@@ -62469,17 +62465,17 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
+      "topScore": 0,
       "secondScore": 0,
-      "margin": 11.200000000000001,
+      "margin": 0,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Health & Medicine",
           "score": 0
@@ -62551,6 +62547,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -62731,19 +62731,15 @@
       "id": "UCjIrqdXaUzYEEAIib8bsBrw",
       "name": "ReelinInTheYears66",
       "description": "Reelin' In The Years Productions houses the world's largest library of music footage, containing over 30,000 hours of material covering nearly every genre from the last 100 years. We have live concerts, TV appearances, interviews, in-studio segments, b-roll and more. In addition to music we have thousands of hours of interviews with the most recognizable celebrities, comedians, politicians, athletes, artists and authors of the 20th Century. If you need footage for your film, documentary, TV show, commercial, museum exhibit or presentation, we are your one-stop shop. Visit our online database at http://www.reelinintheyears.com to explore our archive, but please email us as we are constantly adding new material to the archive. We do not supply material to fans or collectors under any circumstance, so please do not contact us if that is your intention.",
-      "assignedLabel": "News",
+      "assignedLabel": "Unclassified",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
+        "label": "Unclassified",
+        "topScore": 0,
         "secondScore": 0,
-        "margin": 11.200000000000001,
+        "margin": 0,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Health & Medicine",
             "score": 0
@@ -62815,17 +62811,17 @@
           {
             "label": "Business & Marketing",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
+      "topScore": 0,
       "secondScore": 0,
-      "margin": 11.200000000000001,
+      "margin": 0,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Health & Medicine",
           "score": 0
@@ -62897,6 +62893,10 @@
         {
           "label": "Business & Marketing",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -62958,10 +62958,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -62987,6 +62983,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -63040,10 +63040,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -63069,6 +63065,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -63646,10 +63646,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -63679,6 +63675,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -63728,10 +63728,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -63761,6 +63757,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -64288,15 +64288,19 @@
       "id": "UC-Qy-4esLdXmO1F6k5kz0Qg",
       "name": "Ripple Training",
       "description": "Founded in 2002, Ripple Training Inc. is an online digital training and content distribution company specializing in software training products and plug-ins for post production professionals. Ripple Training was founded by editor and producer Steve Martin who has over 20 years of experience as an editor, educator, and producer.\n\nWe have a passion to help you be creatively successful! Trained over 100,000 students: Whether you’re a beginner, small business owner who wants to learn how to edit marketing videos like a pro, film editing enthusiast, or a professional video editor who wants to expand their careers, we’ve got the video editing courses for you! \n\nRipple Training: Trusted Tutorials for Final Cut Pro, DaVinci Resolve, Motion Video Editing Software & More!\n\nYou can learn from Industry Experts and engage with tutorials that won’t waste your time!\n\nBring your creativity to life with Ripple Training and become more proficient in your editing skills.",
-      "assignedLabel": "Video Editing Brands",
+      "assignedLabel": "Video Editing & Creative Tools",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "Video Editing Brands",
-        "topScore": 4.800000000000001,
-        "secondScore": 4.6,
-        "margin": 0.20000000000000107,
+        "label": "Video Editing & Creative Tools",
+        "topScore": 9.2,
+        "secondScore": 4.800000000000001,
+        "margin": 4.399999999999999,
         "scores": [
+          {
+            "label": "Video Editing & Creative Tools",
+            "score": 9.2
+          },
           {
             "label": "DIY, Home & Construction",
             "score": 4.800000000000001
@@ -64304,10 +64308,6 @@
           {
             "label": "Video Editing Brands",
             "score": 4.6
-          },
-          {
-            "label": "Video Editing & Creative Tools",
-            "score": 3.2
           },
           {
             "label": "Health & Medicine",
@@ -64331,10 +64331,6 @@
           },
           {
             "label": "Maker & 3D Printing",
-            "score": 0
-          },
-          {
-            "label": "News",
             "score": 0
           },
           {
@@ -64372,13 +64368,21 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 4.800000000000001,
-      "secondScore": 4.6,
-      "margin": 0.20000000000000107,
+      "topScore": 9.2,
+      "secondScore": 4.800000000000001,
+      "margin": 4.399999999999999,
       "scores": [
+        {
+          "label": "Video Editing & Creative Tools",
+          "score": 9.2
+        },
         {
           "label": "DIY, Home & Construction",
           "score": 4.800000000000001
@@ -64386,10 +64390,6 @@
         {
           "label": "Video Editing Brands",
           "score": 4.6
-        },
-        {
-          "label": "Video Editing & Creative Tools",
-          "score": 3.2
         },
         {
           "label": "Health & Medicine",
@@ -64413,10 +64413,6 @@
         },
         {
           "label": "Maker & 3D Printing",
-          "score": 0
-        },
-        {
-          "label": "News",
           "score": 0
         },
         {
@@ -64453,6 +64449,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -65714,10 +65714,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -65755,6 +65751,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -65796,10 +65796,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -65837,6 +65833,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -65887,10 +65887,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -65928,6 +65924,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -65969,10 +65969,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -66010,6 +66006,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -67098,10 +67098,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -67139,6 +67135,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -67180,10 +67180,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -67221,6 +67217,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -67291,10 +67291,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -67313,6 +67309,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -67373,10 +67373,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -67395,6 +67391,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -68094,15 +68094,19 @@
       "id": "UC6ITJIW6jgrrP5irR7WoHrw",
       "name": "Sean Dollwet",
       "description": "No BS business and investing advice by a 28 year old millionaire. If you want to learn how I built a simple publishing business that makes multiple -six figures a year passively and travel the world, check out the free training here 👉 https://seandollwet.com/fsp\n\nAnd if you're ready to watch more, make sure to subscribe to my channel here 👉 https://www.youtube.com/c/SeanDollwet?sub_confirmation=1",
-      "assignedLabel": "News",
+      "assignedLabel": "Business & Marketing",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 0,
-        "margin": 11.200000000000001,
+        "label": "Business & Marketing",
+        "topScore": 36.8,
+        "secondScore": 11.200000000000001,
+        "margin": 25.599999999999994,
         "scores": [
+          {
+            "label": "Business & Marketing",
+            "score": 36.8
+          },
           {
             "label": "News",
             "score": 11.200000000000001
@@ -68125,10 +68129,6 @@
           },
           {
             "label": "Video Editing & Creative Tools",
-            "score": 0
-          },
-          {
-            "label": "Business & Marketing",
             "score": 0
           },
           {
@@ -68181,10 +68181,14 @@
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 0,
-      "margin": 11.200000000000001,
+      "topScore": 36.8,
+      "secondScore": 11.200000000000001,
+      "margin": 25.599999999999994,
       "scores": [
+        {
+          "label": "Business & Marketing",
+          "score": 36.8
+        },
         {
           "label": "News",
           "score": 11.200000000000001
@@ -68207,10 +68211,6 @@
         },
         {
           "label": "Video Editing & Creative Tools",
-          "score": 0
-        },
-        {
-          "label": "Business & Marketing",
           "score": 0
         },
         {
@@ -69355,10 +69355,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -69388,6 +69384,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -69437,10 +69437,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -69470,6 +69466,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -69697,10 +69697,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -69734,6 +69730,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -69779,10 +69779,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -69816,6 +69812,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -70039,10 +70039,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -70080,6 +70076,10 @@
           },
           {
             "label": "Music & Musicians",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -70121,10 +70121,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -70163,6 +70159,10 @@
         {
           "label": "Music & Musicians",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -70176,16 +70176,12 @@
         "mode": "scored",
         "label": "Music & Musicians",
         "topScore": 23,
-        "secondScore": 11.200000000000001,
-        "margin": 11.799999999999999,
+        "secondScore": 0,
+        "margin": 23,
         "scores": [
           {
             "label": "Music & Musicians",
             "score": 23
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "AI & Emerging Tech",
@@ -70254,20 +70250,20 @@
           {
             "label": "Health & Medicine",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 23,
-      "secondScore": 11.200000000000001,
-      "margin": 11.799999999999999,
+      "secondScore": 0,
+      "margin": 23,
       "scores": [
         {
           "label": "Music & Musicians",
           "score": 23
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "AI & Emerging Tech",
@@ -70336,6 +70332,10 @@
         {
           "label": "Health & Medicine",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -70343,18 +70343,18 @@
       "id": "UC50lv4EYY1N1_-B495meX8w",
       "name": "SketchUp",
       "description": "SketchUp users are architects, designers, builders, makers and engineers. They are the people who shape the physical world. They are important, and they deserve great tools because great tools produce great work.\n\nAt SketchUp, we do our best to make great tools for drawing. For our users, drawing is thinking. They draw to explore ideas, to figure things out, to show other people what they mean. They draw because they love it, and because nothing great was ever built that didn't start with a great drawing.",
-      "assignedLabel": "News",
+      "assignedLabel": "Maker & 3D Printing",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
+        "label": "Maker & 3D Printing",
+        "topScore": 4.6,
         "secondScore": 0,
-        "margin": 11.200000000000001,
+        "margin": 4.6,
         "scores": [
           {
-            "label": "News",
-            "score": 11.200000000000001
+            "label": "Maker & 3D Printing",
+            "score": 4.6
           },
           {
             "label": "Health & Medicine",
@@ -70401,10 +70401,6 @@
             "score": 0
           },
           {
-            "label": "Maker & 3D Printing",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -70427,16 +70423,20 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
+      "topScore": 4.6,
       "secondScore": 0,
-      "margin": 11.200000000000001,
+      "margin": 4.6,
       "scores": [
         {
-          "label": "News",
-          "score": 11.200000000000001
+          "label": "Maker & 3D Printing",
+          "score": 4.6
         },
         {
           "label": "Health & Medicine",
@@ -70483,10 +70483,6 @@
           "score": 0
         },
         {
-          "label": "Maker & 3D Printing",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -70509,6 +70505,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -71262,10 +71262,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -71291,6 +71287,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -71344,10 +71344,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -71373,6 +71369,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -72252,16 +72252,12 @@
         "mode": "scored",
         "label": "Music & Musicians",
         "topScore": 23,
-        "secondScore": 11.200000000000001,
-        "margin": 11.799999999999999,
+        "secondScore": 4.800000000000001,
+        "margin": 18.2,
         "scores": [
           {
             "label": "Music & Musicians",
             "score": 23
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "DIY, Home & Construction",
@@ -72330,20 +72326,20 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 23,
-      "secondScore": 11.200000000000001,
-      "margin": 11.799999999999999,
+      "secondScore": 4.800000000000001,
+      "margin": 18.2,
       "scores": [
         {
           "label": "Music & Musicians",
           "score": 23
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "DIY, Home & Construction",
@@ -72412,6 +72408,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -74380,10 +74380,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -74406,6 +74402,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -74462,10 +74462,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -74488,6 +74484,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -74841,19 +74841,15 @@
       "id": "UCyH3IAelkUFM0u6Iacx22lA",
       "name": "Tears For Fears",
       "description": "Tears for Fears were always more ambitious than the average synth pop group. From the beginning, the duo of Roland Orzabal and Curt Smith were tackling big subjects -- their very name derived from Arthur Janov's primal scream therapy, and his theories were evident throughout their debut, The Hurting. Driven by catchy, infectious synth pop, The Hurting became a big hit in their native England, setting the stage for international stardom with their second album, 1985's Songs From the Big Chair. \n\nOn the strength of the singles \"Everybody Wants to Rule the World\" and \"Shout,\" the record became a major hit, establishing the duo as one of the leading acts of the second generation of MTV stars.",
-      "assignedLabel": "News",
+      "assignedLabel": "Music & Musicians",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 8,
-        "margin": 3.200000000000001,
+        "label": "Music & Musicians",
+        "topScore": 8,
+        "secondScore": 0,
+        "margin": 8,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Music & Musicians",
             "score": 8
@@ -74925,17 +74921,17 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 8,
-      "margin": 3.200000000000001,
+      "topScore": 8,
+      "secondScore": 0,
+      "margin": 8,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Music & Musicians",
           "score": 8
@@ -75007,6 +75003,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -76456,10 +76456,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -76482,6 +76478,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -76538,10 +76538,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -76564,6 +76560,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -76802,10 +76802,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -76828,6 +76824,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -76884,10 +76884,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -76910,6 +76906,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -77490,10 +77490,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -77519,6 +77515,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -77572,10 +77572,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -77601,6 +77597,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -77788,16 +77788,12 @@
         "mode": "scored",
         "label": "Photography & Cameras",
         "topScore": 12.8,
-        "secondScore": 11.200000000000001,
-        "margin": 1.5999999999999996,
+        "secondScore": 0,
+        "margin": 12.8,
         "scores": [
           {
             "label": "Photography & Cameras",
             "score": 12.8
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -77866,20 +77862,20 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 12.8,
-      "secondScore": 11.200000000000001,
-      "margin": 1.5999999999999996,
+      "secondScore": 0,
+      "margin": 12.8,
       "scores": [
         {
           "label": "Photography & Cameras",
           "score": 12.8
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -77947,6 +77943,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -78133,13 +78133,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 27.6,
+        "topScore": 32.2,
         "secondScore": 0,
-        "margin": 27.6,
+        "margin": 32.2,
         "scores": [
           {
             "label": "Gardening",
-            "score": 27.6
+            "score": 32.2
           },
           {
             "label": "Health & Medicine",
@@ -78215,13 +78215,13 @@
           }
         ]
       },
-      "topScore": 27.6,
+      "topScore": 32.2,
       "secondScore": 0,
-      "margin": 27.6,
+      "margin": 32.2,
       "scores": [
         {
           "label": "Gardening",
-          "score": 27.6
+          "score": 32.2
         },
         {
           "label": "Health & Medicine",
@@ -78359,10 +78359,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -78385,6 +78381,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -78441,10 +78441,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -78467,6 +78463,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -80608,10 +80608,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -80634,6 +80630,10 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
@@ -80690,10 +80690,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -80716,6 +80712,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -81075,16 +81075,12 @@
         "mode": "scored",
         "label": "Photography & Cameras",
         "topScore": 12.8,
-        "secondScore": 11.200000000000001,
-        "margin": 1.5999999999999996,
+        "secondScore": 0,
+        "margin": 12.8,
         "scores": [
           {
             "label": "Photography & Cameras",
             "score": 12.8
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "Health & Medicine",
@@ -81153,20 +81149,20 @@
           {
             "label": "Music & Musicians",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 12.8,
-      "secondScore": 11.200000000000001,
-      "margin": 1.5999999999999996,
+      "secondScore": 0,
+      "margin": 12.8,
       "scores": [
         {
           "label": "Photography & Cameras",
           "score": 12.8
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "Health & Medicine",
@@ -81234,6 +81230,10 @@
         },
         {
           "label": "Music & Musicians",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -81469,10 +81469,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -81498,6 +81494,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -81551,10 +81551,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -81580,6 +81576,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]
@@ -81767,16 +81767,12 @@
         "mode": "scored",
         "label": "Music & Musicians",
         "topScore": 23,
-        "secondScore": 11.200000000000001,
-        "margin": 11.799999999999999,
+        "secondScore": 4.800000000000001,
+        "margin": 18.2,
         "scores": [
           {
             "label": "Music & Musicians",
             "score": 23
-          },
-          {
-            "label": "News",
-            "score": 11.200000000000001
           },
           {
             "label": "DIY, Home & Construction",
@@ -81845,20 +81841,20 @@
           {
             "label": "Health Brands",
             "score": 0
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
       "topScore": 23,
-      "secondScore": 11.200000000000001,
-      "margin": 11.799999999999999,
+      "secondScore": 4.800000000000001,
+      "margin": 18.2,
       "scores": [
         {
           "label": "Music & Musicians",
           "score": 23
-        },
-        {
-          "label": "News",
-          "score": 11.200000000000001
         },
         {
           "label": "DIY, Home & Construction",
@@ -81927,6 +81923,10 @@
         {
           "label": "Health Brands",
           "score": 0
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -83496,13 +83496,13 @@
       "why": {
         "mode": "scored",
         "label": "Gardening",
-        "topScore": 9.600000000000001,
+        "topScore": 11.200000000000001,
         "secondScore": 4.800000000000001,
-        "margin": 4.800000000000001,
+        "margin": 6.4,
         "scores": [
           {
             "label": "Gardening",
-            "score": 9.600000000000001
+            "score": 11.200000000000001
           },
           {
             "label": "DIY, Home & Construction",
@@ -83578,13 +83578,13 @@
           }
         ]
       },
-      "topScore": 9.600000000000001,
+      "topScore": 11.200000000000001,
       "secondScore": 4.800000000000001,
-      "margin": 4.800000000000001,
+      "margin": 6.4,
       "scores": [
         {
           "label": "Gardening",
-          "score": 9.600000000000001
+          "score": 11.200000000000001
         },
         {
           "label": "DIY, Home & Construction",
@@ -84010,15 +84010,19 @@
       "id": "UC9N2JaiIWYR2GEN1tgHAczA",
       "name": "Vic Firth",
       "description": "At Vic Firth, we know you're passionate about the world of percussion.  So are we!  As drummers and percussionists, we share our musical ideas and celebrate each other's playing every day.  That's why we're sharing our video library with you!  Check out exclusive interviews, lessons and performances from your favorite drumset, concert and marching artists! Browse. Share. Learn. Enjoy!",
-      "assignedLabel": "News",
+      "assignedLabel": "Music & Musicians",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 0,
-        "margin": 11.200000000000001,
+        "label": "Music & Musicians",
+        "topScore": 23,
+        "secondScore": 11.200000000000001,
+        "margin": 11.799999999999999,
         "scores": [
+          {
+            "label": "Music & Musicians",
+            "score": 23
+          },
           {
             "label": "News",
             "score": 11.200000000000001
@@ -84045,10 +84049,6 @@
           },
           {
             "label": "Business & Marketing",
-            "score": 0
-          },
-          {
-            "label": "Music & Musicians",
             "score": 0
           },
           {
@@ -84097,10 +84097,14 @@
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 0,
-      "margin": 11.200000000000001,
+      "topScore": 23,
+      "secondScore": 11.200000000000001,
+      "margin": 11.799999999999999,
       "scores": [
+        {
+          "label": "Music & Musicians",
+          "score": 23
+        },
         {
           "label": "News",
           "score": 11.200000000000001
@@ -84127,10 +84131,6 @@
         },
         {
           "label": "Business & Marketing",
-          "score": 0
-        },
-        {
-          "label": "Music & Musicians",
           "score": 0
         },
         {
@@ -86486,10 +86486,6 @@
             "score": 0
           },
           {
-            "label": "News",
-            "score": 0
-          },
-          {
             "label": "Gardening",
             "score": 0
           },
@@ -86515,6 +86511,10 @@
           },
           {
             "label": "Business & Marketing",
+            "score": -999
+          },
+          {
+            "label": "News",
             "score": -999
           }
         ]
@@ -86568,10 +86568,6 @@
           "score": 0
         },
         {
-          "label": "News",
-          "score": 0
-        },
-        {
           "label": "Gardening",
           "score": 0
         },
@@ -86598,6 +86594,10 @@
         {
           "label": "Business & Marketing",
           "score": -999
+        },
+        {
+          "label": "News",
+          "score": -999
         }
       ]
     },
@@ -86605,19 +86605,15 @@
       "id": "UCsy9I56PY3IngCf_VGjunMQ",
       "name": "Zeihan on Geopolitics",
       "description": "Welcome to the Zeihan on Geopolitics YouTube Channel. Geopolitical Strategist Peter Zeihan is a global energy, demographic and security expert.\n\nIf you're looking to stay informed on the realities of geography and populations, you've come to the right place. Zeihan's worldview offers insights on how global politics impact markets and economic trends, helping industry leaders navigate today’s complex mix of geopolitical risks and opportunities. Expect a forward looking approach on what will drive tomorrow’s headlines, delivered in digestible, accessible and relevant takeaways for audiences of all types.\n\nThanks for watching and don't forget to subscribe!",
-      "assignedLabel": "News",
+      "assignedLabel": "Music & Musicians",
       "method": "scored",
       "why": {
         "mode": "scored",
-        "label": "News",
-        "topScore": 11.200000000000001,
-        "secondScore": 8,
-        "margin": 3.200000000000001,
+        "label": "Music & Musicians",
+        "topScore": 8,
+        "secondScore": 0,
+        "margin": 8,
         "scores": [
-          {
-            "label": "News",
-            "score": 11.200000000000001
-          },
           {
             "label": "Music & Musicians",
             "score": 8
@@ -86689,17 +86685,17 @@
           {
             "label": "Business & Marketing",
             "score": -999
+          },
+          {
+            "label": "News",
+            "score": -999
           }
         ]
       },
-      "topScore": 11.200000000000001,
-      "secondScore": 8,
-      "margin": 3.200000000000001,
+      "topScore": 8,
+      "secondScore": 0,
+      "margin": 8,
       "scores": [
-        {
-          "label": "News",
-          "score": 11.200000000000001
-        },
         {
           "label": "Music & Musicians",
           "score": 8
@@ -86770,6 +86766,10 @@
         },
         {
           "label": "Business & Marketing",
+          "score": -999
+        },
+        {
+          "label": "News",
           "score": -999
         }
       ]

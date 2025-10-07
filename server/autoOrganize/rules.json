@@ -25,9 +25,12 @@
         "machine learning", "ml\\b", "generative", "midjourney", "stable diffusion", "prompt",
         "karpathy", "openai", "anthropic", "llama", "mistral",
         { "re": "(?i)\\bai\\b", "w": 1.2 },
-        { "re": "(?i)\\bgpt\\b|\\bllm\\b", "w": 1.1 },
+        { "re": "(?i)\\bgpt\\b", "w": 1.1 },
+        { "re": "(?i)\\bllm\\b", "w": 1.1 },
         { "re": "(?i)\\brobot(ic)?s?\\b", "w": 1.0 },
-        { "re": "(?i)\\bautonomous\\b", "w": 0.6 }
+        { "re": "(?i)\\bautonomous\\b", "w": 0.6 },
+        { "re": "(?i)\\bprompt\\s*engineering\\b", "w": 1.2 },
+        { "re": "(?i)\\brob\\s*the\\s*ai\\s*genius\\b", "w": 1.2 }
       ],
       "exclude": [
         "makeup ai", "ai art nails"
@@ -42,7 +45,8 @@
         "tech", "review", "unboxing", "gadgets?", "apple", "iphone", "ipad", "mac",
         "android", "windows", "pc build", "benchmark",
         { "re": "(?i)\\b(review(s)?|unboxing|tech|gadget(s)?)\\b", "w": 1.0 },
-        { "re": "(?i)\\b(apple|android|iphone|mac|windows)\\b", "w": 0.7 }
+        { "re": "(?i)\\b(apple|android|iphone|mac|windows)\\b", "w": 0.7 },
+        { "re": "(?i)\\bmicrosoft\\b", "w": 1.0 }
       ],
       "exclude": [
         "photography", "camera", "drone", "flight sim", "tutorial", "tutorials",
@@ -59,7 +63,10 @@
         { "re": "(?i)\\b(sony|canon|nikon|fujifilm|lumix|insta360|gopro|blackmagic)\\b", "w": 0.9 },
         { "re": "(?i)\\b(camera|lens|photograph(y|er))\\b", "w": 0.8 },
         { "re": "(?i)\\bsony\\s*alpha\\b|\\bcanon\\b|\\bfujifilm\\b|\\blumix\\b", "w": 0.7 },
-        { "re": "(?i)\\blightroom\\b|\\braw\\b|\\bcolor\\s*grading\\b", "w": 0.6 }
+        { "re": "(?i)\\blightroom\\b|\\braw\\b|\\bcolor\\s*grading\\b", "w": 0.6 },
+        { "re": "(?i)\\bb&h\\b", "w": 1.2 },
+        { "re": "(?i)\\bbhphoto\\b", "w": 1.2 },
+        { "re": "(?i)\\bb\\s*&\\s*h\\s*photo\\b", "w": 1.2 }
       ],
       "exclude": [
         "security camera", "body cam", "dashcam", "marketing", "dropship", "ecom", "crypto", "stocks"
@@ -73,7 +80,11 @@
       "include": [
         "edit", "premiere", "final cut", "davinci resolve", "after effects",
         "motionvfx", "filmora", "bretfx", "color grade", "timeline",
-        { "re": "(?i)\\b(final\\s*cut|fcpx|premiere|after\\s*effects|resolve|davinci|editor|editing)\\b", "w": 1.1 }
+        { "re": "(?i)\\b(final\\s*cut|fcpx|premiere|after\\s*effects|resolve|davinci|editor|editing)\\b", "w": 1.1 },
+        { "re": "(?i)\\bripple\\s*training\\b", "w": 1.2 },
+        { "re": "(?i)\\bno\\s*film\\s*school\\b", "w": 1.2 },
+        { "re": "(?i)\\bhollywood\\s*fcp\\b", "w": 1.2 },
+        { "re": "(?i)\\bben\\s*halsall\\b", "w": 1.2 }
       ],
       "exclude": [
         "sales", "agency", "dropship",
@@ -91,7 +102,10 @@
         "startup", "shopify", "amazon fba",
         { "re": "(?i)\\b(startup(s)?|entrepreneur(ship)?|SaaS|agency|e[- ]?commerce|marketing|sales|funnel|brand(ing)?)\\b", "w": 1.0 },
         { "re": "(?i)\\b(make\\s*money|side\\s*hustle|monetiz(e|ation)|creator\\s*economy|thumbnail|hook)\\b", "w": 1.0 },
-        { "re": "(?i)\\b(kdp|amazon\\s*kdp|passive\\s*income)\\b", "w": 0.9 }
+        { "re": "(?i)\\b(kdp|amazon\\s*kdp|passive\\s*income)\\b", "w": 0.9 },
+        { "re": "(?i)\\bcreator\\s*magic\\b", "w": 1.2 },
+        { "re": "(?i)\\bsean\\s*dollwet\\b", "w": 1.2 },
+        { "re": "(?i)\\bmatthew\\s*berman\\b", "w": 1.2 }
       ],
       "exclude": [
         "flight", "storm", "camera", "lens", "photo", "premiere", "filmora",
@@ -112,7 +126,10 @@
         "riff", "chord", "jazz",
         { "re": "(?i)\\b(official)\\b.*\\b(album|single|records|band|tour|live set)\\b", "w": 1.2 },
         { "re": "(?i)\\b(lyrics?|guitar(ist)?|drums?|DJ|beats?|remix)\\b", "w": 0.8 },
-        { "re": "(?i)\\balbum\\b|\\brecords?\\b|\\bguitar\\b|\\bdrums?\\b|\\bsinger\\b|\\bband\\b", "w": 0.6 }
+        { "re": "(?i)\\balbum\\b|\\brecords?\\b|\\bguitar\\b|\\bdrums?\\b|\\bsinger\\b|\\bband\\b", "w": 0.6 },
+        { "re": "(?i)\\bcallum\\s*graham\\b", "w": 1.2 },
+        { "re": "(?i)\\bdoctor\\s*mix\\b", "w": 1.2 },
+        { "re": "(?i)\\bvic\\s*firth\\b", "w": 1.2 }
       ],
       "exclude": [
         "storm", "flight", "pilot", "camera", "lens", "tutorial", "tutorials", "review", "reviews",
@@ -150,7 +167,9 @@
       "label": "Home Repair & Tools",
       "include": [
         { "re": "(?i)\\bdrywall\\b|\\bplumbing\\b|\\bhvac\\b|\\boutlet\\b|\\bstud\\s*finder\\b|\\bimpact\\s*driver\\b", "w": 1.0 },
-        { "re": "(?i)\\boscillating\\s*multi-?tool\\b|\\bcaulk\\b|\\bgrout\\b|\\bbreaker\\b|\\bsolder\\b", "w": 0.9 }
+        { "re": "(?i)\\boscillating\\s*multi-?tool\\b|\\bcaulk\\b|\\bgrout\\b|\\bbreaker\\b|\\bsolder\\b", "w": 0.9 },
+        { "re": "(?i)\\bmagic\\s*plan\\b", "w": 1.1 },
+        { "re": "(?i)\\bmagicplan\\b", "w": 1.1 }
       ],
       "exclude": [],
       "threshold": 1.0,
@@ -161,7 +180,8 @@
       "label": "Construction & Trades",
       "include": [
         { "re": "(?i)\\bframing\\b|\\brebar\\b|\\bOSB\\b|\\bmasonry\\b|\\bconcrete\\b|\\bpour\\b|\\bcuring\\b", "w": 1.0 },
-        { "re": "(?i)\\bformwork\\b|\\bjoist\\b|\\brafter\\b|\\banchor\\s*bolt\\b", "w": 0.8 }
+        { "re": "(?i)\\bformwork\\b|\\bjoist\\b|\\brafter\\b|\\banchor\\s*bolt\\b", "w": 0.8 },
+        { "re": "(?i)\\bpractical\\s*engineering\\b", "w": 1.1 }
       ],
       "exclude": [],
       "threshold": 1.0,
@@ -172,7 +192,8 @@
       "label": "Maker & 3D Printing",
       "include": [
         { "re": "(?i)\\bPLA\\b|\\bPETG\\b|\\bSTL\\b|\\bslicer\\b|\\bnozzle\\b", "w": 1.0 },
-        { "re": "(?i)\\bMarlin\\b|\\bPrusa\\b|\\bEnder\\b", "w": 0.9 }
+        { "re": "(?i)\\bMarlin\\b|\\bPrusa\\b|\\bEnder\\b", "w": 0.9 },
+        { "re": "(?i)\\bsketchup\\b", "w": 1.1 }
       ],
       "exclude": [],
       "threshold": 1.0,
@@ -188,7 +209,7 @@
         { "re": "(?i)\\breport(s|ing)?\\b", "w": 1.0 },
         { "re": "(?i)\\bheadline(s)?\\b", "w": 0.9 },
         { "re": "(?i)\\b(update|brief)\\b", "w": 0.8 },
-        { "re": "(?i)\\bworld\\b|\\bglobal\\b", "w": 0.5 }
+        { "re": "(?i)\\bworld\\b|\\bglobal\\b", "w": 0.4 }
       ],
       "exclude": [
         "product news", "game news", "games news", "review", "reviews", "product\\s*news", "game(s)?\\s*news", "review(s)?",
@@ -196,7 +217,13 @@
         { "re": "(?i)\\breview(s)?\\b" },
         { "re": "(?i)product\\s*news" },
         { "re": "(?i)game(s)?\\s*news" },
-        { "re": "(?i)review(s)?" }
+        { "re": "(?i)review(s)?" },
+        { "re": "(?i)\\b(premiere|after\\s*effects|resolve|final\\s*cut|fcp|editor|editing)\\b" },
+        { "re": "(?i)\\b(camera|lens|photograph(y|er)|bhphoto|b&h)\\b" },
+        { "re": "(?i)\\b(guitar|drum|drummer|band|record|mix|studio)\\b" },
+        { "re": "(?i)\\b(sketchup|cad|cnc|router\\s*bit|lathe|bandsaw|planer|mortise|dovetail)\\b" },
+        { "re": "(?i)\\b(prank|comedy|sketch|jfl)\\b" },
+        { "re": "(?i)\\b(red\\s*bull|paramount\\s*pictures|microsoft)\\b" }
       ],
       "threshold": 1.8,
       "scope": "universal",
@@ -206,7 +233,8 @@
       "label": "Gardening",
       "include": [
         { "re": "(?i)\\b(garden(ing)?|gardener|raised beds?|compost|permaculture|homestead(ing)?)\\b", "w": 1.0 },
-        { "re": "(?i)\\b(lawn|landscap(e|ing))\\b", "w": 0.8 }
+        { "re": "(?i)\\b(lawn|landscap(e|ing))\\b", "w": 0.8 },
+        { "re": "(?i)\\bjoe\\s*garden(er)?\\s*tv\\b", "w": 1.3 }
       ],
       "exclude": [
         { "re": "(?i)\\bgarden (route|state)\\b" }

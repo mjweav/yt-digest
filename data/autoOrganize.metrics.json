@@ -2,13 +2,13 @@
   "totals": {
     "channels": 503,
     "clusters": 15,
-    "unclassified": 155
+    "unclassified": 159
   },
   "perCluster": [
     {
       "label": "Unclassified",
-      "size": 155,
-      "channelCount": 155,
+      "size": 159,
+      "channelCount": 159,
       "purity": 0,
       "methodStats": {}
     },
@@ -21,44 +21,44 @@
     },
     {
       "label": "Photography & Cameras",
-      "size": 45,
-      "channelCount": 45,
-      "purity": 12.871,
+      "size": 46,
+      "channelCount": 46,
+      "purity": 14.922,
       "methodStats": {}
     },
     {
       "label": "DIY, Home & Construction",
-      "size": 33,
-      "channelCount": 33,
-      "purity": 5.291,
+      "size": 35,
+      "channelCount": 35,
+      "purity": 5.171,
       "methodStats": {}
     },
     {
       "label": "Business & Marketing",
-      "size": 54,
-      "channelCount": 54,
-      "purity": 8.007,
+      "size": 57,
+      "channelCount": 57,
+      "purity": 8.765,
       "methodStats": {}
     },
     {
       "label": "News",
-      "size": 87,
-      "channelCount": 87,
-      "purity": 10.028,
+      "size": 61,
+      "channelCount": 61,
+      "purity": 11.036,
       "methodStats": {}
     },
     {
       "label": "General Tech & Reviews",
-      "size": 30,
-      "channelCount": 30,
-      "purity": 6.453,
+      "size": 32,
+      "channelCount": 32,
+      "purity": 7.344,
       "methodStats": {}
     },
     {
       "label": "AI & Emerging Tech",
-      "size": 9,
-      "channelCount": 9,
-      "purity": 4.089,
+      "size": 10,
+      "channelCount": 10,
+      "purity": 3.8,
       "methodStats": {}
     },
     {
@@ -77,23 +77,23 @@
     },
     {
       "label": "Music & Musicians",
-      "size": 42,
-      "channelCount": 42,
-      "purity": 9.195,
+      "size": 49,
+      "channelCount": 49,
+      "purity": 9.592,
       "methodStats": {}
     },
     {
       "label": "Video Editing & Creative Tools",
-      "size": 8,
-      "channelCount": 8,
-      "purity": 4.85,
+      "size": 12,
+      "channelCount": 12,
+      "purity": 4.9,
       "methodStats": {}
     },
     {
       "label": "Gardening",
-      "size": 18,
-      "channelCount": 18,
-      "purity": 14.178,
+      "size": 20,
+      "channelCount": 20,
+      "purity": 17.23,
       "methodStats": {}
     },
     {
@@ -104,15 +104,15 @@
       "methodStats": {}
     },
     {
-      "label": "Video Editing Brands",
+      "label": "Maker & 3D Printing",
       "size": 1,
       "channelCount": 1,
-      "purity": 0.2,
+      "purity": 4.6,
       "methodStats": {}
     }
   ],
   "methodStats": {
     "scored": 503
   },
-  "generatedAt": "2025-10-07T02:02:57.358Z"
+  "generatedAt": "2025-10-07T02:39:30.984Z"
 }
