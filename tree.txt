@@ -1,55 +1,153 @@
 .
 ├── _chats
+│   ├── cline_task_oct-2-2025_4-33-11-pm.md
 │   ├── cline_task_sep-30-2025_10-20-57-pm.md
-│   └── cline_task_sep-30-2025_11-24-26-am.md
+│   ├── cline_task_sep-30-2025_11-24-26-am.md
+│   ├── Cluster Classification Testing-1.txt
+│   ├── GPT BUILD_Part 2_conversation history.txt
+│   ├── Vibe Coding - YT-Digest DEV Phase 2_Full Conversation.md
+│   └── Vibe Coding - YT-Digest DEV Phase 3.md
 ├── CHANGELOG.md
 ├── client_secret.json
 ├── CONTRIBUTING.md
 ├── data
+│   ├── ao_channels_detailed.csv
+│   ├── ao_channels_light.csv
+│   ├── ao_channels_lowmargin.csv
+│   ├── ao_cluster_summary.csv
+│   ├── ao_unclassified.report.json
+│   ├── autoOrganize.debug.baseline.json
+│   ├── autoOrganize.debug.json
+│   ├── autoOrganize.json
+│   ├── autoOrganize.meta.json
+│   ├── autoOrganize.metrics.baseline.json
+│   ├── autoOrganize.metrics.json
+│   ├── autoOrganize.metrics.raw.json
+│   ├── categories.json
+│   ├── channelCategories.json
 │   ├── channels.json
 │   ├── digests.json
+│   ├── lwl_channels.csv
+│   ├── lwl_clusters.json
+│   ├── lwl_summary.csv
 │   ├── selections.json
 │   ├── tags.json
+│   ├── umbrella_channels.csv
+│   ├── umbrella_config.json
+│   ├── umbrella_debug.json
+│   ├── umbrella_last.txt
+│   ├── umbrella_metrics.csv
+│   ├── umbrella_metrics.json
+│   ├── umbrella_summary.csv
+│   ├── umbrella_topics.json
 │   ├── users.json
 │   └── watched.json
+├── design
+│   ├── auto_organize_collage_v4_1.html
+│   ├── auto_organize_collage_v4_1.jpeg
+│   └── auto_organize_spike.md
 ├── docs
-│   ├── Bits.txt
+│   ├── _archive
+│   │   ├── PRD1.md
+│   │   ├── PRD2.md
+│   │   ├── PRD3.md
+│   │   ├── PRD4-full.md
+│   │   └── PRD5.md
+│   ├── _context reload
+│   │   ├── context_phase4.json
+│   │   ├── DEV5_CONTEXT.md
+│   │   ├── heuristics2_resume_plan.md
+│   │   ├── KICKOFF_CHECKLIST.md
+│   │   ├── KNOBS_REFERENCE.md
+│   │   ├── phase4_primer.md
+│   │   └── PHASE5_PRIMER_short.md
+│   ├── _plans
+│   │   ├── ao_big_picture_plan.md
+│   │   ├── auto_organize_plan.md
+│   │   ├── heuristics2_resume_plan.md
+│   │   ├── idea_harvest_from_python_project.md
+│   │   └── YT-Digest_SOP_Workflow.md
+│   ├── ao_invariants.md
+│   ├── ao_unclassified_findings.md
+│   ├── ARCHITECTURE.md
+│   ├── AUTO_ORGANIZE.md
+│   ├── BITS-YT-DIGEST.txt
+│   ├── DEVELOPMENT.md
 │   ├── PRD.md
+│   ├── primer-autosave.md
 │   └── YT_Digest_NewLast7Days_Plan.md
 ├── package-lock.json
 ├── package.json
+├── patches
+│   ├── 2025-10-06_diy-cleanup-v1_standalone.md
+│   ├── 2025-10-06_lwl-fixes-v1_standalone.md
+│   ├── 2025-10-06_news-bleed-v1_standalone.md
+│   ├── 2025-10-07_phase5-umbrella-tune-v1_standalone.md
+│   ├── README.md
+│   ├── YT-Digest_Phase5.1_Umbrella_Tune_Patch.md
+│   ├── YT-Digest_Phase5.2_Umbrella_Patch.md
+│   └── YT-Digest_Phase5.3_Metrics_and_Guardrails.md
 ├── README.md
 ├── restart.sh
 ├── ROADMAP.md
+├── runmetrics.sh
+├── scripts
+│   ├── commitall.sh
+│   ├── compare_metrics.js
+│   ├── export_csv.js
+│   ├── export_lowmargin.js
+│   ├── exportAO.js
+│   ├── label_terms.js
+│   ├── lwl_cluster.js
+│   ├── metrics
+│   │   └── umbrella_metrics.js
+│   ├── umbrella_fit.js
+│   └── unclassified_report.js
 ├── server
+│   ├── autoOrganize
+│   │   ├── builder.js
+│   │   ├── heuristics.js
+│   │   ├── heuristics2.js
+│   │   ├── learn.js
+│   │   ├── rules.json
+│   │   └── taxonomy.json
+│   ├── data
+│   │   ├── autoOrganize.debug.json
+│   │   ├── autoOrganize.json
+│   │   └── categoriesStore.js
 │   ├── index.js
 │   ├── package.json
 │   ├── routes
 │   │   ├── auth.js
+│   │   ├── autoOrganize.js
+│   │   ├── categories.js
 │   │   └── youtube.js
+│   ├── types.d.ts
 │   └── utils
 │       ├── googleAuth.js
-│       └── jsonStore.js
+│       ├── jsonStore.js
+│       └── paths.js
 ├── src
 │   ├── App.jsx
 │   ├── components
-│   ├── dist
-│   │   ├── assets
-│   │   │   ├── index-1642d4c4.css
-│   │   │   └── index-eb25220f.js
-│   │   └── index.html
 │   ├── index.css
 │   ├── index.html
 │   ├── main.jsx
 │   ├── package.json
 │   ├── pages
+│   │   ├── AutoOrganize.jsx
 │   │   ├── ChannelPicker.jsx
 │   │   ├── Digest.jsx
 │   │   └── Settings.jsx
 │   ├── postcss.config.js
 │   ├── tailwind.config.js
 │   └── vite.config.js
+├── tests
+│   ├── autosave-integration-report.json
+│   ├── autosave-validation-report.json
+│   ├── test-autosave-integration.js
+│   └── test-autosave.js
 ├── TODO.md
 └── tree.txt
 
-12 directories, 41 files
+20 directories, 131 files

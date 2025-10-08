@@ -1,5 +1,9 @@
 #FEATURES:
 
+
+tree -I "node_modules|.git|.vscode|.DS_Store|dist|build|*.log|*.pyc|__pycache__" -L 4 > tree.txt
+
+
 - Date tags per channel (7 day, 30 day, 6m 1yr) or use global
 - Pull More Channel Data
 	- Make channel name linkable to channel

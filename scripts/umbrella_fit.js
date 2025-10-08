@@ -261,4 +261,105 @@ function main(){
   );
 }
 
+// === Phase 5.3: metrics writer ===
+
+function pct(n, d) { return d ? n / d : 0; }
+
+function writeUmbrellaMetrics({ channelsPath, summaryPath, debugPath }) {
+  const channelsCsv = fs.readFileSync(channelsPath, 'utf8').trim().split('\n');
+  const header = channelsCsv[0].split(',');
+  const rows = channelsCsv.slice(1).map(line => {
+    // naive CSV split; safe because our fields are simple. Replace with a tiny CSV parser if needed.
+    const parts = line.split(',');
+    const rec = {};
+    header.forEach((h, i) => rec[h] = parts[i]);
+    return rec;
+  });
+
+  const N = rows.length;
+  const assignedRows = rows.filter(r => r.umbrellaLabel && !/^Unclassified/.test(r.umbrellaLabel));
+  const A = assignedRows.length;
+  const coverage = pct(A, N);
+
+  // collect numeric margin/score
+  const margins = assignedRows.map(r => parseFloat(r.margin)).filter(x => !Number.isNaN(x));
+  const scores  = assignedRows.map(r => parseFloat(r.score)).filter(x => !Number.isNaN(x));
+
+  function quantile(arr, q) {
+    if (!arr.length) return NaN;
+    const s = arr.slice().sort((a,b)=>a-b);
+    const pos = (s.length - 1) * q;
+    const base = Math.floor(pos);
+    const rest = pos - base;
+    return s[base + 1] !== undefined ? s[base] + rest * (s[base + 1] - s[base]) : s[base];
+  }
+
+  const medianMargin = quantile(margins, 0.5);
+  const p25Margin = quantile(margins, 0.25);
+  const p75Margin = quantile(margins, 0.75);
+  const minMargin = Math.min(...margins, NaN);
+  const maxMargin = Math.max(...margins, NaN);
+
+  // basic noise scan from debug top3 (optional; if not present, defaults to 0)
+  let noiseRate = 0;
+  try {
+    const dbg = JSON.parse(fs.readFileSync(debugPath, 'utf8'));
+    const str = JSON.stringify(dbg).toLowerCase();
+    noiseRate = /(\d{1,2}:\d{2}(?:am|pm)?|(19|20)\d{2}|1080p|4k|\d+fps|\d{1,2}[\/\-]\d{1,2})/i.test(str) ? 1 : 0;
+  } catch { /* ignore */ }
+
+  // echo params if present
+  let params = {};
+  try {
+    const dbg = JSON.parse(fs.readFileSync(debugPath, 'utf8'));
+    params = dbg.params || {};
+  } catch { /* ignore */ }
+
+  const metrics = {
+    when: new Date().toISOString(),
+    totals: { channels: N, assigned: A, coverage },
+    margins: { median: medianMargin, p25: p25Margin, p75: p75Margin, min: minMargin, max: maxMargin },
+    scores: { min: Math.min(...scores, NaN), max: Math.max(...scores, NaN) },
+    noise: { rate: noiseRate },
+    params
+  };
+
+  // write JSON
+  const jsonPath = path.join('data', 'umbrella_metrics.json');
+  fs.writeFileSync(jsonPath, JSON.stringify(metrics, null, 2));
+
+  // append CSV history
+  const histPath = path.join('data', 'umbrella_metrics.csv');
+  const row = [
+    metrics.when,
+    N, A, coverage.toFixed(4),
+    (medianMargin ?? NaN).toFixed(4),
+    (p25Margin ?? NaN).toFixed(4),
+    (p75Margin ?? NaN).toFixed(4),
+    (minMargin ?? NaN).toFixed(4),
+    (maxMargin ?? NaN).toFixed(4),
+    noiseRate.toFixed(4),
+    params.SCORE_MIN ?? '',
+    params.MARGIN_MIN ?? '',
+    params.TITLE_WEIGHT ?? '',
+    params.patch ?? ''
+  ].join(',');
+
+  if (!fs.existsSync(histPath)) {
+    fs.writeFileSync(histPath, 'when,channels,assigned,coverage,median_margin,p25_margin,p75_margin,min_margin,max_margin,noise_rate,SCORE_MIN,MARGIN_MIN,TITLE_WEIGHT,patch\n');
+  }
+  fs.appendFileSync(histPath, row + '\n');
+
+  // one-liner for PRs / logs
+  const summaryLine = `[Umbrella] coverage=${(coverage*100).toFixed(1)}% | median_margin=${(medianMargin||0).toFixed(3)} | noise=${(noiseRate*100).toFixed(1)}% | params=${JSON.stringify(params)}`;
+  fs.writeFileSync(path.join('data', 'umbrella_last.txt'), summaryLine);
+}
+
+// Call it after writing umbrella files
+writeUmbrellaMetrics({
+  channelsPath: path.join('data','umbrella_channels.csv'),
+  summaryPath:  path.join('data','umbrella_summary.csv'),
+  debugPath:    path.join('data','umbrella_debug.json')
+});
+
 if (require.main === module){ main(); }
