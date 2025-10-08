@@ -1,5 +1,24 @@
 import express from 'express';
 import cors from 'cors';
+import { config } from 'dotenv';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load environment variables from .env file in project root
+config({ path: join(__dirname, '../.env') });
+
+// Debug: Log environment variables (without secrets)
+console.log('🔧 Environment loaded:', {
+  PORT: process.env.PORT,
+  NODE_ENV: process.env.NODE_ENV,
+  GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID ? '***configured***' : 'NOT SET',
+  GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET ? '***configured***' : 'NOT SET',
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY ? '***configured***' : 'NOT SET'
+});
+
 import { JsonStore } from './utils/jsonStore.js';
 import { GoogleAuth } from './utils/googleAuth.js';
 // Import routes

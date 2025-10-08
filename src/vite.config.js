@@ -8,7 +8,7 @@ export default defineConfig({
     strictPort: true, // Don't auto-select different port if 3000 is in use
     proxy: {
       '/api': {
-        target: 'http://localhost:3001',
+        target: `http://localhost:${process.env.PORT || 3001}`,
         changeOrigin: true
       }
     }

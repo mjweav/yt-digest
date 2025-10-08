@@ -1,19 +1,10 @@
 import { google } from 'googleapis';
 import { JsonStore } from './jsonStore.js';
-import { readFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Read OAuth 2.0 configuration from client_secret.json
-const credentialsPath = join(__dirname, '../../client_secret.json');
-const credentials = JSON.parse(readFileSync(credentialsPath, 'utf8'));
-
-const CLIENT_ID = credentials.installed.client_id;
-const CLIENT_SECRET = credentials.installed.client_secret;
-const REDIRECT_URI = credentials.installed.redirect_uris[0]; // Use the first redirect URI from config
+// Get OAuth 2.0 configuration from environment variables
+const CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const REDIRECT_URI = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3001/api/auth/google/callback';
 
 // YouTube API scope for read-only access
 const SCOPES = ['https://www.googleapis.com/auth/youtube.readonly'];
