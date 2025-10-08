@@ -1,0 +1,280 @@
+{
+  "topics": [
+    {
+      "label": "AI",
+      "seeds": [
+        "ai",
+        "gpt",
+        "llm",
+        "prompt engineering",
+        {
+          "token": "machine learning",
+          "w": 2
+        },
+        "nlp",
+        "diffusion",
+        "transformers",
+        "autonomous",
+        "robotics"
+      ]
+    },
+    {
+      "label": "Video Editing",
+      "seeds": [
+        "premiere pro",
+        "after effects",
+        "final cut pro",
+        "davinci resolve",
+        "editor",
+        "timeline",
+        "color grade"
+      ]
+    },
+    {
+      "label": "Photography",
+      "seeds": [
+        "camera",
+        "lens",
+        "lightroom",
+        "raw",
+        "bokeh",
+        "sony alpha",
+        "fujifilm",
+        "aperture",
+        "iso"
+      ]
+    },
+    {
+      "label": "Tech",
+      "seeds": [
+        "microsoft",
+        "apple",
+        "google",
+        "android",
+        "windows",
+        "mac",
+        "iphone",
+        "review",
+        "unboxing",
+        "chip",
+        "silicon",
+        "gpu",
+        "ssd",
+        "teardown"
+      ]
+    },
+    {
+      "label": "Coding",
+      "seeds": [
+        "javascript",
+        "python",
+        "react",
+        "node",
+        "typescript",
+        "api",
+        "sdk",
+        "programming",
+        "code",
+        "backend",
+        "frontend",
+        "compiler",
+        "algorithm",
+        "data structures"
+      ]
+    },
+    {
+      "label": "News",
+      "seeds": [
+        "news",
+        "headlines",
+        "report",
+        "breaking",
+        "journalism",
+        "anchor",
+        "newsletter",
+        "bulletin",
+        "briefing",
+        "nightly",
+        "correspondents"
+      ]
+    },
+    {
+      "label": "Woodworking",
+      "seeds": [
+        "jointer",
+        "planer",
+        "bandsaw",
+        "lathe",
+        "dovetail",
+        "mortise",
+        "tenon",
+        "chisel",
+        "hardwood",
+        "plywood",
+        "cnc"
+      ]
+    },
+    {
+      "label": "Home Repair",
+      "seeds": [
+        "drywall",
+        "plumbing",
+        "hvac",
+        "thermostat",
+        "outlet",
+        "breaker",
+        "stud finder",
+        "caulk",
+        "grout",
+        "solder"
+      ]
+    },
+    {
+      "label": "Construction",
+      "seeds": [
+        "framing",
+        "rebar",
+        "joist",
+        "rafter",
+        "concrete",
+        "masonry",
+        "formwork",
+        "footing",
+        "anchor bolt",
+        "sheathing",
+        "osb"
+      ]
+    },
+    {
+      "label": "3D Printing",
+      "seeds": [
+        "3d printing",
+        "pla",
+        "petg",
+        "abs",
+        "stl",
+        "gcode",
+        "slicer",
+        "nozzle",
+        "extruder",
+        "prusa",
+        "ender",
+        "marlin",
+        "klipper",
+        "sketchup"
+      ]
+    },
+    {
+      "label": "Music",
+      "seeds": [
+        "guitar",
+        "drum",
+        "piano",
+        "singer",
+        "band",
+        "mixing",
+        "recording studio",
+        "vic firth",
+        "doctor mix"
+      ]
+    },
+    {
+      "label": "Business",
+      "seeds": [
+        "marketing",
+        "make money",
+        "side hustle",
+        "monetization",
+        "creator economy",
+        "thumbnail",
+        "hook",
+        "sales",
+        "entrepreneur"
+      ]
+    },
+    {
+      "label": "Health",
+      "seeds": [
+        "doctor",
+        "clinic",
+        "health",
+        "keto",
+        "nutrition",
+        "fitness",
+        "medicine"
+      ]
+    },
+    {
+      "label": "Gardening",
+      "seeds": [
+        "garden",
+        "soil",
+        "compost",
+        "mulch",
+        "prune",
+        "seedlings",
+        "vegetables",
+        "orchard"
+      ]
+    },
+    {
+      "label": "Aviation",
+      "seeds": [
+        "aircraft",
+        "airplane",
+        "pilot",
+        "ifr",
+        "vfr",
+        "atc",
+        "airshow",
+        "raptor"
+      ]
+    },
+    {
+      "label": "Comedy",
+      "seeds": [
+        "comedy",
+        "sketch",
+        "standup",
+        "prank",
+        "laughs"
+      ]
+    },
+    {
+      "label": "Film & TV",
+      "seeds": [
+        "movie",
+        "film",
+        "cinema",
+        "trailer",
+        "tv series",
+        "studio",
+        "hollywood"
+      ]
+    },
+    {
+      "label": "Gaming",
+      "seeds": [
+        "gameplay",
+        "walkthrough",
+        "esports",
+        "steam",
+        "playstation",
+        "xbox",
+        "nintendo"
+      ]
+    },
+    {
+      "label": "Finance",
+      "seeds": [
+        "investing",
+        "stocks",
+        "portfolio",
+        "options",
+        "trading",
+        "markets",
+        "dividends"
+      ]
+    }
+  ]
+}

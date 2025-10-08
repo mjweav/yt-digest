@@ -2,6 +2,13 @@
 
 All notable changes to YT Digest will be documented here.
 
+## 2025-10-07 — Phase5 Umbrella Tune v1
+- **Higher confidence thresholds**: Raised TITLE_WEIGHT (1.4→1.6), SCORE_MIN (0.18→0.24), MARGIN_MIN (0.06→0.10) for stricter umbrella assignments
+- **Timestamp/date/number filtering**: Added TIME_NUM_RE helper to filter out timestampy tokens (times, dates, 4k/1080p, etc.) from scoring
+- **Enriched seed lists**: Added portable tokens to AI (nlp, diffusion, transformers, autonomous, robotics), Tech (chip, silicon, gpu, ssd, teardown), Coding (backend, frontend, compiler, algorithm, data structures), News (bulletin, briefing, nightly, correspondents)
+- **Expanded generics**: Added time-based tokens (live, stream, season, premiere, now, today, tonight) to prevent noise in classification
+- **Validation results**: 503 channels ✓, improved assignment confidence with reduced timestamp/date/number noise in scoring
+
 ## Phase 1 – Project Setup
 - JSON storage utility created (`jsonStore.js`)
 - Express API with CRUD endpoints
