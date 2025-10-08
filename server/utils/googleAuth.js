@@ -102,39 +102,71 @@ export class GoogleAuth {
         throw new Error('User not found');
       }
 
-      const oauth2Client = this.getOAuth2Client();
-      oauth2Client.setCredentials({
-        access_token: user.accessToken,
-        refresh_token: user.refreshToken,
-        expiry_date: new Date(user.expiresAt).getTime()
-      });
+      return await this.refreshAccessTokenIfNeeded(user, usersData);
+    } catch (error) {
+      console.error('Error getting valid access token:', error);
+      throw new Error(`Failed to get valid access token: ${error.message}`);
+    }
+  }
 
+  /**
+   * Refresh access token if needed and return the valid token
+   * @param {Object} user - User object from users.json
+   * @param {Object} usersData - Users data store
+   * @returns {Promise<string>} Valid access token
+   */
+  static async refreshAccessTokenIfNeeded(user, usersData) {
+    try {
       // Check if token is expired or expires soon (within 5 minutes)
       const now = Date.now();
       const expiresAt = new Date(user.expiresAt).getTime();
       const fiveMinutes = 5 * 60 * 1000;
 
       if (now >= (expiresAt - fiveMinutes)) {
-        // Refresh the token
-        console.log('Refreshing access token...');
-        const { credentials } = await oauth2Client.refreshAccessToken();
+        console.log('Access token expired or expires soon, refreshing...');
 
-        // Update stored tokens
-        user.accessToken = credentials.access_token;
-        if (credentials.refresh_token) {
-          user.refreshToken = credentials.refresh_token;
+        if (!user.refreshToken) {
+          throw new Error('No refresh token available - user needs to re-authenticate');
         }
-        user.expiresAt = new Date(Date.now() + (credentials.expiry_date || 3600 * 1000)).toISOString();
 
-        JsonStore.setData('users', usersData);
+        // Refresh the token
+        const oauth2Client = this.getOAuth2Client();
+        oauth2Client.setCredentials({
+          access_token: user.accessToken,
+          refresh_token: user.refreshToken
+        });
 
-        return credentials.access_token;
+        try {
+          const { credentials } = await oauth2Client.refreshAccessToken();
+
+          // Update stored tokens
+          user.accessToken = credentials.access_token;
+          if (credentials.refresh_token) {
+            user.refreshToken = credentials.refresh_token;
+          }
+          user.expiresAt = new Date(Date.now() + (credentials.expiry_date || 3600 * 1000)).toISOString();
+
+          JsonStore.setData('users', usersData);
+
+          console.log('Token refreshed successfully');
+          return credentials.access_token;
+        } catch (refreshError) {
+          console.error('Token refresh failed:', refreshError);
+
+          // Handle specific refresh token errors
+          if (refreshError.code === 400 && refreshError.errors?.[0]?.reason === 'invalid_grant') {
+            console.log('Refresh token invalid or expired - user needs to re-authenticate');
+            throw new Error('Refresh token invalid - user needs to re-authenticate');
+          }
+
+          throw refreshError;
+        }
       }
 
       return user.accessToken;
     } catch (error) {
-      console.error('Error getting valid access token:', error);
-      throw new Error(`Failed to get valid access token: ${error.message}`);
+      console.error('Error in refreshAccessTokenIfNeeded:', error);
+      throw error;
     }
   }
 
@@ -156,45 +188,27 @@ export class GoogleAuth {
         throw new Error('Not Authorized: No access token found');
       }
 
+      // Refresh token if needed and get the valid access token
+      const validAccessToken = await this.refreshAccessTokenIfNeeded(user, usersData);
+
       const oauth2Client = this.getOAuth2Client();
 
-      // Check if token is expired or expires soon (within 5 minutes)
-      const now = Date.now();
-      const expiresAt = new Date(user.expiresAt).getTime();
-      const fiveMinutes = 5 * 60 * 1000;
-
-      if (now >= (expiresAt - fiveMinutes)) {
-        console.log('Access token expired or expires soon, refreshing...');
-
-        // Refresh the token
-        oauth2Client.setCredentials({
-          access_token: user.accessToken,
-          refresh_token: user.refreshToken
-        });
-
-        const { credentials } = await oauth2Client.refreshAccessToken();
-
-        // Update stored tokens
-        user.accessToken = credentials.access_token;
-        if (credentials.refresh_token) {
-          user.refreshToken = credentials.refresh_token;
-        }
-        user.expiresAt = new Date(Date.now() + (credentials.expiry_date || 3600 * 1000)).toISOString();
-
-        JsonStore.setData('users', usersData);
-
-        console.log('Token refreshed successfully');
-      }
-
-      // Set the current credentials
+      // Set the current credentials with the valid token
       oauth2Client.setCredentials({
-        access_token: user.accessToken,
+        access_token: validAccessToken,
         refresh_token: user.refreshToken
       });
 
       return oauth2Client;
     } catch (error) {
       console.error('Error getting authorized client:', error);
+
+      // Handle specific error cases for better user experience
+      if (error.message.includes('No refresh token available') ||
+          error.message.includes('Refresh token invalid')) {
+        throw new Error('Authentication expired - user needs to re-authenticate');
+      }
+
       throw error;
     }
   }

@@ -13,12 +13,29 @@ router.get('/status', async (req, res) => {
     const usersData = JsonStore.getData('users');
     const user = usersData.users[usersData.users.length - 1]; // Use most recent user
 
-    if (!user || !user.accessToken) {
+    if (!user) {
       return res.json({
         connected: false,
-        message: 'Not connected to YouTube'
+        message: 'No user found'
       });
     }
+
+    if (!user.accessToken) {
+      return res.json({
+        connected: false,
+        message: 'No access token found'
+      });
+    }
+
+    // Check if we have a refresh token
+    const hasRefreshToken = !!(user.refreshToken);
+
+    // Check token expiration status
+    const now = Date.now();
+    const expiresAt = new Date(user.expiresAt).getTime();
+    const fiveMinutes = 5 * 60 * 1000;
+    const isExpired = now >= expiresAt;
+    const expiresSoon = now >= (expiresAt - fiveMinutes);
 
     // Try to get user info from YouTube to verify token is still valid
     try {
@@ -37,37 +54,63 @@ router.get('/status', async (req, res) => {
           channelTitle: channel.snippet.title,
           channelId: channel.id,
           userId: user.id,
-          expiresAt: user.expiresAt
+          expiresAt: user.expiresAt,
+          hasRefreshToken: hasRefreshToken,
+          scopes: ['https://www.googleapis.com/auth/youtube.readonly'],
+          tokenExpiryISO: user.expiresAt,
+          verified: true
         });
       }
     } catch (youtubeError) {
       console.error('Error verifying YouTube connection:', youtubeError);
 
-      // If token is invalid, clear it
-      if (youtubeError.message.includes('Not Authorized') ||
-          youtubeError.message.includes('invalid_grant')) {
-        console.log('Token invalid, clearing user data...');
-        usersData.users = usersData.users.filter(u => u.id !== user.id);
-        JsonStore.setData('users', usersData);
+      // Handle different types of errors
+      if (youtubeError.message.includes('Authentication expired') ||
+          youtubeError.message.includes('No refresh token available') ||
+          youtubeError.message.includes('Refresh token invalid')) {
 
         return res.json({
           connected: false,
-          message: 'Token expired, please reconnect'
+          needsReauth: true,
+          hasRefreshToken: hasRefreshToken,
+          message: 'Authentication expired - user needs to re-authenticate',
+          error: youtubeError.message
         });
       }
+
+      // For other errors, still report as connected but unverified
+      console.log('YouTube API error (token may be valid):', youtubeError.message);
     }
 
     // If we get here, user exists but we couldn't verify with YouTube
+    // or verification failed but token might still be valid
     res.json({
       connected: true,
       googleId: user.googleId,
       userId: user.id,
       expiresAt: user.expiresAt,
-      verified: false
+      hasRefreshToken: hasRefreshToken,
+      scopes: ['https://www.googleapis.com/auth/youtube.readonly'],
+      tokenExpiryISO: user.expiresAt,
+      verified: false,
+      expired: isExpired,
+      expiresSoon: expiresSoon
     });
 
   } catch (error) {
     console.error('Error checking auth status:', error);
+
+    // Don't crash on expired tokens - provide graceful error response
+    if (error.message.includes('Authentication expired') ||
+        error.message.includes('No refresh token available')) {
+      return res.json({
+        connected: false,
+        needsReauth: true,
+        message: 'Authentication expired - user needs to re-authenticate',
+        error: error.message
+      });
+    }
+
     res.status(500).json({
       error: 'Failed to check authentication status',
       message: error.message
