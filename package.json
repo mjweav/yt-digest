@@ -11,8 +11,7 @@
     "dev": "concurrently \"npm run dev --workspace=server\" \"npm run dev --workspace=src\"",
     "dev:server": "npm run dev --workspace=server",
     "dev:frontend": "npm run dev --workspace=src",
-    "install:all": "npm install && npm install --workspaces",
-    "commitall": "git add . && git commit -m \"feat: automated commit - $(date +'%Y-%m-%d %H:%M:%S')\" && git push origin main"
+    "install:all": "npm install && npm install --workspaces"
   },
   "devDependencies": {
     "concurrently": "^8.2.0"
