@@ -114,3 +114,4 @@ data/*.json
 _chats/
 docs/Bits.txt
 .DS_Store
+_archive/

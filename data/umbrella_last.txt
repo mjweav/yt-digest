@@ -1,1 +1,0 @@
-[Umbrella] coverage=100.0% | median_margin=0.015 | noise=0.0% | params={"TITLE_WEIGHT":1.6,"SCORE_MIN":0.2,"MARGIN_MIN":0.1,"HASH_DIM":2048}
