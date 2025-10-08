@@ -27,7 +27,9 @@
         "davinci resolve",
         "editor",
         "timeline",
-        "color grade"
+        "color grade",
+        "proxy",
+        "render"
       ]
     },
     {
@@ -41,7 +43,8 @@
         "sony alpha",
         "fujifilm",
         "aperture",
-        "iso"
+        "iso",
+        "shutter"
       ]
     },
     {
@@ -175,7 +178,8 @@
         "mixing",
         "recording studio",
         "vic firth",
-        "doctor mix"
+        "doctor mix",
+        "drums"
       ]
     },
     {
@@ -249,7 +253,8 @@
         "trailer",
         "tv series",
         "studio",
-        "hollywood"
+        "hollywood",
+        "scene"
       ]
     },
     {
@@ -261,7 +266,10 @@
         "steam",
         "playstation",
         "xbox",
-        "nintendo"
+        "nintendo",
+        "game",
+        "games",
+        "level"
       ]
     },
     {

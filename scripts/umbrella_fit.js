@@ -15,9 +15,35 @@ const MIN_DESC_LEN = 40;      // below = "sparse" description
 const MIN_TITLE_TOKENS = 3;   // title token count to consider non-sparse if desc sparse
 
 const HASH_DIM = 2048;        // feature hashing vector size (cosine space)
-const SCORE_MIN = 0.24;       // minimum cosine to accept a topic
-const MARGIN_MIN = 0.10;      // top - second must be >= this
+const SCORE_MIN = 0.20;       // minimum cosine to accept a topic (↓ from 0.22 to improve coverage further)
+const MARGIN_MIN = 0.10;      // top - second must be >= this (keep margin gate)
 const MAX_TOP3 = 3;           // write top3 candidates per channel in debug
+
+// --- Phase 5.2: domain phrases that should nudge obvious topic matches ---
+const PHRASE_BOOSTS = {
+  "Video Editing": ["final cut","davinci resolve","after effects","premiere pro","color grading"],
+  "Photography":   ["lightroom","photoshop","raw photo","camera raw"],
+  "Music":         ["drum lesson","guitar lesson","piano tutorial","music theory"],
+  "Gaming":        ["gameplay","walkthrough","speedrun"],
+  "Film & TV":     ["official trailer","behind the scenes","movie trailer"]
+};
+
+const PHRASE_WEIGHT = 0.50; // small, just enough to lift obvious cases
+
+function applyPhraseBoosts(text, topicScores) {
+  const hay = (text || "").toLowerCase();
+  for (const [topic, phrases] of Object.entries(PHRASE_BOOSTS)) {
+    for (const p of phrases) {
+      if (hay.includes(p)) {
+        // Find the topic score object and boost it
+        const scoreObj = topicScores.find(obj => obj.label === topic);
+        if (scoreObj) {
+          scoreObj.s += PHRASE_WEIGHT;
+        }
+      }
+    }
+  }
+}
 
 // Stopwords / generics
 const STOPWORDS = new Set([
@@ -167,8 +193,14 @@ function main(){
     }
 
     const v = featureHashVector(toks);
-    const scores = topics.map(t => ({ label: t.label, s: cosine(v, t.vec) }));
-    scores.sort((a,b)=>b.s-a.s);
+    const base = topics.map(t => ({ label: t.label, s: cosine(v, t.vec) }));
+
+    // Phase 5.2: apply phrase boosts using full text context
+    const fullText = `${name || ""} ${desc || ""}`;
+    applyPhraseBoosts(fullText, base);
+
+    // Rank with updated scores
+    const scores = base.sort((a,b)=>b.s-a.s);
     const top = scores[0];
     const second = scores[1] || {s:0,label:null};
     const margin = top.s - second.s;

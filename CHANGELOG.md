@@ -2,6 +2,13 @@
 
 All notable changes to YT Digest will be documented here.
 
+## 2025-10-08 — Phase5.2 Umbrella Patch (Recall bump, precision kept)
+- **Thresholds**: Lowered SCORE_MIN from 0.24→0.20 for improved coverage while keeping MARGIN_MIN=0.10 and TITLE_WEIGHT=1.6
+- **Phrase boosts (surgical)**: Added domain-defining phrase map with small boosts (0.50 weight) for obvious topic matches (Video Editing: "final cut","davinci resolve","after effects","premiere pro","color grading"; Photography: "lightroom","photoshop","raw photo","camera raw"; Music: "drum lesson","guitar lesson","piano tutorial","music theory"; Gaming: "gameplay","walkthrough","speedrun"; Film & TV: "official trailer","behind the scenes","movie trailer")
+- **Expanded generics**: Added platform fillers ("official","live","stream","season","episode","ep","premiere","now","today","tonight") to further reduce noise
+- **Enriched seeds**: Added portable tokens to Video Editing ("proxy","render"), Photography ("shutter"), Music ("drums"), Gaming ("game","games","level"), Film & TV ("scene")
+- **Validation results**: 503 channels ✓, coverage improved from 3.2%→6.36% (32 classified), margins ≥0.10 maintained, zero timestamp/date/number noise in debug output
+
 ## 2025-10-07 — Phase5 Umbrella Tune v1
 - **Higher confidence thresholds**: Raised TITLE_WEIGHT (1.4→1.6), SCORE_MIN (0.18→0.24), MARGIN_MIN (0.06→0.10) for stricter umbrella assignments
 - **Timestamp/date/number filtering**: Added TIME_NUM_RE helper to filter out timestampy tokens (times, dates, 4k/1080p, etc.) from scoring
