@@ -22,6 +22,36 @@ function readJSONL(p){if(!fs.existsSync(p))return[];return fs.readFileSync(p,'ut
 function appendJSONL(p,obj){fs.mkdirSync(path.dirname(p),{recursive:true});fs.appendFileSync(p,JSON.stringify(obj)+"\n");}
 function stickyChoice(prev,next){if(!prev)return next;return (next.confidence??0)>=(prev.confidence??0)+0.15?next:prev;}
 
+// OpenAI model pricing (per 1M tokens) - current as of October 2025
+const OPENAI_PRICING = {
+  'gpt-5': { input: 0.125, output: 10.00 },
+  'gpt-5-mini': { input: 0.250, output: 2.00 },
+  'gpt-4o': { input: 2.50, output: 10.00 },
+  'gpt-4o-mini': { input: 0.15, output: 0.60 },
+  'gpt-4-turbo': { input: 10.00, output: 30.00 },
+  'gpt-4-turbo-preview': { input: 10.00, output: 30.00 },
+  'gpt-4': { input: 30.00, output: 60.00 },
+  'gpt-4-0125-preview': { input: 10.00, output: 30.00 },
+  'gpt-4-1106-preview': { input: 10.00, output: 30.00 },
+  'gpt-4-0613': { input: 30.00, output: 60.00 },
+  'gpt-3.5-turbo': { input: 1.50, output: 2.00 },
+  'gpt-3.5-turbo-0125': { input: 0.50, output: 1.50 },
+  'gpt-3.5-turbo-1106': { input: 1.00, output: 2.00 },
+  'gpt-3.5-turbo-0613': { input: 1.50, output: 2.00 }
+};
+
+function getModelPricing(modelName) {
+  const normalizedModel = modelName.toLowerCase().replace(/[^a-z0-9-]/g, '');
+  for (const [model, pricing] of Object.entries(OPENAI_PRICING)) {
+    if (normalizedModel.includes(model.replace(/[^a-z0-9]/g, ''))) {
+      return pricing;
+    }
+  }
+  // Fallback to gpt-4o-mini pricing if model not found
+  console.warn(`Warning: Unknown model '${modelName}', using gpt-4o-mini pricing as fallback`);
+  return OPENAI_PRICING['gpt-4o-mini'];
+}
+
 async function callOpenAI({ system, user, model }) {
   await ensureFetch();
   const key = process.env.OPENAI_API_KEY || "";
@@ -32,11 +62,13 @@ async function callOpenAI({ system, user, model }) {
   const json = await res.json();
   const content = json.choices?.[0]?.message?.content || "{}";
   let parsed={}; try{parsed=JSON.parse(content);}catch{throw new Error("Failed to parse JSON from model");}
+  const usage = json.usage || { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 };
   return {
     label: String(parsed.label||""),
     confidence: Math.max(0, Math.min(1, Number(parsed.confidence||0))),
     knowledge_source: parsed.knowledge_source==="world_knowledge"?"world_knowledge":"text_clues",
-    evidence: String(parsed.evidence||"").slice(0,100)
+    evidence: String(parsed.evidence||"").slice(0,100),
+    usage
   };
 }
 
@@ -45,13 +77,23 @@ async function main(){
   const verbose = (args.verbose === '1' || args.verbose === 'true');
   const fresh = (args.fresh === '1' || args.fresh === 'true');
   const resume = (args.resume === '1' || args.resume === 'true');
+
+  // Parse model first for dynamic pricing
+  const model = args.model || 'gpt-4o-mini';
+
+  // Dynamic cost estimation setup based on model
+  const modelPricing = getModelPricing(model);
+  const priceIn  = Number(process.env.OPENAI_PRICE_INPUT_PER_MTOK || modelPricing.input);
+  const priceOut = Number(process.env.OPENAI_PRICE_OUTPUT_PER_MTOK || modelPricing.output);
+  let totalInTok = 0, totalOutTok = 0;
+  let totalCost = 0;
+
   const channelsPath = args.channels || 'data/channels.json';
   const labelBookPath= args.labels   || 'data/labelbook.json';
   const outCsv        = args.out     || 'data/fitting_results.csv';
   const outJsonl      = args.jsonl   || 'data/assignments.jsonl';
   const prevJsonl     = args.prev    || 'data/assignments.prev.jsonl';
   const anchorsPath   = args.anchors || '';
-  const model         = args.model   || 'gpt-4o-mini';
   const confidenceFloor = args.confFloor ? Number(args.confFloor) : 0.40;
 
   const channelsRaw = loadJSON(channelsPath);
@@ -147,9 +189,17 @@ async function main(){
     if (result.label === "Unclassified (low confidence)") nLowConf++;
     if (!String(result.label).startsWith("Unclassified")) nAssigned++;
     nProcessed++;
+
+    // Cost estimation per row
+    const inTok = result.usage?.prompt_tokens || 0;
+    const outTok = result.usage?.completion_tokens || 0;
+    const rowCost = (inTok/1_000_000)*priceIn + (outTok/1_000_000)*priceOut;
+    totalInTok += inTok; totalOutTok += outTok; totalCost += rowCost;
+
     if (verbose) {
       console.log(`  → label: ${result.label}  conf: ${result.confidence.toFixed(2)}  src: ${result.knowledge_source}`);
       if (result.evidence) console.log(`    evidence: ${result.evidence}`);
+      console.log(`  tokens: in=${inTok} out=${outTok}  est=$${rowCost.toFixed(6)}`);
     }
 
     // Sticky labels
@@ -170,9 +220,12 @@ async function main(){
 
   const secs = ((Date.now() - startedAt)/1000).toFixed(1);
   console.log(`\n== Run Summary ==`);
+  console.log(`model: ${model}`);
   console.log(`channels: ${channels.length}`);
   console.log(`processed: ${nProcessed}, sparse: ${nSparse}, low_conf: ${nLowConf}, errors: ${nError}, assigned: ${nAssigned}`);
   console.log(`elapsed: ${secs}s`);
+  console.log(`tokens: in=${totalInTok} out=${totalOutTok}`);
+  console.log(`est cost: $${totalCost.toFixed(4)}  (in @$${priceIn}/MTok, out @$${priceOut}/MTok)`);
 
   const headers = ["channelId","channelTitle","label","shortDesc","confidence","knowledge_source","evidence","shortlist_count"];
   fs.mkdirSync(path.dirname(outCsv), { recursive:true });
