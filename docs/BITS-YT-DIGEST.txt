@@ -3,6 +3,27 @@
 
 tree -I "node_modules|.git|.vscode|.DS_Store|dist|build|*.log|*.pyc|__pycache__" -L 4 > tree.txt
 
+npm run fit:run     # Run the fitting process
+npm run fit:metrics # Analyze results
+npm run fit:run -- --fresh=1 --resume=1 --verbose=1
+
+
+
+
+
+
+Umbrella Notes:
+
+-Weather
+
+
+
+
+
+
+
+
+=========================================================================================
 
 - Date tags per channel (7 day, 30 day, 6m 1yr) or use global
 - Pull More Channel Data

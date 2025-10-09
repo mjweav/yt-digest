@@ -12,7 +12,7 @@
     "dev:server": "npm run dev --workspace=server",
     "dev:frontend": "npm run dev --workspace=src",
     "install:all": "npm install && npm install --workspaces",
-    "fit:run": "node scripts/batch.run.js --channels data/channels.json --labels data/labelbook.json --out data/fitting_results.csv --jsonl data/assignments.jsonl --anchors data/anchors.json",
+    "fit:run": "node scripts/batch.run.js --channels data/channels.json --labels data/labelbook.json --out data/fitting_results.csv --jsonl data/assignments.jsonl --anchors data/anchors.json --verbose=1",
     "fit:metrics": "node scripts/metrics.summary.js --jsonl data/assignments.jsonl --prev data/assignments.prev.jsonl --out data/metrics.json"
   },
   "devDependencies": {
