@@ -42,6 +42,7 @@ async function callOpenAI({ system, user, model }) {
 
 async function main(){
   const args = parseArgs();
+  const verbose = (args.verbose === '1' || args.verbose === 'true');
   const channelsPath = args.channels || 'data/channels.json';
   const labelBookPath= args.labels   || 'data/labelbook.json';
   const outCsv        = args.out     || 'data/fitting_results.csv';
@@ -61,15 +62,28 @@ async function main(){
   const channels = Array.isArray(channelsRaw) ? channelsRaw : (channelsRaw.channels || channelsRaw.items || []);
   const rows = [];
 
-  for (const ch of channels) {
+  // Instrumentation counters and timer
+  const startedAt = Date.now();
+  let nProcessed = 0, nSparse = 0, nError = 0, nLowConf = 0, nAssigned = 0;
+
+  for (let i = 0; i < channels.length; i++) {
+    const ch = channels[i];
     const title = ch.title || ch.snippet?.title || ch.channelTitle || "";
     const description = ch.description || ch.snippet?.description || ch.desc || "";
     const channelId = ch.id || ch.channelId || ch.snippet?.channelId || "";
     if (!channelId) continue;
 
+    // Log per-channel progress
+    if (verbose) {
+      console.log(`[${i+1}/${channels.length}] ${channelId || "NO_ID"} — ${String(title).slice(0,80)}`);
+    }
+
     // Triage
     const { isSparse, reason } = triageSparse({ title, description });
     if (isSparse) {
+      if (verbose) console.log(`  → TRIAGE: Unclassified (sparse) — ${reason}`);
+      nSparse++;
+      nProcessed++;
       const record = { channelId, title, label:"Unclassified (sparse)", confidence:0, knowledge_source:"text_clues", evidence:reason, shortlist_count:0, timestamp:new Date().toISOString() };
       rows.push({ channelId, channelTitle:title, label:record.label, shortDesc: (description||"").replace(/\s+/g," ").slice(0,240), confidence:record.confidence, knowledge_source:record.knowledge_source, evidence:record.evidence, shortlist_count:0 });
       appendJSONL(outJsonl, record); continue;
@@ -77,6 +91,7 @@ async function main(){
 
     // Shortlist → Prompt → LLM
     const list = shortlist({ title, description, labelBook, k:12 });
+    if (verbose) console.log(`  shortlist(${list.length}): ${list.map(x=>x.name).join(" | ")}`);
     const prompt = buildPrompt({ channel: { title, description }, shortlist: list, anchors });
     let result;
     try { result = await callOpenAI({ system: prompt.system, user: prompt.user, model }); }
@@ -88,6 +103,16 @@ async function main(){
     } else {
       const names = new Set(list.map(x=>x.name));
       if (!names.has(result.label)) result.label = list[0]?.name || result.label;
+    }
+
+    // Update counters and log model result
+    if (result.label === "Unclassified (error)") nError++;
+    if (result.label === "Unclassified (low confidence)") nLowConf++;
+    if (!String(result.label).startsWith("Unclassified")) nAssigned++;
+    nProcessed++;
+    if (verbose) {
+      console.log(`  → label: ${result.label}  conf: ${result.confidence.toFixed(2)}  src: ${result.knowledge_source}`);
+      if (result.evidence) console.log(`    evidence: ${result.evidence}`);
     }
 
     // Sticky labels
@@ -105,6 +130,12 @@ async function main(){
       evidence: chosen.evidence, shortlist_count: list.length
     });
   }
+
+  const secs = ((Date.now() - startedAt)/1000).toFixed(1);
+  console.log(`\n== Run Summary ==`);
+  console.log(`channels: ${channels.length}`);
+  console.log(`processed: ${nProcessed}, sparse: ${nSparse}, low_conf: ${nLowConf}, errors: ${nError}, assigned: ${nAssigned}`);
+  console.log(`elapsed: ${secs}s`);
 
   const headers = ["channelId","channelTitle","label","shortDesc","confidence","knowledge_source","evidence","shortlist_count"];
   fs.mkdirSync(path.dirname(outCsv), { recursive:true });
