@@ -43,6 +43,8 @@ async function callOpenAI({ system, user, model }) {
 async function main(){
   const args = parseArgs();
   const verbose = (args.verbose === '1' || args.verbose === 'true');
+  const fresh = (args.fresh === '1' || args.fresh === 'true');
+  const resume = (args.resume === '1' || args.resume === 'true');
   const channelsPath = args.channels || 'data/channels.json';
   const labelBookPath= args.labels   || 'data/labelbook.json';
   const outCsv        = args.out     || 'data/fitting_results.csv';
@@ -58,6 +60,20 @@ async function main(){
   if (!ok){ console.error("LabelBook validation failed:\n"+errors.join("\n")); process.exit(2); }
   const anchors = anchorsPath && fs.existsSync(anchorsPath) ? loadJSON(anchorsPath) : [];
   const prev = new Map(readJSONL(prevJsonl).map(r=>[r.channelId,r]));
+
+  // Rotate previous assignments if --fresh
+  if (fresh) {
+    if (fs.existsSync(outJsonl)) {
+      fs.copyFileSync(outJsonl, prevJsonl);
+      fs.writeFileSync(outJsonl, ""); // truncate
+      console.log(`[fresh] Rotated ${outJsonl} -> ${prevJsonl} and cleared current.`);
+    }
+    if (fs.existsSync(outCsv)) {
+      const backupCsv = outCsv.replace(/\.csv$/, `.prev.csv`);
+      fs.copyFileSync(outCsv, backupCsv);
+      console.log(`[fresh] Backed up ${outCsv} -> ${backupCsv}`);
+    }
+  }
 
   const channels = Array.isArray(channelsRaw) ? channelsRaw : (channelsRaw.channels || channelsRaw.items || []);
   const rows = [];
@@ -76,6 +92,27 @@ async function main(){
     // Log per-channel progress
     if (verbose) {
       console.log(`[${i+1}/${channels.length}] ${channelId || "NO_ID"} — ${String(title).slice(0,80)}`);
+    }
+
+    // Resume short-circuit
+    if (resume) {
+      const prevRec = prev.get(channelId);
+      if (prevRec && prevRec.label && !String(prevRec.label).startsWith("Unclassified")) {
+        // Keep previous unless we expect a better one (handled by sticky logic anyway)
+        // Simply write the previous record forward to current outputs.
+        appendJSONL(outJsonl, prevRec);
+        rows.push({
+          channelId,
+          channelTitle: title,
+          shortDesc: (description||"").replace(/\s+/g," ").slice(0,240),
+          label: prevRec.label,
+          confidence: prevRec.confidence,
+          knowledge_source: prevRec.knowledge_source || "text_clues",
+          evidence: prevRec.evidence || "",
+          shortlist_count: prevRec.shortlist_count || ""
+        });
+        continue;
+      }
     }
 
     // Triage
