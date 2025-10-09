@@ -1,14 +1,14 @@
 {
   "version": "2025-10-09",
   "umbrellas": [
-    { "name":"Technology","definition":"software, hardware, AI, computing, and devices","inclusion":"coding, gadgets, operating systems","exclusion":"general news without tech focus","aliases":["tech","AI","artificial intelligence","programming","software","computers","gadgets"],"examples":["Two Minute Papers","Linus Tech Tips","Matthew Berman","Machine Learning Street Talk"] },
-    { "name":"News","definition":"journalism, reporting, and current events","inclusion":"politics, world news, investigations","exclusion":"entertainment gossip","aliases":["current events","politics","breaking news","journalism"],"examples":["MSNBC","BBC News","CNN","The Young Turks"] },
+    { "name":"Technology","definition":"software, hardware, AI, computing, and devices","exclusion":"coding/developer tutorials (see Programming & Software Dev)","aliases":["tech","gadget","device","smartphone","iphone","android","app","software","firmware","silicon"],"examples":["MKBHD","The Verge"] },
+    { "name":"News","definition":"journalism, reporting, and current events","exclusion":"product tutorials or how-to without reporting","aliases":["current events","breaking","journalism","reporter","headline","geopolitics","press","cnn","bbc","msnbc","reuters","ap"],"examples":["BBC News","Reuters"] },
     { "name":"Gaming","definition":"video games, gameplay, reviews, esports","inclusion":"lets plays, game reviews, esports","exclusion":"film/TV media not game-related","aliases":["video games","esports","gameplay"],"examples":["IGN","GameSpot"] },
     { "name":"Film & TV","definition":"movies, TV shows, trailers, reviews","inclusion":"trailers, film analysis, TV recaps","exclusion":"video editing software tutorials","aliases":["movies","television","cinema","streaming"],"examples":["KinoCheck.com","Screen Junkies","WatchMojo.com"] },
     { "name":"Music","definition":"music performance, lessons, production","inclusion":"guitar, piano, music theory, DAWs","exclusion":"general audio tech without music","aliases":["songs","bands","musicians","concerts","audio production"],"examples":["Rick Beato","Benn Jordan","Scary Pockets","Music"] },
     { "name":"Photography","definition":"photography techniques and gear","inclusion":"camera reviews, photo editing","exclusion":"primary focus on video editing software","aliases":["photo","cameras","photographers","camera gear"],"examples":["Peter McKinnon","Jared Polin","Fstoppers"] },
     { "name":"Video Editing","definition":"editing and color grading of video","inclusion":"Premiere Pro, DaVinci Resolve, After Effects","exclusion":"cinematography and filming techniques","aliases":["color grading","post production","video production","filmmaking"],"examples":["Casey Faris","Justin Odisho","This Guy Edits"] },
-    { "name":"Education","definition":"teaching and learning across subjects","inclusion":"tutorials, lessons, academic topics","exclusion":"news commentary without pedagogy","aliases":["learning","tutorials","courses","how-to","lessons"],"examples":["Khan Academy","Veritasium","Kurzgesagt"] },
+    { "name":"Education","definition":"teaching and learning across subjects","exclusion":"news commentary without instruction","aliases":["course","lecture","tutorial","lesson","teacher","school","curriculum","syllabus"],"examples":["Khan Academy","CrashCourse"] },
     { "name":"Lifestyle","definition":"daily life, vlogs, productivity, self-help","inclusion":"minimalism, van life, productivity","exclusion":"news, politics, or niche pro fields","aliases":["vlogs","daily life","self improvement","personal development","productivity"],"examples":["Matt D'Avella","Casey Neistat","Peter McKinnon"] },
     { "name":"Sports","definition":"sports news, analysis, and competitions","inclusion":"NFL, NBA, soccer, athletics","exclusion":"gaming esports content","aliases":["athletics","football","basketball","soccer","sports news"],"examples":["ESPN","NFL","NBA"] },
     { "name":"Business","definition":"entrepreneurship, marketing, and business strategies","inclusion":"startups, marketing, business growth","exclusion":"general finance or stock trading","aliases":["entrepreneurship","marketing","business","startups","companies"],"examples":["Gary Vaynerchuk","Alex Hormozi","Neil Patel"] },
@@ -20,6 +20,104 @@
     { "name":"Comedy","definition":"humorous content, sketches, and entertainment","inclusion":"stand-up, comedy sketches, funny videos","exclusion":"general entertainment without humor","aliases":["comedy","funny","humor","jokes","stand-up"],"examples":["Jimmy Fallon","John Oliver","Comedy Central"] },
     { "name":"Automotive","definition":"cars, motorcycles, and vehicle maintenance","inclusion":"car reviews, maintenance, automotive tech","exclusion":"general transportation or racing","aliases":["cars","automotive","vehicles","motorcycles","trucks"],"examples":["Doug DeMuro","Donut Media","Jay Leno's Garage"] },
     { "name":"Home & Garden","definition":"home improvement, gardening, and DIY projects","inclusion":"renovation, gardening, home decor","exclusion":"professional construction or architecture","aliases":["home improvement","gardening","DIY","home decor"],"examples":["This Old House","Garden Answer","DIY Perks"] },
-    { "name":"Finance","definition":"personal finance, investing, and money management","inclusion":"investing, budgeting, financial planning","exclusion":"business operations or sales","aliases":["finance","investing","money","financial planning","stocks"],"examples":["Graham Stephan","The Plain Bagel","Andrei Jikh"] }
+    { "name":"Finance","definition":"personal finance, investing, and money management","inclusion":"investing, budgeting, financial planning","exclusion":"business operations or sales","aliases":["finance","investing","money","financial planning","stocks"],"examples":["Graham Stephan","The Plain Bagel","Andrei Jikh"] },
+    {
+      "name": "Politics & World News",
+      "definition": "Reporting and analysis on domestic politics, geopolitics, government, and global affairs.",
+      "inclusion": "elections, policy, diplomacy, conflicts, international relations",
+      "exclusion": "business/market tickers; tech product coverage",
+      "aliases": ["politics","geopolitics","policy","election","capitol","parliament","foreign affairs","world news","state department"],
+      "examples": ["BBC News","MSNBC"],
+      "parents": ["News"]
+    },
+    {
+      "name": "Business & Markets News",
+      "definition": "News focused on the economy, companies, investing, and financial markets.",
+      "inclusion": "earnings, macroeconomy, inflation, interest rates, equities, startups",
+      "exclusion": "personal finance how-tos or long-form investing education",
+      "aliases": ["markets","stocks","earnings","IPO","macro","economy","federal reserve","wall street","bloomberg","cnbc"],
+      "examples": ["Bloomberg Television","CNBC"],
+      "parents": ["News"]
+    },
+    {
+      "name": "Tech & Science News",
+      "definition": "News coverage of technology companies, products, research, and scientific developments.",
+      "inclusion": "AI breakthroughs, product launches, lab results, journal coverage",
+      "exclusion": "how-to tutorials or developer walkthroughs",
+      "aliases": ["tech news","science news","product launch","research update","beta","developer conference","keynote","patch notes"],
+      "examples": ["The Verge","CNET"],
+      "parents": ["News"]
+    },
+    {
+      "name": "Consumer Tech & Gadgets",
+      "definition": "Reviews and coverage of phones, laptops, cameras, and everyday devices.",
+      "inclusion": "unboxings, feature rundowns, comparisons, buyer guides",
+      "exclusion": "PC building benchmarks; developer coding tutorials",
+      "aliases": ["gadget","smartphone","iphone","android","laptop","tablet","headphones","wearables","camera gear","review"],
+      "examples": ["MKBHD","Mrwhosetheboss"],
+      "parents": ["Technology"]
+    },
+    {
+      "name": "Programming & Software Dev",
+      "definition": "Coding tutorials, frameworks, APIs, and developer tooling.",
+      "inclusion": "languages, frameworks, devops, backend/frontend, code walkthroughs",
+      "exclusion": "general gadget reviews or PC part builds",
+      "aliases": ["programming","coding","developer","python","javascript","typescript","react","node","docker","api","cli","sdk"],
+      "examples": ["Fireship","Traversy Media"],
+      "parents": ["Technology"]
+    },
+    {
+      "name": "PC Hardware & Builds",
+      "definition": "PC parts, performance tuning, and workstation/gaming builds.",
+      "inclusion": "benchmarks, GPUs/CPUs, thermals, cases, cooling, overclocking",
+      "exclusion": "camera/phone gadget reviews; pure game content",
+      "aliases": ["pc build","gpu","cpu","benchmark","motherboard","ram","ssd","thermal","overclock","power supply","case"],
+      "examples": ["Gamers Nexus","JayzTwoCents"],
+      "parents": ["Technology"]
+    },
+    {
+      "name": "AI Tools & Productivity",
+      "definition": "Practical use of AI assistants and tools to get work done.",
+      "inclusion": "prompting, workflows, productivity, AI app roundups",
+      "exclusion": "ML research papers; theoretical AI alignment",
+      "aliases": ["chatgpt","gpt","claude","midjourney","stable diffusion","prompt","agents","workflows","automations","llm tools"],
+      "examples": ["Matt Wolfe","AI Explained"],
+      "parents": ["Technology"]
+    },
+    {
+      "name": "Academic Courses & Lectures",
+      "definition": "Structured lectures and course material from academic-style educators.",
+      "inclusion": "curriculum-based series, classroom-style lectures, textbook-aligned units",
+      "exclusion": "casual how-tos or news commentary",
+      "aliases": ["lecture","course","curriculum","syllabus","semester","university","professor","open course","edx"],
+      "examples": ["Khan Academy","MIT OpenCourseWare"],
+      "parents": ["Education"]
+    },
+    {
+      "name": "How-To & Skills Tutorials",
+      "definition": "Practical step-by-step guides for general skills and crafts.",
+      "inclusion": "non-academic tutorials (writing, design, soft skills, tools)",
+      "exclusion": "programming (see Programming & Software Dev); video editing (use Video Editing)",
+      "aliases": ["tutorial","how to","step by step","guide","walkthrough","beginner","intermediate","masterclass"],
+      "examples": ["Skillshare-style creators","Ali Abdaal"],
+      "parents": ["Education"]
+    },
+    {
+      "name": "Study Skills & Test Prep",
+      "definition": "Techniques and resources for studying, exams, and certifications.",
+      "inclusion": "memorization, spaced repetition, test strategies, SAT/ACT/MCAT/Bar/Certs",
+      "exclusion": "general life productivity (keep in Lifestyle)",
+      "aliases": ["study tips","revision","flashcards","anki","exam prep","practice tests","scores","certification"],
+      "examples": ["Med School Insiders","Magoosh"],
+      "parents": ["Education"]
+    },
+    {
+      "name": "Weather",
+      "definition": "Forecasts, meteorology, storm tracking, and severe weather coverage.",
+      "inclusion": "daily/weekly forecasts, storm outlooks, hurricane/tornado tracking",
+      "exclusion": "climate policy debates (use Politics & World News) or earth science explainers (use Science)",
+      "aliases": ["forecast","meteorology","radar","doppler","severe weather","hurricane","tornado","winter storm","NOAA","NWS","outlook","model run"],
+      "examples": ["The Weather Channel","Ryan Hall, Y'all"]
+    }
   ]
 }
