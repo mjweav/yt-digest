@@ -1,30 +1,48 @@
-// CommonJS
-const DEFAULT_K = 12;
-
 /**
- * @returns {Array<{name:string, definition:string}>}
+ * Dynamic shortlist builder
+ * - loads every umbrella (including children) from labelbook
+ * - indexes aliases + names
+ * - returns up to k best matches
  */
-function shortlist({ title, description, labelBook, k = DEFAULT_K }) {
-  const hay = `${title||""} ${description||""}`.toLowerCase();
-  const scored = [];
+
+const fs = require("fs");
+
+function shortlist({ title, description, labelBook, k = 12 }) {
+  const text = `${title} ${description}`.toLowerCase();
+  const tokens = text.split(/\W+/).filter(Boolean);
+  const wordSet = new Set(tokens);
+
+  // Build flat alias map
+  const all = [];
   for (const u of (labelBook.umbrellas || [])) {
-    const keys = new Set();
-    (u.name||"").toLowerCase().split(/\s+/).forEach(w => w && keys.add(w));
-    (u.aliases||[]).forEach(a => (a||"").toLowerCase().split(/\s+/).forEach(w => w && keys.add(w)));
-    let s = 0;
-    const phrases = [u.name, ...(u.aliases||[])].filter(Boolean).map(x => x.toLowerCase());
-    for (const p of phrases) if (hay.includes(p)) s += Math.min(2.0, p.split(/\s+/).length);
-    for (const kw of keys) if (new RegExp(`\\b${kw.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")}\\b`,'i').test(hay)) s += 1;
-    if (s > 0) scored.push({ name: u.name, definition: u.definition, score: s });
+    const names = [u.name.toLowerCase(), ...(u.aliases || []).map(a => a.toLowerCase())];
+    all.push({ ...u, names });
   }
-  if (scored.length < 6) {
-    const fallbacks = ["Technology","News","Lifestyle","Entertainment","Gaming","Education"];
-    for (const f of fallbacks) {
-      const u = (labelBook.umbrellas||[]).find(x => x.name.toLowerCase() === f.toLowerCase());
-      if (u && !scored.find(x => x.name === u.name)) scored.push({ name:u.name, definition:u.definition, score: 0.1 });
+
+  // Score by keyword hits
+  const scored = [];
+  for (const u of all) {
+    let score = 0;
+    for (const n of u.names) {
+      const parts = n.split(/\s+/);
+      if (parts.some(p => wordSet.has(p))) score += 1;
+      if (text.includes(n)) score += 2; // phrase hit
     }
+    // parent/child relation bonus
+    if (u.parents && u.parents.length) {
+      for (const p of u.parents) if (text.includes(p.toLowerCase())) score += 1.5;
+    }
+    if (score > 0) scored.push({ label: u.name, def: u.definition, score });
   }
-  scored.sort((a,b) => b.score - a.score);
-  return scored.slice(0, k).map(({name, definition}) => ({name, definition}));
+
+  // Sort + slice
+  const ranked = scored.sort((a, b) => b.score - a.score).slice(0, k);
+
+  if (ranked.length < 8) {
+    console.warn(`⚠️ shortlist underfilled (${ranked.length}/${k}) for "${title.slice(0,60)}..."`);
+  }
+
+  return ranked;
 }
+
 module.exports = { shortlist };

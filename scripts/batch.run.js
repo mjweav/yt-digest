@@ -78,6 +78,104 @@ async function main(){
   const fresh = (args.fresh === '1' || args.fresh === 'true');
   const resume = (args.resume === '1' || args.resume === 'true');
 
+  // Dynamic shortlist configuration
+  const shortlistSize = Number(args.shortlist || 12);
+  const showPrompt = args.showPrompt === "1" || args.showPrompt === "true";
+
+  // Enhanced logging setup
+  const logFile = 'data/run.log';
+  const logFilePrev = 'data/run.log.prev';
+
+  // Rotate log files
+  if (fs.existsSync(logFile)) {
+    if (fs.existsSync(logFilePrev)) {
+      fs.unlinkSync(logFilePrev);
+    }
+    fs.renameSync(logFile, logFilePrev);
+  }
+
+  // Custom console methods with colors and file logging
+  const colors = {
+    reset: '\x1b[0m',
+    bright: '\x1b[1m',
+    red: '\x1b[31m',
+    green: '\x1b[32m',
+    yellow: '\x1b[33m',
+    blue: '\x1b[34m',
+    magenta: '\x1b[35m',
+    cyan: '\x1b[36m',
+    white: '\x1b[37m'
+  };
+
+  function logToFile(message) {
+    fs.appendFileSync(logFile, message + '\n');
+  }
+
+  function logWithColor(color, message, fileOnly = false) {
+    const coloredMessage = `${colors[color]}${message}${colors.reset}`;
+    logToFile(message);
+    if (!fileOnly) console.log(coloredMessage);
+  }
+
+  function logSeparator(char = '═', length = 60, color = 'cyan') {
+    const separator = char.repeat(length);
+    logWithColor(color, separator, false);
+  }
+
+  function logHeader(title) {
+    logSeparator('═', 60, 'cyan');
+    logWithColor('bright', `🚀 ${title}`, false);
+    logSeparator('═', 60, 'cyan');
+  }
+
+  function logChannelProgress(current, total, channelId, title) {
+    const progress = `[${current}/${total}]`;
+    const channelInfo = `${colors.bright}${channelId}${colors.reset} — ${title.slice(0, 60)}`;
+    const message = `${colors.blue}${progress}${colors.reset} ${channelInfo}`;
+    logToFile(`${progress} ${channelId} — ${title}`);
+    if (!showPrompt) console.log(message);
+  }
+
+  function logShortlist(count, labels) {
+    const shortlistInfo = `shortlist(${count}): ${labels.slice(0, 5).join(' | ')}${labels.length > 5 ? ' | ...' : ''}`;
+    logToFile(`  ${shortlistInfo}`);
+    if (verbose && !showPrompt) console.log(`  ${colors.yellow}${shortlistInfo}${colors.reset}`);
+  }
+
+  function logClassification(label, confidence, source, evidence) {
+    const confidenceColor = confidence >= 0.8 ? 'green' : confidence >= 0.6 ? 'yellow' : 'red';
+    const classification = `→ label: ${colors[confidenceColor]}${label}${colors.reset}  conf: ${confidence.toFixed(2)}  src: ${source}`;
+    const evidenceMsg = `    evidence: ${evidence}`;
+    logToFile(`  ${classification}`);
+    logToFile(`    ${evidenceMsg}`);
+    if (verbose && !showPrompt) {
+      console.log(`  ${classification}`);
+      console.log(`    ${colors.cyan}${evidenceMsg}${colors.reset}`);
+    }
+  }
+
+  function logTokens(input, output, cost) {
+    const tokenInfo = `tokens: in=${input} out=${output}  est=$${cost.toFixed(6)}`;
+    logToFile(`  ${tokenInfo}`);
+    if (verbose && !showPrompt) console.log(`  ${colors.magenta}${tokenInfo}${colors.reset}`);
+  }
+
+  function logWarning(message) {
+    const warningMsg = `⚠️  ${message}`;
+    logToFile(`  ${warningMsg}`);
+    if (verbose && !showPrompt) console.log(`  ${colors.yellow}${warningMsg}${colors.reset}`);
+  }
+
+  function logTriage(reason) {
+    const triageMsg = `→ TRIAGE: ${colors.red}Unclassified (sparse)${colors.reset} — ${reason}`;
+    logToFile(`  ${triageMsg}`);
+    if (verbose && !showPrompt) console.log(`  ${triageMsg}`);
+  }
+
+  function logSummary(title, value, color = 'green') {
+    logWithColor(color, `${title}: ${value}`, false);
+  }
+
   // Parse model first for dynamic pricing
   const model = args.model || 'gpt-4o-mini';
 
@@ -100,6 +198,14 @@ async function main(){
   const labelBook   = loadJSON(labelBookPath);
   const { ok, errors } = validateLabelBook(labelBook);
   if (!ok){ console.error("LabelBook validation failed:\n"+errors.join("\n")); process.exit(2); }
+
+  // Log labelbook summary with enhanced formatting
+  logHeader("YT-DIGEST FITTING RUN");
+  logWithColor('green', `📚 Loaded labelbook: ${(labelBook.umbrellas || []).length} umbrellas`, false);
+  let aliasTotal = 0;
+  for (const u of (labelBook.umbrellas || [])) aliasTotal += (u.aliases || []).length;
+  logWithColor('green', `🔗 Indexed aliases: ${aliasTotal}`, false);
+
   const anchors = anchorsPath && fs.existsSync(anchorsPath) ? loadJSON(anchorsPath) : [];
   const prev = new Map(readJSONL(prevJsonl).map(r=>[r.channelId,r]));
 
@@ -108,12 +214,12 @@ async function main(){
     if (fs.existsSync(outJsonl)) {
       fs.copyFileSync(outJsonl, prevJsonl);
       fs.writeFileSync(outJsonl, ""); // truncate
-      console.log(`[fresh] Rotated ${outJsonl} -> ${prevJsonl} and cleared current.`);
+      logWithColor('yellow', `🔄 [fresh] Rotated ${outJsonl} -> ${prevJsonl} and cleared current.`, false);
     }
     if (fs.existsSync(outCsv)) {
       const backupCsv = outCsv.replace(/\.csv$/, `.prev.csv`);
       fs.copyFileSync(outCsv, backupCsv);
-      console.log(`[fresh] Backed up ${outCsv} -> ${backupCsv}`);
+      logWithColor('yellow', `💾 [fresh] Backed up ${outCsv} -> ${backupCsv}`, false);
     }
   }
 
@@ -131,10 +237,8 @@ async function main(){
     const channelId = ch.id || ch.channelId || ch.snippet?.channelId || "";
     if (!channelId) continue;
 
-    // Log per-channel progress
-    if (verbose) {
-      console.log(`[${i+1}/${channels.length}] ${channelId || "NO_ID"} — ${String(title).slice(0,80)}`);
-    }
+    // Log per-channel progress with enhanced formatting
+    logChannelProgress(i + 1, channels.length, channelId, title);
 
     // Resume short-circuit
     if (resume) {
@@ -157,10 +261,10 @@ async function main(){
       }
     }
 
-    // Triage
+    // Triage with enhanced logging
     const { isSparse, reason } = triageSparse({ title, description });
     if (isSparse) {
-      if (verbose) console.log(`  → TRIAGE: Unclassified (sparse) — ${reason}`);
+      logTriage(reason);
       nSparse++;
       nProcessed++;
       const record = { channelId, title, label:"Unclassified (sparse)", confidence:0, knowledge_source:"text_clues", evidence:reason, shortlist_count:0, timestamp:new Date().toISOString() };
@@ -169,9 +273,15 @@ async function main(){
     }
 
     // Shortlist → Prompt → LLM
-    const list = shortlist({ title, description, labelBook, k:12 });
-    if (verbose) console.log(`  shortlist(${list.length}): ${list.map(x=>x.name).join(" | ")}`);
-    const prompt = buildPrompt({ channel: { title, description }, shortlist: list, anchors });
+    const list = shortlist({ title, description, labelBook, k: shortlistSize });
+
+    // Log shortlist with enhanced formatting
+    if (list.length < 8) {
+      logWarning(`shortlist underfilled (${list.length}/${shortlistSize}) for "${title.slice(0,60)}..."`);
+    }
+    logShortlist(list.length, list.map(x => x.name));
+
+    const prompt = buildPrompt({ channel: { title, description }, shortlist: list, anchors, showPrompt });
     let result;
     try { result = await callOpenAI({ system: prompt.system, user: prompt.user, model }); }
     catch(e){ result = { label:"Unclassified (error)", confidence:0, knowledge_source:"text_clues", evidence:String(e.message).slice(0,100) }; }
@@ -184,7 +294,7 @@ async function main(){
       if (!names.has(result.label)) result.label = list[0]?.name || result.label;
     }
 
-    // Update counters and log model result
+    // Update counters and log model result with enhanced formatting
     if (result.label === "Unclassified (error)") nError++;
     if (result.label === "Unclassified (low confidence)") nLowConf++;
     if (!String(result.label).startsWith("Unclassified")) nAssigned++;
@@ -196,11 +306,9 @@ async function main(){
     const rowCost = (inTok/1_000_000)*priceIn + (outTok/1_000_000)*priceOut;
     totalInTok += inTok; totalOutTok += outTok; totalCost += rowCost;
 
-    if (verbose) {
-      console.log(`  → label: ${result.label}  conf: ${result.confidence.toFixed(2)}  src: ${result.knowledge_source}`);
-      if (result.evidence) console.log(`    evidence: ${result.evidence}`);
-      console.log(`  tokens: in=${inTok} out=${outTok}  est=$${rowCost.toFixed(6)}`);
-    }
+    // Log classification and token info with enhanced formatting
+    logClassification(result.label, result.confidence, result.knowledge_source, result.evidence);
+    logTokens(inTok, outTok, rowCost);
 
     // Sticky labels
     const previous = prev.get(channelId);
@@ -219,18 +327,32 @@ async function main(){
   }
 
   const secs = ((Date.now() - startedAt)/1000).toFixed(1);
-  console.log(`\n== Run Summary ==`);
-  console.log(`model: ${model}`);
-  console.log(`channels: ${channels.length}`);
-  console.log(`processed: ${nProcessed}, sparse: ${nSparse}, low_conf: ${nLowConf}, errors: ${nError}, assigned: ${nAssigned}`);
-  console.log(`elapsed: ${secs}s`);
-  console.log(`tokens: in=${totalInTok} out=${totalOutTok}`);
-  console.log(`est cost: $${totalCost.toFixed(4)}  (in @$${priceIn}/MTok, out @$${priceOut}/MTok)`);
+
+  // Enhanced run summary with colors and formatting
+  logSeparator('═', 60, 'cyan');
+  logWithColor('bright', '📊 RUN SUMMARY', false);
+  logSeparator('═', 60, 'cyan');
+
+  logSummary('🤖 Model', model, 'blue');
+  logSummary('📺 Channels', channels.length.toString(), 'blue');
+  logSummary('✅ Processed', nProcessed.toString(), 'green');
+  logSummary('⚠️  Sparse', nSparse.toString(), 'yellow');
+  logSummary('❌ Low Conf', nLowConf.toString(), 'red');
+  logSummary('💥 Errors', nError.toString(), 'red');
+  logSummary('🎯 Assigned', nAssigned.toString(), 'green');
+  logSummary('⏱️  Elapsed', `${secs}s`, 'cyan');
+  logSummary('🔢 Tokens', `in=${totalInTok} out=${totalOutTok}`, 'magenta');
+  logSummary('💰 Est Cost', `$${totalCost.toFixed(4)} (in @$${priceIn}/MTok, out @$${priceOut}/MTok)`, 'yellow');
 
   const headers = ["channelId","channelTitle","label","shortDesc","confidence","knowledge_source","evidence","shortlist_count"];
   fs.mkdirSync(path.dirname(outCsv), { recursive:true });
   fs.writeFileSync(outCsv, writeCSV(rows, headers), 'utf8');
-  console.log(`Wrote ${rows.length} rows to ${outCsv}`);
+
+  logSeparator('═', 60, 'green');
+  logWithColor('green', `✅ Wrote ${rows.length} rows to ${outCsv}`, false);
+  logWithColor('green', `📋 Full log saved to data/run.log`, false);
+  logWithColor('green', `💾 Previous log backed up to data/run.log.prev`, false);
+  logSeparator('═', 60, 'green');
 }
 
 if (require.main === module) { main().catch(err=>{ console.error(err); process.exit(1); }); }
