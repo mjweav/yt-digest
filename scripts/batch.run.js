@@ -82,6 +82,22 @@ async function main(){
   const shortlistSize = Number(args.shortlist || 12);
   const showPrompt = args.showPrompt === "1" || args.showPrompt === "true";
 
+  // Define a generic backfill (tweak to your taxonomy as needed)
+  const BACKFILL = [
+    { label: "News", def: "journalism, reporting, and current events" },
+    { label: "Technology", def: "software, hardware, AI, computing, devices" },
+    { label: "Education", def: "instructional and learning content" },
+    { label: "Lifestyle", def: "daily life, self-improvement, vlogs" },
+    { label: "Music", def: "music performance, lessons, production" },
+    { label: "Film & TV", def: "movies, shows, trailers, cinema" },
+    { label: "Gaming", def: "video games, reviews, playthroughs" },
+    { label: "Sports", def: "athletics, teams, competitions" },
+    { label: "Home & Garden", def: "DIY, renovation, gardening" },
+    { label: "Cooking", def: "food, recipes, culinary" },
+    { label: "Health & Fitness", def: "wellness, exercise, nutrition" },
+    { label: "Travel", def: "trips, destinations, exploration" }
+  ];
+
   // Enhanced logging setup
   const logFile = 'data/run.log';
   const logFilePrev = 'data/run.log.prev';
@@ -273,7 +289,7 @@ async function main(){
     }
 
     // Shortlist → Prompt → LLM
-    const list = shortlist({ title, description, labelBook, k: shortlistSize });
+    const list = shortlist({ title, description, labelBook, k: shortlistSize, backfill: BACKFILL });
 
     // Log shortlist with enhanced formatting
     if (list.length < 8) {
@@ -286,12 +302,44 @@ async function main(){
     try { result = await callOpenAI({ system: prompt.system, user: prompt.user, model }); }
     catch(e){ result = { label:"Unclassified (error)", confidence:0, knowledge_source:"text_clues", evidence:String(e.message).slice(0,100) }; }
 
+    // Post-LLM validation: ensure canonical label is returned
+    function normalizeLabel(lbl) {
+      if (!lbl) return "";
+      // strip spaces around em-dash or hyphenated definitions accidentally included
+      return String(lbl).split("—")[0].split(" - ")[0].trim();
+    }
+
+    const allowed = new Set(list.map(x => x.label));
+    let picked = normalizeLabel(result.label);
+
+    // exact match, or case-insensitive fallback
+    if (!allowed.has(picked)) {
+      for (const a of allowed) {
+        if (a.toLowerCase() === picked.toLowerCase()) { picked = a; break; }
+      }
+    }
+
+    // final guard: if still not in shortlist, mark low-confidence unclassified
+    if (!allowed.has(picked)) {
+      console.warn(`⚠️ Model returned non-canonical label "${result.label}". Coercing to Unclassified (low confidence).`);
+      picked = "Unclassified (low confidence)";
+      result.confidence = Math.min(result.confidence || 0.2, 0.2);
+      result.knowledge_source = result.knowledge_source || "text_clues";
+      result.evidence = (result.evidence || "") + " [auto-coerced invalid label output]";
+    }
+    result.label = picked;
+
+    // also prefer richer source tagging if both signals exist
+    if (result.knowledge_source === "world_knowledge" && (title && description)) {
+      result.knowledge_source = "both";
+    }
+
     // Confidence floor + shortlist guard
     if ((result.confidence||0) < confidenceFloor) {
       result.label = "Unclassified (low confidence)";
     } else {
-      const names = new Set(list.map(x=>x.name));
-      if (!names.has(result.label)) result.label = list[0]?.name || result.label;
+      const names = new Set(list.map(x=>x.label));
+      if (!names.has(result.label)) result.label = list[0]?.label || result.label;
     }
 
     // Update counters and log model result with enhanced formatting

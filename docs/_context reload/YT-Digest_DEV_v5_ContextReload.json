@@ -1,0 +1,101 @@
+{
+  "project": "YT-Digest",
+  "phase": "DEV Phase 5",
+  "microstep": "5.2b",
+  "checkpoint_time": "2025-10-10 00:33:44",
+  "engine": {
+    "name": "Heuristics2",
+    "weights": {
+      "title": 3.0,
+      "description": 1.6,
+      "url": 0.6
+    },
+    "min_margin": 0.75,
+    "tfidf": {
+      "cosine_min": 0.22
+    },
+    "normalization": [
+      "lowercase",
+      "punct_trim",
+      "timestamp_stoplist"
+    ],
+    "label_guard": {
+      "max_len": 40,
+      "trim_on": [
+        "\u2014",
+        "\u2013",
+        ":",
+        "\u00b7"
+      ]
+    }
+  },
+  "paths": {
+    "engine_core": "server/autoOrganize/heuristics2.js",
+    "pipeline": "server/autoOrganize/builder.js",
+    "entry": "server/autoOrganize/autoOrganize.js",
+    "outputs": {
+      "primary": "data/autoOrganize.json",
+      "debug": "data/autoOrganize.debug.json",
+      "meta": "data/autoOrganize.meta.json"
+    },
+    "taxonomy": {
+      "anchors": "data/anchors.json",
+      "umbrella_map": "data/umbrella_map.json",
+      "stop_terms": "data/stop_terms.json"
+    }
+  },
+  "patch_08": {
+    "goals": [
+      "Restore world_knowledge hits",
+      "Remove implicit umbrella cap (~10)",
+      "Shorten verbose labels to canonical names",
+      "Reduce timestamp/noise leakage"
+    ],
+    "changes": {
+      "anchors_refresh": true,
+      "umbrella_cap_removed": true,
+      "label_hygiene": true,
+      "stop_terms_expanded": true,
+      "tie_break_tweaks": true
+    },
+    "expected_outcomes": [
+      "world_knowledge present where warranted",
+      "Umbrellas >10 allowed when scores justify",
+      "Cleaner labels in outputs",
+      "Music consolidation deferred to Phase 6 policy"
+    ]
+  },
+  "analysis": {
+    "checklist": [
+      "Umbrella cardinality (>10 where expected)",
+      "world_knowledge restoration diff",
+      "Label audit for overlength/multi-separator",
+      "Music merge plan and impact estimate",
+      "Edge cases from timestamp/noise tokens",
+      "Threshold sensitivity plan (\u00b10.05)",
+      "Performance snapshot from meta"
+    ]
+  },
+  "phase6_plan": {
+    "streams": [
+      "quality_tuning",
+      "pipeline_integration",
+      "deployability",
+      "observability",
+      "ai_optimization"
+    ],
+    "targets": {
+      "replace_heuristics2_in_main_app": true,
+      "feature_flag_toggle": true
+    },
+    "deploy_targets": [
+      "Render",
+      "Vercel"
+    ]
+  },
+  "flags": {
+    "analysisPending": true,
+    "reanalyzeUmbrella": true,
+    "patchRunComplete": true
+  }
+}
