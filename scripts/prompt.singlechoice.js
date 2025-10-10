@@ -15,7 +15,7 @@ function buildPrompt({ channel, shortlist, anchors = [], showPrompt = false }) {
     .map((x, i) => {
       const a = anchorMap.get(x.label);
       const ex = a ? ` Example: ${a}` : "";
-      return `${i + 1}. ${x.label} — ${x.def || ""}${ex}`.trim();
+      return `${x.id} — ${x.label} — ${x.def || ""}${ex}`.trim();
     })
     .join("\n");
 
@@ -23,9 +23,10 @@ function buildPrompt({ channel, shortlist, anchors = [], showPrompt = false }) {
 Use BOTH:
 • world knowledge (famous people, outlets, bands, shows, brands, etc.)
 • text clues in the channel title/description.
-Choose EXACTLY ONE label from the shortlist. Output STRICT JSON matching the schema.`;
+Choose EXACTLY ONE ID from the shortlist. Output STRICT JSON matching the schema.`;
 
-  // Machine-readable guard: labels array provided explicitly
+  // Machine-readable guard: IDs array provided explicitly
+  const idsOnly = shortlist.map(x => x.id);
   const user = `
 Channel:
 Title: ${title}
@@ -34,11 +35,11 @@ Description: ${description}
 Shortlist (human readable):
 ${choices}
 
-Shortlist (labels array, machine-readable):
-${JSON.stringify(labelsOnly)}
+Shortlist (IDs array, machine-readable):
+${JSON.stringify(idsOnly)}
 
 Respond in JSON ONLY with this schema:
-{"label": "<one of the labels exactly as given above>",
+{"choice_id": "<one of the IDs exactly as given above>",
  "confidence": <0..1>,
  "knowledge_source": "world_knowledge" | "text_clues" | "both",
  "evidence": "<short justification>"}

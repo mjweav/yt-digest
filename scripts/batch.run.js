@@ -6,7 +6,9 @@ const { validateLabelBook } = require('./labelbook.schema.js');
 const { triageSparse } = require('./triage.sparse.js');
 const { shortlist } = require('./shortlist.keywords.js');
 const { buildPrompt } = require('./prompt.singlechoice.js');
-const { normalizeLabel } = require('../lib/labelSanitizer.js');
+const { normalizeDashes } = require('../lib/labelSanitizer.js');
+const { loadChoices, createIdToLabelMap } = require('../lib/choices.js');
+const { validateChoice } = require('../lib/validateChoice.js');
 
 // Prefer global fetch (Node 18+); lazy-load node-fetch if missing
 let fetchFn = global.fetch;
@@ -62,13 +64,9 @@ async function callOpenAI({ system, user, model }) {
   if (!res.ok){ const txt=await res.text(); throw new Error(`OpenAI error ${res.status}: ${txt.slice(0,200)}`); }
   const json = await res.json();
   const content = json.choices?.[0]?.message?.content || "{}";
-  let parsed={}; try{parsed=JSON.parse(content);}catch{throw new Error("Failed to parse JSON from model");}
   const usage = json.usage || { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 };
   return {
-    label: String(parsed.label||""),
-    confidence: Math.max(0, Math.min(1, Number(parsed.confidence||0))),
-    knowledge_source: parsed.knowledge_source==="world_knowledge"?"world_knowledge":"text_clues",
-    evidence: String(parsed.evidence||"").slice(0,100),
+    jsonResponse: content, // Raw JSON string for ID contract validation
     usage
   };
 }
@@ -216,6 +214,11 @@ async function main(){
   const { ok, errors } = validateLabelBook(labelBook);
   if (!ok){ console.error("LabelBook validation failed:\n"+errors.join("\n")); process.exit(2); }
 
+  // Load choices for ID-based contract
+  const choices = loadChoices(labelBookPath);
+  const idToLabelMap = createIdToLabelMap(labelBookPath);
+  const allowedIds = choices.map(c => c.id);
+
   // Log labelbook summary with enhanced formatting
   logHeader("YT-DIGEST FITTING RUN");
   logWithColor('green', `📚 Loaded labelbook: ${(labelBook.umbrellas || []).length} umbrellas`, false);
@@ -300,34 +303,77 @@ async function main(){
 
     const prompt = buildPrompt({ channel: { title, description }, shortlist: list, anchors, showPrompt });
     let result;
-    try { result = await callOpenAI({ system: prompt.system, user: prompt.user, model }); }
-    catch(e){ result = { label:"Unclassified (error)", confidence:0, knowledge_source:"text_clues", evidence:String(e.message).slice(0,100) }; }
+    let rawResponse = { usage: { prompt_tokens: 0, completion_tokens: 0 } }; // Initialize with defaults
 
-    // Post-LLM validation: ensure canonical label is returned
-    const allowed = new Set(list.map(x => x.label));
-    let picked = normalizeLabel(result.label, allowed);
+    try {
+      // Call OpenAI with ID-based contract
+      rawResponse = await callOpenAI({ system: prompt.system, user: prompt.user, model });
 
-    // If sanitizer returned null (not in allowedSet), mark as low-confidence unclassified
-    if (picked === null) {
-      console.warn(`⚠️ Model returned non-canonical label "${result.label}". Coercing to Unclassified (low confidence).`);
-      picked = "Unclassified (low confidence)";
-      result.confidence = Math.min(result.confidence || 0.2, 0.2);
-      result.knowledge_source = result.knowledge_source || "text_clues";
-      result.evidence = (result.evidence || "") + " [auto-coerced invalid label output]";
+      // Parse the JSON response
+      let parsedResponse = {};
+      try {
+        parsedResponse = JSON.parse(rawResponse.jsonResponse);
+      } catch (e) {
+        logWarning(`Failed to parse model JSON: ${e.message}. Using unclassified.`);
+        result = {
+          choice_id: "unclassified",
+          label: "Unclassified (invalid response)",
+          confidence: 0.51,
+          knowledge_source: "text_clues",
+          evidence: `JSON parse error: ${e.message}`
+        };
+      }
+
+      if (!result) {
+        // Validate the JSON response with strict ID contract
+        const validation = validateChoice(rawResponse.jsonResponse, allowedIds);
+
+        if (!validation.ok) {
+          // Debug: log the actual response and allowed IDs for troubleshooting
+          if (verbose) {
+            console.log(`DEBUG: Model response: ${rawResponse.jsonResponse}`);
+            console.log(`DEBUG: Allowed IDs: ${JSON.stringify(allowedIds.slice(0, 5))}...`);
+            if (validation.choice_id) {
+              console.log(`DEBUG: Rejected choice_id: ${validation.choice_id}`);
+            }
+          }
+
+          // Invalid response - use unclassified with floor confidence
+          logWarning(`Invalid model response: ${validation.reason}. Using unclassified.`);
+          result = {
+            choice_id: "unclassified",
+            label: "Unclassified (invalid response)",
+            confidence: 0.51,
+            knowledge_source: "text_clues",
+            evidence: `Invalid response: ${validation.reason}`
+          };
+        } else {
+          // Valid response - map ID to canonical label
+          const canonicalLabel = idToLabelMap[validation.choice_id] || "Unclassified";
+          result = {
+            choice_id: validation.choice_id,
+            label: canonicalLabel,
+            confidence: validation.confidence || 0.5,
+            knowledge_source: parsedResponse.knowledge_source || "text_clues",
+            evidence: parsedResponse.evidence || ""
+          };
+        }
+      }
     }
-    result.label = picked;
-
-    // also prefer richer source tagging if both signals exist
-    if (result.knowledge_source === "world_knowledge" && (title && description)) {
-      result.knowledge_source = "both";
+    catch(e) {
+      result = {
+        choice_id: "unclassified",
+        label: "Unclassified (error)",
+        confidence: 0,
+        knowledge_source: "text_clues",
+        evidence: String(e.message).slice(0,100)
+      };
     }
 
-    // Confidence floor + shortlist guard
-    if ((result.confidence||0) < confidenceFloor) {
+    // Apply confidence floor
+    if ((result.confidence || 0) < confidenceFloor) {
       result.label = "Unclassified (low confidence)";
-    } else {
-      const names = new Set(list.map(x=>x.label));
-      if (!names.has(result.label)) result.label = list[0]?.label || result.label;
+      result.choice_id = "unclassified";
     }
 
     // Update counters and log model result with enhanced formatting
@@ -337,8 +383,8 @@ async function main(){
     nProcessed++;
 
     // Cost estimation per row
-    const inTok = result.usage?.prompt_tokens || 0;
-    const outTok = result.usage?.completion_tokens || 0;
+    const inTok = rawResponse.usage?.prompt_tokens || 0;
+    const outTok = rawResponse.usage?.completion_tokens || 0;
     const rowCost = (inTok/1_000_000)*priceIn + (outTok/1_000_000)*priceOut;
     totalInTok += inTok; totalOutTok += outTok; totalCost += rowCost;
 
@@ -349,14 +395,15 @@ async function main(){
     // Sticky labels
     const previous = prev.get(channelId);
     const chosen = stickyChoice(previous && previous.label && previous.label.startsWith("Unclassified") ? null : previous, {
-      channelId, title, label: result.label, confidence: result.confidence,
+      channelId, title, label: result.label, choice_id: result.choice_id, confidence: result.confidence,
       knowledge_source: result.knowledge_source, evidence: result.evidence,
       shortlist_count: list.length, timestamp: new Date().toISOString()
     });
     appendJSONL(outJsonl, chosen);
 
     rows.push({
-      channelId, channelTitle:title, label: chosen.label, shortDesc:(description||"").replace(/\s+/g," ").slice(0,240),
+      channelId, channelTitle:title, label: chosen.label, label_id: chosen.choice_id || "unclassified",
+      shortDesc:(description||"").replace(/\s+/g," ").slice(0,240),
       confidence: chosen.confidence, knowledge_source: chosen.knowledge_source,
       evidence: chosen.evidence, shortlist_count: list.length
     });
@@ -380,7 +427,7 @@ async function main(){
   logSummary('🔢 Tokens', `in=${totalInTok} out=${totalOutTok}`, 'magenta');
   logSummary('💰 Est Cost', `$${totalCost.toFixed(4)} (in @$${priceIn}/MTok, out @$${priceOut}/MTok)`, 'yellow');
 
-  const headers = ["channelId","channelTitle","label","shortDesc","confidence","knowledge_source","evidence","shortlist_count"];
+  const headers = ["channelId","channelTitle","label","label_id","shortDesc","confidence","knowledge_source","evidence","shortlist_count"];
   fs.mkdirSync(path.dirname(outCsv), { recursive:true });
   fs.writeFileSync(outCsv, writeCSV(rows, headers), 'utf8');
 

@@ -28,7 +28,7 @@ function shortlist({ title, description, labelBook, k = 12, backfill = [] }) {
     if (u.parents && u.parents.length) {
       for (const p of u.parents) if (text.includes(String(p).toLowerCase())) score += 1.5;
     }
-    if (score > 0) scored.push({ label: u.name, def: u.definition, score });
+    if (score > 0) scored.push({ id: u.id, label: u.name, def: u.definition, score });
   }
 
   let ranked = scored.sort((a, b) => b.score - a.score).slice(0, k);
@@ -39,7 +39,14 @@ function shortlist({ title, description, labelBook, k = 12, backfill = [] }) {
     const have = new Set(ranked.map(x => x.label));
     for (const b of backfill) {
       if (have.has(b.label)) continue;
-      ranked.push({ label: b.label, def: b.def || "", score: 0 });
+      // Find the corresponding umbrella in labelbook to get the ID
+      const umbrella = all.find(u => u.name === b.label);
+      ranked.push({
+        id: umbrella ? umbrella.id : b.label.toLowerCase().replace(/\s+/g, '-'),
+        label: b.label,
+        def: b.def || "",
+        score: 0
+      });
       if (ranked.length >= k) break;
     }
   }

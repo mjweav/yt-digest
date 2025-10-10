@@ -8,2343 +8,437 @@
 [1/504] UCaIalqLU0cYvTrc-3rKms1w — 3DVista
   shortlist(12):  |  |  |  |  | ...
   → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on video tutorials and tips for creating panoramas and virtual tours, which alig
-  tokens: in=439 out=63  est=$0.000104
+        evidence: The channel focuses on tutorials and tips for creating panoramas and virtual tours, which aligns with practical step-by-step guides.
+  tokens: in=469 out=65  est=$0.000109
 [2/504] UCBgc_s9bZcC7_VPC7Qyegfw — 4K Clips And Trailers
   shortlist(12):  |  |  |  |  | ...
   → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on 4K clips and trailers, which aligns with content related to movies and TV sho
-  tokens: in=508 out=58  est=$0.000111
+        evidence: The channel focuses on 4K clips and trailers, which aligns with film and TV content.
+  tokens: in=530 out=55  est=$0.000112
 [3/504] UCgGpNbEWsZhrtV_62dsUDpQ — 7idea Productions
   shortlist(12):  |  |  |  |  | ...
   → label: [32mTravel[0m  conf: 0.85  src: text_clues
-        evidence: The channel focuses on capturing modern-day railroads and scenic views, which aligns with travel and
-  tokens: in=358 out=55  est=$0.000087
+        evidence: The channel focuses on capturing modern-day railroads and scenic views, which aligns with travel content related to exploration and destinations.
+  tokens: in=367 out=59  est=$0.000090
 [4/504] UCovVc-qqwYp8oqwO3Sdzx7w — 74 Gear
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on aviation and is run by a Boeing 747 pilot, indicating instructional content r
-  tokens: in=380 out=56  est=$0.000091
+  → label: [32mEducation[0m  conf: 0.80  src: text_clues
+        evidence: The channel focuses on aviation and is run by a Boeing 747 pilot, suggesting instructional content related to aviation education.
+  tokens: in=396 out=58  est=$0.000094
 [5/504] UCd0Yn5SKGaujdXCwk2TwmoA — 360 Vroomers
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mSports[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on various action sports and uses action cameras, indicating a strong emphasis o
-  tokens: in=534 out=55  est=$0.000113
+  → label: [32mPhotography[0m  conf: 0.80  src: both
+        evidence: The channel focuses on action sports photography using 360 cameras and has a strong background in photography and blogging about camera technology.
+  tokens: in=553 out=58  est=$0.000118
 [6/504] UCyxcZgX1wNU-nk1yB9CvzSw — Aaron Parnas
   → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
 [7/504] UC6AFPIXFIHYZItD0fmgDN9Q — Above Ground Pool Builder
   shortlist(12):  |  |  |  |  | ...
   → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on above-ground pool installation, which falls under home improvement and outdoo
-  tokens: in=342 out=54  est=$0.000084
+        evidence: The channel focuses on above-ground pool installation, which falls under home improvement and gardening.
+  tokens: in=351 out=54  est=$0.000085
 [8/504] UCBS1b2TF1uuhAomGYpFio7w — Above Ground Pros
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on providing guidance and education specifically for above ground pool owners, w
-  tokens: in=452 out=62  est=$0.000105
+  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: both
+        evidence: The channel focuses on providing practical guidance for above ground pool owners, which aligns with how-to skills and tutorials, while also addressing a gap in education for this specific niche.
+  tokens: in=477 out=73  est=$0.000115
 [9/504] UCv7ayuEI595kZglwebEWWWw — Adam Taylor // Architecture Photography Resources
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on architecture and interior photography, providing educational resources and wo
-  tokens: in=411 out=56  est=$0.000095
+  → label: [32mPhotography[0m  conf: 0.90  src: both
+        evidence: The channel focuses on architecture and interior photography, and the description emphasizes educational resources for photographers, aligning closely with the photography category.
+  tokens: in=436 out=59  est=$0.000101
 [10/504] UCyHaY6HrTUWNWA3bN26esUA — AdEspresso
   shortlist(12):  |  |  |  |  | ...
   → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on managing Facebook Ads and features related to campaign creation, analysis, an
-  tokens: in=383 out=62  est=$0.000095
+        evidence: The channel focuses on managing Facebook Ads and optimizing campaigns, which relates directly to technology and software.
+  tokens: in=392 out=54  est=$0.000091
 [11/504] UC1KmNKYC1l0stjctkGswl6g — After Skool
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on empowering individuals and delivering profound ideas through art, which align
-  tokens: in=413 out=59  est=$0.000097
+  → label: [32mEducation[0m  conf: 0.85  src: both
+        evidence: The channel's focus on empowering individuals and delivering profound ideas through art aligns with educational content, while the description suggests a transformative approach to personal development.
+  tokens: in=431 out=62  est=$0.000102
 [12/504] UCNJ1Ymd5yFuUPtn21xtRbbw — AI Explained
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mTech & Science News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on AI developments, which are significant in technology and science news, and th
-  tokens: in=633 out=66  est=$0.000135
+  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: both
+        evidence: The channel focuses on AI developments and tools, indicating a strong emphasis on productivity through AI, as well as the author's background in software development and integration of various APIs.
+  tokens: in=664 out=69  est=$0.000141
 [13/504] UCWZwfV3ICOt3uEPpW6hYK4g — AI Foundations
   → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
 [14/504] UCwicfou4Ewu-koikmga-bEg — AI In Context
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on AI, its implications, and is produced by a nonprofit dedicated to understandi
-  tokens: in=477 out=64  est=$0.000110
+  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: both
+        evidence: The channel focuses on AI's impact and practical implications, aligning with AI tools and productivity themes, while also discussing broader societal issues related to AI.
+  tokens: in=496 out=65  est=$0.000113
 [15/504] UC5l7RouTQ60oUjLjt1Nh-UQ — AI Revolution
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on advancements in artificial intelligence and breaking down complex concepts, w
-  tokens: in=384 out=60  est=$0.000094
+  → label: [32mTechnology[0m  conf: 0.90  src: both
+        evidence: The channel focuses on advancements in artificial intelligence, which falls under the technology category, and the description indicates a breakdown of complex concepts, aligning with educational content in tech.
+  tokens: in=396 out=66  est=$0.000099
 [16/504] UCED3hlYdD0SlCff7jJ8tF3Q — AI Samson
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on helping viewers adapt and thrive in the era of AI, exploring innovative AI to
-  tokens: in=600 out=72  est=$0.000133
+  → label: [32mTechnology[0m  conf: 0.90  src: both
+        evidence: The channel focuses on AI tools and their impact on design and entrepreneurship, which aligns with technology themes. The description emphasizes exploring innovative AI tools, indicating a strong connection to technology.
+  tokens: in=623 out=68  est=$0.000134
 [17/504] UCnM9I0mYTFSO3wkfof7oUvA — Alex Ford
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on digital marketing, building profitable online businesses, and financial freed
-  tokens: in=552 out=56  est=$0.000116
+  → label: [32mBusiness[0m  conf: 0.90  src: both
+        evidence: The channel focuses on digital marketing, building profitable online businesses, and financial freedom, which aligns closely with the business category.
+  tokens: in=571 out=57  est=$0.000120
 [18/504] UCUyDOdBWhC1MCxEjC46d-zw — Alex Hormozi
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mFinance[0m  conf: 0.90  src: text_clues
-        evidence: The channel is run by Alex Hormozi, a known entrepreneur in the finance space, and the description m
-  tokens: in=366 out=70  est=$0.000097
+  → label: [32mFinance[0m  conf: 0.90  src: both
+        evidence: The channel is run by Alex Hormozi, a known figure in the finance space, focusing on business and money management, as indicated by the mention of his book '$100M Money Models' and his role as founder of Acquisition.com.
+  tokens: in=375 out=81  est=$0.000105
 [19/504] UC3N1BvkmnYWqa3SSthhzReA — Allan Walls Photography
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on photography techniques, particularly macro and close-up photography, as indic
-  tokens: in=451 out=56  est=$0.000101
+  → label: [32mPhotography[0m  conf: 0.95  src: both
+        evidence: The channel title and description explicitly focus on photography, particularly macro and close-up photography, which aligns perfectly with the 'photography' category.
+  tokens: in=471 out=62  est=$0.000108
 [20/504] UCv42RmpB6iwadGz6n818l6w — Alter Bridge
   shortlist(12):  |  |  |  |  | ...
   → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'Alter Bridge' refers to a well-known rock band, and the description indicates it 
-  tokens: in=351 out=69  est=$0.000094
+        evidence: The channel title 'Alter Bridge' refers to a well-known rock band, and the description indicates it is the official channel for the band, focusing on music-related content.
+  tokens: in=360 out=69  est=$0.000095
 [21/504] UCDBrVr0ttWpoRY-_yZajp2Q — alyankovic
   → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
 [22/504] UC34AYD6is66Xpv6HPRB0Miw — AM/PM Podcast
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on entrepreneurship, business models, and financial strategies, as indicated in 
-  tokens: in=492 out=66  est=$0.000113
+  → label: [32mBusiness[0m  conf: 0.90  src: both
+        evidence: The channel focuses on entrepreneurship, business models, and financial strategies, which aligns closely with the business category.
+  tokens: in=512 out=54  est=$0.000109
 [23/504] UCORX3Cl7ByidjEgzSCgv9Yw — Anastasi In Tech
   shortlist(12):  |  |  |  |  | ...
   → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Anastasi In Tech' and the description 'Podcast on the future of technology' clear
-  tokens: in=456 out=64  est=$0.000107
+        evidence: The channel title 'Anastasi In Tech' and the description 'Podcast on the future of technology' clearly indicate a focus on technology.
+  tokens: in=487 out=63  est=$0.000111
 [24/504] UCXUPKJO5MZQN11PqgIvyuvQ — Andrej Karpathy
   → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
 [25/504] UC2D2CMWXMOVWx7giW1n3LIg — Andrew Huberman
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mScience[0m  conf: 0.90  src: text_clues
-        evidence: The channel is hosted by a neuroscientist discussing neuroscience and science-based tools, indicatin
-  tokens: in=481 out=58  est=$0.000107
+  → label: [32mEducation[0m  conf: 0.90  src: both
+        evidence: The channel is hosted by a neuroscientist and focuses on neuroscience and science-based tools, which aligns with educational content. The description emphasizes teaching about brain function and health, indicating a strong educational component.
+  tokens: in=509 out=73  est=$0.000120
 [26/504] UCP0z2BisC_uuJGDk90gs2yA — Arc De Soleil
   shortlist(12):  |  |  |  |  | ...
   → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Arc De Soleil' suggests a connection to music, and the description indicates it i
-  tokens: in=374 out=69  est=$0.000097
+        evidence: The channel title 'Arc De Soleil' suggests a focus on music, and the description indicates it is an official channel, likely for music performances or related content.
+  tokens: in=388 out=67  est=$0.000098
 [27/504] UC-smeLB9AnOTeypr1YyjJ3A — ARTE Concert
   → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
 [28/504] UC1LpsuAUaKoMzzJSEt5WImw — Asianometry
   shortlist(12):  |  |  |  |  | ...
   → label: [32mHistory[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on video essays about business, economics, and history, indicating a strong emph
-  tokens: in=404 out=56  est=$0.000094
+        evidence: The channel focuses on video essays about business, economics, and history, indicating a strong emphasis on historical analysis.
+  tokens: in=418 out=57  est=$0.000097
 [29/504] UC7o7gV3iTgpvXqdyThjevsg — ASICentral
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel is associated with the Advertising Specialty Institute, which focuses on marketing and p
-  tokens: in=452 out=56  est=$0.000101
+  → label: [32mBusiness[0m  conf: 0.90  src: both
+        evidence: The channel focuses on the advertising specialty industry, which is closely related to business and marketing strategies, as indicated by its description of serving promotional products industry professionals.
+  tokens: in=477 out=64  est=$0.000110
 [30/504] UCe0TLA0EsQbE-MjuHXevj2A — ATHLEAN-X™
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on workouts, nutrition, and training advice for achieving a healthy and athletic
-  tokens: in=571 out=70  est=$0.000128
+  → label: [32mHealth & Fitness[0m  conf: 0.95  src: both
+        evidence: The channel focuses on workouts, nutrition, and training advice for achieving a healthy and athletic body, which aligns with health and fitness content. Additionally, it features Jeff Cavaliere, a known figure in the fitness community.
+  tokens: in=597 out=79  est=$0.000137
 [31/504] UC1s_8hYVql2DuDmwuBt9yJA — Aus Flight Simmer
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Microsoft Flight Simulator, which is a technology-based simulation software, 
-  tokens: in=460 out=66  est=$0.000109
+  → label: [32mPC Hardware & Builds[0m  conf: 0.80  src: text_clues
+        evidence: The channel focuses on flight simulation, which often involves hardware reviews and performance tuning, aligning it with PC hardware content.
+  tokens: in=489 out=62  est=$0.000111
 [32/504] UCgyvzxg11MtNDfgDQKqlPvQ — AuthenTech - Ben Schmanke
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mConsumer Tech & Gadgets[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on authentic reviews of technology, specifically mentioning innovative and excit
-  tokens: in=587 out=84  est=$0.000138
+  → label: [32mConsumer Tech & Gadgets[0m  conf: 0.90  src: both
+        evidence: The channel focuses on authentic reviews of technology, specifically consumer tech and gadgets, as indicated by the title and description. Additionally, the personal beliefs shared in the description suggest a deeper connection to the purpose of technology in life, aligning with consumer tech themes.
+  tokens: in=624 out=87  est=$0.000146
 [33/504] UC0N-iKBpHZlhSFu6BqLsHWQ — AV-Ultra
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on providing free professional training and tutorials in motion graphics and vid
-  tokens: in=560 out=64  est=$0.000122
+  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: both
+        evidence: The channel focuses on professional training and tutorials in motion graphics and video production, which aligns with practical step-by-step guides for skills.
+  tokens: in=585 out=65  est=$0.000127
 [34/504] UCHIRBiAd-PtmNxAcLnGfwog — B&H Photo Video Pro Audio
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on photography, filmmaking, and audio, as indicated in the title and description
-  tokens: in=473 out=70  est=$0.000113
+  → label: [32mPhotography[0m  conf: 0.90  src: both
+        evidence: The channel focuses on photography, filmmaking, and audio, as indicated by the title and description, which emphasize tutorials and passion for the craft.
+  tokens: in=492 out=62  est=$0.000111
 [35/504] UCXfC0B4gKbYEDYqValFg4Yw — Barry KDP
   shortlist(12):  |  |  |  |  | ...
   → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on helping KDP publishers launch and scale profitable books, indicating instruct
-  tokens: in=354 out=54  est=$0.000085
+        evidence: The channel focuses on helping KDP publishers, indicating instructional content related to publishing and scaling books, which aligns with education.
+  tokens: in=366 out=59  est=$0.000090
 [36/504] UCZtDUmC3W7j25XHZWFT_XgQ — BBC Music
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on music performances from major events and artists, as well as promoting emergi
-  tokens: in=496 out=63  est=$0.000112
+  → label: [32mMusic[0m  conf: 0.95  src: both
+        evidence: The channel title 'BBC Music' and description emphasize music performances, major artists, and events, indicating a strong focus on music content.
+  tokens: in=517 out=60  est=$0.000114
 [37/504] UCIXKkzlHjD1rUPOLRfJZvrg — Becki and Chris
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on home renovation and DIY projects, which aligns with the Home & Garden categor
-  tokens: in=531 out=64  est=$0.000118
+  → label: [32mHome & Garden[0m  conf: 0.90  src: both
+        evidence: The channel focuses on home renovation and DIY projects, which aligns closely with the home & garden category. Additionally, the description mentions vehicle-based adventure filmmaking, indicating a lifestyle aspect.
+  tokens: in=549 out=70  est=$0.000124
 [38/504] UCAjSHLRJcDfhDSu7WRpOu-w — Ben Claremont
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.80  src: text_clues
-        evidence: The description mentions 'Tutorials, gear reviews & creative ideas' which indicates a focus on teach
-  tokens: in=412 out=65  est=$0.000101
+  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
+        evidence: The channel focuses on creating 360 content with Insta360 cameras, which relates directly to photography techniques and gear.
+  tokens: in=432 out=58  est=$0.000100
 [39/504] UCQbfC3DLce4TYulsmwf2lzQ — Ben Halsall: Final Cut Pro & Adobe Tutorials
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching Final Cut Pro and Adobe software through tutorials, which aligns wit
-  tokens: in=585 out=61  est=$0.000124
+  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: both
+        evidence: The channel focuses on teaching Final Cut Pro and Adobe software through tutorials, which aligns with practical skills and how-to content.
+  tokens: in=615 out=63  est=$0.000130
 [40/504] UCBJh1lBd44OGUd5JrHZQvCQ — Best of The Voice
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on performances from 'The Voice', a well-known music competition show, highlight
-  tokens: in=358 out=61  est=$0.000090
+  → label: [32mMusic[0m  conf: 0.90  src: text_clues
+        evidence: The channel focuses on performances from 'The Voice', which is a music competition show, highlighting auditions and battles.
+  tokens: in=367 out=57  est=$0.000089
 [41/504] UCeqky0tc84Ezl0CYMW3xKkA — Best360
   shortlist(12):  |  |  |  |  | ...
   → label: [32mVideo Editing[0m  conf: 0.85  src: text_clues
-        evidence: The channel's description indicates a focus on helping viewers create videos they are proud to post,
-  tokens: in=430 out=61  est=$0.000101
+        evidence: The channel focuses on helping viewers create videos and bridge the gap between technology and creativity, indicating a strong emphasis on video editing.
+  tokens: in=461 out=62  est=$0.000106
 [42/504] UCOWF2oK605qOVfkCy3we32g — BFBS Forces News
   shortlist(12):  |  |  |  |  | ...
   → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'BFBS Forces News' and the description indicate a focus on news reporting, specifi
-  tokens: in=423 out=61  est=$0.000100
+        evidence: The channel title 'BFBS Forces News' and the description indicate a focus on news reporting, particularly related to military and forces news.
+  tokens: in=443 out=62  est=$0.000104
 [43/504] UCLv09ZbvDVctHv8zIE1hoTw — Black Tie Kitchen
   shortlist(12):  |  |  |  |  | ...
   → label: [32mCooking[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on low-carb and keto recipes, emphasizing food preparation and culinary arts.
-  tokens: in=502 out=51  est=$0.000106
+        evidence: The channel focuses on low-carb and keto recipes, indicating a strong emphasis on cooking and food preparation.
+  tokens: in=523 out=56  est=$0.000112
 [44/504] UCgMQxnLWLE8YSLFnH9SHmHQ — Blaze Grubbs
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on promoting general aviation and helping others with flight training, which ali
-  tokens: in=435 out=56  est=$0.000099
+  → label: [32mEducation[0m  conf: 0.90  src: both
+        evidence: The channel focuses on promoting general aviation and helping others with flight training, which aligns with educational content.
+  tokens: in=452 out=53  est=$0.000100
 [45/504] UCX_gtN8XsErdLPOUkEPaqiA — Blowout Professor
   → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
 [46/504] UCC4vs_6IdURyXrwYa74k-jw — Blues Lounge
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on a band performing blues music, with a description highlighting their genre fu
-  tokens: in=477 out=61  est=$0.000108
+  → label: [32mMusic[0m  conf: 0.95  src: both
+        evidence: The channel focuses on music, specifically a band that blends blues, jazz, and rock, which aligns with the 'music' category. The description emphasizes their musical journey and releases.
+  tokens: in=492 out=69  est=$0.000115
 [47/504] UCRvnaTGSZQe3xuiZZZVklZA — Bob Moses
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'Bob Moses' refers to the electronic music duo known for their performances and mu
-  tokens: in=394 out=71  est=$0.000102
+  → label: [32mMusic[0m  conf: 0.95  src: both
+        evidence: The channel title 'Bob Moses' refers to the electronic music duo known for their music performances, and the description confirms it as their official channel, indicating a focus on music content.
+  tokens: in=408 out=69  est=$0.000103
 [48/504] UCxNZMlrLOGO88BnFwNYgEEA — Bobby Bass
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title and description clearly indicate a focus on music, with mentions of being a musici
-  tokens: in=432 out=64  est=$0.000103
+  → label: [32mMusic[0m  conf: 0.95  src: both
+        evidence: The channel title and description clearly indicate a focus on music, with mentions of being a musician, involvement in music groups, and a passion for creating unique arrangements.
+  tokens: in=449 out=65  est=$0.000106
 [49/504] UCY2p6zqx9LcPZci4KNqkEBg — Brad West
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on video editing, filmmaking, and Final Cut Pro, indicating a strong emphasis on
-  tokens: in=398 out=58  est=$0.000094
+  → label: [32mVideo Editing[0m  conf: 0.90  src: both
+        evidence: The channel focuses on video editing and filmmaking, specifically mentioning Final Cut Pro, which aligns with the video-editing category.
+  tokens: in=414 out=59  est=$0.000097
 [50/504] UC3stPIuUoCDHG7COfwr0tEA — Brandon Li
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on a nomadic lifestyle and filmmaking, suggesting a personal journey and explora
-  tokens: in=504 out=58  est=$0.000110
+  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
+        evidence: The channel focuses on filmmaking and experimenting with video projects, indicating a strong emphasis on video editing techniques.
+  tokens: in=527 out=57  est=$0.000113
 [51/504] UC_0jev81m10XfTzggeae1Mg — BretFX
   shortlist(12):  |  |  |  |  | ...
   → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on creating tutorials and tips for using Final Cut Pro and Apple Motion, which a
-  tokens: in=388 out=64  est=$0.000097
+        evidence: The channel focuses on creating tutorials and tips for Final Cut Pro Effects, which aligns with practical step-by-step guides for skills.
+  tokens: in=409 out=66  est=$0.000101
 [52/504] UCONzk0OgGQC5HiQ7aEPjYyA — BRF Louisiana
   → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
 [53/504] UCrjya2B7Cd1yZWV1liFtnOA — Brian Murray
   → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
 [54/504] UCQANb2YPwAtK-IQJrLaaUFw — Brian Tyler Cohen
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on progressive political commentary, interviews with prominent political figures
-  tokens: in=595 out=65  est=$0.000128
+  → label: [32mPolitics & World News[0m  conf: 0.95  src: both
+        evidence: The channel focuses on progressive political commentary, interviews with prominent political figures, and analysis of current events, aligning closely with the politics-world-news category.
+  tokens: in=623 out=65  est=$0.000132
 [55/504] UC4rlAVgAK0SGk-yTfe48Qpw — BRIGHT SIDE
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on a variety of topics including self-improvement, psychology, and daily routine
-  tokens: in=563 out=70  est=$0.000126
+  → label: [32mLifestyle[0m  conf: 0.85  src: both
+        evidence: The channel focuses on self-improvement, psychology, and daily routines, which aligns with lifestyle content. Additionally, the description mentions a community aspect and fun tests, indicating a lifestyle-oriented approach.
+  tokens: in=589 out=72  est=$0.000132
 [56/504] UCxWulY15ahTxS0VieQp-HPg — Brody Dolyniuk
   shortlist(12):  |  |  |  |  | ...
-  → label: [33mMusic[0m  conf: 0.70  src: text_clues
-        evidence: The channel features cover songs, indicating a focus on music performance, while the description als
-  tokens: in=382 out=63  est=$0.000095
+  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.80  src: text_clues
+        evidence: The description mentions 'technical how-to videos' and 'My car projects', indicating a focus on practical skills and tutorials.
+  tokens: in=399 out=65  est=$0.000099
 [57/504] UCAG3VrzHOmnNjrDeOpcZfFQ — Brooke C
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on playing drum covers of favorite songs, indicating a strong emphasis on music 
-  tokens: in=447 out=61  est=$0.000104
+  → label: [32mMusic[0m  conf: 0.90  src: both
+        evidence: The channel focuses on playing drum covers of favorite songs, indicating a strong connection to music performance, supported by endorsements of musical equipment.
+  tokens: in=467 out=59  est=$0.000105
 [58/504] UCoUM-UJ7rirJYP8CQ0EIaHA — Bruno Mars
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 1.00  src: text_clues
-        evidence: The channel is dedicated to Bruno Mars, a prominent musician known for his official music videos, li
-  tokens: in=571 out=64  est=$0.000124
+  → label: [32mMusic[0m  conf: 1.00  src: both
+        evidence: The channel is dedicated to Bruno Mars, a prominent musician known for his hit songs and music videos, as indicated in the title and description.
+  tokens: in=591 out=59  est=$0.000124
 [59/504] UCZRp6-Xvzo_dBFvt9L7y3Qw — Build Great Products
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on building AI applications and emphasizes practical use of AI in product develo
-  tokens: in=472 out=61  est=$0.000107
+  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: both
+        evidence: The channel focuses on building AI applications and emphasizes practical use of AI tools, aligning with the ID for AI Tools & Productivity.
+  tokens: in=494 out=61  est=$0.000111
 [60/504] UC9xpl8LyFRsKXASGHBBj_xQ — Building Integrity
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on educating the public and contractors about the engineering and construction i
-  tokens: in=413 out=57  est=$0.000096
+  → label: [32mEducation[0m  conf: 0.90  src: both
+        evidence: The channel focuses on educating the public and contractors about the engineering and construction industry, aligning with the education category.
+  tokens: in=438 out=55  est=$0.000099
 [61/504] UCNWb1R70xnomfDf6Iu0uZ2Q — Burkland Gardens
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on a plant nursery specializing in dwarf and unusual conifers, which aligns with
-  tokens: in=573 out=60  est=$0.000122
+  → label: [32mHome & Garden[0m  conf: 0.90  src: both
+        evidence: The channel focuses on a plant nursery specializing in dwarf conifers, which aligns with gardening and home improvement themes, supported by the description of their offerings and online store.
+  tokens: in=605 out=68  est=$0.000132
 [62/504] UCFCDEaQC9NqzYDTxwTejlDg — Butcher Wizard
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mCooking[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on butchery and cooking, with a description emphasizing recipes and meat prepara
-  tokens: in=455 out=59  est=$0.000104
+  → label: [32mCooking[0m  conf: 0.95  src: both
+        evidence: The channel focuses on butchery and cooking, with a description emphasizing recipes and meat preparation, clearly aligning with the cooking category.
+  tokens: in=468 out=60  est=$0.000106
 [63/504] UCARXOI1UlItgIevoI5jZViQ — CaliKim29 Garden & Home DIY
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on gardening and DIY projects, as indicated by the title and description, which 
-  tokens: in=556 out=60  est=$0.000119
+  → label: [32mHome & Garden[0m  conf: 0.95  src: both
+        evidence: The channel focuses on gardening and DIY projects, emphasizing growing organic food, which aligns with the home and garden category.
+  tokens: in=574 out=58  est=$0.000121
 [64/504] UC6MvbqzzXu9E6SWM2Jf-g_Q — Calum Graham Music
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'Calum Graham Music' and the description highlight his identity as a fingerstyle g
-  tokens: in=413 out=60  est=$0.000098
+  → label: [32mMusic[0m  conf: 0.95  src: both
+        evidence: The channel focuses on a Canadian fingerstyle guitarist, highlighting his music career and recognition, which aligns with the 'music' category.
+  tokens: in=431 out=59  est=$0.000100
 [65/504] UCl3lEILSFI3InXa5C__Phug — Cambridge University Cosmology
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mScience[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on cosmology and was established by Stephen Hawking, indicating a strong emphasi
-  tokens: in=447 out=59  est=$0.000102
+  → label: [32mScience[0m  conf: 0.90  src: both
+        evidence: The channel focuses on cosmology and was established by Stephen Hawking, indicating a strong emphasis on scientific research and understanding of the universe.
+  tokens: in=467 out=60  est=$0.000106
 [66/504] UCMJecdKUslHToOEpeuRGwXg — Candyrat Records
   → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
 [67/504] UCx8Thl4BbkOwslTGXzPJx0A — Captain Steeeve
   shortlist(12):  |  |  |  |  | ...
   → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
-        evidence: The channel title 'Captain Steeeve' and the social media links suggest a personal brand focused on d
-  tokens: in=358 out=48  est=$0.000082
+        evidence: The channel title 'Captain Steeeve' and the social media presence suggest a focus on personal branding and lifestyle content, typical of vloggers.
+  tokens: in=367 out=65  est=$0.000094
 [68/504] UC_hOdGU7CK_jfckv2C6kmFA — Chill Guitar Music
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on chill guitar music, smooth jazz, and chillhop, featuring relaxing guitar solo
-  tokens: in=539 out=59  est=$0.000116
+  → label: [32mMusic[0m  conf: 0.95  src: both
+        evidence: The channel focuses on chill guitar music, jazzhop, and smooth jazz, which are all music genres. The description emphasizes relaxing guitar solos and creating a chill atmosphere, aligning it closely with the 'music' category.
+  tokens: in=556 out=76  est=$0.000129
 [69/504] UCwjvvgGX6oby5mZ3gbDe8Ug — China Insights
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on insights related to China, which suggests a focus on current events and journ
-  tokens: in=385 out=53  est=$0.000090
+  → label: [32mNews[0m  conf: 0.80  src: text_clues
+        evidence: The channel's focus on insights and current events related to China suggests a news-oriented content, especially with the mention of a program and a new channel name.
+  tokens: in=405 out=66  est=$0.000100
 [70/504] UCT2kPBcD6tXn8TP_aV7BmgA — China Observer
   shortlist(12):  |  |  |  |  | ...
   → label: [32mPolitics & World News[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on first-hand news and exclusive analysis from China, indicating a strong emphas
-  tokens: in=392 out=60  est=$0.000095
+        evidence: The channel focuses on first-hand news and exclusive analysis from China, which aligns with reporting and analysis on domestic politics and global affairs.
+  tokens: in=404 out=64  est=$0.000099
 [71/504] UCRte954rw0oeMWFroy_ClAw — Chris Hau
   shortlist(12):  |  |  |  |  | ...
-  → label: [33mTravel[0m  conf: 0.70  src: text_clues
-        evidence: The channel discusses travel experiences and encourages creativity, indicating a focus on travel con
-  tokens: in=389 out=50  est=$0.000088
+  → label: [32mTechnology[0m  conf: 0.80  src: text_clues
+        evidence: The channel discusses tech and travel, indicating a focus on technology.
+  tokens: in=407 out=48  est=$0.000090
 [72/504] UCrPUg54jUy1T_wII9jgdRbg — Chris Ramsay
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on vlogs and a combination of magic and puzzles, which aligns with daily life an
-  tokens: in=377 out=57  est=$0.000091
+  → label: [32mLifestyle[0m  conf: 0.85  src: text_clues
+        evidence: The channel focuses on vlogs and a mix of magic and puzzles, which aligns with lifestyle content.
+  tokens: in=390 out=56  est=$0.000092
 [73/504] UC-dmJ79518WlKMbsu50eMTQ — Clark Kegley
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on self-improvement and personal development, emphasizing a lifestyle change rat
-  tokens: in=520 out=60  est=$0.000114
+  → label: [32mLifestyle[0m  conf: 0.90  src: both
+        evidence: The channel focuses on self-improvement and personal development, which aligns with lifestyle content. The description emphasizes creating a fulfilling life and unlocking one's potential, typical of lifestyle channels.
+  tokens: in=538 out=68  est=$0.000121
 [74/504] UC-eicAkiRdGLguiS1dS_N9Q — Clay Hayes
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on traditional archery, bow building, and survival skills, which are practical s
-  tokens: in=499 out=72  est=$0.000118
+  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: both
+        evidence: The channel focuses on traditional archery, bow building, and survival skills, which aligns with practical step-by-step guides for skills and crafts.
+  tokens: in=520 out=67  est=$0.000118
 [75/504] UCaL1DGiCW-HVgqeaLuHUfJA — Cloud Based Real Estate Brokerage with Jesse Dau
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on real estate brokerage and entrepreneurship, highlighting Jesse Dau's success 
-  tokens: in=580 out=60  est=$0.000123
+  → label: [32mBusiness[0m  conf: 0.90  src: both
+        evidence: The channel focuses on real estate brokerage and entrepreneurship, highlighting Jesse Dau's success in building a real estate brand and aligning with eXp Realty, which aligns with business strategies.
+  tokens: in=596 out=67  est=$0.000130
 [76/504] UC83jt4dlz1Gjl58fzQrrKZg — CNA
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The channel covers global developments with an Asian perspective, focusing on news, documentaries, a
-  tokens: in=525 out=62  est=$0.000116
+  → label: [32mNews[0m  conf: 0.90  src: both
+        evidence: The channel covers global developments with an Asian perspective, focusing on news, documentaries, and expert analysis, which aligns closely with the 'news' category.
+  tokens: in=550 out=63  est=$0.000120
 [77/504] UCHF66aWLOxBW4l6VkSrS3cQ — Coachella
   shortlist(12):  |  |  |  |  | ...
   → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Coachella' refers to the famous music festival, and the description mentions even
-  tokens: in=349 out=61  est=$0.000089
+        evidence: The channel title 'Coachella' refers to the famous music festival, indicating a focus on music performances.
+  tokens: in=358 out=57  est=$0.000088
 [78/504] UCKvKjZ3l9azWz4F49q2R3tQ — Coffee Relaxing Jazz
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title and description explicitly mention 'Coffee Relaxing Jazz' and state that all music
-  tokens: in=354 out=62  est=$0.000090
+  → label: [32mMusic[0m  conf: 0.90  src: text_clues
+        evidence: The channel title 'Coffee Relaxing Jazz' and the description indicate that it focuses on original music, specifically jazz, which aligns with the music category.
+  tokens: in=372 out=65  est=$0.000095
 [79/504] UCrk7jhruZVuLshUNh1qUi4g — COGconnected
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mGaming[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on news, reviews, and editorials specifically about video games and gaming cultu
-  tokens: in=470 out=60  est=$0.000106
+  → label: [32mGaming[0m  conf: 0.95  src: both
+        evidence: The channel title and description clearly indicate a focus on gaming news, reviews, and culture, aligning it closely with the gaming category.
+  tokens: in=494 out=59  est=$0.000110
 [80/504] UC4QZ_LsYcvcq7qOsOhpAX4A — ColdFusion
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHistory[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on captivating stories about the world and its history, as well as the cutting e
-  tokens: in=647 out=60  est=$0.000133
+  → label: [32mHistory[0m  conf: 0.80  src: both
+        evidence: The channel focuses on captivating stories about technological history and the evolution of the world, as indicated in the description, while also being authored by Dagogo Altraide, who has written a book rated highly in technology history.
+  tokens: in=679 out=77  est=$0.000148
 [81/504] UCDUhp92NhqVc0K3jSmWhgvA — Comedy Dynamics
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mComedy[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'Comedy Dynamics' and the description highlight its focus on stand-up comedy produ
-  tokens: in=360 out=61  est=$0.000091
+  → label: [32mComedy[0m  conf: 0.95  src: both
+        evidence: The channel title 'Comedy Dynamics' and its description as the largest independent stand-up comedy production and distribution company clearly indicate a focus on comedic content.
+  tokens: in=372 out=63  est=$0.000094
 [82/504] UCXyqlW3MOTbhpQIMapXMOSQ — Content Creators
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on mastering video shooting and editing, which aligns directly with video editin
-  tokens: in=412 out=66  est=$0.000101
+  → label: [32mVideo Editing[0m  conf: 0.90  src: both
+        evidence: The channel focuses on helping creators master video shooting and editing, which aligns closely with the 'video-editing' category. The founders' emphasis on monetizing video skills further supports this choice.
+  tokens: in=433 out=73  est=$0.000109
 [83/504] UCghY41qySm6IMH9VbRvf9VA — CopyandContentAI
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on AI tools for generating customized sales copy and content, emphasizing produc
-  tokens: in=556 out=66  est=$0.000123
+  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: both
+        evidence: The channel focuses on AI tools for generating customized sales copy and content, aligning with productivity enhancements in business contexts.
+  tokens: in=584 out=58  est=$0.000122
 [84/504] UCpHdE9yhgSuM4FezX8dmbPw — CPA Strength
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching accounting concepts, providing tips for the CPA exam, and includes a
-  tokens: in=516 out=60  est=$0.000113
+  → label: [32mStudy Skills & Test Prep[0m  conf: 0.85  src: both
+        evidence: The channel focuses on accounting education, CPA exam tips, and beginner accounting concepts, which aligns with study skills and test preparation. Additionally, the mention of being a licensed CPA and providing tips indicates a strong educational component.
+  tokens: in=541 out=81  est=$0.000130
 [85/504] UCzOlf72W0G4SJBHu9HxR7ng — Crazy About Life
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on healthy living, running, and cycling, which aligns with the Health & Fitness 
-  tokens: in=440 out=66  est=$0.000106
+  → label: [32mHealth & Fitness[0m  conf: 0.90  src: both
+        evidence: The channel focuses on healthy living, running, and cycling, which aligns with health and fitness content. The description also mentions motivation and inspiration related to fitness.
+  tokens: in=463 out=66  est=$0.000109
 [86/504] UC08Fah8EIryeOZRkjBRohcQ — Creator Magic
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on AI tools, workflow automation, and practical applications of AI in coding, wh
-  tokens: in=489 out=65  est=$0.000112
+  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: both
+        evidence: The channel focuses on AI tools and their practical applications in coding workflows, aligning closely with the AI Tools & Productivity category.
+  tokens: in=520 out=60  est=$0.000114
 [87/504] UCy6Q9UCG7Wa-N7nht2BFrHA — CSI Starbase
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mTech & Science News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on advancements and updates at Starbase, which relates to technology and scienti
-  tokens: in=431 out=68  est=$0.000105
+  → label: [32mTech & Science News[0m  conf: 0.90  src: both
+        evidence: The channel focuses on advancements and updates at Starbase, which relates to technology and science news, and the description indicates a deep analysis of these topics.
+  tokens: in=451 out=66  est=$0.000107
 [88/504] UCkUaT0T03TJvafYkfATM2Ag — Daily Stoic
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Stoicism, a philosophical approach to life, and offers courses and exercises,
-  tokens: in=592 out=56  est=$0.000122
+  → label: [32mEducation[0m  conf: 0.90  src: both
+        evidence: The channel focuses on Stoicism, a philosophical approach to life, which aligns with educational content aimed at personal development and learning practical wisdom.
+  tokens: in=614 out=60  est=$0.000128
 [89/504] UCNf9HkMqlTFiick46DGXY7g — Damien Cooper
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mComedy[0m  conf: 0.80  src: text_clues
-        evidence: The description mentions 'dad jokes' which indicates a humorous aspect, aligning with comedy content
-  tokens: in=347 out=52  est=$0.000083
+  → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
+        evidence: The channel focuses on real life struggles in the creative field, which aligns with lifestyle content.
+  tokens: in=358 out=54  est=$0.000086
 [90/504] UCA-mWX9CvCTVFWRMb9bKc9w — Dan Martell
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching entrepreneurship and building AI businesses, as well as personal exp
-  tokens: in=583 out=54  est=$0.000120
+  → label: [32mBusiness[0m  conf: 0.90  src: both
+        evidence: The channel focuses on teaching business growth and entrepreneurship, with a strong emphasis on building AI businesses and personal experiences in the tech industry.
+  tokens: in=615 out=59  est=$0.000128
 [91/504] UC1CAa_tjoI4-bEsEjxvHJXQ — Dane McBeth Publishing
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on self-publishing and online entrepreneurship, indicating practical guides and 
-  tokens: in=385 out=55  est=$0.000091
+  → label: [32mBusiness[0m  conf: 0.90  src: both
+        evidence: The channel focuses on self-publishing and online entrepreneurship, which aligns closely with business strategies and practices.
+  tokens: in=400 out=53  est=$0.000092
 [92/504] UCw2THyt0iIxN6pdCdL8LA8Q — DangerTV
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on reality and documentary series related to dangerous jobs and survival stories
-  tokens: in=456 out=75  est=$0.000113
+  → label: [32mFilm & TV[0m  conf: 0.90  src: both
+        evidence: The channel focuses on reality and documentary series related to dangerous jobs and survival stories, which aligns with film and TV content, while the description emphasizes thrilling entertainment.
+  tokens: in=479 out=65  est=$0.000111
 [93/504] UCwjZLzqHYImv4oCJQcZ8Hig — Daniel Schiffer
   → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
 [94/504] UCRqGBcNkSE1-w9pbh_j7bSw — Daniella Benita
   shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on hair color tutorials, hair styling, and salon business tips, which are practi
-  tokens: in=489 out=61  est=$0.000110
-[95/504] UCpPnsOUPkWcukhWUVcTJvnA — Dave Dugdale
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.80  src: text_clues
-        evidence: The channel discusses the camera market and the creator's love for cameras, indicating a focus on ph
-  tokens: in=506 out=57  est=$0.000110
-[96/504] UCNzszbnvQeFzObW0ghk0Ckw — Dave's Garage
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The description mentions 'DIY info and practical step-by-step tutorials,' indicating a focus on teac
-  tokens: in=386 out=63  est=$0.000096
-[97/504] UCKCS2T2uR_7h4zpVETbcFjg — David Bayer
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[98/504] UCvixJtaXuNdMPUGdOPcY8Ag — David Pakman Show
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.95  src: text_clues
-        evidence: The channel is described as a progressive program focused on journalism, commentary, and current eve
-  tokens: in=398 out=58  est=$0.000094
-[99/504] UCvKRFNawVcuz4b9ihUTApCg — David Shapiro
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[100/504] UCO01dS4TaSRSyOipXEYPL6Q — David Sharpe
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel features interviews with individuals sharing their online business success stories, whic
-  tokens: in=424 out=59  est=$0.000099
-[101/504] UCtkcJMyK1F46NJ5WjX7hBSw — Dead Wax
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel features hosts who are musicians discussing music production, theory, and performance, i
-  tokens: in=418 out=57  est=$0.000097
-[102/504] UCobfgsTVhaIyIRAms-M4JWw — Deep Woods Custom Guitars
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Deep Woods Custom Guitars' suggests a focus on guitars, which are musical instrum
-  tokens: in=327 out=63  est=$0.000087
-[103/504] UCpr-NNORb2UQYDD3k-w-OFg — Denys Davydov
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on updates regarding Ukraine, indicating a strong emphasis on geopolitical issue
-  tokens: in=432 out=54  est=$0.000097
-[104/504] UCBB0oz7Yo_35gnbPYGKGJTA — Diesel Creek
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[105/504] UCNawoJ4W-TZHiD6UTPGIiAQ — Digital Feast Studios
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The description mentions 'Creative Marketing Agency' and focuses on crafting engaging work, which al
-  tokens: in=353 out=57  est=$0.000087
-[106/504] UC8wXC0ZCfGt3HaVLy_fdTQw — Digital Trends
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mConsumer Tech & Gadgets[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on reviews and insights related to technology and gadgets, as indicated by its d
-  tokens: in=483 out=63  est=$0.000110
-[107/504] UCPSu8IosaYxsVx5TOGFtjCg — Dirty Loops
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'Dirty Loops' refers to a well-known band, and the description indicates it is the
-  tokens: in=347 out=66  est=$0.000092
-[108/504] UCEAY1udDi0HBnu7BbxDsJUg — DIY PETE
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on DIY projects related to building furniture and home improvement, as indicated
-  tokens: in=580 out=65  est=$0.000126
-[109/504] UCbzNcFN7cxA8HO18cTYyTfg — Doctor Mix
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on synthesizers, music production, and offers lessons, indicating a strong empha
-  tokens: in=546 out=56  est=$0.000115
-[110/504] UCHHW_lDfbAUr12BbFMqFMnQ — DonV Filmora Tutorials
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on tutorials for using Filmora, which is a video editing software, indicating a 
-  tokens: in=415 out=61  est=$0.000099
-[111/504] UCyA6KQ8PgP98E0ToIdq8c7A — Dr. Alex Tubio
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.90  src: text_clues
-        evidence: The channel title and description indicate a focus on chiropractic care, which falls under health an
-  tokens: in=368 out=55  est=$0.000088
-[112/504] UCXnFys9ZXBE0uyDhKHUi-dA — Dr. Andrea Furlan
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on chronic pain management and education in physical medicine, indicating a stro
-  tokens: in=552 out=56  est=$0.000116
-[113/504] UCFAsatVhnrL8j7NXVWvK23A — Dr. Leo
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on weight loss and healthy lifestyle, which aligns with the Health & Fitness cat
-  tokens: in=473 out=67  est=$0.000111
-[114/504] UCIe2pR6PE0dae9BunJ38F7w — Dr. Sten Ekberg
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on natural health and wellness, featuring a holistic doctor and covering topics 
-  tokens: in=592 out=69  est=$0.000130
-[115/504] UCSsAoV6KrfZZ71Kkwb_GWVA — Dr. Susan Hardwick-Smith
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on gynecology, hormone optimization, and wellness strategies for midlife, which 
-  tokens: in=510 out=79  est=$0.000124
-[116/504] UCBHhdnYxvu94yefpeZABY9g — Dream Theater
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 1.00  src: text_clues
-        evidence: The channel is explicitly described as the official YouTube channel of the US progressive metal band
-  tokens: in=336 out=59  est=$0.000086
-[117/504] UC073quTeFarhKNe8ZuC6Qig — Drew Builds Stuff
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.85  src: text_clues
-        evidence: The channel focuses on building and creating various projects, which aligns with practical guides an
-  tokens: in=377 out=57  est=$0.000091
-[118/504] UC_PYpOA0xGq2-24E3RWyOyw — Drone Canada
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.85  src: text_clues
-        evidence: The channel focuses on teaching viewers how to fly drones, film with drones, and emphasizes drone sa
-  tokens: in=568 out=62  est=$0.000122
-[119/504] UCgJ5K7wWoFlnYC3e8eIxYrA — Drone U
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching drone piloting skills and offers a library of online courses, indica
-  tokens: in=424 out=55  est=$0.000097
-[120/504] UCL4cw2w7kMcTpsqGMtzs02w — Dub Element
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[121/504] UCknLrEdhRCp1aegoMqRaCZg — DW News
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on global news and analysis, particularly from Europe, and emphasizes independen
-  tokens: in=565 out=71  est=$0.000127
-[122/504] UCYlZLHOzom9-MryCEodaoXg — Dylan Bates • The Final Cut Bro
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on tutorials for Apple Motion and Final Cut Pro, which are practical skills rela
-  tokens: in=435 out=60  est=$0.000101
-[123/504] UC_HzoVeEzCUsHJtHCemb9sg — Dylan John
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on videography, content creation, and Final Cut Pro skills, which are directly r
-  tokens: in=516 out=60  est=$0.000113
-[124/504] UCKUSu0zaUcTg0L6Bsxr51og — Editors Keys
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on becoming a better content creator, which aligns with instructional and learni
-  tokens: in=349 out=52  est=$0.000084
-[125/504] UCRKUD_3V4q7qyAexSuiBIFw — El Conan
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on sharing love for Jazz, Gospel, and Latin Christian Music, which clearly indic
-  tokens: in=351 out=58  est=$0.000087
-[126/504] UCskD50ri3723Tk1SkS-qAIA — El Estepario Siberiano
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[127/504] UCt9kG_EDX8zwGSC1-ycJJVA — Elementor
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Elementor, a website builder platform for WordPress, which falls under softwa
-  tokens: in=445 out=61  est=$0.000103
-[128/504] UCgslJ2VwZHVxw-D095WQ3lQ — Elise Trouw
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[129/504] UCN7kH4qcPPPC_KWlX6Ze-Iw — Elizabeth G
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[130/504] UCvrmr8Nfd86dG7pnSHC7c6Q — EllenPlaysBass
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'EllenPlaysBass' and the description indicate a focus on bass playing, which is a 
-  tokens: in=374 out=60  est=$0.000092
-[131/504] UCXAWX5r69jcqPTNAhXCSA7Q — Elon Musk Fan Zone
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTech & Science News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Elon Musk, a prominent figure in technology and science, covering news relate
-  tokens: in=581 out=69  est=$0.000129
-[132/504] UCokX6YIQymfsKSJvqo9dGEQ — Endless RVing
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTravel[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on RVing and travel experiences, providing informative content about RV life, ca
-  tokens: in=522 out=63  est=$0.000116
-[133/504] UCVIo_UX--1R03WE_U3I6xEA — Engineered Arts
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[134/504] UCSbyncU597LMwb3HhnAI_4w — Epic Gardening
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Epic Gardening' and the description focus on gardening, grow guides, and tips, wh
-  tokens: in=369 out=65  est=$0.000094
-[135/504] UCka3OGDqIQnPcuh1DtWcBdw — Epic Tutorials for Mobile Filmmaking + EPIC LUTs
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on providing tutorials for smartphone filmmaking, which aligns with practical st
-  tokens: in=519 out=68  est=$0.000119
-[136/504] UCAPeu_wnvIB5AkQ-xnkLOJA — Eric Welander
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mConsumer Tech & Gadgets[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Apple and smart home tech, which aligns with consumer technology and gadgets,
-  tokens: in=411 out=67  est=$0.000102
-[137/504] UCxByVUuLdxxiqQVmbOnDEzw — Erik Grankvist
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on building a traditional off-grid log cabin, which involves practical skills an
-  tokens: in=583 out=81  est=$0.000136
-[138/504] UCzr30osBdTmuFUS8IfXtXmg — Essential Craftsman
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on practical skills in building, carpentry, and blacksmithing, which aligns with
-  tokens: in=457 out=74  est=$0.000113
-[139/504] UCzz4CoEgSgWNs9ZAvRMhW2A — Everything Electric CARS
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAutomotive[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Everything Electric CARS' and the description focus on electric vehicles and rela
-  tokens: in=536 out=59  est=$0.000116
-[140/504] UCDjvi-_c_ffte2LaNaE2j8g — F-22 Demo Team
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel is dedicated to the F-22 Raptor Demonstration Team, indicating a focus on instructional 
-  tokens: in=341 out=62  est=$0.000088
-[141/504] UCihmYOoCWYffpuMfuP7BAqA — FD Real
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.85  src: text_clues
-        evidence: The description emphasizes high-quality entertainment focused on the lives of exceptional people and
-  tokens: in=439 out=57  est=$0.000100
-[142/504] UCKvJ_vxZZoN5yeWBU2CVGcQ — Fit Father Project - Fitness For Busy Fathers
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on fitness for busy fathers, specifically targeting men over 40, which aligns wi
-  tokens: in=434 out=76  est=$0.000111
-[143/504] UC_Se32jLBjnOuftl1u3zfLw — Fluctus
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on providing content about the sea, appealing to 'sea geeks' and those curious a
-  tokens: in=521 out=61  est=$0.000115
-[144/504] UCHlHSn0iwyYJg9LQETZ5R_Q — Four80East
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel features Four80East, an electro-jazz collective known for their unique blend of jazz and
-  tokens: in=412 out=65  est=$0.000101
-[145/504] UConJDkGk921yT9hISzFqpzw — Freethink
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTech & Science News[0m  conf: 0.90  src: text_clues
-        evidence: The title 'Freethink' and the description emphasize coverage of innovations and ideas shaping societ
-  tokens: in=384 out=61  est=$0.000094
-[146/504] UCnvgtzmvlb6d58d9BbOKuMA — Fstoppers
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on photography and videography, offering tutorials, gear advice, and workshops, 
-  tokens: in=543 out=58  est=$0.000116
-[147/504] UCw9zJ3qnebPPGsutiEAvu5Q — Full Time Filmmaker
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[148/504] UC_RovKmk0OCbuZjA8f08opw — Futurepedia
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on leveraging AI tools and acquiring AI skills, which aligns closely with practi
-  tokens: in=385 out=61  est=$0.000094
-[149/504] UC_kg1A_YPAa66hZWq7VPg7Q — Garden Answer
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'Garden Answer' and the description mentioning 'Fun DIY and Garden Videos' clearly
-  tokens: in=358 out=64  est=$0.000092
-[150/504] UCigpI42Fq8aYp6IDIoDSqQQ — Garden Style nw
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on gardening skills, design advice, and horticulture, which aligns closely with 
-  tokens: in=453 out=60  est=$0.000104
-[151/504] UCWsI0LmiDyezbnN2JCL4P9w — Gardener Scott
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on gardening techniques, philosophy, and practical demonstrations, which aligns 
-  tokens: in=455 out=59  est=$0.000104
-[152/504] UCnPPpuLBjQZYC6M2BDxd0Ew — Gardening Products Review
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on gardening products and tools, providing reviews and how-to videos related to 
-  tokens: in=601 out=62  est=$0.000127
-[153/504] UCptL6_qMImyW_yZwiMjQdpg — Gary Pilarchik (The Rusted Garden)
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on vegetable gardening, covering topics like seed starting, planting, and garden
-  tokens: in=541 out=63  est=$0.000119
-[154/504] UCctXZhXmG-kf3tlIXgVZUlw — GaryVee
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.95  src: text_clues
-        evidence: Gary Vaynerchuk is a well-known entrepreneur and CEO, focusing on business strategies and marketing,
-  tokens: in=536 out=62  est=$0.000118
-[155/504] UCR1LVH-teuA3-Kfy576TYSw — georgemichael
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 1.00  src: text_clues
-        evidence: The channel is dedicated to George Michael, a famous musician, and the description mentions celebrat
-  tokens: in=345 out=66  est=$0.000091
-[156/504] UCrWmonkmTk5NbvmVnc7f70w — Glenn Kirschner
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on legal analysis and insights related to current events, drawing from the creat
-  tokens: in=568 out=69  est=$0.000127
-[157/504] UCIJHwsTJyrH4YznoJxZmJHQ — GR-Research
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on high-quality audio and loudspeaker design, which relates closely to music per
-  tokens: in=402 out=55  est=$0.000093
-[158/504] UC9r61qohBg1qgGty4_WzojA — GrowVeg
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on organic gardening and vegetable garden planning, which aligns with home impro
-  tokens: in=403 out=55  est=$0.000093
-[159/504] UCfE5Cz44GlZVyoaYTHJbuZw — Guga Foods
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mCooking[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on sharing favorite recipes, BBQ, and Brazilian Churrasco, indicating a strong e
-  tokens: in=410 out=60  est=$0.000097
-[160/504] UC7HOGKjSKzP5PBfmdaAkbQg — Guildhall School of Music & Drama
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on professional training in music and performing arts, indicating a strong educa
-  tokens: in=559 out=59  est=$0.000119
-[161/504] UC8YXmNHJ-JS0dd7z4Z9ChXA — Harv Video/Audio Stuff
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mConsumer Tech & Gadgets[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on video gear, cameras, lenses, and audio recording, which aligns with consumer 
-  tokens: in=398 out=61  est=$0.000096
-[162/504] UCnbKOlm6H9njgmN-Yil90Rg — Heather Cox Richardson
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on contemporary American politics and historical analysis, indicating a strong e
-  tokens: in=485 out=57  est=$0.000107
-[163/504] UCpBvckYg2UXArcfzRcjpPjw — Helium 10
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on providing tools and resources for running businesses on Amazon, indicating a 
-  tokens: in=530 out=56  est=$0.000113
-[164/504] UC9HFMty5k4jdj36wV4E4Iuw — Hidden Technology
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFinance[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on hidden truths that help save money on energy and internet services, indicatin
-  tokens: in=526 out=55  est=$0.000112
-[165/504] UC9MAhZQQd9egwWCxrwSIsJQ — HISTORY
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHistory[0m  conf: 0.95  src: text_clues
-        evidence: The channel is explicitly named 'HISTORY' and focuses on historical storytelling, documentaries, and
-  tokens: in=487 out=63  est=$0.000111
-[166/504] UCZEWB-9BQ2DW-gwBlJJaWNg — Hollywood:FCP
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on editing software, specifically Final Cut Pro X and Avid, which falls under th
-  tokens: in=556 out=68  est=$0.000124
-[167/504] UCnorhjQR4zJkT7AVNhu395Q — Home RenoVision DIY
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on home renovation and DIY projects, as indicated by the title and description.
-  tokens: in=566 out=54  est=$0.000117
-[168/504] UCpJ1vJPFqImom-NN2fkBS0A — HouseImprovements
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on producing how-to DIY home improvement videos, indicating a strong emphasis on
-  tokens: in=377 out=61  est=$0.000093
-[169/504] UCeEqIv7lVwOOLnwxuuhQFuQ — Hugh Hou
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on immersive filmmaking, camera tests, and editing workflows, which aligns close
-  tokens: in=549 out=74  est=$0.000127
-[170/504] UCqyRc7Thu1T7qLIPvy0r7JA — I Love RV Life
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on RV living, sharing personal experiences and perspectives, which aligns with l
-  tokens: in=470 out=53  est=$0.000102
-[171/504] UC-ptWR16ITQyYOglXyQmpzw — IAmTimCorey
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mProgramming & Software Dev[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on software development, specifically C# and SQL, which aligns with programming 
-  tokens: in=471 out=57  est=$0.000105
-[172/504] UCZZwD8OcPUOo1WOVad_tKWA — Idustrial Revolution
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on creating Final Cut Pro plugins and templates, along with tutorials, which ali
-  tokens: in=380 out=65  est=$0.000096
-[173/504] UCgBg0aacyJnw4qUnb1FlfEQ — Institute of Human Anatomy
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching human anatomy and physiology using real human cadavers, which aligns
-  tokens: in=479 out=63  est=$0.000110
-[174/504] UCFQgi22Ht00CpaOQLtvZx2A — ITV News
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The channel provides trusted and impartial news, focusing on journalism and current events from the 
-  tokens: in=455 out=56  est=$0.000102
-[175/504] UCHsThxa9HvDpSywv4bP55NA — J. Gravelle
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[176/504] UCHzfWTvyt4VY7QTKKwY84Tw — Jack Cole
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[177/504] UCbd-QOxzNKQifQfSuaH5I0A — JackConteExtras
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on tips and ideas for creators, building a Patreon membership, and ways to help 
-  tokens: in=495 out=68  est=$0.000115
-[178/504] UC0aNNLyM8FveAGEeaOND10A — Jahin Shahriar
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Ecommerce Business and Web Design, which are key aspects of business strategi
-  tokens: in=486 out=52  est=$0.000104
-[179/504] UC-U0quP8-RF1pvyCessLg0g — Jake Sloan
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on reviewing and comparing cameras, lenses, and drones, specifically in the cont
-  tokens: in=446 out=64  est=$0.000105
-[180/504] UCMb0O2CdPBNi-QqPk5T3gsQ — James Hoffmann
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mCooking[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on coffee and food-related content, including how-tos and guides, which aligns w
-  tokens: in=579 out=67  est=$0.000127
-[181/504] UCZG-C5esGZyVfxO2qXa1Zmw — Jared Polin
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on photography tips, techniques, and gear, as indicated by the title 'Jared Poli
-  tokens: in=536 out=73  est=$0.000124
-[182/504] UCMlK5j8VTQHD21a79_cnZxA — Jasmine Hardie
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTravel[0m  conf: 0.90  src: text_clues
-        evidence: The channel description indicates a focus on outdoor adventures and inspiring others to explore, whi
-  tokens: in=357 out=56  est=$0.000087
-[183/504] UCSm7riYU-NTWWFlG9XJBcRA — Jason Lee
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on sharing business ideas and ways to make money, targeting founders and creator
-  tokens: in=393 out=52  est=$0.000090
-[184/504] UC7Y1wd4-c4H2Cl0lAuNvJ-Q — jaybyrdfilms
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel specializes in aerial cinematography and filmmaking, which aligns closely with the Film 
-  tokens: in=543 out=66  est=$0.000121
-[185/504] UCR-DXc1voovS8nhAvccRZhg — Jeff Geerling
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mProgramming & Software Dev[0m  conf: 0.80  src: text_clues
-        evidence: The channel title and description indicate that Jeff Geerling is a developer and author, suggesting 
-  tokens: in=360 out=63  est=$0.000092
-[186/504] UCXoJOZU-pR7AfD5yfae-zNg — Jenn Jager Pro Tutorials
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on tutorials for Final Cut Pro and Apple Motion, which are specific to video edi
-  tokens: in=401 out=57  est=$0.000094
-[187/504] UCUSySH2YjIwsDu2Hx6DWwTA — Jesse Dollemore
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on news and politics, discussing impactful topics with a social justice angle, w
-  tokens: in=557 out=62  est=$0.000121
-[188/504] UCFIRm1Fv1VC4DZxmYyvNOTQ — Jeven Dovey
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on helping viewers make better videos and tells interesting stories, indicating 
-  tokens: in=425 out=58  est=$0.000099
-[189/504] UCf9BO33b-MnIxB5y0azrxmg — Jimmy Carr
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mComedy[0m  conf: 0.95  src: text_clues
-        evidence: The channel is dedicated to Jimmy Carr's stand-up comedy, as indicated by the title and description,
-  tokens: in=478 out=61  est=$0.000108
-[190/504] UCa6vGFO9ty8v5KZJXQxdhaw — Jimmy Kimmel Live
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel features late night videos, celebrity segments, and viral content related to television,
-  tokens: in=360 out=61  est=$0.000091
-[191/504] UC-2YHgc363EdcusLIBbgxzg — Joe Scott
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on answering questions and providing informative and eye-opening content, which 
-  tokens: in=509 out=72  est=$0.000120
-[192/504] UC5PA3oLhFbaba-LlbR_xVNg — joegardenerTV
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on organic gardening and teaching gardening skills, which aligns with the Home &
-  tokens: in=572 out=70  est=$0.000128
-[193/504] UC_Oz4jIU_rSmXaBH69kmddw — Johnny Davidson - Drumming & Hang Gliding
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel features a tribute to RUSH with a drum cover project, indicating a focus on music perfor
-  tokens: in=478 out=59  est=$0.000107
-[194/504] UCmGSJVG3mCRXVOP4yZrU1Dw — Johnny Harris
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on independent journalism and understanding the world, which aligns closely with
-  tokens: in=381 out=59  est=$0.000093
-[195/504] UCXoMM35ugF5iOzAEb-PmfRA — Jonathan Petramala
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on documenting major disaster events and highlights journalism and reporting, wh
-  tokens: in=435 out=53  est=$0.000097
-[196/504] UC40gs0opj389ohjLnJIAJzA — Jonathan Young
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[197/504] UCqq3PZwp8Ob8_jN0esCunIw — Just For Laughs
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mComedy[0m  conf: 1.00  src: text_clues
-        evidence: The channel is dedicated to the Just For Laughs Comedy Festival, featuring stand-up, sketch, and imp
-  tokens: in=578 out=63  est=$0.000124
-[198/504] UC8Sh9yuLqlpnQdBdcfwFErA — Just One Dime
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The description focuses on helping entrepreneurs and families with estate planning, asset protection
-  tokens: in=384 out=66  est=$0.000097
-[199/504] UCkUDijzPGiHVBSeOktgpMiQ — K9’s and Chaos
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
-        evidence: The channel is dedicated to K9 Warriors and the Country way of life, indicating a focus on lifestyle
-  tokens: in=382 out=62  est=$0.000094
-[200/504] UCrBId04l9CaruJsQ5Q8y9lA — Kanade Sato
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel features a young drummer with a strong background in jazz fusion and pop music, notable 
-  tokens: in=624 out=69  est=$0.000135
-[201/504] UCcFfP0Px7cO3h6BCZUpXUQQ — Keith Wheeler Books
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on providing hints, tips, and tricks for self-publishing, which aligns with prac
-  tokens: in=579 out=65  est=$0.000126
-[202/504] UCIma2WOQs1Mz2AuOt6wRSUw — KenDBerryMD
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on evidence-based nutrition and ancestral health, promoting low-carb, keto, and 
-  tokens: in=557 out=66  est=$0.000123
-[203/504] UC_fXTGbg6ck3BU6X65e3sag — Kendrick's Gear Journal
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on evaluating photography gear and sharing thoughts on tools used in photography
-  tokens: in=576 out=53  est=$0.000118
-[204/504] UCnAGH-jp4YXl30rir1BPrxA — Keto Recipes
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mCooking[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on sharing keto recipes, which directly relates to food preparation and culinary
-  tokens: in=542 out=66  est=$0.000121
-[205/504] UC-s3Pb8uIBm0QN8MVaulJKA — Kindlepreneur
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on helping self-publishers learn to sell books and optimize marketing strategies
-  tokens: in=422 out=65  est=$0.000102
-[206/504] UCQaqi80QVyIhFQ6HZTXCeOg — King County Sheriff Air Support
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The channel is associated with the King County Sheriff's Office Air Support Unit, indicating a focus
-  tokens: in=332 out=60  est=$0.000086
-[207/504] UCLRlryMfL8ffxzrtqv0_k_w — KinoCheck.com
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on movie news, trailers, and video essays, indicating a strong emphasis on film 
-  tokens: in=553 out=57  est=$0.000117
-[208/504] UCyKUfgfeRaCrqMr9b0UcSoQ — Kraken The Box
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTravel[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on adventures and discoveries in a 'pirate wonderland' which suggests travel and
-  tokens: in=428 out=56  est=$0.000098
-[209/504] UCW7bg34be3iNMXjPNctjYKA — KSENIA BUZINA
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[210/504] UCFbtcTaMFnOAP0pFO1L8hVw — Kyle Hill
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: Kyle Hill is described as an award-winning science educator and holds a position related to science 
-  tokens: in=456 out=60  est=$0.000104
-[211/504] UC4oVjJptcsvtgIMrdIUQYlQ — LADbible Stories
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on original shows and extraordinary stories told by real people, which aligns wi
-  tokens: in=413 out=62  est=$0.000099
-[212/504] UCXZDUSJ0XU4KxhI00R_yCXQ — Lari Basilio
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[213/504] UCSvCR76uY0R8mjVETskWRvg — Larry Jordan
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on media production and post-production, specifically mentioning training in vid
-  tokens: in=458 out=66  est=$0.000108
-[214/504] UCz8K1occVvDTYDfFo7N5EZw — Law&Crime Network
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on live court coverage, high-profile criminal trials, and legal analysis, which 
-  tokens: in=579 out=57  est=$0.000121
-[215/504] UCzUyasGg5A03r3zPkorqIBQ — Learn Color Grading
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on color grading and editing using DaVinci Resolve, which directly relates to vi
-  tokens: in=389 out=56  est=$0.000092
-[216/504] UCyy1JVscJxxJfJx2IrQm2Ug — Learn From Most Influential Investors
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Learn From Most Influential Investors' indicates a focus on educational content r
-  tokens: in=326 out=55  est=$0.000082
-[217/504] UCWWq67D7TofEPq_eBiaYCWw — Learn Online Video
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on tutorials and skills improvement in online video production, which aligns wit
-  tokens: in=387 out=60  est=$0.000094
-[218/504] UCUnFheTbVpASikm0YPb8pSw — Learn Organic Gardening at GrowingYourGreens
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on organic gardening, providing tips for growing food at home, which aligns with
-  tokens: in=450 out=70  est=$0.000110
-[219/504] UCJgZJZZbnLFPr5GJdCuIwpA — Legal AF
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on breaking news stories, in-depth analysis, and interviews related to legal mat
-  tokens: in=472 out=75  est=$0.000116
-[220/504] UCpa-Zb0ZcQjTCPP1Dx_1M8Q — LegalEagle
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching viewers about the legal system and provides insights into the legal 
-  tokens: in=563 out=56  est=$0.000118
-[221/504] UCReiNw77Lw8Es5VMNekirrw — Leggari Products
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on DIY projects for home renovation using coatings, which aligns with home impro
-  tokens: in=571 out=55  est=$0.000119
-[222/504] UCD5ZsXiIFlrWrbOCM6rEDKQ — Leonid & Friends
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on tribute performances to famous music bands like Chicago and Earth Wind & Fire
-  tokens: in=369 out=58  est=$0.000090
-[223/504] UCq6TJZjUFp877PkgeJkETew — Lester Picker
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on photography techniques and tips, with the creator's extensive experience and 
-  tokens: in=529 out=61  est=$0.000116
-[224/504] UCJXz-QU2_KU7pSuWr12XTHA — Levi Allen
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTravel[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on adventure films, indicating a strong emphasis on travel experiences and adven
-  tokens: in=387 out=51  est=$0.000089
-[225/504] UCSHZKyawb77ixDdsGog4iWA — Lex Fridman
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[226/504] UC74ssco0gFbhNpXHJyYcYEQ — Lexington Lab Band ®️
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on a collaboration of musicians performing iconic songs, indicating a strong emp
-  tokens: in=381 out=54  est=$0.000090
-[227/504] UCui4jxDaMb53Gdh-AZUTPAg — Liam Ottley
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on entrepreneurship in the AI sector, sharing insights on running an AI Automati
-  tokens: in=471 out=64  est=$0.000109
-[228/504] UCX1RcjoZnq4UHSrj0Vc03Bg — LIFT-OFF
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on space exploration and related topics, which aligns with educational content a
-  tokens: in=410 out=54  est=$0.000094
-[229/504] UCKHO2e2sy2wqu1Ch8j7zfrA — Lisa  Life and Style
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on beauty, fashion, and helping women over 40 find their style and confidence, w
-  tokens: in=576 out=58  est=$0.000121
-[230/504] UCItFLm69UtzH5FYCnHJfAHg — LITTLE BIG BEAT STUDIOS
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on high-end mixing and mastering services for artists, which is a core aspect of
-  tokens: in=398 out=69  est=$0.000101
-[231/504] UCZ2wHrgU2nr0CoO0KNSDV5g — Live Nation
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'Live Nation' is associated with live music events and concerts, and the descripti
-  tokens: in=367 out=69  est=$0.000096
-[232/504] UC1nJElGcVcTpeZJVyxEbzJw — Live Storms Media
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mWeather[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on storm footage and is featured by major news networks, indicating a strong emp
-  tokens: in=435 out=55  est=$0.000098
-[233/504] UC-6LDZDGRvS8XH9O8An4kEg — Live Your Message with Marisa Murgatroyd
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on coaching individuals on growing online businesses and is led by Marisa Murgat
-  tokens: in=437 out=73  est=$0.000109
-[234/504] UCOwiQHSjCZdLfurAAnh7v7w — LLTArchived2
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[235/504] UCBeWUqDIm65lB9w9MuDAWrA — Locometric
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[236/504] UC-RA5BzE_BnZhf5iVdNF1hA — loopop
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on electronic music and synth ideas, tips, tricks, and reviews, which aligns clo
-  tokens: in=365 out=59  est=$0.000090
-[237/504] UCG2Any5yo0Lgiwf3o_GiF-A — Los Lonely Boys
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[238/504] UC3TqK2sSktlk7CmXGpw7_Cg — Low End University
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on bass guitar instruction and has a founder with a notable music career, indica
-  tokens: in=549 out=59  est=$0.000118
-[239/504] UC6biysICWOJ-C3P4Tyeggzg — Low Level
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[240/504] UCM05jgFNwoeXvWfO9GuExzA — Luke Beasley
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mComedy[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on political humor and commentary, indicating a comedic approach to political to
-  tokens: in=398 out=51  est=$0.000090
-[241/504] UCZrvodIV5I4meIJl8P2NF6A — Luke Million
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[242/504] UCMLtBahI5DMrt0NPvDSoIRQ — Machine Learning Street Talk
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mScience[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on advanced AI research and covers topics in cognitive science, computer science
-  tokens: in=617 out=62  est=$0.000130
-[243/504] UClI2TvzZX2IkZ_usZV8QOvA — Mack Avenue
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel is dedicated to Mack Avenue Music Group, a prominent jazz label, indicating a strong foc
-  tokens: in=514 out=57  est=$0.000111
-[244/504] UCqmjz2x7NffJRMg4mmeDTvg — magicplan
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on an app for contractors that involves creating floor plans and estimates, whic
-  tokens: in=580 out=57  est=$0.000121
-[245/504] UCcNrmSXswsMJzuaSQknziTw — Make Money Matt
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFinance[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on strategies to grow on YouTube and build a digital career, which aligns with p
-  tokens: in=394 out=59  est=$0.000094
-[246/504] UCmRE4gvdeDkwf1oJrsabWWQ — MAKE. ART. NOW.
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'MAKE. ART. NOW.' and the description suggest a focus on creative expression, whic
-  tokens: in=403 out=73  est=$0.000104
-[247/504] UCZiGGE0e0DctISlShAILbjQ — Marcin
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Marcin' and the description 'Marcin's official channel' suggest a focus on music,
-  tokens: in=412 out=69  est=$0.000103
-[248/504] UCknsp0YMH7BwVes8_bwWpnw — Mark Harrison
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
-        evidence: The channel description emphasizes motivation to experience the world, try new things, and challenge
-  tokens: in=383 out=58  est=$0.000092
-[249/504] UCY1kMZp36IQSyNx_9h4mpCg — Mark Rober
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching engineering concepts through toy building and has a background in en
-  tokens: in=544 out=57  est=$0.000116
-[250/504] UCsPpLcxHv5XJw4Rx5GALUjg — MarketingBlocks AI
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on marketing strategies and tools for entrepreneurs, coaches, and founders, indi
-  tokens: in=525 out=58  est=$0.000114
-[251/504] UCKqf_mRynhJ_o0oGOH4VNvg — Marla Heller, MS, RD, Mediterranean & DASH expert
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on the DASH diet, which is a nutritional approach to lower blood pressure and im
-  tokens: in=511 out=64  est=$0.000115
-[252/504] UCKrWgJg6GU9OwC-5fSqfB1g — Martin Miller
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel features Martin Miller, a professional musician and guitar player, who has a significant
-  tokens: in=571 out=66  est=$0.000125
-[253/504] UCjvBO4kjuBSYe6Bi3RYQAQA — Mary Kate "M.K." Williams
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on helping aspiring authors with self-publishing, providing practical advice and
-  tokens: in=552 out=65  est=$0.000122
-[254/504] UCSzRlpPbZTA6b8weTKnSHlA — Mary Trump Media
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on political commentary and analysis related to Donald Trump, indicating a stron
-  tokens: in=505 out=58  est=$0.000111
-[255/504] UCP5A5lVxaT7cO_LehpxjTZg — Matt Diggity
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on SEO techniques and strategies for online marketing, which aligns with busines
-  tokens: in=463 out=65  est=$0.000108
-[256/504] UChYHKRass0kZvBkVKQuZElQ — Matt Gray
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on scaling businesses, entrepreneurship, and building personal brands, which ali
-  tokens: in=539 out=53  est=$0.000113
-[257/504] UCh1vNDTd-d60UEJRf6BAUZA — Matt Johnson’s Keyspace
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel is run by Matt Johnson, the keyboard player from Jamiroquai, indicating a strong connect
-  tokens: in=437 out=73  est=$0.000109
-[258/504] UCLAEBQMxxwE6gNy13q_rdcg — Matt Lorion
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on entrepreneurship and financial freedom, highlighting the creator's success as
-  tokens: in=411 out=60  est=$0.000098
-[259/504] UChpleBmo18P08aKCIgti38g — Matt Wolfe
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on exploring AI capabilities and tools, which aligns with the label 'AI Tools & 
-  tokens: in=559 out=73  est=$0.000128
-[260/504] UCwdVOry0oNF9WIe_3uCfz9Q — Matt's Off Road Recovery
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on off-road towing and recovery techniques, which aligns with practical skills t
-  tokens: in=437 out=68  est=$0.000106
-[261/504] UCFTEN8q_sQNHVENU4KcCMAA — Matthew Anderson
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[262/504] UCawZsQWqfGSbCI5yjkdVkTA — Matthew Berman
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on topics like AI, machine learning, and coding, which are all under the broader
-  tokens: in=457 out=58  est=$0.000103
-[263/504] UC45W_AtKcDxSmWR1s1xsLEg — Matthew O'Brien
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Final Cut Pro tips, tricks, and tutorials, which directly relates to video ed
-  tokens: in=471 out=56  est=$0.000104
-[264/504] UC_pT_Iz6XjuM-eMTlXghdfw — Max the Meat Guy
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on meat-related content and promotes a jerky brand, indicating a lifestyle theme
-  tokens: in=529 out=59  est=$0.000115
-[265/504] UCeRxxz9ByOqdd8A-0iF_Idg — Mayday: Air Disaster
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on a dramatic non-fiction series investigating air disasters, which aligns with 
-  tokens: in=442 out=60  est=$0.000102
-[266/504] UC4InHaWu_I_vSuBPlVj_L3Q — mbmars01
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTravel[0m  conf: 0.80  src: text_clues
-        evidence: The channel features videos of cities, landmarks, landscapes, and travel destinations, indicating a 
-  tokens: in=586 out=55  est=$0.000121
-[267/504] UCG-iSMVtWbbwDDXgXXypARQ — MedCram - Medical Lectures Explained CLEARLY
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAcademic Courses & Lectures[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on medical education through structured lectures and aims to clarify complex top
-  tokens: in=626 out=60  est=$0.000130
-[268/504] UC9r9HYFxEQOBXSopFS61ZWg — MeidasTouch
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on breaking news and politics, emphasizing a pro-democracy stance, which aligns 
-  tokens: in=403 out=60  est=$0.000096
-[269/504] UCwpHKudUkP5tNgmMdexB3ow — Mentour Pilot
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on providing insights into the airline industry, including aviation accidents, p
-  tokens: in=389 out=59  est=$0.000094
-[270/504] UCru5yi7yq_Y8Q4Ye4eB0r2Q — MHFIN
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFinance[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on finance topics such as inflation and bitcoin, indicating a clear emphasis on 
-  tokens: in=389 out=54  est=$0.000091
-[271/504] UC1vts8sER8VOrgh9L8RyBOQ — Michael Ramsey:                       On The Riser
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on drumming, which is a key aspect of music performance and education, as indica
-  tokens: in=405 out=71  est=$0.000103
-[272/504] UCqBERDzM6ZcovT1s01kIrVg — Michigan Foot Doctors
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on empowering viewers to find the right medical care and provides educational co
-  tokens: in=418 out=54  est=$0.000095
-[273/504] UCFtEEv80fQVKkD4h1PF-Xqw — Microsoft
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel is Microsoft's official page, a leading technology company focused on software, hardware
-  tokens: in=435 out=67  est=$0.000105
-[274/504] UCJ9905MRHxwLZ2jeNQGIWxA — Microsoft Mechanics
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Microsoft's technology products and services, including software, hardware, a
-  tokens: in=526 out=57  est=$0.000113
-[275/504] UCVGVbOl6F5rGF4wSYS6Y5yQ — MIgardener
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on gardening, organic gardening, self-sustainability, and related topics, which 
-  tokens: in=491 out=64  est=$0.000112
-[276/504] UCYEiWHoP2IHHgjOapTAYMQw — Mike Russell
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on providing education and practical techniques for audio and video content crea
-  tokens: in=548 out=62  est=$0.000119
-[277/504] UCh35n5aqG8fF2tXXEtDd0EQ — Military News
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[278/504] UC_P_VjGqCyjQyCwBUPu4lHg — Milo Andreo
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching piano and keyboard, offering lessons and exercises, which aligns wit
-  tokens: in=529 out=72  est=$0.000123
-[279/504] UCYenDLnIHsoqQ6smwKXQ7Hg — #Mind Warehouse
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[280/504] UCUHW94eEFW7hkUMVaZz4eDg — minutephysics
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mScience[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on physics and science, as indicated by the title 'minutephysics' and the descri
-  tokens: in=385 out=62  est=$0.000095
-[281/504] UC8sibhG707qg5AlVlj5P3mw — Momentum Productions
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mConsumer Tech & Gadgets[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on various types of tech, including filmmaking and cameras, which aligns with co
-  tokens: in=406 out=60  est=$0.000097
-[282/504] UCmIxjdhwpUI5lDoslfDqcPQ — Money on The Side
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching aspiring entrepreneurs about building a semi-passive Amazon KDP busi
-  tokens: in=470 out=58  est=$0.000105
-[283/504] UCSL3dIAj0iMBz1V4Rz-AUFA — MOTIV8
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on motivational speeches, which aligns with self-improvement and daily life them
-  tokens: in=359 out=56  est=$0.000087
-[284/504] UCs26XZBwrSZLiTEH8wcoVXw — Moz
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The description emphasizes marketing analytics software and resources for learning inbound marketing
-  tokens: in=359 out=55  est=$0.000087
-[285/504] UCaVp-iXRPfiSxbkhmi56IHQ — MrMBB333
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.85  src: text_clues
-        evidence: The channel focuses on changes to Earth and their potential impacts, which aligns with reporting and
-  tokens: in=476 out=54  est=$0.000104
-[286/504] UCaXkIU1QidjPwiAYu6GcHjg — MSNBC
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'MSNBC' is well-known for its political commentary and news analysis, and the desc
-  tokens: in=391 out=66  est=$0.000098
-[287/504] UC-9-kyTW8ZkZNDHQJ6FgpwQ — Music
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title is 'Music' and the description explicitly mentions finding top talent and playlist
-  tokens: in=392 out=56  est=$0.000092
-[288/504] UCV-gQcOtKcxOPaPk1MVe4jQ — Music Shed
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[289/504] UC5ve4DxNMLRXOetCYWFUkYw — Música Progressiva
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'Música Progressiva' and the description indicate a focus on progressive rock musi
-  tokens: in=344 out=59  est=$0.000087
-[290/504] UC8JT2m0mKEgvEtie3JNKwew — Naked Science
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mScience[0m  conf: 0.90  src: text_clues
-        evidence: The channel is dedicated to bringing the world of science and technology, exploring scientific conce
-  tokens: in=470 out=53  est=$0.000102
-[291/504] UC-_eueKsPcJUPnCguEufWPA — Nate's Tech
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[292/504] UC_7KM3ANRHy2zhQ_zl-C4XQ — Nathan Cool Photo
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[293/504] UC0Z-E_L3z_JLVNuFoS8fefA — National Park Diaries
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on educational stories about national parks and conservation, which aligns with 
-  tokens: in=581 out=60  est=$0.000123
-[294/504] UCejgtTHroWI5sF_2-fuiF4Q — Nature's Always Right
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on gardening, homesteading, and regenerative agriculture, which are all key aspe
-  tokens: in=419 out=81  est=$0.000111
-[295/504] UCqZQlzSHbVJrwrn5XvzrzcA — NBC Sports
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mSports[0m  conf: 1.00  src: text_clues
-        evidence: The channel title 'NBC Sports' and the description highlight its focus on sports events, news, and a
-  tokens: in=529 out=64  est=$0.000118
-[296/504] UCl-Zrl0QhF66lu1aGXaTbfw — Neil Patel
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[297/504] UCtYKe7-XbaDjpUwcU5x0bLg — neo
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel description explicitly states that it creates educational short documentaries on various
-  tokens: in=388 out=57  est=$0.000092
-[298/504] UCCjG8NtOig0USdrT5D1FpxQ — NewsNation
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The channel's title 'NewsNation' and description emphasize 'fact-based, unbiased news' indicating a 
-  tokens: in=425 out=61  est=$0.000100
-[299/504] UCcJceGUaevGlP7s2xzL9akA — Next Level Gardening
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on gardening, which is a key aspect of home and garden improvement, and the desc
-  tokens: in=551 out=64  est=$0.000121
-[300/504] UCunQ-SNSI9uOZwrb62po_tQ — Next Level Riding Clinics
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on informative videos dedicated to the snowmobile community, indicating practica
-  tokens: in=366 out=61  est=$0.000092
-[301/504] UCRmm7T6mAm-QBNvnEaIl3AA — Nick Johnston
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[302/504] UCxv1rK6prSp2aoNqNyxD_Vg — Nick Page
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[303/504] UCX9mv-ifhUnNrRi8qdscFeQ — Nick Powell Photography
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel title and description clearly indicate a focus on photography, specifically commercial, 
-  tokens: in=377 out=55  est=$0.000090
-[304/504] UCbo-KbSjJDG6JWQ_MTZ_rNA — Nick Saraev
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on making money with AI, teaching online business strategies, and providing mark
-  tokens: in=548 out=59  est=$0.000118
-[305/504] UCxMoaKZtWKFuHGr7LIInOOQ — Nick Stephenson
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching authors marketing strategies and audience growth, which aligns with 
-  tokens: in=558 out=52  est=$0.000115
-[306/504] UCkJld-AoXurbT2jDnfM8qiA — Nigel Danson
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on landscape photography, sharing tips and techniques, and features specific loc
-  tokens: in=431 out=61  est=$0.000101
-[307/504] UCPhq7iR65k0gWcraXgLiY1A — Nigel John Stanford
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title and description explicitly mention 'Music from Nigel Stanford' and focus on audio 
-  tokens: in=343 out=62  est=$0.000089
-[308/504] UCM2FoYtC-2PQzMr_gDfQnHg — No Film School
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on film, TV, and tech news specifically aimed at filmmakers, indicating a strong
-  tokens: in=405 out=63  est=$0.000099
-[309/504] UCFPzKZg-By8_DtBJiEDLcJw — NOAPOLOGY
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'NOAPOLOGY' and the description indicate it is a band, listing members and providi
-  tokens: in=496 out=63  est=$0.000112
-[310/504] UCUowDOg5xfSWV0hUYeUUbfw — Notepirate
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAcademic Courses & Lectures[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on structured educational content related to financial accounting and corporate 
-  tokens: in=448 out=59  est=$0.000103
-[311/504] UCjHz5SVHeMT0AViCYZvsGDA — NOVA PBS Official
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mScience[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on making science accessible and is the most-watched primetime science series, i
-  tokens: in=541 out=58  est=$0.000116
-[312/504] UC2mLN9pZNE8_ccLHmA1SHvA — NovationHelp
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[313/504] UC4eYXhJI4-7wSWc8UNRwD4A — NPR Music
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel features Tiny Desk Concerts and live shows, indicating a strong focus on music performan
-  tokens: in=353 out=54  est=$0.000085
-[314/504] UCHvSoleJlpzZYEHpcn32Xng — NWVideoTours
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[315/504] UCAhcelYvyDAPy0cn_sscWkw — Off Grid In The Pacific North West
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on off-grid living, homesteading, and personal experiences, which aligns with li
-  tokens: in=467 out=66  est=$0.000110
-[316/504] UC5kQUZFCbuZQorVnzS6P_xA — Olivier Girard - the Posture Guy
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching posture improvement techniques and ergonomic practices, which aligns
-  tokens: in=597 out=70  est=$0.000132
-[317/504] UCdYVQ4i7eZD_GJkL4yxkKCw — Olufemii
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.85  src: text_clues
-        evidence: The channel focuses on teaching video production techniques and has a diverse team of educators, ind
-  tokens: in=409 out=53  est=$0.000093
-[318/504] UC8JracmfBuygk-myx7lVZnw — On the House - Real Estate Marketing
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on real estate photography techniques and marketing strategies, emphasizing the 
-  tokens: in=578 out=56  est=$0.000120
-[319/504] UC0XRm3cLtvjjceli-Oa1X2Q — ONSCENE TV
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.95  src: text_clues
-        evidence: The channel description explicitly states that it covers breaking news stories and lists various cit
-  tokens: in=458 out=59  est=$0.000104
-[320/504] UCwpRQ_NrBJvGlwCG__qy9Og — Ordinary Filmmaker
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mConsumer Tech & Gadgets[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on camera gear, filming techniques, and content creation, which aligns with cons
-  tokens: in=514 out=66  est=$0.000117
-[321/504] UC2itzMBo0R0kHZ8cF7nrcaA — Oregon Public Broadcasting
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The channel is described as an independent media organization focused on in-depth reporting and stor
-  tokens: in=455 out=56  est=$0.000102
-[322/504] UCeE3lj6pLX_gCd0Yvns517Q — Ozzy Man Reviews
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.80  src: text_clues
-        evidence: The channel reviews wildlife, sports, viral videos, and conducts celebrity interviews, with a specif
-  tokens: in=384 out=70  est=$0.000100
-[323/504] UCSxR0IZEq1WhTJqAnQGyk4g — Pacific Northwest Weather Watch
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mWeather[0m  conf: 0.95  src: text_clues
-        evidence: The channel title and description explicitly mention 'Pacific Northwest Weather' and focus on weathe
-  tokens: in=379 out=59  est=$0.000092
-[324/504] UCTQnU1zyhvwscc2P5QS-tLw — Pakman Live
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[325/504] UCs030M7gu_Pi2ag9a12oa8w — Pan Rocks!
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[326/504] UCrRttZIypNTA1Mrfwo745Sg — Paramount Plus
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel is named Paramount Plus, a well-known streaming service that offers a wide range of movi
-  tokens: in=522 out=65  est=$0.000117
-[327/504] UCQhuXR2O6MpsCHfByBiF10Q — Pavement Repair Products Co.
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on providing products and solutions for concrete and asphalt repair, which align
-  tokens: in=465 out=63  est=$0.000108
-[328/504] UCpxYSWgxVt3Pyn1ovXsGQ0g — PBS Terra
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mScience[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on science and nature shows, exploring topics like extreme weather, natural phen
-  tokens: in=512 out=64  est=$0.000115
-[329/504] UCkRhsBbu0tvQrXBtvpl0kIg — Peaches Skin Care
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on skin care and natural methods for achieving healthy skin, aligning with healt
-  tokens: in=450 out=55  est=$0.000101
-[330/504] UCI6GYwCv9ZFkoiUgobwcLzQ — Performance AI
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on helping users leverage AI to improve their lives and productivity, which alig
-  tokens: in=421 out=61  est=$0.000100
-[331/504] UC4hELpI0Zw3t7ASEGkgkmZA — Peter Barber
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title and description indicate that Peter Barber is a professional singer and music prod
-  tokens: in=342 out=69  est=$0.000093
-[332/504] UCaPZyvqGjmxdTUYhyf1zEkQ — Peter Leyden
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: Peter Leyden's expertise in new technologies and trends, along with his background in Wired Magazine
-  tokens: in=566 out=65  est=$0.000124
-[333/504] UCtM-xct7QQx0dL-swaMzYbg — Peter Lindgren
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on videography, photography, and camera gear reviews, indicating a strong emphas
-  tokens: in=420 out=56  est=$0.000097
-[334/504] UCXElBPBCkhdDWMmCPMFq_6A — Peter Makholm
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on gimbal tutorials and teaching filmmaking techniques, which aligns with practi
-  tokens: in=410 out=57  est=$0.000096
-[335/504] UC3DkFux8Iv-aYnTRWzwaiBA — Peter McKinnon
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel title and description explicitly mention 'photography' and 'video', indicating a focus o
-  tokens: in=363 out=57  est=$0.000089
-[336/504] UCbOh7f6EoY4K-2Vvii-17xg — PHANTOM
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[337/504] UC9n0tUXP7QB5ALfg3PFO19A — Photography Pro
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on photography hacks, tutorials, and tips, indicating a clear emphasis on photog
-  tokens: in=421 out=56  est=$0.000097
-[338/504] UCdQ_ZkYaMe6qPoueUyPQgpQ — Photoshop Training Channel
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on teaching Adobe Photoshop and Lightroom through concise tutorials, which align
-  tokens: in=560 out=75  est=$0.000129
-[339/504] UChYbZdv4UApRyuAwCKMVuYg — Pixel Film Studios
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on visual effects tools for post-production, specifically for video editing soft
-  tokens: in=460 out=63  est=$0.000107
-[340/504] UCtrdEiQnaRrmseXgggjt3Dw — Plaid Crafts
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on craft inspiration and DIY ideas, which aligns with practical step-by-step gui
-  tokens: in=433 out=79  est=$0.000112
-[341/504] UCnA2IGSh8jOPPiz20oamKzA — Planet Fitness Beginner
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Planet Fitness, a gym known for its affordable membership and fitness trainin
-  tokens: in=416 out=64  est=$0.000101
-[342/504] UC-MEgsEcEkbSuPWpu4a-PzQ — Plini
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[343/504] UCKRoXz3hHAu2XL_k3Ef4vJQ — Pod Save America
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.95  src: text_clues
-        evidence: The channel is hosted by former Obama aides and focuses on political discussions, breaking down news
-  tokens: in=578 out=70  est=$0.000129
-[344/504] UCDe08Fs0s0YKJuk5h45csAQ — Polyphia
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Polyphia' refers to a well-known instrumental progressive rock band, and the desc
-  tokens: in=363 out=74  est=$0.000099
-[345/504] UCSiPjfAJBgbFlIUsxOWpK0w — PomplamooseMusic
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'PomplamooseMusic' and the description indicate a focus on music, specifically sup
-  tokens: in=450 out=59  est=$0.000103
-[346/504] UCbU6Rve0XMNZ2a2yaYgjlTA — Pondering Politics
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Pondering Politics' and the description indicate a focus on American politics and
-  tokens: in=380 out=66  est=$0.000097
-[347/504] UCaw4VmRW8SfygV2u044OpoQ — POP PSYCH
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on psychology, relationships, and personal development, which aligns with lifest
-  tokens: in=515 out=62  est=$0.000114
-[348/504] UC9OFhiq5cs10XYGDwBO_7xg — Porcupine Tree
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[349/504] UCWSRFubEPtc-EvqNChdc-ZQ — Portal Joss Stone
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Portal Joss Stone' suggests a focus on the artist Joss Stone, who is known for he
-  tokens: in=367 out=61  est=$0.000092
-[350/504] UCrZ58f5yvy0HQ9hm-hZ1H_g — Portland Life
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on living in Portland, Oregon, providing information about the local real estate
-  tokens: in=501 out=60  est=$0.000111
-[351/504] UCMOqf8ab-42UUQIdVoKwjlQ — Practical Engineering
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on infrastructure and engineering concepts, which aligns with educational conten
-  tokens: in=448 out=64  est=$0.000106
-[352/504] UCZa-aF5az5nT4PL4XecbCNw — Primal Investor
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[353/504] UClyyA0EAUcQ34b7jdFn1m_Q — ProCamera
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on mobile photography, photo and video capabilities, and editing, which aligns c
-  tokens: in=448 out=58  est=$0.000102
-[354/504] UCQGv_dy-oLeu5SSgz2_8i8w — Project Diaries
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on gardening projects, DIY tutorials, and using recycled materials, which aligns
-  tokens: in=555 out=58  est=$0.000118
-[355/504] UC2rzsm1Qi6N1X-wuOg_p0Ng — Project Farm
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAutomotive[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on testing automotive products and tools, which aligns with the automotive categ
-  tokens: in=465 out=68  est=$0.000111
-[356/504] UCX6c6hTIqcphjMsXbeanJ1g — Prompt Engineer
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on the latest advancements in AI, including tools and technologies like OpenAI a
-  tokens: in=510 out=66  est=$0.000116
-[357/504] UCNB_pp1iJiEDvTxO5wENMZA — Puddle Of Mudd TV
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel is dedicated to the band Puddle of Mudd, featuring live performances, backstage access, 
-  tokens: in=436 out=64  est=$0.000104
-[358/504] UCK5-hzSvMAPSSo2vH_LtNKw — Quazi Johir
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on entrepreneurship and sharing lessons on achieving financial freedom, which al
-  tokens: in=473 out=51  est=$0.000102
-[359/504] UC3uCNdbm9RZb3F_KZKX5u4w — Rainbow Gardens
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
-        evidence: The channel title 'Rainbow Gardens' and the description emphasize appreciating beauty in everyday li
-  tokens: in=543 out=67  est=$0.000122
-[360/504] UC15W5y0lGyZD7DNIW_VmnyA — Raiv Creative
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on creating content using AI technology, emphasizing the practical use of AI too
-  tokens: in=422 out=67  est=$0.000103
-[361/504] UCpJ7ZS8hK-IOeciv952Xhug — Really American
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on grassroots independent news covering politics, current events, and has been f
-  tokens: in=456 out=65  est=$0.000107
-[362/504] UCblfuW_4rakIf2h6aqANefA — Red Bull
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mSports[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Red Bull' is associated with extreme sports and action events, and the descriptio
-  tokens: in=375 out=64  est=$0.000095
-[363/504] UCV6hWxB0-u_IX7e-h4fEBAw — Reed Timmer
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mWeather[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on extreme meteorology and storm chasing, with specific references to tornadoes 
-  tokens: in=587 out=61  est=$0.000125
-[364/504] UCjIrqdXaUzYEEAIib8bsBrw — ReelinInTheYears66
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel specializes in a vast library of music footage, including live concerts and interviews w
-  tokens: in=540 out=60  est=$0.000117
-[365/504] UCCD_GyqAJ2w5UpH9R4yIEjw — Reinhardt Buhr
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel features a multi-instrumentalist who creates music using various instruments and live lo
-  tokens: in=507 out=60  est=$0.000112
-[366/504] UCif0FLmduEgE0i6ApPOf6IQ — RemotePilot101
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[367/504] UCLBHPoY3NugnZYURxln3fKQ — Rene Ritchie
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on technology and its cultural implications, which aligns with the Technology la
-  tokens: in=381 out=51  est=$0.000088
-[368/504] UCCJ56k8nBeqWLoxNa6DToAQ — Rhett Shull
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on gear reviews, lessons, and vlogs related to guitar, indicating a strong empha
-  tokens: in=389 out=60  est=$0.000094
-[369/504] UCxp6k6RQ2oP6EmP0W5_J7-g — RichardTaylorTV
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on Final Cut Pro and post-production, which are directly related to video editin
-  tokens: in=400 out=54  est=$0.000092
-[370/504] UCJquYOG5EL82sKTfH9aMA9Q — Rick Beato
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[371/504] UCcp-HjtmTMeIJ-0RrSHSGLA — Rick Beato 2
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Rick Beato 2' suggests a focus on music, as Rick Beato is known for his music-rel
-  tokens: in=357 out=67  est=$0.000094
-[372/504] UCmNAkARqTFvNoyxmFhKTS9Q — Rick Mulready
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on simplifying AI and its applications in online business, indicating a strong e
-  tokens: in=612 out=59  est=$0.000127
-[373/504] UC-Qy-4esLdXmO1F6k5kz0Qg — Ripple Training
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.95  src: text_clues
-        evidence: The channel specializes in software training for video editing, specifically mentioning Final Cut Pr
-  tokens: in=555 out=64  est=$0.000122
-[374/504] UC5UbM7c9BhNBto3_zDcdr4w — RMNS Channel
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on daily uploads of various music genres, including jazz and classical, and emph
-  tokens: in=479 out=61  est=$0.000108
-[375/504] UC0FBv8ckxw1hrZxbUm3G7hA — Rob The AI Guy
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching how to use AI for productivity and making money online, which aligns
-  tokens: in=468 out=62  est=$0.000107
-[376/504] UCuR8L5fK6ZXyApcL7vMcv0g — Robert Benjamin
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on providing value through tutorials on growing social media platforms, which al
-  tokens: in=441 out=59  est=$0.000102
-[377/504] UCpVqUbp1Q3LPlOg4DG6F6pQ — Ronny Jordan - Topic
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title includes 'Ronny Jordan', a known British guitarist associated with the acid jazz m
-  tokens: in=376 out=72  est=$0.000100
-[378/504] UCCLD2QUYsDuHdBkQp10Yy0w — RUHM
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on luxury marketing and real estate consulting, which are key aspects of busines
-  tokens: in=508 out=53  est=$0.000108
-[379/504] UC5C-Asy_myoWCkLEtZR72SA — Rush
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[380/504] UCJU1nWTl6sC_KaXgkqcnBnA — RV Pastor Kevin
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[381/504] UCNl2ziy9FwESuahXMyfCRVA — RV Tips & Travels
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on educating the RV community with tips, tricks, upgrades, and maintenance, whic
-  tokens: in=543 out=63  est=$0.000119
-[382/504] UCy4vTBzImDfSEQejeWt-xVA — RVstreet
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on DIY, maintenance, and repair of RVs, providing detailed step-by-step videos, 
-  tokens: in=582 out=68  est=$0.000128
-[383/504] UCJHAT3Uvv-g3I8H3GhHWV7w — Ryan Hall, Y'all
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mWeather[0m  conf: 0.95  src: text_clues
-        evidence: The channel title and description explicitly mention 'Digital Meteorologist' and 'Severe Weather Bro
-  tokens: in=348 out=62  est=$0.000089
-[384/504] UCG98giOsUxIlXV0rNUhxLew — Ryan Serhant
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness & Markets News[0m  conf: 0.90  src: text_clues
-        evidence: The channel is run by Ryan Serhant, an entrepreneur and CEO, with a focus on real estate and investm
-  tokens: in=402 out=74  est=$0.000105
-[385/504] UC_tusQ99Bno--GHjhb1Aa6g — RyanNangle
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Final Cut Pro X tutorials and tips, indicating a strong emphasis on teaching 
-  tokens: in=374 out=59  est=$0.000092
-[386/504] UCegKDBFMUSQNeWe4FAB7aig — Sade
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[387/504] UCwjDLq70gf6j9B5ykweXJRg — Samazonkdp
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on building an Amazon KDP business, which relates directly to entrepreneurship a
-  tokens: in=384 out=54  est=$0.000090
-[388/504] UCx7DWIF3zT2xapezCxIzNVQ — Sandra Di
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on side hustles, selling digital products, and business growth strategies, indic
-  tokens: in=534 out=56  est=$0.000114
-[389/504] UCpsHnULJAkwwckxzdmspKDw — sawyerhartman
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on photography techniques and tutorials, as indicated by the title and descripti
-  tokens: in=428 out=67  est=$0.000104
-[390/504] UC-2JUs_G21BrJ0efehwGkUw — Scary Pockets
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel is explicitly described as a funk band releasing music videos and covers, indicating a s
-  tokens: in=424 out=55  est=$0.000097
-[391/504] UCs-HqvE13SeePDZEpC__Mkw — Scott Suggs
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on e-commerce, entrepreneurship, and marketing strategies, which aligns with the
-  tokens: in=519 out=69  est=$0.000119
-[392/504] UCWTj3vCqkQIsrTGSm4kM34g — Scott's Bass Lessons
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on bass guitar lessons, artist interviews, and gear reviews, indicating a strong
-  tokens: in=518 out=57  est=$0.000112
-[393/504] UCEtMRF1ywKMc4sf3EXYyDzw — ScottHermanFitness
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.95  src: text_clues
-        evidence: The channel title and description focus on fitness, body transformation, and wellness, indicating a 
-  tokens: in=430 out=61  est=$0.000101
-[394/504] UCRhV1rWIpm_pU19bBm_2RXw — Sean Carroll
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel features a theoretical physicist discussing complex concepts, which aligns with instruct
-  tokens: in=353 out=53  est=$0.000085
-[395/504] UC6ITJIW6jgrrP5irR7WoHrw — Sean Dollwet
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on business and investing advice, specifically mentioning building a publishing 
-  tokens: in=455 out=54  est=$0.000101
-[396/504] UCxPmXKxJcDAhuYVHeFFyGTA — Sebastian Maniscalco
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel features Sebastian Maniscalco, a well-known comedian and actor, and promotes his tour an
-  tokens: in=371 out=65  est=$0.000095
-[397/504] UCJm2TgUqtK1_NLBrjNQ1P-w — Second Thought
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel is devoted to education and analysis of current events from a socialist perspective, ind
-  tokens: in=484 out=58  est=$0.000107
-[398/504] UCcaKZ3y-OXjmZZGD-OL--MQ — Self Publishing Empire
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFinance[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on turning a side hustle into a full-time income stream, discussing financial fr
-  tokens: in=564 out=66  est=$0.000124
-[399/504] UCkOTYGNYxS6jq7JT3Fk5NEQ — Self Publishing Titans
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on self-publishing and selling books on Amazon KDP, which aligns with practical 
-  tokens: in=360 out=61  est=$0.000091
-[400/504] UC4B8ywA2Cz_K95w2oeWxizg — Sell on Amazon
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[401/504] UCadiUi-KZoFk1K5ZDsluLcA — Sen. Adam Schiff
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The channel is associated with U.S. Senator Adam Schiff, indicating a focus on political news and cu
-  tokens: in=362 out=70  est=$0.000096
-[402/504] UC5J-7sW8cVzCGyKN8ym4QsA — Serge Morgotch
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on tutorials related to filming, editing, and sharing videos, which aligns close
-  tokens: in=382 out=58  est=$0.000092
-[403/504] UCBtR7ynKM9odz-PW_7uyzDw — SevereStudios
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mWeather[0m  conf: 0.95  src: text_clues
-        evidence: The channel title and description explicitly mention severe weather information, storm tracking, and
-  tokens: in=408 out=56  est=$0.000095
-[404/504] UCN9Qw0JvYMh2HwmwSSy3n0w — Shawn Dolinski
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The description explicitly mentions filmmaking and photography tutorials, indicating a focus on phot
-  tokens: in=386 out=50  est=$0.000088
-[405/504] UCv7Bgr5Mq-dPYu-Ol4AocEA — Shinedown
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 1.00  src: text_clues
-        evidence: The channel is the official YouTube channel of Shinedown, a well-known rock band, and the descriptio
-  tokens: in=440 out=61  est=$0.000103
-[406/504] UCAc1soZsuAm94dgctvyGAzw — Shot by Myles
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on sharing knowledge about camera gear and filmmaking, which aligns with practic
-  tokens: in=388 out=58  est=$0.000093
-[407/504] UCGn3-2LtsXHgtBIdl2Loozw — sina-drums
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on making music, playing drums, and collaborating with musicians, which aligns w
-  tokens: in=460 out=67  est=$0.000109
-[408/504] UC50lv4EYY1N1_-B495meX8w — SketchUp
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on providing tools for architects, designers, and engineers, emphasizing drawing
-  tokens: in=464 out=68  est=$0.000110
-[409/504] UCwSozl89jl2zUDzQ4jGJD3g — Skill Leap AI
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on sharing the latest AI tools and models, along with tutorials and reviews, ind
-  tokens: in=468 out=65  est=$0.000109
-[410/504] UCif4ZSCR6TQ9NgliluF6Ksw — SL Epoxy Floor Paint
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'SL Epoxy Floor Paint' suggests a focus on home improvement and DIY projects relat
-  tokens: in=325 out=59  est=$0.000084
-[411/504] UCUol4EQWxfmxKUCiKjHxUjA — Smart Money Tactics
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on affiliate marketing strategies and making money online, which aligns with ent
-  tokens: in=537 out=52  est=$0.000112
-[412/504] UCo1t7ajBc5r44Ejxnod-h7Q — Snarky Puppy
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[413/504] UCE-xQTbJXX0wBi_cbA7-XAw — Sons of Legion
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on a music group blending rock, soul, and blues, with specific references to the
-  tokens: in=564 out=65  est=$0.000124
-[414/504] UC00LJoYxVb0T8e5miMBl0EQ — Southwestern Health Resources
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on population-based healthcare and patient-centered care, indicating a strong em
-  tokens: in=449 out=55  est=$0.000100
-[415/504] UC_lGMZMTN7Oh9DRKV2eaMtg — SPACE DESIGN WAREHOUSE
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on tech reviews, specifically Apple products and Raspberry Pi, and includes elem
-  tokens: in=519 out=61  est=$0.000114
-[416/504] UCU-dblTpSJE0KkvHnj323LA — Space SPAN (Space Policy and News)
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.80  src: text_clues
-        evidence: The channel title and description focus on space policy and politics, indicating a strong emphasis o
-  tokens: in=386 out=60  est=$0.000094
-[417/504] UCTiL1q9YbrVam5nP2xzFTWQ — SpaceWeatherNews (S0)
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[418/504] UCMV3aTOwUtG5vwfH9_rzb2w — Spark
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHistory[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on documentaries and historical content, featuring renowned historians and promo
-  tokens: in=532 out=59  est=$0.000115
-[419/504] UCpDJl2EmP7Oh90Vylx0dZtA — Spinnin' Records
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel is dedicated to music videos from a leading dance record label, featuring well-known art
-  tokens: in=607 out=56  est=$0.000125
-[420/504] UCLihM2pKzsuimSfMmlDB5EQ — StartupBros
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[421/504] UClKIjbgtWGzHtXhBDS_I0pg — State Azure
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[422/504] UCN3d4-i8WLD7LP-9JgADIBg — Sterling Patrick Fuentes
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[423/504] UC-9mlH6az1Q_XUP3fw1N4Fg — Steven Wilson
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[424/504] UC9tnwOsaA7T29VuUCuXvr7g — Stewart and Alina
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on teaching viewers how to create and edit video content effectively, which alig
-  tokens: in=498 out=64  est=$0.000113
-[425/504] UCjyDzADaZy1WFUWqFmfcHJg — StreamGeeks
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on live streams, video recordings, and podcasts related to streaming media, whic
-  tokens: in=443 out=57  est=$0.000101
-[426/504] UCUFoQUaVRt3MVFxqwPUMLCQ — StudioBinder
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on production management for video and photo productions, which aligns closely w
-  tokens: in=354 out=58  est=$0.000088
-[427/504] UCj1VqrHhDte54oLgPG4xpuQ — Stuff Made Here
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on engineering and building, aiming to educate viewers about the joy of creating
-  tokens: in=485 out=57  est=$0.000107
-[428/504] UCFhMWAVkp-3T2YnwdwH0TXQ — SVS
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel description mentions providing advice on home theater/audio system set-up and includes p
-  tokens: in=440 out=64  est=$0.000104
-[429/504] UCSDNfhsWyNOz8foxx5p8unQ — Sweet Project Cars
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAutomotive[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on DIY car and truck maintenance, providing money-saving tips and tricks, which 
-  tokens: in=461 out=56  est=$0.000103
-[430/504] UCN-JravNOcJu1KBAeuecQ0Q — Tal Wilkenfeld
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel features Tal Wilkenfeld, a celebrated bassist and singer-songwriter, with a focus on her
-  tokens: in=547 out=69  est=$0.000123
-[431/504] UCT5C7yaO3RVuOgwP8JVAujQ — Taskmaster
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mComedy[0m  conf: 0.90  src: text_clues
-        evidence: The channel features the Emmy Award nominated show 'Taskmaster', which is a comedy competition serie
-  tokens: in=518 out=63  est=$0.000116
-[432/504] UCAVglge_6d2KfnNK3Ar_gag — Taylor Brown
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel description explicitly mentions sharing 'Photo & Video tips', indicating a focus on phot
-  tokens: in=367 out=52  est=$0.000086
-[433/504] UCVXr-MS0WcLk5m8D0iVkZ3A — Tazzie Tazzie
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[434/504] UCyH3IAelkUFM0u6Iacx22lA — Tears For Fears
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel is named after the band Tears For Fears, known for their synth pop music and significant
-  tokens: in=497 out=82  est=$0.000124
-[435/504] UCdngmbVKX1Tgre699-XLlUA — TechWorld with Nana
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on DevOps and Cloud education, covering topics like Docker, Kubernetes, and CI/C
-  tokens: in=490 out=60  est=$0.000110
-[436/504] UC6ckWeFOnxq5JNGdB5_QKcg — Ted the Butcher TV
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mCooking[0m  conf: 0.80  src: text_clues
-        evidence: The title 'Ted the Butcher TV' suggests a focus on butchery and food preparation, indicating a likel
-  tokens: in=327 out=50  est=$0.000079
-[437/504] UCqP533PjxjSyExyasIe8cNw — TekMatix
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel shares demos and tutorial videos on how to utilize Tekmatix, indicating a focus on pract
-  tokens: in=394 out=60  est=$0.000095
-[438/504] UCaHkDyvWVXXAGyG2lURMaYg — Tennessee Brando
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.80  src: text_clues
-        evidence: The channel features a singer-songwriter, indicating a focus on music, while the description also me
-  tokens: in=346 out=62  est=$0.000089
-[439/504] UC0p-6V0WzrDWfwUQlyKpv6w — Texas Academy of Family Physicians
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Texas Academy of Family Physicians' suggests a focus on educational content relat
-  tokens: in=325 out=58  est=$0.000084
-[440/504] UCFlXQdhS9koeFIxUagXhb4g — thatbassvoice®
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on music with a unique voice style, featuring cinematic jazz, reimagined covers,
-  tokens: in=500 out=66  est=$0.000115
-[441/504] UCHhYXsLBEVVnbvsq57n1MTQ — The AI Advantage
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on building an AI toolkit and offers practical tutorials related to AI, indicati
-  tokens: in=371 out=63  est=$0.000093
-[442/504] UCKelCK4ZaO6HeEI1KQjqzWA — The AI Daily Brief: Artificial Intelligence News
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTech & Science News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on daily news and discussions specifically related to artificial intelligence, w
-  tokens: in=460 out=58  est=$0.000104
-[443/504] UCz0zSuukBglV2YwG3_7uKRg — The Apple Circle
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.95  src: text_clues
-        evidence: The channel is dedicated to covering everything Apple, which is a major technology brand known for i
-  tokens: in=366 out=57  est=$0.000089
-[444/504] UC6n8I1UDTKP1IWjQMg6_TwA — The B1M
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on construction, aiming to educate and change perceptions about the industry, wh
-  tokens: in=437 out=54  est=$0.000098
-[445/504] UCx5KB2QDUDH-o8PFnF3yJCQ — The Basic Filmmaker
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHow-To & Skills Tutorials[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on helping people create better videos for YouTube with practical advice on audi
-  tokens: in=502 out=67  est=$0.000115
-[446/504] UC0r6S4hmYdRcDnw7zey7Myg — The Bearded Butchers
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.85  src: text_clues
-        evidence: The channel focuses on butchery, outdoor lifestyle, and family activities, which aligns with lifesty
-  tokens: in=561 out=67  est=$0.000124
-[447/504] UCG4Hp1KbGw4e02N7FpPXDgQ — The Bulwark
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on political analysis and reporting, featuring prominent political figures and d
-  tokens: in=491 out=66  est=$0.000113
-[448/504] UCuvjQYKukKjVyhSVxQibgOw — The Calum Johnson Show
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on curious questions and remarkable people, suggesting a lifestyle and self-impr
-  tokens: in=361 out=65  est=$0.000093
-[449/504] UCry6nxAo2tfVyO6lEboiU3w — The Carol Burnett Show Official
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mComedy[0m  conf: 0.90  src: text_clues
-        evidence: The channel features 'The Carol Burnett Show,' a pioneering sketch comedy series, and is recognized 
-  tokens: in=542 out=70  est=$0.000123
-[450/504] UCGB-czkAt6nLd3UrQ1eD0uw — The Chris Cuomo Project
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel features Chris Cuomo, a veteran journalist known for his political commentary, and discu
-  tokens: in=557 out=69  est=$0.000125
-[451/504] UCwWhs_6x42TyRM4Wstoq8HA — The Daily Show
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mComedy[0m  conf: 0.90  src: text_clues
-        evidence: The Daily Show is known for its satirical take on news and politics, hosted by Jon Stewart, which al
-  tokens: in=451 out=60  est=$0.000104
-[452/504] UCGq-a57w-aPwyi3pW7XLiHw — The Diary Of A CEO
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
-        evidence: The channel title 'The Diary Of A CEO' suggests a focus on personal experiences and insights related
-  tokens: in=344 out=66  est=$0.000091
-[453/504] UC9V_-gqJsZNOy4v_HqbRz3w — The Gardening Channel With James Prigioni
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHome & Garden[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on gardening, specifically growing food forests and organic practices, which ali
-  tokens: in=530 out=57  est=$0.000114
-[454/504] UCB81DRhPwVoUQcVNp3dBIXQ — The Graystones
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on music, mentioning their passion for performing, songwriting, and their love f
-  tokens: in=577 out=68  est=$0.000127
-[455/504] UC7Q4rvzJDbHeBHYk5rnvZeA — The Humanist Report
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on sociopolitical and religious news stories, indicating a strong emphasis on po
-  tokens: in=395 out=57  est=$0.000093
-[456/504] UCJ0uqCI0Vqr2Rrt1HseGirg — The Late Late Show with James Corden
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel is for 'The Late Late Show with James Corden', a well-known television show, indicating 
-  tokens: in=347 out=63  est=$0.000090
-[457/504] UCMtFAi84ehTSYSE9XoHefig — The Late Show with Stephen Colbert
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel is for 'The Late Show with Stephen Colbert', a well-known late-night talk show, which fa
-  tokens: in=393 out=64  est=$0.000097
-[458/504] UCpYCxV51bykhMY-wSUozQRg — The Lincoln Project
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The Lincoln Project is a political action committee focused on opposing Trumpism, which aligns with 
-  tokens: in=468 out=70  est=$0.000112
-[459/504] UCeAKdCMMS4I9waww0LDLqng — The Nerdy Novelist
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on using AI and author-related software to enhance creativity, which aligns with
-  tokens: in=407 out=59  est=$0.000096
-[460/504] UCiWsyCYUN4QDgpL-2PGPckg — The Parallel Truth
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.85  src: text_clues
-        evidence: The channel focuses on educational mini documentary style videos that address curious minds and unfo
-  tokens: in=408 out=61  est=$0.000098
-[461/504] UCs9-XIXPfAF465u3OVdMILg — The People's Majority
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.80  src: text_clues
-        evidence: The title 'The People's Majority' suggests a focus on collective issues or societal topics, which al
-  tokens: in=324 out=47  est=$0.000077
-[462/504] UCiM2ZsguGDiGfsL2sUNatXQ — The Pineapple Thief
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'The Pineapple Thief' is the name of a known progressive rock band, and the descri
-  tokens: in=336 out=71  est=$0.000093
-[463/504] UC1E1SVcVyU3ntWMSQEp38Yw — The Prof G Pod – Scott Galloway
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness & Markets News[0m  conf: 0.90  src: text_clues
-        evidence: The channel features Scott Galloway, a business leader and NYU professor, discussing major stories i
-  tokens: in=453 out=73  est=$0.000112
-[464/504] UCAPciy143ZBXBrFpCVPnWDg — The Randall Carlson
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHistory[0m  conf: 0.90  src: text_clues
-        evidence: The channel explores ancient wisdom, cataclysms that shaped the past, and humanity’s forgotten legac
-  tokens: in=542 out=61  est=$0.000118
-[465/504] UCIzXayRP7-P0ANpq-nD-h5g — The Sun
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mNews[0m  conf: 0.90  src: text_clues
-        evidence: The channel description explicitly mentions providing the latest news, which aligns with the News la
-  tokens: in=388 out=51  est=$0.000089
-[466/504] UCJjAIBWeY022ZNj_Cp_6wAw — The Tesla Space
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAutomotive[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on Tesla vehicles and related news, which directly aligns with automotive conten
-  tokens: in=476 out=66  est=$0.000111
-[467/504] UCvEO0vHclzNfDYCyKQV5TsA — The Wellermen
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The Wellermen are known for their music, specifically sea shanties, and their description highlights
-  tokens: in=563 out=61  est=$0.000121
-[468/504] UCIFk2uvCNcEmZ77g0ESKLcQ — The Why Files
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mScience[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on mysteries, myths, legends, and conspiracies, which often involve scientific e
-  tokens: in=582 out=70  est=$0.000129
-[469/504] UC9OJk22Mh_-aj0ruME96T2w — The Williams Fam
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.80  src: text_clues
-        evidence: The channel features a family of dancing brothers, indicating a focus on daily life and vlogs.
-  tokens: in=400 out=53  est=$0.000092
-[470/504] UC1yBKRuGpC1tSM73A0ZjYjQ — The Young Turks
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on political issues and current events through a progressive lens, as indicated 
-  tokens: in=548 out=63  est=$0.000120
-[471/504] UC9Ryt3XOGYBoAJVsBHNGDzA — Theoretically Media
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.80  src: text_clues
-        evidence: The channel title 'Theoretically Media' suggests a focus on theoretical concepts, which aligns with 
-  tokens: in=368 out=56  est=$0.000089
-[472/504] UCcPuBEAwuF6XWXkcXJXJwsg — This Guy Edits
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mVideo Editing[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on film editing techniques and offers courses and consulting for aspiring editor
-  tokens: in=549 out=58  est=$0.000117
-[473/504] UC7kCeZ53sli_9XwuQeFxLqw — Ticker Symbol: YOU
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFinance[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on investing in innovation, which aligns with finance, and the creator's backgro
-  tokens: in=457 out=65  est=$0.000108
-[474/504] UCp9GmsywyVNLdpu8iB0d9Mg — Tim Welch Vocal Studio
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on vocal coaching and breaking down music styles, indicating a strong emphasis o
-  tokens: in=529 out=54  est=$0.000112
-[475/504] UC-8ywcgWTF2gMiPtrycZIcw — Time Bomb
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.80  src: text_clues
-        evidence: The channel discusses government policy and water management, indicating a focus on political and wo
-  tokens: in=442 out=65  est=$0.000105
-[476/504] UC88lvyJe7aHZmcvzvubDFRg — Timeline - World History Documentaries
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHistory[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on world history documentaries, exploring ancient civilizations and significant 
-  tokens: in=520 out=57  est=$0.000112
-[477/504] UCTjDhFuGXlhx9Us0gq0VK2w — Times Radio
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[478/504] UCsN8M73DMWa8SPp5o_0IAQQ — Tomorrowland
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[479/504] UCJASBOyF4Fkd26SIwRhLuZw — Tone and Tighten
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mHealth & Fitness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on physical therapy, rehabilitation, and fitness goals, which aligns with health
-  tokens: in=555 out=72  est=$0.000126
-[480/504] UCRe2W-32N-_uStDULAEdyKA — Topaz Labs
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel is focused on image enhancement software, which falls under the technology category.
-  tokens: in=410 out=50  est=$0.000091
-[481/504] UCo33niDKpTpgwZ_dohqvylg — TubeBuddy
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mTechnology[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on a browser extension designed to enhance YouTube functionality, indicating a s
-  tokens: in=547 out=56  est=$0.000116
-[482/504] UCEgYhf84VjXDz-W7a9-rdCQ — Two Bit da Vinci
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.85  src: text_clues
-        evidence: The channel focuses on breaking down complex stories and providing insights, which aligns with educa
-  tokens: in=406 out=59  est=$0.000096
-[483/504] UC6OICk-ceplUJf4sCN3DMnQ — Tyler Stalman
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on creative tools for professional photo and video production, indicating a stro
-  tokens: in=349 out=57  est=$0.000087
-[484/504] UCx4pIz6Xb3xeC5tz9MYZfWg — V V
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[485/504] UCdOPzgbosSnbfwd9-iXP2NA — Vanessa Lau
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on helping creators earn more and feel good, which aligns with entrepreneurship 
-  tokens: in=411 out=54  est=$0.000094
-[486/504] UCHnyfMqiRRG1u-2MsSQLbXA — Veritasium
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mScience[0m  conf: 0.90  src: text_clues
-        evidence: The channel title 'Veritasium' suggests a focus on truth and knowledge, while the description explic
-  tokens: in=387 out=59  est=$0.000093
-[487/504] UC9N2JaiIWYR2GEN1tgHAczA — Vic Firth
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'Vic Firth' is associated with a well-known brand in the percussion community, and
-  tokens: in=420 out=71  est=$0.000106
-[488/504] UCWF0PiUvUi3Jma2oFgaiX2w — VICE TV
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel VICE TV is known for its immersive docu-style content that often covers current events a
-  tokens: in=384 out=67  est=$0.000098
-[489/504] UCnBMUbokI94_PY59m8yDMRg — VrTours Solutions
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on 3D virtual tours for real estate and business, indicating a strong connection
-  tokens: in=371 out=58  est=$0.000090
-[490/504] UC6nSFpj9HTCZ5t-N3Rm3-HA — Vsauce
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-[491/504] UCuqdsYT5rFqw0L5oO_HwvgA — WarLeaks - Military Blog
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.80  src: text_clues
-        evidence: The channel is described as an educational and documentary military channel, focusing on military te
-  tokens: in=472 out=61  est=$0.000107
-[492/504] UCaWd5_7JhbQBe4dknZhsHJg — WatchMojo.com
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on top 10 lists related to movies and TV shows, as indicated in the description,
-  tokens: in=547 out=67  est=$0.000122
-[493/504] UCMq1R1LgS04lIKdpLh_OS1w — Wes McDowell
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mBusiness[0m  conf: 0.95  src: text_clues
-        evidence: The channel focuses on helping small business owners grow their customer base through digital market
-  tokens: in=558 out=57  est=$0.000118
-[494/504] UCqcbQf6yw5KzRoDDcZ_wBSw — Wes Roth
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mAI Tools & Productivity[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on AI, machine learning, and tools like ChatGPT, indicating a strong emphasis on
-  tokens: in=532 out=61  est=$0.000116
-[495/504] UCSrPuHtKbst7Zy8pyWn_3Cg — What's Inside?
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mEducation[0m  conf: 0.80  src: text_clues
-        evidence: The channel focuses on exploring and explaining the contents of various objects, which aligns with e
-  tokens: in=467 out=59  est=$0.000105
-[496/504] UCEFZ7yABV_j9Ts3U18pZ1vw — Will Chidlow
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mLifestyle[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on vlogging and sharing personal progress in filmmaking, which aligns with lifes
-  tokens: in=355 out=53  est=$0.000085
-[497/504] UC_gUM8rL-Lrg6O3adPW9K1g — WION
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on global issues, in-depth analysis, and aims to provide unbiased news coverage,
-  tokens: in=488 out=65  est=$0.000112
-[498/504] UCUZM6dU9lRVEfrZF3EFrzWQ — Yello
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel is described as the official YouTube Channel by the electronic music pioneers YELLO, ind
-  tokens: in=351 out=60  est=$0.000089
-[499/504] UClgRkhTL3_hImCAmdLfDE4g — YouTube Movies
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mFilm & TV[0m  conf: 0.95  src: text_clues
-        evidence: The channel title 'YouTube Movies' and description indicate a focus on movies, including new release
-  tokens: in=340 out=59  est=$0.000086
-[500/504] UC36i_MUpwgeDpXFE4YzAXpw — Yuqing Guo
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPhotography[0m  conf: 0.90  src: text_clues
-        evidence: The description focuses on mastering 360 cameras and learning magic techniques related to photograph
-  tokens: in=353 out=50  est=$0.000083
-[501/504] UCpF9KnCcZM9KWovxn3TtZ9Q — YYNOT
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mMusic[0m  conf: 0.95  src: text_clues
-        evidence: The channel is described as a 'Progressive Hard Rock Band' and mentions classic Rush, indicating a f
-  tokens: in=367 out=60  est=$0.000091
-[502/504] UCsy9I56PY3IngCf_VGjunMQ — Zeihan on Geopolitics
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mPolitics & World News[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on geopolitical analysis by Peter Zeihan, emphasizing global politics, demograph
-  tokens: in=489 out=65  est=$0.000112
-[503/504] UCeeYm4DCcKiN6hmKBspX8Ig — ZHIYUN-TECH
-  shortlist(12):  |  |  |  |  | ...
-  → label: [32mConsumer Tech & Gadgets[0m  conf: 0.90  src: text_clues
-        evidence: The channel focuses on gimbals and lighting products for content creation, which are considered cons
-  tokens: in=517 out=68  est=$0.000118
-[504/504] UCa09am-cOsC-FSgr_nLkFFA — ZOE
-  → TRIAGE: [31mUnclassified (sparse)[0m — sparse_title_and_description
-════════════════════════════════════════════════════════════
-📊 RUN SUMMARY
-════════════════════════════════════════════════════════════
-🤖 Model: gpt-4o-mini
-📺 Channels: 504
-✅ Processed: 504
-⚠️  Sparse: 65
-❌ Low Conf: 0
-💥 Errors: 0
-🎯 Assigned: 439
-⏱️  Elapsed: 764.2s
-🔢 Tokens: in=201283 out=26956
-💰 Est Cost: $0.0464 (in @$0.15/MTok, out @$0.6/MTok)
-════════════════════════════════════════════════════════════
-✅ Wrote 504 rows to data/fitting_results.csv
-📋 Full log saved to data/run.log
-💾 Previous log backed up to data/run.log.prev
-════════════════════════════════════════════════════════════

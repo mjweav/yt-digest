@@ -2,6 +2,16 @@
 
 All notable changes to YT Digest will be documented here.
 
+## 2025-10-09 — Microstep 5.2c ID Return Contract
+- **ID-based shortlist contract**: Switched to stable `choice_id` enum system with `id → canonical label` mapping in code
+- **Strict validation**: Added `lib/validateChoice.js` for JSON-only responses with enum enforcement and confidence validation
+- **Minimal sanitizer**: Reduced `lib/labelSanitizer.js` to Unicode dash normalization only (no truncation, no word capping)
+- **Choice management**: Created `lib/choices.js` for loading parent umbrellas and building ID mappings
+- **Updated batch runner**: Modified `scripts/batch.run.js` to use ID contract end-to-end with proper error handling
+- **Enhanced output**: Added `label_id` field to CSV/JSONL outputs for auditing while maintaining canonical labels
+- **Comprehensive testing**: Added `tests/choiceContract.spec.js` and `tests/sanitizerMinimal.spec.js` with full coverage
+- **Validation results**: Eliminates "auto-coerced invalid label output" events, removes mojibake/separator noise from stored labels, maintains canonical label output with stable IDs for auditing
+
 ## 2025-10-08 — Phase5.2 Umbrella Patch (Recall bump, precision kept)
 - **Thresholds**: Lowered SCORE_MIN from 0.24→0.20 for improved coverage while keeping MARGIN_MIN=0.10 and TITLE_WEIGHT=1.6
 - **Phrase boosts (surgical)**: Added domain-defining phrase map with small boosts (0.50 weight) for obvious topic matches (Video Editing: "final cut","davinci resolve","after effects","premiere pro","color grading"; Photography: "lightroom","photoshop","raw photo","camera raw"; Music: "drum lesson","guitar lesson","piano tutorial","music theory"; Gaming: "gameplay","walkthrough","speedrun"; Film & TV: "official trailer","behind the scenes","movie trailer")

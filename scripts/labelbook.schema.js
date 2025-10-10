@@ -1,5 +1,5 @@
 // CommonJS
-const REQUIRED_KEYS = ["name","definition"];
+const REQUIRED_KEYS = ["name","definition","id"];
 const OPTIONAL_KEYS = ["inclusion","exclusion","aliases","examples","parents"];
 
 /**
