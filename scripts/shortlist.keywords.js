@@ -12,7 +12,7 @@ function shortlist({ title, description, labelBook, k = 12, backfill = [] }) {
   const wordSet = new Set(tokens);
 
   const all = [];
-  for (const u of (labelBook.umbrellas || [])) {
+  for (const u of (labelBook.umbrellas || labelBook)) {
     const names = [u.name.toLowerCase(), ...(u.aliases || []).map(a => a.toLowerCase())];
     all.push({ ...u, names });
   }
