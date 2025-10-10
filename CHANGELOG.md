@@ -210,3 +210,10 @@ Next: 4.2b precision pass - further threshold tuning required
 - **Fixed regex syntax**: Corrected malformed character class in `scripts/label_terms.js` normalize function
 - **Fixed CSV literals**: Updated header strings in `scripts/lwl_cluster.js` with proper newline escapes
 - **Validation results**: LWL harness runs cleanly, generates 3 output files (lwl_clusters.json: 121K, lwl_channels.csv: 46K, lwl_summary.csv: 6.4K)
+
+## 2025-10-09 — Microstep 5.2b Label Normalization Fix
+- **Canonical label enforcement**: Created `lib/labelSanitizer.js` with robust normalization (mojibake fixes, separator truncation, word capping, title case, acronym preservation)
+- **Batch runner integration**: Updated `scripts/batch.run.js` to use sanitizer for canonical label enforcement at write-out time
+- **Comprehensive testing**: Added `tests/labelSanitizer.spec.js` with 12 test cases covering all edge cases (verbose strings, mojibake, separators, word caps, case reconciliation, acronyms, ampersands)
+- **Test infrastructure**: Added `npm test` script for running label sanitizer tests
+- **Validation results**: All 12 tests pass ✓, no labels containing separators (`—`, `:`, `·`) in output, labels limited to ≤3 words, mojibake artifacts eliminated, verbose labels now canonical parents

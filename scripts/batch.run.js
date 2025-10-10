@@ -6,6 +6,7 @@ const { validateLabelBook } = require('./labelbook.schema.js');
 const { triageSparse } = require('./triage.sparse.js');
 const { shortlist } = require('./shortlist.keywords.js');
 const { buildPrompt } = require('./prompt.singlechoice.js');
+const { normalizeLabel } = require('../lib/labelSanitizer.js');
 
 // Prefer global fetch (Node 18+); lazy-load node-fetch if missing
 let fetchFn = global.fetch;
@@ -303,24 +304,11 @@ async function main(){
     catch(e){ result = { label:"Unclassified (error)", confidence:0, knowledge_source:"text_clues", evidence:String(e.message).slice(0,100) }; }
 
     // Post-LLM validation: ensure canonical label is returned
-    function normalizeLabel(lbl) {
-      if (!lbl) return "";
-      // strip spaces around em-dash or hyphenated definitions accidentally included
-      return String(lbl).split("—")[0].split(" - ")[0].trim();
-    }
-
     const allowed = new Set(list.map(x => x.label));
-    let picked = normalizeLabel(result.label);
+    let picked = normalizeLabel(result.label, allowed);
 
-    // exact match, or case-insensitive fallback
-    if (!allowed.has(picked)) {
-      for (const a of allowed) {
-        if (a.toLowerCase() === picked.toLowerCase()) { picked = a; break; }
-      }
-    }
-
-    // final guard: if still not in shortlist, mark low-confidence unclassified
-    if (!allowed.has(picked)) {
+    // If sanitizer returned null (not in allowedSet), mark as low-confidence unclassified
+    if (picked === null) {
       console.warn(`⚠️ Model returned non-canonical label "${result.label}". Coercing to Unclassified (low confidence).`);
       picked = "Unclassified (low confidence)";
       result.confidence = Math.min(result.confidence || 0.2, 0.2);
